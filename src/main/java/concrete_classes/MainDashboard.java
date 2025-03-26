@@ -14,6 +14,6 @@ package concrete_classes;
 public class MainDashboard {
     public static void main(String[] args) {
         System.out.println("testing git");
-        System.out.println("testing git branches");
+        System.out.println("testing git branch 2");
     }
 }
