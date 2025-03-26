@@ -12,5 +12,7 @@ package concrete_classes;
  * the user.
  */
 public class MainDashboard {
-    
+    public static void main(String[] args) {
+        System.out.println("testing git");
+    }
 }
