@@ -1,0 +1,4 @@
+CSE101,Intro to CS,Computer Science
+CSE102,Data Structures,Computer Science
+NET201,Networking Basics,Networks
+DS301,Machine Learning,Data Science
