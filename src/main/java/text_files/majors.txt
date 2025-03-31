@@ -1,5 +1,5 @@
 Computer Science
 Data Science
-Networking
+Networks & Cybersecurity
 Digital Services
 Software Development

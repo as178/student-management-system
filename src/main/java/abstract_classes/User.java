@@ -8,8 +8,6 @@ package abstract_classes;
  *
  * @author Angela Saric (24237573)
  * 
- * This is the class every user within our program is
- * going to extend, since all users have the below information.
  */
 public abstract class User {
     protected int id;
@@ -22,4 +20,18 @@ public abstract class User {
     protected String phoneNumber;
     protected Character gender;
     protected String address;
+
+    public User(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
+            String uniEmail, String phoneNumber, Character gender, String address) {
+        this.id = id;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.personalEmail = personalEmail;
+        this.uniEmail = uniEmail;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        this.address = address;
+    }
 }

@@ -10,4 +10,22 @@ package concrete_classes.components;
  */
 public class Course {
     
+    private String courseId;
+    private String courseName;
+    private String courseMajor;
+    private String coursePrerequisite;
+    private int courseEstimatedHours;
+    private String courseLecturer;
+    private String courseDescription;
+    
+    public Course(String courseId, String courseName, String courseMajor, String coursePrerequisite,
+            int courseEstimatedHours, String courseLecturer, String courseDescription){
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.courseMajor = courseMajor;
+        this.coursePrerequisite = coursePrerequisite;
+        this.courseEstimatedHours = courseEstimatedHours;
+        this.courseLecturer = courseLecturer;
+        this.courseDescription = courseDescription;
+    }
 }

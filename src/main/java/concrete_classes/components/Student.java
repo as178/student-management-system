@@ -5,6 +5,7 @@
 package concrete_classes.components;
 
 import abstract_classes.User;
+import java.util.HashMap;
 
 /**
  *
@@ -12,9 +13,14 @@ import abstract_classes.User;
  */
 public class Student extends User {
 
-    //courses lists;
-    
-    public Student(/*input variables EXCLUDING lists*/) {
+    private String major;
+    private HashMap<String, Float> enrolledCourses;
+    private HashMap<String, Float> completedCourses;
+
+    public Student(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
+            String uniEmail, String phoneNumber, Character gender, String address, String major) {
+        super(id, password, firstName, lastName, dateOfBirth, personalEmail, uniEmail, phoneNumber, gender, address);
+        this.major = major;
     }
-    
+
 }
