@@ -5,7 +5,8 @@
 package concrete_classes;
 
 import java.util.Scanner;
-import utility_classes.DashboardUtil;
+import other_classes.HeadersUtil;
+import other_classes.LoginUserInputValidation;
 
 /**
  *
@@ -15,27 +16,27 @@ import utility_classes.DashboardUtil;
  */
 public class StudentManagementSystem {
     
+    public static MainDashboard mainDashboard = new MainDashboard();
+    
     public static void main(String[] args) {
-        
-        System.out.println("====================================");
-        System.out.println("     Student Management System      ");
-        System.out.println("====================================");
-        
-        System.out.println("1. Login as Student\n2. Login as Lecturer\n3. Login as Administrator\nx Exit");
-        System.out.println("====================================");
+        HeadersUtil.printHeader("Welcome to the", "Student Management System!", "(Login Required)");
+        mainDashboard.showMenu();
         
         Scanner scan = new Scanner(System.in);
-
-        //input validation called here
-        String option = scan.nextLine();
+        String userInput = new String();
         
-        //AuthenticatorManager.login();
-        //within the authenticator, ask the user to type in username and password
-        //depending on the option they chose, read from students.txt, lecturers.txt OR admins.txt
-        //if the person exists but they get their password wrong/if the person doesnt exist ==> try again
-        //within this they can always quit or return
-        //return appropriate object
+        LoginUserInputValidation loginUserValidation = new LoginUserInputValidation();
+        loginUserValidation.validateUserInput(userInput, scan);
         
-        DashboardUtil.showMenu(option);
+        /*
+        to implement now:
+        - the "go back" option
+        - the logout option
+        these options should always be available (?), as well as the shutdown option
+        
+        next to implement:
+        - writing method for students
+        - making an interface for authentication, login()
+        */
     }
 }

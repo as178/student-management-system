@@ -1,0 +1,10 @@
+24229618,password123,John,Doe,15-05-2000,john.doe@email.com,john.doe@aut.ac.nz,0211234567,M,123 Main St,Computer Science
+24237573,password456,Jane,Smith,22-08-1999,jane.smith@email.com,jane.smith@aut.ac.nz,0215678901,F,456 Oak St,Data Science
+22358946,password789,Alan,Brown,30-11-2001,alan.brown@email.com,alan.brown@aut.ac.nz,0211357246,M,789 Pine St,Networks & Cybersecurity
+21568973,password012,Emily,White,11-02-2000,emily.white@email.com,emily.white@aut.ac.nz,0219876543,F,321 Birch St,Data Science
+23568741,password345,Michael,Green,05-12-1998,michael.green@email.com,michael.green@aut.ac.nz,0213456789,M,654 Elm St,Digital Services
+25698745,password678,Sarah,Black,14-07-1999,sarah.black@email.com,sarah.black@aut.ac.nz,0216543210,F,987 Maple St,Networks & Cybersecurity
+65874622,password901,David,Lee,18-09-2000,david.lee@email.com,david.lee@aut.ac.nz,0218765432,M,135 Cedar St,Digital Services
+13256875,password234,Laura,Harris,23-01-2001,laura.harris@email.com,laura.harris@aut.ac.nz,0214321987,F,246 Redwood St,Software Development
+26895785,password567,James,Wilson,29-03-2000,james.wilson@email.com,james.wilson@aut.ac.nz,0218761234,M,369 Fir St,Software Development
+23654975,password890,Anna,Clark,17-10-1998,anna.clark@email.com,anna.clark@aut.ac.nz,0212468135,F,741 Willow St,Software Development

@@ -22,5 +22,16 @@ public class Student extends User {
         super(id, password, firstName, lastName, dateOfBirth, personalEmail, uniEmail, phoneNumber, gender, address);
         this.major = major;
     }
+    
+    public String getPassword(){
+        return this.password;
+    }
+    
+    public String getFirstName(){
+        return this.firstName;
+    }
 
+    public String getLastName(){
+        return this.lastName;
+    }
 }
