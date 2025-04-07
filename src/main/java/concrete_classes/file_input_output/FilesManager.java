@@ -5,9 +5,11 @@
 package concrete_classes.file_input_output;
 
 import abstract_classes.User;
-import concrete_classes.components.Student;
+import concrete_classes.students.Student;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -47,6 +49,48 @@ public class FilesManager {
             }
         } catch (IOException e) {
             System.out.println("Error in reading from this file: students.txt");
+        }
+    }
+
+    public static void writeStudentsFile() {
+        try {
+            BufferedWriter fileOutput = new BufferedWriter(new FileWriter("src/main/java/text_files/students.txt"));
+            for (HashMap.Entry<String, User> userObj : currentUsers.entrySet()) {
+                fileOutput.write(userObj.getValue().toString());
+                fileOutput.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error in writing to this file: students.txt");
+        }
+    }
+
+    public static void loadEnrolledCourses(Student studentObj) {
+        String lineOutput;
+        try {
+            BufferedReader fileInput = new BufferedReader(new FileReader("src/main/java/text_files/studentsEnrolledCourses"));
+            while ((lineOutput = fileInput.readLine()) != null) {
+                String[] currentLine = lineOutput.split(",");
+                if (currentLine[0].equals(String.valueOf(studentObj.getId()))) {
+                    studentObj.getEnrolledCourses().put(currentLine[1], Float.valueOf(currentLine[2]));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error in reading from this file: studentsEnrolledCourses.txt");
+        }
+    }
+
+    public static void loadCompletedCourses(Student studentObj) {
+        String lineOutput;
+        try {
+            BufferedReader fileInput = new BufferedReader(new FileReader("src/main/java/text_files/studentsCompletedCourses"));
+            while ((lineOutput = fileInput.readLine()) != null) {
+                String[] currentLine = lineOutput.split(",");
+                if (currentLine[0].equals(String.valueOf(studentObj.getId()))) {
+                    studentObj.getCompletedCourses().put(currentLine[1], Float.valueOf(currentLine[2]));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error in reading from this file: studentsCompletedCourses.txt");
         }
     }
 }

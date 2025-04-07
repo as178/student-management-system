@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package concrete_classes.components;
+package concrete_classes.students;
 
 import abstract_classes.User;
 import java.util.HashMap;
@@ -73,6 +73,13 @@ public class Student extends User {
 
     public HashMap<String, Float> getCompletedCourses() {
         return this.completedCourses;
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + password + "," + firstName + "," + lastName + ","
+                + dateOfBirth + "," + personalEmail + "," + uniEmail + ","
+                + phoneNumber + "," + gender + "," + address + "," + major;
     }
 
 }

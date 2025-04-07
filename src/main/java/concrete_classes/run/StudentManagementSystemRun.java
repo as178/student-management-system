@@ -4,11 +4,10 @@
  */
 package concrete_classes.run;
 
-import concrete_classes.MainDashboard;
-import concrete_classes.components.Student;
-import concrete_classes.file_input_output.FilesManager;
-import java.util.Scanner;
-import other_classes.LoginUserInputValidation;
+import concrete_classes.authentication.UserAuthentication;
+import concrete_classes.other.DashboardUtil;
+import concrete_classes.other.LoginOptionValidator;
+import concrete_classes.other.NavigationUtil;
 
 /**
  *
@@ -18,22 +17,46 @@ import other_classes.LoginUserInputValidation;
  */
 public class StudentManagementSystemRun {
 
+    /*
+    static instance of main dashboard, for convenience and ease of access
+     */
     public static MainDashboard mainDashboard = new MainDashboard();
 
     public void run() {
-        mainDashboard.showHeader();
-        mainDashboard.showMenu();
 
-        Scanner scan = new Scanner(System.in);
-        String userInput = new String();
+        /* boolean for loop logic */
+        boolean running = true;
 
-        LoginUserInputValidation loginUserValidation = new LoginUserInputValidation();
-        loginUserValidation.validateUserInput(userInput, scan); 
-        
-        //checks if currentuser is student object then runs the student RUN method
-        if (FilesManager.currentUser instanceof Student) {
-            StudentRun SR = new StudentRun();
-            SR.StudentRun(userInput, scan);
+        while (running) {
+            /* shows the main dashboard header and menu options */
+            mainDashboard.showHeader();
+            mainDashboard.showMenu();
+
+            /*
+            validates main dashboard user input
+            - if user input is invalid ==> prompted again
+            - if input is valid ==> return the user type and load up the users hashmap
+                relative to the chosen user type
+            - user can choose to exit anytime
+             */
+            LoginOptionValidator loginOption = new LoginOptionValidator();
+            String userInput = loginOption.validateUserInput(); //"1", "2", etc. . .
+
+            /*
+            authenticates user by asking them for a username and password, and
+            prompts user with helpful messages if invalid input is given
+            - user can choose to exit or go back to the main dashboard screen
+             */
+            UserAuthentication userAuthentication = new UserAuthentication();
+            if (!userAuthentication.login()) {
+                continue;
+            }
+
+            /*
+            based on user choice, call the appropriate dashboard and display their options
+             */
+            String finalUserInput = DashboardUtil.displayDashboards(userInput).toLowerCase();
+            NavigationUtil.checkExit(finalUserInput);
         }
 
         /*

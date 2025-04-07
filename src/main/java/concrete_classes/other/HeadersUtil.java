@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package other_classes;
+package concrete_classes.other;
 
 /**
  *
@@ -10,17 +10,18 @@ package other_classes;
  */
 public class HeadersUtil {
 
-    private HeadersUtil(){}
+    private HeadersUtil() {
+    }
 
     public static void printHeader(String... headerText) {
         int numberOfLines = 36;
         String lines = "=".repeat(numberOfLines);
         System.out.println(lines);
-        
-        for (String headerLine : headerText){
+
+        for (String headerLine : headerText) {
             int headerLineLength = headerLine.length();
             int numberOfSpaces = (numberOfLines - headerLineLength) / 2;
-            
+
             String spaces = " ".repeat(numberOfSpaces);
             System.out.println(spaces + headerLine + spaces);
         }

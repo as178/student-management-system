@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package concrete_classes;
+package concrete_classes.students;
 
-import concrete_classes.components.Student;
 import concrete_classes.file_input_output.FilesManager;
 
 /**
  *
  * @author williamniven
  */
-public class StudentManager {
+public class StudentViewDetails {
+    
     public static void viewMyDetails() {
         Student currentStudent = (Student) FilesManager.currentUser;
         System.out.println("\n==== My Details ====\n");
