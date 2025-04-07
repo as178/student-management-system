@@ -5,12 +5,19 @@
 package concrete_classes;
 
 import interfaces.DashboardInterface;
+import interfaces.HeaderInterface;
+import other_classes.HeadersUtil;
 
 /**
  *
  * @author Angela Saric (24237573)
  */
-public class MainDashboard implements DashboardInterface {
+public class MainDashboard implements DashboardInterface, HeaderInterface {
+
+    @Override
+    public void showHeader() {
+        HeadersUtil.printHeader("Welcome to the", "Student Management System!", "(Login Required)");
+    }
 
     @Override
     public void showMenu() {

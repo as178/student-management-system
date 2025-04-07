@@ -8,6 +8,7 @@ import concrete_classes.components.Student;
 import concrete_classes.file_input_output.FilesManager;
 import java.util.Scanner;
 import other_classes.HeadersUtil;
+import other_classes.ProgramShutdown;
 
 /**
  *
@@ -22,12 +23,24 @@ public class UserAuthentication {
         String password;
 
         while (!validInput) {
-            System.out.println("Please type in your username (ID):");
+            System.out.println("b - Go Back\nx - Exit\nPlease type in your username (ID):");
             usernameId = scan.nextLine();
 
-            System.out.println("Please type in your password:");
+            if (usernameId.equalsIgnoreCase("b")){
+                return;
+            } else if (usernameId.equalsIgnoreCase("x")){
+                ProgramShutdown.shutdown();
+            }
+            
+            System.out.println("b - Go Back\nx - Exit\nPlease type in your password:");
             password = scan.nextLine();
 
+//            if (usernameId.equalsIgnoreCase("b")){
+//                
+//            } else if (usernameId.equalsIgnoreCase("x")){
+//                
+//            }
+            
             if (FilesManager.currentUsers.containsKey(usernameId)) {
 
                 FilesManager.currentUser = FilesManager.currentUsers.get(usernameId);

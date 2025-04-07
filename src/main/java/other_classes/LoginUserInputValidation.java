@@ -4,9 +4,9 @@
  */
 package other_classes;
 
-import concrete_classes.StudentManagementSystem;
 import concrete_classes.authentication.UserAuthentication;
 import concrete_classes.file_input_output.FilesManager;
+import concrete_classes.run.StudentManagementSystemRun;
 import interfaces.InputValidationInterface;
 import java.util.Scanner;
 
@@ -18,18 +18,16 @@ public class LoginUserInputValidation implements InputValidationInterface {
 
     @Override
     public void validateUserInput(String userInput, Scanner scan) {
-        
+
         boolean validInput = false;
         UserAuthentication userAuthentication = new UserAuthentication();
-        
+
         System.out.println("Please pick an option (login as a): ");
         userInput = scan.nextLine();
-        
+
         while (!validInput) {
             if (userInput.equalsIgnoreCase("x")) {
-                validInput = true;
-                ProgramShutdown programEnd = new ProgramShutdown();
-                programEnd.shutdown();
+                ProgramShutdown.shutdown();
             } else if (userInput.equalsIgnoreCase("1")) {
                 validInput = true;
                 FilesManager.readStudentsFile();
@@ -37,7 +35,7 @@ public class LoginUserInputValidation implements InputValidationInterface {
                 DashboardUtil.showMenu(userInput);
             } else {
                 HeadersUtil.printHeader("Please pick a valid option.");
-                StudentManagementSystem.mainDashboard.showMenu();
+                StudentManagementSystemRun.mainDashboard.showMenu();
                 userInput = scan.nextLine();
             }
         }
