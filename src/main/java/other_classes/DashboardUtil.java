@@ -21,7 +21,9 @@ public final class DashboardUtil {
     public static void showMenu(String option){
         switch(option){
             case "1":
-                new StudentDashboard().showMenu();
+                StudentDashboard S = new StudentDashboard();
+                S.showHeader();
+                S.showMenu();
                 break;
         }
     }

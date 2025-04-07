@@ -31,8 +31,7 @@ public class LoginUserInputValidation implements InputValidationInterface {
             } else if (userInput.equalsIgnoreCase("1")) {
                 validInput = true;
                 FilesManager.readStudentsFile();
-                userAuthentication.login(scan);
-                DashboardUtil.showMenu(userInput);
+                userAuthentication.login(scan);               
             } else {
                 HeadersUtil.printHeader("Please pick a valid option.");
                 StudentManagementSystemRun.mainDashboard.showMenu();

@@ -5,29 +5,37 @@
 package concrete_classes.run;
 
 import concrete_classes.MainDashboard;
+import concrete_classes.components.Student;
+import concrete_classes.file_input_output.FilesManager;
 import java.util.Scanner;
 import other_classes.LoginUserInputValidation;
 
 /**
  *
  * @author Angela Saric (24237573)
- * 
+ *
  * Code which is executed first when the program is run.
  */
 public class StudentManagementSystemRun {
-    
+
     public static MainDashboard mainDashboard = new MainDashboard();
-    
+
     public void run() {
         mainDashboard.showHeader();
         mainDashboard.showMenu();
-        
+
         Scanner scan = new Scanner(System.in);
         String userInput = new String();
-        
+
         LoginUserInputValidation loginUserValidation = new LoginUserInputValidation();
-        loginUserValidation.validateUserInput(userInput, scan);
+        loginUserValidation.validateUserInput(userInput, scan); 
         
+        //checks if currentuser is student object then runs the student RUN method
+        if (FilesManager.currentUser instanceof Student) {
+            StudentRun SR = new StudentRun();
+            SR.StudentRun(userInput, scan);
+        }
+
         /*
         to implement now:
         - the "go back" option
@@ -37,6 +45,6 @@ public class StudentManagementSystemRun {
         next to implement:
         - writing method for students
         - making an interface for authentication, login() - not necessary
-        */
+         */
     }
 }

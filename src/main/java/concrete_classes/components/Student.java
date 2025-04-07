@@ -22,16 +22,57 @@ public class Student extends User {
         super(id, password, firstName, lastName, dateOfBirth, personalEmail, uniEmail, phoneNumber, gender, address);
         this.major = major;
     }
-    
-    public String getPassword(){
+
+    public int getId() {
+        return this.id;
+    }
+
+    public String getPassword() {
         return this.password;
     }
-    
-    public String getFirstName(){
+
+    public String getFirstName() {
         return this.firstName;
     }
 
-    public String getLastName(){
+    public String getLastName() {
         return this.lastName;
     }
+
+    public String getDateOfBirth() {
+        return this.dateOfBirth;
+    }
+
+    public String getPersonalEmail() {
+        return this.personalEmail;
+    }
+
+    public String getUniEmail() {
+        return this.uniEmail;
+    }
+
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public Character getGender() {
+        return this.gender;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public String getMajor() {
+        return this.major;
+    }
+
+    public HashMap<String, Float> getEnrolledCourses() {
+        return this.enrolledCourses;
+    }
+
+    public HashMap<String, Float> getCompletedCourses() {
+        return this.completedCourses;
+    }
+
 }
