@@ -5,7 +5,7 @@
 package concrete_classes.other;
 
 import concrete_classes.file_input_output.FilesManager;
-import concrete_classes.run.StudentManagementSystemRun;
+import concrete_classes.run.StudentManagementSystem;
 import interfaces.InputValidationInterface;
 import java.util.Scanner;
 
@@ -30,7 +30,7 @@ public class LoginOptionValidator implements InputValidationInterface {
                     return userInput;
                 default:
                     HeadersUtil.printHeader("Please pick a valid option.");
-                    StudentManagementSystemRun.mainDashboard.showMenu();
+                    StudentManagementSystem.mainDashboard.showMenu();
                     userInput = scan.nextLine();
             }
         }
