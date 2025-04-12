@@ -12,9 +12,8 @@ import concrete_classes.file_input_output.FilesManager;
  */
 public class StudentViewDetails {
     
-    private static Student currentStudent = (Student) FilesManager.currentUser;
-    
     public static void viewMyDetails() {
+        Student currentStudent = (Student) FilesManager.currentUser;
         System.out.println("\n==== My Details ====\n");
         System.out.println("ID: " + currentStudent.getId());
         System.out.println("Name: " + currentStudent.getFirstName() + " " + currentStudent.getLastName());
