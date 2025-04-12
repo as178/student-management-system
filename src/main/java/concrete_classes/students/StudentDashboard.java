@@ -38,33 +38,37 @@ public class StudentDashboard implements InputValidationInterface, DashboardInte
     public String validateUserInput() {
 
         Scanner scan = new Scanner(System.in);
-        boolean running = true;
 
-        while (running) {
+        while (true) {
 
             this.showHeader();
             this.showMenu();
             String userInput = scan.nextLine();
 
-            if (NavigationUtil.backOrExit(userInput)) {
-                return "b";
-            }
-            switch (userInput) {
-                case "1":
-                    StudentViewDetails.viewMyDetails();
-                    break;
-                case "2":
-                    StudentViewDetails.currentlyEnrolledCourses();
-                    break;
-                case "3":
-                    StudentViewDetails.veiwEditDetails();
-                    break;
-                default:
-                    HeadersUtil.printHeader("Please pick a valid option.");
-                    this.showMenu();
-                    userInput = scan.nextLine();
+            boolean validInput = false;
+            while (!validInput) {
+                if (NavigationUtil.backOrExit(userInput)) {
+                    return "b";
+                }
+                switch (userInput) {
+                    case "1":
+                        StudentViewDetails.viewMyDetails();
+                        validInput = true;
+                        break;
+                    case "2":
+                        StudentViewDetails.currentlyEnrolledCourses();
+                        validInput = true;
+                        break;
+                    case "3":
+                        StudentViewDetails.veiwEditDetails();
+                        validInput = true;
+                        break;
+                    default:
+                        HeadersUtil.printHeader("Please pick a valid option.");
+                        this.showMenu();
+                        userInput = scan.nextLine();
+                }
             }
         }
-        return "b";
     }
 }

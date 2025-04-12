@@ -32,10 +32,7 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
     
     public void run() {
 
-        /* boolean for loop logic */
-        boolean running = true;
-
-        while (running) {
+        while (true) {
             /* shows the main dashboard header and menu options */
             this.showHeader();
             this.showMenu();
@@ -61,21 +58,10 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             }
 
             /*
-            based on user choice, call the appropriate dashboard and display their options
+            based on user choice, call the appropriate dashboard and display their options. . .
              */
             String finalUserInput = DashboardUtil.displayDashboards(userInput).toLowerCase();
             NavigationUtil.checkExit(finalUserInput);
         }
-
-        /*
-        to implement now:
-        - the "go back" option
-        - the logout option
-        these options should always be available (?), as well as the shutdown option
-        
-        next to implement:
-        - writing method for students
-        - making an interface for authentication, login() - not necessary
-         */
     }
 }
