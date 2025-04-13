@@ -32,8 +32,7 @@ public class StudentDashboard implements InputValidationInterface, DashboardInte
 
     @Override
     public void showMenu() {
-        System.out.println("1 - View My Details\n2 - View Currently Enrolled Courses"
-                + "\n3 - View My Grades\nb - Go Back (Logout)\nx - Exit");
+        System.out.println("1 - View My Details\n2 - View My Academic Details\nb - Go Back (Logout)\nx - Exit");
     }
 
     @Override
@@ -59,11 +58,8 @@ public class StudentDashboard implements InputValidationInterface, DashboardInte
                         validInput = true;
                         break;
                     case "2":
-                        //StudentViewDetails.currentlyEnrolledCourses();
-                        validInput = true;
-                        break;
-                    case "3":
-                        //StudentViewDetails.veiwEditDetails();
+                        StudentViewAcademicDetails viewAcademicDetails = new StudentViewAcademicDetails(currentStudent);
+                        viewAcademicDetails.validateUserInput();
                         validInput = true;
                         break;
                     default:

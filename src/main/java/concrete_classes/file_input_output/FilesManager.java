@@ -73,14 +73,26 @@ public class FilesManager {
         writeStudentsFile();
     }
 
-    public static void loadEnrolledCourses(Student studentObj) {
+    public static void readEnrolledCourses(Student studentObj) {
         String lineOutput;
         try {
-            BufferedReader fileInput = new BufferedReader(new FileReader("src/main/java/text_files/studentsEnrolledCourses"));
+            BufferedReader fileInput = new BufferedReader(new FileReader("src/main/java/text_files/studentsEnrolledCourses.txt"));
             while ((lineOutput = fileInput.readLine()) != null) {
                 String[] currentLine = lineOutput.split(",");
                 if (currentLine[0].equals(String.valueOf(studentObj.getId()))) {
-                    studentObj.getEnrolledCourses().put(currentLine[1], Float.valueOf(currentLine[2]));
+                    for (int i = 1; i < currentLine.length; i += 2) {
+                        
+                        String courseCode = currentLine[i];
+                        Float grade;
+                        
+                        if (currentLine[i + 1].equals("null")) {
+                            grade = null;
+                        } else {
+                            grade = Float.valueOf(currentLine[i + 1]);
+                        }
+
+                        studentObj.getEnrolledCourses().put(courseCode, grade);
+                    }
                 }
             }
         } catch (IOException e) {
@@ -88,10 +100,10 @@ public class FilesManager {
         }
     }
 
-    public static void loadCompletedCourses(Student studentObj) {
+    public static void readCompletedCourses(Student studentObj) {
         String lineOutput;
         try {
-            BufferedReader fileInput = new BufferedReader(new FileReader("src/main/java/text_files/studentsCompletedCourses"));
+            BufferedReader fileInput = new BufferedReader(new FileReader("src/main/java/text_files/studentsCompletedCourses.txt"));
             while ((lineOutput = fileInput.readLine()) != null) {
                 String[] currentLine = lineOutput.split(",");
                 if (currentLine[0].equals(String.valueOf(studentObj.getId()))) {

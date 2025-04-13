@@ -100,6 +100,7 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
                         }
 
                         currentStudent.setPersonalEmail(newEmail);
+                        FilesManager.saveCurrentStudent(currentStudent);
                         HeadersUtil.printHeader("Your personal email has been updated successfully!");
                         validInput = true;
                         break;
@@ -123,6 +124,7 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
                         }
 
                         currentStudent.setPhoneNumber(ValidationUtil.formatPhoneNumber(newPhoneNumber));
+                        FilesManager.saveCurrentStudent(currentStudent);
                         HeadersUtil.printHeader("Your phone number has been updated successfully!");
                         validInput = true;
                         break;
@@ -146,6 +148,7 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
                         }
 
                         currentStudent.setAddress(newAddress);
+                        FilesManager.saveCurrentStudent(currentStudent);
                         HeadersUtil.printHeader("Your address has been updated successfully!");
                         validInput = true;
                         break;

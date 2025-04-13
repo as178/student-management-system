@@ -4,46 +4,48 @@
  */
 package concrete_classes.students;
 
+import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
 import interfaces.InputValidationInterface;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
  *
- * @author williamniven
+ * @author Angela Saric (24237573)
  */
-public class StudentViewDetails implements DashboardInterface, HeaderInterface, InputValidationInterface {
-    
+public class StudentViewAcademicDetails implements DashboardInterface, HeaderInterface, InputValidationInterface {
+
     private Student currentStudent;
-    
-    public StudentViewDetails(Student currentStudent){
+
+    public StudentViewAcademicDetails(Student currentStudent) {
         this.currentStudent = currentStudent;
-    }
-    
-    @Override
-    public void showHeader() {
-        HeadersUtil.printHeader("My Details");
     }
 
     @Override
     public void showMenu() {
-        System.out.println("ID: " + currentStudent.getId());
-        System.out.println("Name: " + currentStudent.getFirstName() + " " + currentStudent.getLastName());
-        System.out.println("Date of Birth: " + currentStudent.getDateOfBirth());
-        System.out.println("Personal Email: " + currentStudent.getPersonalEmail());
-        System.out.println("University Email: " + currentStudent.getUniEmail());
-        System.out.println("Phone Number: " + currentStudent.getPhoneNumber());
-        System.out.println("Gender: " + currentStudent.getGender());
-        System.out.println("Address: " + currentStudent.getAddress());
+        System.out.println("My Major: " + currentStudent.getMajor());
+        System.out.println("My Current Courses & Grades (Maximum of 8): ");
+        System.out.println("[ Course Code || Grade ]");
+        for (HashMap.Entry<String, Float> entry : currentStudent.getEnrolledCourses().entrySet()) {
+            System.out.println(">   " + entry.getKey() + "   || " + entry.getValue());
+        }
         HeadersUtil.printHeader("Please choose one of the options below:");
-        System.out.println("1 - Modify Your Details\nb - Go Back\nx - Exit");
+        System.out.println("1 - View More (Course Details)\n2 - Change Major\n"
+                + "3 - Change Courses\nb - Go Back\nx - Exit");
+    }
+
+    @Override
+    public void showHeader() {
+        HeadersUtil.printHeader("My Academic Details");
     }
 
     @Override
     public String validateUserInput() {
+        FilesManager.readEnrolledCourses(currentStudent);
         Scanner scan = new Scanner(System.in);
 
         while (true) {
@@ -59,8 +61,15 @@ public class StudentViewDetails implements DashboardInterface, HeaderInterface, 
 
                 switch (userInput) {
                     case "1":
-                        StudentModifyDetails modifyDetails = new StudentModifyDetails(currentStudent);
-                        modifyDetails.validateUserInput();
+                        //StudentViewCourses ==> methods for viewing current & completed courses in detail
+                        validInput = true;
+                        break;
+                    case "2":
+                        //StudentModifyMajor change major method
+                        validInput = true;
+                        break;
+                    case "3":
+                        //StudentModifyCourses add/remove courses methods                        
                         validInput = true;
                         break;
                     default:

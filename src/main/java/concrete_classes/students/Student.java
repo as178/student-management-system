@@ -22,6 +22,8 @@ public class Student extends User {
             String uniEmail, String phoneNumber, Character gender, String address, String major) {
         super(id, password, firstName, lastName, dateOfBirth, personalEmail, uniEmail, phoneNumber, gender, address);
         this.major = major;
+        this.enrolledCourses = new HashMap<>();
+        this.completedCourses = new HashMap<>();
     }
 
     public String getMajor() {
