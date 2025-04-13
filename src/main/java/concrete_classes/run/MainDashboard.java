@@ -62,6 +62,21 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
              */
             String finalUserInput = DashboardUtil.displayDashboards(userInput).toLowerCase();
             NavigationUtil.checkExit(finalUserInput);
+            
+            /*
+            to ask Will:
+            
+            - logout option?
+            
+            - tidy up addresses, maybe? what do we want them to look like?
+            eg. 123 Street Name, Suburb, City, Postcode
+            
+            - in general do we want more validation/rules/restrictions on the formatting?
+            - duplicates?
+            
+            - for future, all courses and majors should be loaded up as Sets?
+            
+            */
         }
     }
 }

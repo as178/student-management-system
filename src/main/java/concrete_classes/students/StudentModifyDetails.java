@@ -4,8 +4,10 @@
  */
 package concrete_classes.students;
 
+import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
+import concrete_classes.other.ValidationUtil;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
 import interfaces.InputValidationInterface;
@@ -34,46 +36,124 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("What would you like to modify today?");
+        HeadersUtil.printHeader("What would you like to modify?");
     }
 
     @Override
     public String validateUserInput() {
         Scanner scan = new Scanner(System.in);
 
+        outerLoop:
         while (true) {
             this.showHeader();
             this.showMenu();
 
             String userInput = scan.nextLine().trim().toLowerCase();
 
-            if (NavigationUtil.backOrExit(userInput)) {
-                return "b";
-            }
-
+            //inner loop
             boolean validInput = false;
             while (!validInput) {
+                if (NavigationUtil.backOrExit(userInput)) {
+                    return "b";
+                }
+
                 switch (userInput) {
                     case "1":
-                        HeadersUtil.printHeader("Please type in your new email address below.");
-                        String newEmail = scan.nextLine();
-                        //currentStudent.setPersonalEmail(newEmail);
-                        HeadersUtil.printHeader("Personal email updated!");
+                        HeadersUtil.printHeader("Please type in your new password below or",
+                                "type 'b' to go back, or 'x' to exit.");
+                        String newPassword = scan.nextLine().trim();
+
+                        if (NavigationUtil.backOrExit(newPassword)) {
+                            continue outerLoop;
+                        }
+                        while (!ValidationUtil.checkPassword(newPassword)) {
+                            HeadersUtil.printHeader("Passwords must be at least 8 characters long",
+                                    "and must not be empty or blank, please try again.",
+                                    "(Type 'b' to go back, or 'x' to exit.)");
+                            newPassword = scan.nextLine().trim();
+                            if (NavigationUtil.backOrExit(newPassword)) {
+                                continue outerLoop;
+                            }
+                        }
+
+                        currentStudent.setPassword(newPassword);
+                        FilesManager.saveCurrentStudent(currentStudent);
+                        HeadersUtil.printHeader("Your password has been updated successfully!");
+                        validInput = true;
                         break;
+
                     case "2":
-                        System.out.print("Enter new phone number: ");
-                        String newPhone = scan.nextLine();
-                        //currentStudent.setPhoneNumber(newPhone);
-                        HeadersUtil.printHeader("Phone number updated!");
+                        HeadersUtil.printHeader("Please type in your new email below or",
+                                "type 'b' to go back, or 'x' to exit.");
+                        String newEmail = scan.nextLine().trim();
+
+                        if (NavigationUtil.backOrExit(newEmail)) {
+                            continue outerLoop;
+                        }
+                        while (!ValidationUtil.checkEmail(newEmail)) {
+                            HeadersUtil.printHeader("Invalid email address format, please try again.",
+                                    "(Type 'b' to go back, or 'x' to exit.)");
+                            newEmail = scan.nextLine().trim();
+                            if (NavigationUtil.backOrExit(newEmail)) {
+                                continue outerLoop;
+                            }
+                        }
+
+                        currentStudent.setPersonalEmail(newEmail);
+                        HeadersUtil.printHeader("Your personal email has been updated successfully!");
+                        validInput = true;
                         break;
+
                     case "3":
-                        System.out.print("Enter new address: ");
-                        String newAddress = scan.nextLine();
-                        //currentStudent.setAddress(newAddress);
-                        HeadersUtil.printHeader("Address updated!");
+                        HeadersUtil.printHeader("Please type in your new phone number below",
+                                "(e.g. xxx xxx xxxx, +xx xx xxx xxxx, xxxxxxxxxx)",
+                                "or type 'b' to go back, or 'x' to exit.");
+                        String newPhoneNumber = scan.nextLine().trim();
+
+                        if (NavigationUtil.backOrExit(newPhoneNumber)) {
+                            continue outerLoop;
+                        }
+                        while (!ValidationUtil.checkPhoneNumber(newPhoneNumber)) {
+                            HeadersUtil.printHeader("Invalid phone number, please try again.",
+                                    "(Type 'b' to go back, or 'x' to exit.)");
+                            newPhoneNumber = scan.nextLine().trim();
+                            if (NavigationUtil.backOrExit(newPhoneNumber)) {
+                                continue outerLoop;
+                            }
+                        }
+
+                        currentStudent.setPhoneNumber(ValidationUtil.formatPhoneNumber(newPhoneNumber));
+                        HeadersUtil.printHeader("Your phone number has been updated successfully!");
+                        validInput = true;
                         break;
+
+                    case "4":
+                        HeadersUtil.printHeader("Please type in your new address below",
+                                "(e.g. 123 Street Name Suburb City 1234),",
+                                "or type 'b' to go back, or 'x' to exit.");
+                        String newAddress = scan.nextLine().trim();
+
+                        if (NavigationUtil.backOrExit(newAddress)) {
+                            continue outerLoop;
+                        }
+                        while (!ValidationUtil.checkPhoneNumber(newAddress)) {
+                            HeadersUtil.printHeader("Invalid address, please try again.",
+                                    "(Type 'b' to go back, or 'x' to exit.)");
+                            newPhoneNumber = scan.nextLine().trim();
+                            if (NavigationUtil.backOrExit(newAddress)) {
+                                continue outerLoop;
+                            }
+                        }
+
+                        currentStudent.setAddress(newAddress);
+                        HeadersUtil.printHeader("Your address has been updated successfully!");
+                        validInput = true;
+                        break;
+
                     default:
-                        HeadersUtil.printHeader("Invalid input.");
+                        HeadersUtil.printHeader("Invalid input, please pick a valid field to modify.");
+                        this.showMenu();
+                        userInput = scan.nextLine();
                 }
             }
         }

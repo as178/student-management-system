@@ -62,8 +62,7 @@ public class StudentViewDetails implements DashboardInterface, HeaderInterface, 
                 switch (userInput) {
                     case "m":
                         StudentModifyDetails modifyDetails = new StudentModifyDetails(currentStudent);
-                        modifyDetails.showHeader();
-                        modifyDetails.showMenu();
+                        modifyDetails.validateUserInput();
                         validInput = true;
                         break;
                     default:

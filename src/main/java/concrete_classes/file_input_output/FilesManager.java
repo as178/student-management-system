@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -19,11 +20,12 @@ import java.util.HashMap;
  */
 public class FilesManager {
 
-    public static HashMap<String, User> currentUsers;
+    //using linked hashmap to keep the order of which the users are stored within the files
+    public static LinkedHashMap<String, User> currentUsers;
     public static User currentUser;
 
     public static void readStudentsFile() {
-        currentUsers = new HashMap<String, User>();
+        currentUsers = new LinkedHashMap<String, User>();
         String fileOutput;
 
         try {
@@ -56,12 +58,19 @@ public class FilesManager {
         try {
             BufferedWriter fileOutput = new BufferedWriter(new FileWriter("src/main/java/text_files/students.txt"));
             for (HashMap.Entry<String, User> userObj : currentUsers.entrySet()) {
-                fileOutput.write(userObj.getValue().toString());
+                Student studentObj = (Student) userObj.getValue();
+                fileOutput.write(studentObj.toString());
                 fileOutput.newLine();
             }
+            fileOutput.close();
         } catch (IOException e) {
             System.out.println("Error in writing to this file: students.txt");
         }
+    }
+
+    public static void saveCurrentStudent(Student currentStudent) {
+        currentUsers.put(currentStudent.getId() + "", currentStudent);
+        writeStudentsFile();
     }
 
     public static void loadEnrolledCourses(Student studentObj) {

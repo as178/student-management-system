@@ -83,4 +83,20 @@ public abstract class User {
     public String getAddress() {
         return this.address;
     }
+
+    public void setPassword(String newPassword) {
+        this.password = newPassword;
+    }
+
+    public void setPersonalEmail(String newPersonalEmail) {
+        this.personalEmail = newPersonalEmail;
+    }
+
+    public void setPhoneNumber(String newPhoneNumber) {
+        this.phoneNumber = newPhoneNumber;
+    }
+
+    public void setAddress(String newAddress) {
+        this.address = newAddress;
+    }
 }
