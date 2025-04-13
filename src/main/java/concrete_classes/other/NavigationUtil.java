@@ -8,7 +8,7 @@ package concrete_classes.other;
  *
  * @author Angela Saric (24237573)
  */
-public class NavigationUtil {
+public final class NavigationUtil {
 
     public static final String back = "b";
     public static final String exit = "x";

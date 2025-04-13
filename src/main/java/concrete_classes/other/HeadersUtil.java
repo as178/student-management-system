@@ -8,13 +8,12 @@ package concrete_classes.other;
  *
  * @author Angela Saric (24237573)
  */
-public class HeadersUtil {
+public final class HeadersUtil {
 
-    private HeadersUtil() {
-    }
+    private HeadersUtil() {}
 
     public static void printHeader(String... headerText) {
-        int numberOfLines = 36;
+        int numberOfLines = 50;
         String lines = "=".repeat(numberOfLines);
         System.out.println(lines);
 

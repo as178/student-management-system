@@ -5,17 +5,32 @@
 package concrete_classes.students;
 
 import concrete_classes.file_input_output.FilesManager;
+import concrete_classes.other.HeadersUtil;
+import concrete_classes.other.NavigationUtil;
+import interfaces.DashboardInterface;
+import interfaces.HeaderInterface;
+import interfaces.InputValidationInterface;
+import java.util.Scanner;
 
 /**
  *
  * @author williamniven
  */
-public class StudentViewDetails {
+public class StudentViewDetails implements DashboardInterface, HeaderInterface, InputValidationInterface {
     
-    public static Student currentStudent = (Student) FilesManager.currentUser;
+    private Student currentStudent;
     
-    public static void viewMyDetails() {
-        System.out.println("\n==== My Details ====\n");
+    public StudentViewDetails(Student currentStudent){
+        this.currentStudent = currentStudent;
+    }
+    
+    @Override
+    public void showHeader() {
+        HeadersUtil.printHeader("My Details");
+    }
+
+    @Override
+    public void showMenu() {
         System.out.println("ID: " + currentStudent.getId());
         System.out.println("Name: " + currentStudent.getFirstName() + " " + currentStudent.getLastName());
         System.out.println("Date of Birth: " + currentStudent.getDateOfBirth());
@@ -25,21 +40,38 @@ public class StudentViewDetails {
         System.out.println("Gender: " + currentStudent.getGender());
         System.out.println("Address: " + currentStudent.getAddress());
         System.out.println("Major: " + currentStudent.getMajor());
-        System.out.println("\n====================\n");
-        System.out.println("1 - Edit My Details\n2 - Back\nx - Exit");
+        HeadersUtil.printHeader("Please choose one of the options below:");
+        System.out.println("m - Modify your details\nb - Go Back\nx - Exit");
     }
 
-    public static void veiwEditDetails() {
-        Student currentStudent = (Student) FilesManager.currentUser;
-        System.out.println("\n==== Edit Details ====\n");
-        System.out.println("1) Personal Email: " + currentStudent.getPersonalEmail());
-        System.out.println("2) Phone Number: " + currentStudent.getPhoneNumber());
-        System.out.println("3) Address: " + currentStudent.getAddress());
-        System.out.println("\n======================\n");
-    }
+    @Override
+    public String validateUserInput() {
+        Scanner scan = new Scanner(System.in);
 
-    public static void currentlyEnrolledCourses() {
-        Student currentStudent = (Student) FilesManager.currentUser;
-        System.out.println("Enrolled Courses: " + currentStudent.getEnrolledCourses());
+        while (true) {
+            this.showHeader();
+            this.showMenu();
+            String userInput = scan.nextLine().trim().toLowerCase();
+
+            boolean validInput = false;
+            while (!validInput) {
+                if (NavigationUtil.backOrExit(userInput)) {
+                    return "b";
+                }
+
+                switch (userInput) {
+                    case "m":
+                        StudentModifyDetails modifyDetails = new StudentModifyDetails(currentStudent);
+                        modifyDetails.showHeader();
+                        modifyDetails.showMenu();
+                        validInput = true;
+                        break;
+                    default:
+                        HeadersUtil.printHeader("Invalid input, please see below", "for valid options.");
+                        this.showMenu();
+                        userInput = scan.nextLine();
+                }
+            }
+        }
     }
 }

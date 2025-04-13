@@ -7,9 +7,10 @@ package abstract_classes;
 /**
  *
  * @author Angela Saric (24237573)
- * 
+ *
  */
 public abstract class User {
+
     protected int id;
     protected String password;
     protected String firstName;
@@ -33,5 +34,53 @@ public abstract class User {
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.address = address;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getSecretPassword() {
+        String hashedPassword = "";
+        for (int i = 0; i < this.password.length(); i++) {
+            hashedPassword += "*";
+        }
+        return hashedPassword;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public String getDateOfBirth() {
+        return this.dateOfBirth;
+    }
+
+    public String getPersonalEmail() {
+        return this.personalEmail;
+    }
+
+    public String getUniEmail() {
+        return this.uniEmail;
+    }
+
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public Character getGender() {
+        return this.gender;
+    }
+
+    public String getAddress() {
+        return this.address;
     }
 }

@@ -16,7 +16,7 @@ import concrete_classes.students.StudentDashboard;
  */
 public final class DashboardUtil {
    
-    private DashboardUtil(){}
+    private DashboardUtil() {}
     
     public static String displayDashboards(String userInput){
         switch(userInput){

@@ -23,46 +23,6 @@ public class Student extends User {
         this.major = major;
     }
 
-    public int getId() {
-        return this.id;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public String getDateOfBirth() {
-        return this.dateOfBirth;
-    }
-
-    public String getPersonalEmail() {
-        return this.personalEmail;
-    }
-
-    public String getUniEmail() {
-        return this.uniEmail;
-    }
-
-    public String getPhoneNumber() {
-        return this.phoneNumber;
-    }
-
-    public Character getGender() {
-        return this.gender;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
     public String getMajor() {
         return this.major;
     }
@@ -81,5 +41,4 @@ public class Student extends User {
                 + dateOfBirth + "," + personalEmail + "," + uniEmail + ","
                 + phoneNumber + "," + gender + "," + address + "," + major;
     }
-
 }

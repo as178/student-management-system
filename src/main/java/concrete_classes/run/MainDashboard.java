@@ -22,7 +22,7 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
     
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Welcome to the", "Student Management System!", "Please pick an option:");
+        HeadersUtil.printHeader("Welcome to the Student Management System!", "Please pick an option:");
     }
 
     @Override

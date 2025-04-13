@@ -51,11 +51,11 @@ public class UserAuthentication {
                     if (password.equals(currentStudent.getPassword())) {
                         return true;
                     } else {
-                        HeadersUtil.printHeader("Incorrect credentials,", "please try again.");
+                        HeadersUtil.printHeader("Incorrect credentials, please try again.");
                     }
                 }
             } else {
-                HeadersUtil.printHeader("Invalid user,", "please try again.");
+                HeadersUtil.printHeader("Invalid user, please try again.");
             }
         }
     }

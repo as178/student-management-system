@@ -21,6 +21,8 @@ import java.util.Scanner;
  */
 public class StudentDashboard implements InputValidationInterface, DashboardInterface, HeaderInterface {
 
+    private Student currentStudent = (Student) FilesManager.currentUser;
+    
     @Override
     public void showHeader() {
         Student currentStudent = (Student) FilesManager.currentUser;
@@ -30,8 +32,8 @@ public class StudentDashboard implements InputValidationInterface, DashboardInte
 
     @Override
     public void showMenu() {
-        System.out.println("1 - View My Details\n2 - View My Currently Enrolled Courses"
-                + "\n3 - View My Grades\nb - Go Back\nx - Exit");
+        System.out.println("1 - View My Details\n2 - View Currently Enrolled Courses"
+                + "\n3 - View My Grades\nb - Go Back (Logout)\nx - Exit");
     }
 
     @Override
@@ -52,15 +54,16 @@ public class StudentDashboard implements InputValidationInterface, DashboardInte
                 }
                 switch (userInput) {
                     case "1":
-                        StudentViewDetails.viewMyDetails();
+                        StudentViewDetails viewDetails = new StudentViewDetails(currentStudent);
+                        viewDetails.validateUserInput();
                         validInput = true;
                         break;
                     case "2":
-                        StudentViewDetails.currentlyEnrolledCourses();
+                        //StudentViewDetails.currentlyEnrolledCourses();
                         validInput = true;
                         break;
                     case "3":
-                        StudentViewDetails.veiwEditDetails();
+                        //StudentViewDetails.veiwEditDetails();
                         validInput = true;
                         break;
                     default:
