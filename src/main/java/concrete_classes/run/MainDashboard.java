@@ -64,20 +64,20 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             NavigationUtil.checkExit(finalUserInput);
             
             /*
-            to ask Will:
-            
             - should we store students in a hashset instead?
-            
-            - logout option?
-            
+                - no for now
             - should students be able to change names?
+                - if we feel like it at the end
             
+            Will tasks:
+            - adding more detailed "go back" print outs
+            - gpa to be called in the view academic details section
+            - testing, change .txt files, see what the outputs are
+            
+            Me tasks:
             - tidy up addresses, maybe? what do we want them to look like?
             eg. 123 Street Name, Suburb, City, Postcode
-            
-            - in general do we want more validation/rules/restrictions on the formatting?
-            - duplicates?
-            
+            - wrapping where necessary/putting length limits on things the user can change
             */
         }
     }

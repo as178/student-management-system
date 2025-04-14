@@ -28,13 +28,20 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
 
     @Override
     public void showMenu() {
+        //System.out.println("My GPA: "+ currentStudent.getGPA());
         System.out.println("My Major: " + currentStudent.getMajor());
         System.out.println("My Current Courses & Grades (Maximum of 8): ");
-        System.out.println("[ Course Code || Grade ]");
-        for (HashMap.Entry<String, Float> entry : currentStudent.getEnrolledCourses().entrySet()) {
-            System.out.println(">   " + entry.getKey() + "   ||  "
-                    + GradesUtil.convertFloatToGrade(entry.getValue()));
+
+        if (currentStudent.getEnrolledCourses().isEmpty()) {
+            System.out.println("> No courses being taken at this time . . .");
+        } else {
+            System.out.println("[ Course Code || Grade ]");
+            for (HashMap.Entry<String, Float> entry : currentStudent.getEnrolledCourses().entrySet()) {
+                System.out.println(">   " + entry.getKey() + "   ||  "
+                        + GradesUtil.convertFloatToGrade(entry.getValue()));
+            }
         }
+
         HeadersUtil.printHeader("Please choose one of the options below:");
         System.out.println("1 - View More (Course Details)\n2 - Change Major\n"
                 + "3 - Change Courses\nb - Go Back\nx - Exit");
@@ -48,6 +55,8 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
     @Override
     public String validateUserInput() {
         FilesManager.readEnrolledCourses(currentStudent);
+        FilesManager.readPreviousCourses(currentStudent);
+
         Scanner scan = new Scanner(System.in);
 
         while (true) {
@@ -68,7 +77,7 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
                         validInput = true;
                         break;
                     case "2":
-                        //StudentModifyMajor change major method
+                        StudentModifyMajor modifyMajor = new StudentModifyMajor(currentStudent);
                         validInput = true;
                         break;
                     case "3":

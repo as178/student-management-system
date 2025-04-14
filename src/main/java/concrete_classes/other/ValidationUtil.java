@@ -14,6 +14,7 @@ public final class ValidationUtil {
 
     public static boolean checkPassword(String password) {
         return !password.isBlank() && password.length() >= 8;
+        //no commas and no dots
     }
 
     public static boolean checkEmail(String email) {
@@ -21,8 +22,8 @@ public final class ValidationUtil {
     }
 
     public static boolean checkPhoneNumber(String phoneNumber) {
-        return formatPhoneNumber(phoneNumber).matches("^\\d{10}$") ||
-                formatPhoneNumber(phoneNumber).matches("^\\+\\d{11,13}$");
+        return formatPhoneNumber(phoneNumber).matches("^\\d{10}$") || 
+                formatPhoneNumber(phoneNumber).matches("^\\+\\d{11,13}$"); 
     }
     
     public static String formatPhoneNumber(String phoneNumber){

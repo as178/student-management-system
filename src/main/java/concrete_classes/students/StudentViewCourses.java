@@ -35,22 +35,25 @@ public class StudentViewCourses implements DashboardInterface, HeaderInterface, 
 
     @Override
     public void showMenu() {
-        for (String courseId : currentStudent.getEnrolledCourses().keySet()) {
-            for (Course currentCourse : FilesManager.allCourses) {
-                if (currentCourse.getCourseId().equals(courseId)) {
+        if (currentStudent.getEnrolledCourses().isEmpty()) {
+            System.out.println("> No courses being taken at this time . . .");
+        } else {
+            for (String courseId : currentStudent.getEnrolledCourses().keySet()) {
+                for (Course currentCourse : FilesManager.allCourses) {
+                    if (currentCourse.getCourseId().equals(courseId)) {
 
-                    HeadersUtil.printHeader(currentCourse.getCourseId() + ", "
-                            + currentCourse.getCourseName());
+                        HeadersUtil.printHeader(currentCourse.getCourseId(), currentCourse.getCourseName());
 
-                    Float courseGrade = currentStudent.getEnrolledCourses().get(courseId);
-                    System.out.println("> Your Grade: " + GradesUtil.convertFloatToGrade(courseGrade));
+                        Float courseGrade = currentStudent.getEnrolledCourses().get(courseId);
+                        System.out.println("> Your Grade: " + GradesUtil.convertFloatToGrade(courseGrade));
 
-                    System.out.println("> Major: " + currentCourse.getCourseMajor());
-                    System.out.println("> Prerequisite: " + currentCourse.getCoursePrerequisite());
-                    System.out.println("> Estimated Hours: " + currentCourse.getCourseEstimatedHours());
-                    System.out.println("> Lecturer: " + currentCourse.getCourseLecturer());
-                    System.out.println("> Description:\n"
-                            + WordUtils.wrap(currentCourse.getCourseDescription(), 46));
+                        System.out.println("> Major: " + currentCourse.getCourseMajor());
+                        System.out.println("> Prerequisite: " + currentCourse.getCoursePrerequisite());
+                        System.out.println("> Estimated Hours: " + currentCourse.getCourseEstimatedHours());
+                        System.out.println("> Lecturer: " + currentCourse.getCourseLecturer());
+                        System.out.println("> Description:\n"
+                                + WordUtils.wrap(currentCourse.getCourseDescription(), 46));
+                    }
                 }
             }
         }
@@ -63,34 +66,37 @@ public class StudentViewCourses implements DashboardInterface, HeaderInterface, 
         HeadersUtil.printHeader("Please see below for information about",
                 "your previous courses, or see further", "options displayed.");
 
-        for (String courseId : currentStudent.getPreviousCourses().keySet()) {
-            for (Course currentCourse : FilesManager.allCourses) {
-                if (currentCourse.getCourseId().equals(courseId)) {
+        if (currentStudent.getPreviousCourses().isEmpty()) {
+            System.out.println("> No previous courses exist yet . . .");
+        } else {
+            for (String courseId : currentStudent.getPreviousCourses().keySet()) {
+                for (Course currentCourse : FilesManager.allCourses) {
+                    if (currentCourse.getCourseId().equals(courseId)) {
 
-                    HeadersUtil.printHeader(currentCourse.getCourseId() + ", "
-                            + currentCourse.getCourseName());
+                        HeadersUtil.printHeader(currentCourse.getCourseId(), currentCourse.getCourseName());
 
-                    Float courseGrade = currentStudent.getPreviousCourses().get(courseId);
-                    System.out.println("> Your Grade: " + GradesUtil.convertFloatToGrade(courseGrade));
+                        Float courseGrade = currentStudent.getPreviousCourses().get(courseId);
+                        System.out.println("> Your Grade: " + GradesUtil.convertFloatToGrade(courseGrade));
 
-                    System.out.println("> Major: " + currentCourse.getCourseMajor());
-                    System.out.println("> Prerequisite: " + currentCourse.getCoursePrerequisite());
-                    System.out.println("> Estimated Hours: " + currentCourse.getCourseEstimatedHours());
-                    System.out.println("> Lecturer: " + currentCourse.getCourseLecturer());
-                    System.out.println("> Description:\n"
-                            + WordUtils.wrap(currentCourse.getCourseDescription(), 46));
+                        System.out.println("> Major: " + currentCourse.getCourseMajor());
+                        System.out.println("> Prerequisite: " + currentCourse.getCoursePrerequisite());
+                        System.out.println("> Estimated Hours: " + currentCourse.getCourseEstimatedHours());
+                        System.out.println("> Lecturer: " + currentCourse.getCourseLecturer());
+                        System.out.println("> Description:\n"
+                                + WordUtils.wrap(currentCourse.getCourseDescription(), 46));
+                    }
                 }
             }
         }
 
-        HeadersUtil.printHeader("Press any key to load your current", "courses again, or pick an option below.");
+        HeadersUtil.printHeader("Type in anything or simply press",
+                " 'Enter' to load your current courses again,", "or pick an option below.");
         System.out.println("b - Go Back\nx - Exit");
     }
 
     @Override
     public String validateUserInput() {
         FilesManager.readAllCourses();
-        FilesManager.readEnrolledCourses(currentStudent);
 
         Scanner scan = new Scanner(System.in);
 
@@ -107,7 +113,6 @@ public class StudentViewCourses implements DashboardInterface, HeaderInterface, 
 
                 switch (userInput) {
                     case "1":
-                        FilesManager.readPreviousCourses(currentStudent);
                         this.showPreviouscourses();
                         userInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(userInput)) {

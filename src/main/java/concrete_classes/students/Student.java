@@ -14,7 +14,6 @@ import java.util.HashMap;
 public class Student extends User {
 
     private String major;
-    //private int gpa;
     private HashMap<String, Float> enrolledCourses;
     private HashMap<String, Float> previousCourses;
 
@@ -30,8 +29,8 @@ public class Student extends User {
         return this.major;
     }
     
-//    public int getGPA(){
-//        to be implemented after courses section for student
+//    public float getGPA(){
+//        
 //    }
 
     public HashMap<String, Float> getEnrolledCourses() {
