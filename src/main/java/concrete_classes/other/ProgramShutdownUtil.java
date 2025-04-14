@@ -2,19 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package concrete_classes.run;
+package concrete_classes.other;
 
 /**
  *
  * @author Angela Saric (24237573)
- *
- * Main method; runs the program.
  */
-public class StudentManagementSystem {
+public final class ProgramShutdownUtil {
 
-    public static MainDashboard mainDashboard = new MainDashboard();
+    private ProgramShutdownUtil() {}
     
-    public static void main(String[] args) {
-        mainDashboard.run();
+    public static void shutdown() {
+        HeadersUtil.printHeader("Thank you.", "Program shutting down . . .");
+        System.exit(0);
     }
 }

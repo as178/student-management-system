@@ -4,12 +4,10 @@
  */
 package interfaces;
 
-import java.util.Scanner;
-
 /**
  *
  * @author Angela Saric (24237573)
  */
 public interface InputValidationInterface {
-    void validateUserInput(String userInput, Scanner scan);
+    String validateUserInput();
 }

@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package other_classes;
+package concrete_classes.other;
 
-import concrete_classes.StudentDashboard;
+import concrete_classes.students.StudentDashboard;
 
 /**
  *
@@ -16,13 +16,15 @@ import concrete_classes.StudentDashboard;
  */
 public final class DashboardUtil {
    
-    private DashboardUtil(){}
+    private DashboardUtil() {}
     
-    public static void showMenu(String option){
-        switch(option){
+    public static String displayDashboards(String userInput){
+        switch(userInput){
             case "1":
-                new StudentDashboard().showMenu();
-                break;
+                StudentDashboard studentDashboard = new StudentDashboard();
+                return studentDashboard.validateUserInput();
+            default:
+                return "b";
         }
     }
 }

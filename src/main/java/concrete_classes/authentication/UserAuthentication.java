@@ -4,11 +4,11 @@
  */
 package concrete_classes.authentication;
 
-import concrete_classes.components.Student;
 import concrete_classes.file_input_output.FilesManager;
+import concrete_classes.other.HeadersUtil;
+import concrete_classes.other.NavigationUtil;
+import concrete_classes.students.Student;
 import java.util.Scanner;
-import other_classes.HeadersUtil;
-import other_classes.ProgramShutdown;
 
 /**
  *
@@ -16,47 +16,46 @@ import other_classes.ProgramShutdown;
  */
 public class UserAuthentication {
 
-    public void login(Scanner scan) {
-    
-        boolean validInput = false;
+    public boolean login() {
+
+        Scanner scan = new Scanner(System.in);
         String usernameId;
         String password;
 
-        while (!validInput) {
-            System.out.println("b - Go Back\nx - Exit\nPlease type in your username (ID):");
+        while (true) {
+            HeadersUtil.printHeader("Please type in your username (ID)", "or select one of the following:");
+            System.out.println("b - Go Back\nx - Exit");
             usernameId = scan.nextLine();
-
-            if (usernameId.equalsIgnoreCase("b")){
-                return;
-            } else if (usernameId.equalsIgnoreCase("x")){
-                ProgramShutdown.shutdown();
+            /*
+            if userInput = b, return back to the main dashboard
+            if userInput = x, exit the program immediately
+             */
+            if (NavigationUtil.backOrExit(usernameId)) {
+                return false;
             }
-            
-            System.out.println("b - Go Back\nx - Exit\nPlease type in your password:");
-            password = scan.nextLine();
 
-//            if (usernameId.equalsIgnoreCase("b")){
-//                
-//            } else if (usernameId.equalsIgnoreCase("x")){
-//                
-//            }
-            
+            HeadersUtil.printHeader("Please type in your password", "or select one of the following:");
+            System.out.println("b - Go Back\nx - Exit");
+            password = scan.nextLine();
+            if (NavigationUtil.backOrExit(password)) {
+                return false;
+            }
+
             if (FilesManager.currentUsers.containsKey(usernameId)) {
 
                 FilesManager.currentUser = FilesManager.currentUsers.get(usernameId);
 
                 if (FilesManager.currentUser instanceof Student) {
                     Student currentStudent = (Student) FilesManager.currentUser;
-                    
+
                     if (password.equals(currentStudent.getPassword())) {
-                        validInput = true;
+                        return true;
                     } else {
-                        HeadersUtil.printHeader("Incorrect credentials,", "please try again.");
+                        HeadersUtil.printHeader("Incorrect credentials, please try again.");
                     }
                 }
-
             } else {
-                HeadersUtil.printHeader("Invalid user,", "please try again.");
+                HeadersUtil.printHeader("Invalid user, please try again.");
             }
         }
     }
