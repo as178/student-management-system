@@ -7,7 +7,7 @@ package concrete_classes.run;
 import concrete_classes.authentication.UserAuthentication;
 import concrete_classes.other.DashboardUtil;
 import concrete_classes.other.HeadersUtil;
-import concrete_classes.other.LoginOptionValidator;
+import concrete_classes.authentication.LoginOptionValidator;
 import concrete_classes.other.NavigationUtil;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
@@ -66,15 +66,17 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             /*
             to ask Will:
             
+            - should we store students in a hashset instead?
+            
             - logout option?
+            
+            - should students be able to change names?
             
             - tidy up addresses, maybe? what do we want them to look like?
             eg. 123 Street Name, Suburb, City, Postcode
             
             - in general do we want more validation/rules/restrictions on the formatting?
             - duplicates?
-            
-            - for future, all courses and majors should be loaded up as Sets?
             
             */
         }

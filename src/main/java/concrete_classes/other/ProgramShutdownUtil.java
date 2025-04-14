@@ -8,8 +8,10 @@ package concrete_classes.other;
  *
  * @author Angela Saric (24237573)
  */
-public class ProgramShutdown {
+public final class ProgramShutdownUtil {
 
+    private ProgramShutdownUtil() {}
+    
     public static void shutdown() {
         HeadersUtil.printHeader("Thank you.", "Program shutting down . . .");
         System.exit(0);

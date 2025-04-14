@@ -5,6 +5,7 @@
 package concrete_classes.students;
 
 import concrete_classes.file_input_output.FilesManager;
+import concrete_classes.other.GradesUtil;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
 import interfaces.DashboardInterface;
@@ -31,7 +32,8 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
         System.out.println("My Current Courses & Grades (Maximum of 8): ");
         System.out.println("[ Course Code || Grade ]");
         for (HashMap.Entry<String, Float> entry : currentStudent.getEnrolledCourses().entrySet()) {
-            System.out.println(">   " + entry.getKey() + "   || " + entry.getValue());
+            System.out.println(">   " + entry.getKey() + "   ||  "
+                    + GradesUtil.convertFloatToGrade(entry.getValue()));
         }
         HeadersUtil.printHeader("Please choose one of the options below:");
         System.out.println("1 - View More (Course Details)\n2 - Change Major\n"
@@ -61,7 +63,8 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
 
                 switch (userInput) {
                     case "1":
-                        //StudentViewCourses ==> methods for viewing current & completed courses in detail
+                        StudentViewCourses viewCourses = new StudentViewCourses(currentStudent);
+                        viewCourses.validateUserInput();
                         validInput = true;
                         break;
                     case "2":

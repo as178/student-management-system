@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package concrete_classes.other;
+package concrete_classes.authentication;
 
 import concrete_classes.file_input_output.FilesManager;
+import concrete_classes.other.HeadersUtil;
+import concrete_classes.other.NavigationUtil;
 import concrete_classes.run.StudentManagementSystem;
 import interfaces.InputValidationInterface;
 import java.util.Scanner;

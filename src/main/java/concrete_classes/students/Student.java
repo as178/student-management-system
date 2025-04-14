@@ -16,14 +16,14 @@ public class Student extends User {
     private String major;
     //private int gpa;
     private HashMap<String, Float> enrolledCourses;
-    private HashMap<String, Float> completedCourses;
+    private HashMap<String, Float> previousCourses;
 
     public Student(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address, String major) {
         super(id, password, firstName, lastName, dateOfBirth, personalEmail, uniEmail, phoneNumber, gender, address);
         this.major = major;
-        this.enrolledCourses = new HashMap<>();
-        this.completedCourses = new HashMap<>();
+        this.enrolledCourses = new HashMap<String, Float>();
+        this.previousCourses = new HashMap<String, Float>();
     }
 
     public String getMajor() {
@@ -38,8 +38,8 @@ public class Student extends User {
         return this.enrolledCourses;
     }
 
-    public HashMap<String, Float> getCompletedCourses() {
-        return this.completedCourses;
+    public HashMap<String, Float> getPreviousCourses() {
+        return this.previousCourses;
     }
 
     @Override

@@ -25,7 +25,6 @@ public class StudentDashboard implements InputValidationInterface, DashboardInte
     
     @Override
     public void showHeader() {
-        Student currentStudent = (Student) FilesManager.currentUser;
         HeadersUtil.printHeader("Welcome to the Student Dashboard,",
                 currentStudent.getFirstName() + " " + currentStudent.getLastName() + "!", "What would you like to do?");
     }

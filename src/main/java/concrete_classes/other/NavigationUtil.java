@@ -17,7 +17,7 @@ public final class NavigationUtil {
 
     public static boolean backOrExit(String userInput) {
         if (exit.equalsIgnoreCase(userInput)) {
-            ProgramShutdown.shutdown();
+            ProgramShutdownUtil.shutdown();
         } else if (back.equalsIgnoreCase(userInput)) {
             return true;
         }
@@ -26,7 +26,7 @@ public final class NavigationUtil {
 
     public static void checkExit(String userInput) {
         if (exit.equalsIgnoreCase(userInput)) {
-            ProgramShutdown.shutdown();
+            ProgramShutdownUtil.shutdown();
         }
     }
 }
