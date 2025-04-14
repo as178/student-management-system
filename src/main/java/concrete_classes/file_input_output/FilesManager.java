@@ -28,13 +28,14 @@ public class FilesManager {
     public static User currentUser;
 
     public static HashSet<Course> allCourses;
+    public static HashSet<String> allMajors;
 
     public static void readStudentsFile() {
         currentUsers = new LinkedHashMap<String, User>();
         String fileOutput;
 
         try {
-            BufferedReader fileInput = new BufferedReader(new FileReader("src/main/java/text_files/students.txt"));
+            BufferedReader fileInput = new BufferedReader(new FileReader("src/main/java/text_files/allStudents.txt"));
 
             while ((fileOutput = fileInput.readLine()) != null) {
                 String[] currentLine = fileOutput.split(",");
@@ -55,13 +56,13 @@ public class FilesManager {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error in reading from this file: students.txt");
+            System.out.println("Error in reading from this file: allStudents.txt");
         }
     }
 
     public static void writeStudentsFile() {
         try {
-            BufferedWriter fileOutput = new BufferedWriter(new FileWriter("src/main/java/text_files/students.txt"));
+            BufferedWriter fileOutput = new BufferedWriter(new FileWriter("src/main/java/text_files/allStudents.txt"));
             for (HashMap.Entry<String, User> userObj : currentUsers.entrySet()) {
                 Student studentObj = (Student) userObj.getValue();
                 fileOutput.write(studentObj.toString());
@@ -69,7 +70,7 @@ public class FilesManager {
             }
             fileOutput.close();
         } catch (IOException e) {
-            System.out.println("Error in writing to this file: students.txt");
+            System.out.println("Error in writing to this file: allStudents.txt");
         }
     }
 
@@ -162,6 +163,24 @@ public class FilesManager {
             }
         } catch (IOException e) {
             HeadersUtil.printHeader("Error in reading from this file: studentsPreviousCourses.txt");
+        }
+    }
+
+    public static void readAllMajors() {
+        allMajors = new HashSet<String>();
+        
+        try (BufferedReader fileInput = new BufferedReader(new FileReader("src/main/java/text_files/allMajors.txt"))) {
+            String fileOutput;
+            while ((fileOutput = fileInput.readLine()) != null) {
+                fileOutput = fileOutput.trim();
+                
+                if (!allMajors.add(fileOutput)) {
+                    HeadersUtil.printHeader("Notification from reading allMajors.txt: ",
+                            fileOutput + " wasn't added as it already", "exists in the majors list.");
+                }
+            }
+        } catch (IOException e) {
+            HeadersUtil.printHeader("Error in reading from this file: allMajors.txt");
         }
     }
 }

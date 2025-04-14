@@ -62,6 +62,10 @@ public class Student extends User {
     public HashMap<String, Float> getPreviousCourses() {
         return this.previousCourses;
     }
+    
+    public void setMajor(String newMajor){
+        this.major = newMajor;
+    }
 
     @Override
     public String toString() {

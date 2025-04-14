@@ -24,6 +24,9 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
 
     public StudentViewAcademicDetails(Student currentStudent) {
         this.currentStudent = currentStudent;
+        FilesManager.readEnrolledCourses(currentStudent);
+        FilesManager.readPreviousCourses(currentStudent);
+        FilesManager.readAllCourses();
     }
 
     @Override
@@ -54,9 +57,6 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
 
     @Override
     public String validateUserInput() {
-        FilesManager.readEnrolledCourses(currentStudent);
-        FilesManager.readPreviousCourses(currentStudent);
-
         Scanner scan = new Scanner(System.in);
 
         while (true) {
@@ -78,6 +78,7 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
                         break;
                     case "2":
                         StudentModifyMajor modifyMajor = new StudentModifyMajor(currentStudent);
+                        modifyMajor.validateUserInput();
                         validInput = true;
                         break;
                     case "3":

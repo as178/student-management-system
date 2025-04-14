@@ -75,7 +75,7 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             
             Angela tasks:
             - populate .txt files with better data
-            
+            - go thru student stuff and tidy up everything, checking for wrapping, logic, etc. . .
              */
         }
     }

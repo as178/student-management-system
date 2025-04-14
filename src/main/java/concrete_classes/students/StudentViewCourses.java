@@ -96,8 +96,6 @@ public class StudentViewCourses implements DashboardInterface, HeaderInterface, 
 
     @Override
     public String validateUserInput() {
-        FilesManager.readAllCourses();
-
         Scanner scan = new Scanner(System.in);
 
         while (true) {
