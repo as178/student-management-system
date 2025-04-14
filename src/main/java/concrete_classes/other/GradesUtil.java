@@ -41,8 +41,8 @@ public final class GradesUtil {
             return "Invalid";
         }
     }
-    
-        public static int convertFloatToGPA(Float grade) {
+
+    public static int convertFloatToGPA(Float grade) {
         if (grade >= 89.5f && grade <= 100.0f) {
             return 9; //A+
         } else if (grade >= 84.5f && grade < 89.5f) {
@@ -64,8 +64,7 @@ public final class GradesUtil {
         } else if (grade >= 0.0f && grade < 49.5f) {
             return 0; //D
         } else {
-            System.out.println("invalid grade score to GPA");
-            return 1; //So it dose not impact GPA score
+            return 0; //So it dose not impact GPA score
         }
     }
 }

@@ -7,7 +7,6 @@ package concrete_classes.students;
 import abstract_classes.User;
 import concrete_classes.other.GradesUtil;
 import java.util.HashMap;
-import java.util.Objects;
 
 /**
  *
@@ -32,27 +31,28 @@ public class Student extends User {
     }
 
     public float getGPA() {
-        float GPA = 0;
-        int count = 0;
+        float gradePoints = 0;
+        int numberOfCourses = 0;
+
         for (Float grade : enrolledCourses.values()) {
-            if (grade != null || !Objects.equals(grade, "N/A")) {
-                GPA += GradesUtil.convertFloatToGPA(grade);
-                count++;
+            if (grade != null && grade != -1f) {
+                gradePoints += GradesUtil.convertFloatToGPA(grade);
+                numberOfCourses++;
             }
         }
 
         for (Float grade : previousCourses.values()) {
-            if (grade != null || !Objects.equals(grade, "N/A")) {
-                GPA += GradesUtil.convertFloatToGPA(grade);
-                count++;
+            if (grade != null && grade != -1f) {
+                gradePoints += GradesUtil.convertFloatToGPA(grade);
+                numberOfCourses++;
             }
         }
 
-        if (count == 0) {
+        if (numberOfCourses == 0) {
             return 0;
         }
 
-        return GPA / count;
+        return gradePoints / numberOfCourses;
     }
 
     public HashMap<String, Float> getEnrolledCourses() {

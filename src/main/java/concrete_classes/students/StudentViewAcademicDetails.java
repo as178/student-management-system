@@ -28,7 +28,7 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
 
     @Override
     public void showMenu() {
-        System.out.println("My GPA: "+ currentStudent.getGPA());
+        System.out.println("My GPA: "+ String.format("%.2f", currentStudent.getGPA()));
         System.out.println("My Major: " + currentStudent.getMajor());
         System.out.println("My Current Courses & Grades (Maximum of 8): ");
 
