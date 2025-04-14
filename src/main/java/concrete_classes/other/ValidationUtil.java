@@ -13,12 +13,16 @@ public final class ValidationUtil {
     private ValidationUtil() {}
 
     public static boolean checkPassword(String password) {
-        return !password.isBlank() && password.length() >= 8;
-        //no commas and no dots
+        return !password.isBlank() &&
+                password.length() >= 8 &&
+                password.length() <= 30 &&
+                !password.contains(",") &&
+                !password.contains(".");
     }
 
     public static boolean checkEmail(String email) {
-        return email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
+        return email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")
+                && email.length() <= 50;
     }
 
     public static boolean checkPhoneNumber(String phoneNumber) {
@@ -31,6 +35,7 @@ public final class ValidationUtil {
     }
 
     public static boolean checkAddress(String address) {
-        return address.matches("^\\d+\\s+[A-Za-z]+(?:\\s+[A-Za-z]+){2}\\s+\\d{4}$");
+        return address.matches("^\\d+\\s+(?:[A-Za-z-]+\\s+){3,5}[A-Za-z-]+\\s+\\d{4}$")
+                && !address.contains(",");
     }
 }

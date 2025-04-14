@@ -67,8 +67,10 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
                             continue outerLoop;
                         }
                         while (!ValidationUtil.checkPassword(newPassword)) {
-                            HeadersUtil.printHeader("Passwords must be at least 8 characters long",
-                                    "and must not be empty or blank, please try again.",
+                            HeadersUtil.printHeader("Passwords cannot contain commas or", 
+                                    "periods, be empty or blank, and",
+                                    "must be at least 8 characters long.",
+                                    "Please try again.",
                                     "(Type 'b' to go back, or 'x' to exit.)");
                             newPassword = scan.nextLine().trim();
                             if (NavigationUtil.backOrExit(newPassword)) {
@@ -131,17 +133,17 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
 
                     case "4":
                         HeadersUtil.printHeader("Please type in your new address below",
-                                "(e.g. 123 Street Name Suburb City 1234),",
-                                "or type 'b' to go back, or 'x' to exit.");
-                        String newAddress = scan.nextLine().trim();
+                                "(e.g. 123 Street Name Suburb City 1234).", "No commas allowed.", 
+                                "Type 'b' to go back, or 'x' to exit.");
+                        String newAddress = scan.nextLine();
 
                         if (NavigationUtil.backOrExit(newAddress)) {
                             continue outerLoop;
                         }
-                        while (!ValidationUtil.checkPhoneNumber(newAddress)) {
+                        while (!ValidationUtil.checkAddress(newAddress)) {
                             HeadersUtil.printHeader("Invalid address, please try again.",
                                     "(Type 'b' to go back, or 'x' to exit.)");
-                            newPhoneNumber = scan.nextLine().trim();
+                            newAddress = scan.nextLine();
                             if (NavigationUtil.backOrExit(newAddress)) {
                                 continue outerLoop;
                             }

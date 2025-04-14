@@ -19,7 +19,7 @@ import interfaces.HeaderInterface;
  * Code which is executed first when the program is run.
  */
 public class MainDashboard implements DashboardInterface, HeaderInterface {
-    
+
     @Override
     public void showHeader() {
         HeadersUtil.printHeader("Welcome to the Student Management System!", "Please pick an option:");
@@ -29,7 +29,7 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
     public void showMenu() {
         System.out.println("1 - Login as Student\n2 - Login as Lecturer\n3 - Login as Administrator\nx - Exit");
     }
-    
+
     public void run() {
 
         while (true) {
@@ -62,7 +62,7 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
              */
             String finalUserInput = DashboardUtil.displayDashboards(userInput).toLowerCase();
             NavigationUtil.checkExit(finalUserInput);
-            
+
             /*
             - should we store students in a hashset instead?
                 - no for now
@@ -71,14 +71,12 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             
             Will tasks:
             - adding more detailed "go back" print outs
-            - gpa to be called in the view academic details section
             - testing, change .txt files, see what the outputs are
             
-            Me tasks:
-            - tidy up addresses, maybe? what do we want them to look like?
-            eg. 123 Street Name, Suburb, City, Postcode
-            - wrapping where necessary/putting length limits on things the user can change
-            */
+            Angela tasks:
+            - populate .txt files with better data
+            
+             */
         }
     }
 }
