@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * 
+ *
  * @author Angela Saric (24237573)
  */
 public class StudentModifyMajor implements DashboardInterface, HeaderInterface, InputValidationInterface {
@@ -31,13 +31,6 @@ public class StudentModifyMajor implements DashboardInterface, HeaderInterface, 
 
     @Override
     public void showMenu() {
-        this.listOfMajors.clear();
-        for (String major : FilesManager.allMajors) {
-            if (!currentStudent.getMajor().equals(major)) {
-                listOfMajors.add(major);
-            }
-        }
-
         for (int i = 0; i < listOfMajors.size(); i++) {
             System.out.println((i + 1) + " - " + listOfMajors.get(i));
         }
@@ -50,11 +43,21 @@ public class StudentModifyMajor implements DashboardInterface, HeaderInterface, 
                 "Please pick one of the available majors", "below or see further options displayed.");
     }
 
+    public void getAvailableMajors() {
+        this.listOfMajors.clear();
+        for (String major : FilesManager.allMajors) {
+            if (!currentStudent.getMajor().equals(major)) {
+                listOfMajors.add(major);
+            }
+        }
+    }
+
     @Override
     public String validateUserInput() {
         Scanner scan = new Scanner(System.in);
 
         while (true) {
+            this.getAvailableMajors();
             this.showHeader();
             this.showMenu();
             String userInput = scan.nextLine().trim();
@@ -88,12 +91,12 @@ public class StudentModifyMajor implements DashboardInterface, HeaderInterface, 
                 if (NavigationUtil.backOrExit(userInput)) {
                     validInput = true;
                 } else if (userInput.equalsIgnoreCase("y")) {
-                    
+
                     currentStudent.setMajor(chosenMajor);
-                    
+
                     FilesManager.withdrawAllCourses(currentStudent);
                     FilesManager.saveCurrentStudent(currentStudent);
-                    
+
                     HeadersUtil.printHeader("Your major was successfully updated to: ",
                             chosenMajor + "!",
                             "To enroll into your new courses enter in 'b'",

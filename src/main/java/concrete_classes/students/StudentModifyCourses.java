@@ -14,7 +14,7 @@ import interfaces.InputValidationInterface;
 import java.util.Scanner;
 
 /**
- * Work in progress . . .
+ * 
  * @author Angela Saric (24237573)
  */
 public class StudentModifyCourses implements DashboardInterface, HeaderInterface, InputValidationInterface {
@@ -24,29 +24,7 @@ public class StudentModifyCourses implements DashboardInterface, HeaderInterface
     public StudentModifyCourses(Student currenStudent) {
         this.currentStudent = currenStudent;
     }
-
-    /*
-    - the student can see a dynamic, short list of their current courses (courseId only)
-    - then they can pick to either add more courses or remove courses
     
-    ADDING:
-    - available only if the student is taking less than 8 courses
-    - student is shown a dynamic list of available courses they can take
-        - can't be courses they are currently taking
-        - also can't be courses they have previously taken (NOT withdrawn from or failed, so e.g.
-          if COMP610 has a failed grade/was withdrawn from, the student can retake, but if they passed then no)
-        - if courses have prerequisites, the student must've passed those before taking the new course
-    
-    - the student then picks a course they want to take
-        - if its a course they have previously withdrawn from/failed, take that course out of the prev courses
-    - confirmation message
-    - course is added and the grade is assigned null
-    
-    REMOVING:
-    - student is asked which course they want to withdraw from based on initial list
-    - confirmation message
-    - the course is withdrawn from and placed into the previous courses file with a withdrawn grade
-     */
     @Override
     public void showMenu() {
         if (currentStudent.getEnrolledCourses().isEmpty()) {
@@ -88,12 +66,13 @@ public class StudentModifyCourses implements DashboardInterface, HeaderInterface
 
                 switch (userInput) {
                     case "1":
-                        StudentAddCourse addCourse = new StudentAddCourse(currentStudent);
-                        addCourse.validateUserInput();
+                        StudentEnrollCourse enrollCourse = new StudentEnrollCourse(currentStudent);
+                        enrollCourse.validateUserInput();
                         validInput = true;
                         break;
                     case "2":
-                        //call remove course class
+                        StudentWithdrawCourse withdrawCourse = new StudentWithdrawCourse(currentStudent);
+                        withdrawCourse.validateUserInput();
                         validInput = true;
                         break;
                     default:

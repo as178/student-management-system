@@ -19,14 +19,29 @@ import java.util.Scanner;
  *
  * @author Angela Saric (24237573)
  */
-public class StudentAddCourse implements DashboardInterface, HeaderInterface, InputValidationInterface {
+public class StudentEnrollCourse implements DashboardInterface, HeaderInterface, InputValidationInterface {
 
     private Student currentStudent;
     private ArrayList<Course> availableCourses;
 
-    public StudentAddCourse(Student currenStudent) {
+    public StudentEnrollCourse(Student currenStudent) {
         this.currentStudent = currenStudent;
         this.availableCourses = new ArrayList<Course>();
+    }
+
+    @Override
+    public void showMenu() {
+        if (this.availableCourses.isEmpty()) {
+            System.out.println("> No available courses yet . . .");
+            HeadersUtil.printHeader("Please pick one of the following:");
+        } else {
+            for (int i = 0; i < availableCourses.size(); i++) {
+                System.out.println((i + 1) + " - " + availableCourses.get(i).getCourseId()
+                        + ", " + availableCourses.get(i).getCourseName());
+            }
+            HeadersUtil.printHeader("Which course would you like to enroll in?");
+        }
+        System.out.println("b - Go Back (Change Your Courses)\nx - Exit");
     }
 
     @Override
@@ -35,16 +50,6 @@ public class StudentAddCourse implements DashboardInterface, HeaderInterface, In
                 "The courses you are currently eligible",
                 "to take are as follows.",
                 "(See further options below.)");
-    }
-
-    @Override
-    public void showMenu() {
-        for (int i = 0; i < availableCourses.size(); i++) {
-            System.out.println((i + 1) + " - " + availableCourses.get(i).getCourseId()
-                    + ", " + availableCourses.get(i).getCourseName());
-        }
-        HeadersUtil.printHeader("Which course would you like to enroll in?");
-        System.out.println("b - Go Back (Change Your Courses)\nx - Exit");
     }
 
     public void getAvailableCourses() {
@@ -69,7 +74,7 @@ public class StudentAddCourse implements DashboardInterface, HeaderInterface, In
     @Override
     public String validateUserInput() {
         Scanner scan = new Scanner(System.in);
-        
+
         while (true) {
             if (currentStudent.getEnrolledCourses().size() >= 8) {
                 HeadersUtil.printHeader("You have reached the maximum number of",
@@ -84,6 +89,7 @@ public class StudentAddCourse implements DashboardInterface, HeaderInterface, In
                 if (NavigationUtil.backOrExit(userInput)) {
                     return "b";
                 }
+                return "b";
             } else {
 
                 this.getAvailableCourses();
@@ -121,7 +127,6 @@ public class StudentAddCourse implements DashboardInterface, HeaderInterface, In
                         if (currentStudent.getPreviousCourses().containsKey(chosenCourse.getCourseId())) {
                             currentStudent.getPreviousCourses().remove(chosenCourse.getCourseId());
                         }
-
                         currentStudent.getEnrolledCourses().put(chosenCourse.getCourseId(), null);
 
                         FilesManager.updateStudentCourseFile(currentStudent,
@@ -129,9 +134,9 @@ public class StudentAddCourse implements DashboardInterface, HeaderInterface, In
                                 currentStudent.getEnrolledCourses(), false);
                         FilesManager.updateStudentCourseFile(currentStudent,
                                 "src/main/java/text_files/studentsPreviousCourses.txt",
-                                currentStudent.getPreviousCourses(), true);
+                                currentStudent.getPreviousCourses(), false);
 
-                        HeadersUtil.printHeader("Enrollment successful! Welcome to " + chosenCourse.getCourseId() + "!");
+                        HeadersUtil.printHeader("Enrollment successful!", "Welcome to " + chosenCourse.getCourseId() + "!");
 
                         validInput = true;
                     } else {
