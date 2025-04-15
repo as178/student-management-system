@@ -7,6 +7,7 @@ package concrete_classes.students;
 import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
+import concrete_classes.other.ValidationUtil;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
 import interfaces.InputValidationInterface;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ * 
  * @author Angela Saric (24237573)
  */
 public class StudentModifyMajor implements DashboardInterface, HeaderInterface, InputValidationInterface {
@@ -26,27 +27,21 @@ public class StudentModifyMajor implements DashboardInterface, HeaderInterface, 
         this.currentStudent = currentStudent;
         this.listOfMajors = new ArrayList<String>();
         FilesManager.readAllMajors();
+    }
+
+    @Override
+    public void showMenu() {
+        this.listOfMajors.clear();
         for (String major : FilesManager.allMajors) {
             if (!currentStudent.getMajor().equals(major)) {
                 listOfMajors.add(major);
             }
         }
-    }
 
-    // - list the available majors, excluding the one student is already taking
-    // - do some sort index selection, so that it does not matter how many
-    //majors we add or remove, its dynamic
-    // - prior to user choosing a new major, give alert that says all their
-    //current courses will be wiped, moved to previous courses and assigned the
-    //-1 "withdrawn" grade
-    // - if they're ok with it, proceed and save their choice
-    // - show message saying "to add your courses go back > select change courses
-    @Override
-    public void showMenu() {
         for (int i = 0; i < listOfMajors.size(); i++) {
             System.out.println((i + 1) + " - " + listOfMajors.get(i));
         }
-        System.out.println("b - Go Back\nx - Exit");
+        System.out.println("b - Go Back (Academic Details)\nx - Exit");
     }
 
     @Override
@@ -55,7 +50,6 @@ public class StudentModifyMajor implements DashboardInterface, HeaderInterface, 
                 "Please pick one of the available majors", "below or see further options displayed.");
     }
 
-    //Work in progress . . .
     @Override
     public String validateUserInput() {
         Scanner scan = new Scanner(System.in);
@@ -64,35 +58,52 @@ public class StudentModifyMajor implements DashboardInterface, HeaderInterface, 
             this.showHeader();
             this.showMenu();
             String userInput = scan.nextLine().trim();
-            
+
             if (NavigationUtil.backOrExit(userInput)) {
                 return "b";
             }
+
+            while (!ValidationUtil.checkIntegerRange(userInput, 1, this.listOfMajors.size())) {
+                HeadersUtil.printHeader("Invalid input, please pick a valid option.");
+                this.showMenu();
+                userInput = scan.nextLine();
+                if (NavigationUtil.backOrExit(userInput)) {
+                    return "b";
+                }
+            }
+
+            int validOption = Integer.parseInt(userInput);
+            String chosenMajor = this.listOfMajors.get(validOption - 1);
 
             HeadersUtil.printHeader("Changing your major will withdraw you",
                     "from all your current courses.",
                     "Your grades will appear as 'Withdrawn' and",
                     "won't count towards your GPA.",
                     "Are you sure you want to proceed?");
-            System.out.println("y - Yes, Change My Major\nb - Go Back\nx - Exit");
-            userInput = scan.nextLine();
+            System.out.println("y - Yes, Change My Major\nb - Go Back (Available Majors)\nx - Exit");
+            userInput = scan.nextLine().trim();
 
             boolean validInput = false;
             while (!validInput) {
                 if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
+                    validInput = true;
                 } else if (userInput.equalsIgnoreCase("y")) {
+                    
+                    currentStudent.setMajor(chosenMajor);
+                    
+                    FilesManager.withdrawAllCourses(currentStudent);
+                    FilesManager.saveCurrentStudent(currentStudent);
+                    
+                    HeadersUtil.printHeader("Your major was successfully updated to: ",
+                            chosenMajor + "!",
+                            "To enroll into your new courses enter in 'b'",
+                            "and select '3 - Change Courses'.");
                     validInput = true;
                 } else {
-                    HeadersUtil.printHeader("Invalid input, please pick a valid option.");
-                    userInput = scan.nextLine();
+                    HeadersUtil.printHeader("Invalid input, please pick one of the following:");
+                    System.out.println("y - Yes, Change My Major\nb - Go Back (Available Majors)\nx - Exit");
+                    userInput = scan.nextLine().trim();
                 }
-            }
-
-            int userChoice = Integer.parseInt(userInput);
-            if (userChoice >= 1 && userChoice <= this.listOfMajors.size()) {
-                String newMajor = this.listOfMajors.get(userChoice - 1);
-                currentStudent.setMajor(newMajor);
             }
         }
     }

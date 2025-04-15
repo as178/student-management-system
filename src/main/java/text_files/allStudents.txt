@@ -1,5 +1,5 @@
 24229618,password123,John,Doe,15-05-2000,john.doe@email.com,john.doe@aut.ac.nz,0211234567,M,123 Main St,Computer Science
-24237573,password456,Jane,Smith,22-08-1999,jane.smith@email.com,jane.smith@aut.ac.nz,+64213456789,F,12 Name St Bay Auckland 1234,Data Science
+24237573,password456,Jane,Smith,22-08-1999,jane.smith@email.com,jane.smith@aut.ac.nz,+64213456789,F,12 Name St Bay Auckland 1234,Networks & Cybersecurity
 22358946,password789,Alan,Brown,30-11-2001,alan.brown@email.com,alan.brown@aut.ac.nz,0211357246,M,789 Pine St,Networks & Cybersecurity
 21568973,password012,Emily,White,11-02-2000,emily.white@email.com,emily.white@aut.ac.nz,0219876543,F,321 Birch St,Data Science
 23568741,password345,Michael,Green,05-12-1998,michael.green@email.com,michael.green@aut.ac.nz,0213456789,M,654 Elm St,Digital Services
