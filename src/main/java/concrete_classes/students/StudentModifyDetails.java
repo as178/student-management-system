@@ -71,7 +71,8 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
                                     "periods, be empty or blank, and",
                                     "must be at least 8 characters long.",
                                     "Please try again.",
-                                    "(Type 'b' to go back (Modify Menu), or 'x' to exit.)");
+                                    "(Type 'b' to go back (Modify Menu),",
+                                    " or 'x' to exit.)");
                             newPassword = scan.nextLine().trim();
                             if (NavigationUtil.backOrExit(newPassword)) {
                                 continue outerLoop;
@@ -86,7 +87,8 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
 
                     case "2":
                         HeadersUtil.printHeader("Please type in your new email below or",
-                                "type 'b' to go back (Modify Menu), or 'x' to exit.");
+                                "type 'b' to go back (Modify Menu),",
+                                " or 'x' to exit.");
                         String newEmail = scan.nextLine().trim();
 
                         if (NavigationUtil.backOrExit(newEmail)) {
@@ -94,7 +96,8 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
                         }
                         while (!ValidationUtil.checkEmail(newEmail)) {
                             HeadersUtil.printHeader("Invalid email address format, please try again.",
-                                    "(Type 'b' to go back (Modify Menu), or 'x' to exit.)");
+                                    "(Type 'b' to go back (Modify Menu),",
+                                    " or 'x' to exit.)");
                             newEmail = scan.nextLine().trim();
                             if (NavigationUtil.backOrExit(newEmail)) {
                                 continue outerLoop;
@@ -119,7 +122,8 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
                         }
                         while (!ValidationUtil.checkPhoneNumber(newPhoneNumber)) {
                             HeadersUtil.printHeader("Invalid phone number, please try again.",
-                                    "(Type 'b' to go back (Modify Menu), or 'x' to exit.)");
+                                    "(Type 'b' to go back (Modify Menu),",
+                                    " or 'x' to exit.)");
                             newPhoneNumber = scan.nextLine().trim();
                             if (NavigationUtil.backOrExit(newPhoneNumber)) {
                                 continue outerLoop;
@@ -135,7 +139,8 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
                     case "4":
                         HeadersUtil.printHeader("Please type in your new address below",
                                 "(e.g. 123 Street Name Suburb City 1234).", "No commas allowed.", 
-                                "Type 'b' to go back (Modify Menu), or 'x' to exit.");
+                                "Type 'b' to go back (Modify Menu),",
+                                " or 'x' to exit.");
                         String newAddress = scan.nextLine();
 
                         if (NavigationUtil.backOrExit(newAddress)) {
@@ -143,7 +148,8 @@ public class StudentModifyDetails implements DashboardInterface, HeaderInterface
                         }
                         while (!ValidationUtil.checkAddress(newAddress)) {
                             HeadersUtil.printHeader("Invalid address, please try again.",
-                                    "(Type 'b' to go back (Modify Menu), or 'x' to exit.)");
+                                    "(Type 'b' to go back (Modify Menu),",
+                                    " or 'x' to exit.)");
                             newAddress = scan.nextLine();
                             if (NavigationUtil.backOrExit(newAddress)) {
                                 continue outerLoop;
