@@ -24,7 +24,7 @@ public class UserAuthentication {
 
         while (true) {
             HeadersUtil.printHeader("Please type in your username (ID)", "or select one of the following:");
-            System.out.println("b - Go Back\nx - Exit");
+            System.out.println("b - Go Back (Login Options)\nx - Exit");
             usernameId = scan.nextLine();
             /*
             if userInput = b, return back to the main dashboard
@@ -35,7 +35,7 @@ public class UserAuthentication {
             }
 
             HeadersUtil.printHeader("Please type in your password", "or select one of the following:");
-            System.out.println("b - Go Back\nx - Exit");
+            System.out.println("b - Go Back (Login Options)\nx - Exit");
             password = scan.nextLine();
             if (NavigationUtil.backOrExit(password)) {
                 return false;
