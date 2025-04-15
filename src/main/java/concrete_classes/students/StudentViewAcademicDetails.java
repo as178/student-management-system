@@ -47,7 +47,7 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
 
         HeadersUtil.printHeader("Please choose one of the options below:");
         System.out.println("1 - View More (Course Details)\n2 - Change Major\n"
-                + "3 - Change Courses\nb - Go Back\nx - Exit");
+                + "3 - Change Courses\nb - Go Back (Student Dashboard)\nx - Exit");
     }
 
     @Override
