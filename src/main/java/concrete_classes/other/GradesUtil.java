@@ -15,7 +15,7 @@ public final class GradesUtil {
     public static String convertFloatToGrade(Float grade) {
         if (grade == null) {
             return "N/A";
-        } else if (grade == -1) {
+        } else if (grade == -1f) {
             return "Withdrawn";
         } else if (grade >= 89.5f && grade <= 100.0f) {
             return "A+";

@@ -41,7 +41,7 @@ public class StudentModifyMajor implements DashboardInterface, HeaderInterface, 
         for (int i = 0; i < listOfMajors.size(); i++) {
             System.out.println((i + 1) + " - " + listOfMajors.get(i));
         }
-        System.out.println("b - Go Back (Academic Details)\nx - Exit");
+        System.out.println("b - Go Back (My Academic Details)\nx - Exit");
     }
 
     @Override
