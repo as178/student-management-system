@@ -59,7 +59,7 @@ public class StudentViewCourses implements DashboardInterface, HeaderInterface, 
         }
 
         HeadersUtil.printHeader("Please choose one of the options below:");
-        System.out.println("1 - View Previously Taken Courses\nb - Go Back\nx - Exit");
+        System.out.println("1 - View Previously Taken Courses\nb - Go Back (My Academic Details)\nx - Exit");
     }
 
     public void showPreviouscourses() {
@@ -91,7 +91,7 @@ public class StudentViewCourses implements DashboardInterface, HeaderInterface, 
 
         HeadersUtil.printHeader("Type in anything or simply press",
                 " 'Enter' to load your current courses again,", "or pick an option below.");
-        System.out.println("b - Go Back\nx - Exit");
+        System.out.println("b - Go Back (My Academic Details)\nx - Exit");
     }
 
     @Override
