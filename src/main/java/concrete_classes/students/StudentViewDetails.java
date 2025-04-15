@@ -39,7 +39,7 @@ public class StudentViewDetails implements DashboardInterface, HeaderInterface, 
         System.out.println("Gender: " + currentStudent.getGender());
         System.out.println("Address: " + currentStudent.getAddress());
         HeadersUtil.printHeader("Please choose one of the options below:");
-        System.out.println("1 - Modify Your Details\nb - Go Back\nx - Exit");
+        System.out.println("1 - Modify Your Details\nb - Go Back (Student Dashboard)\nx - Exit");
     }
 
     @Override
