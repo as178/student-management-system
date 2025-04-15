@@ -120,9 +120,11 @@ public class FilesManager {
         currentStudent.getEnrolledCourses().clear();
 
         updateStudentCourseFile(currentStudent,
-                "src/main/java/text_files/studentsEnrolledCourses.txt", currentStudent.getEnrolledCourses(), false);
+                "src/main/java/text_files/studentsEnrolledCourses.txt",
+                currentStudent.getEnrolledCourses(), false);
         updateStudentCourseFile(currentStudent,
-                "src/main/java/text_files/studentsPreviousCourses.txt", currentStudent.getPreviousCourses(), true);
+                "src/main/java/text_files/studentsPreviousCourses.txt",
+                currentStudent.getPreviousCourses(), true);
     }
 
     public static void updateStudentCourseFile(Student currentStudent, String path, HashMap<String, Float> studentsCourses, boolean append) {

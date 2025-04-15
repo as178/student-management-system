@@ -59,6 +59,7 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
 
             /*
             based on user choice, call the appropriate dashboard and display their options. . .
+            (this is where the logic gets separated depending on the chosen dashboards)
              */
             String finalUserInput = DashboardUtil.displayDashboards(userInput).toLowerCase();
             NavigationUtil.checkExit(finalUserInput);
@@ -66,12 +67,13 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             /*
             - should we store students in a hashset instead?
                 - no for now
-            - should students be able to change names?
-                - if we feel like it at the end
             
-            Will tasks:
-            - adding more detailed "go back" print outs
-            - testing, change .txt files, see what the outputs are
+            If we feel like it later:
+            - should students be able to change names?
+            - should we implement the "confirm your password" feature?
+            
+            WILL
+            - should lecturers be able to tell students "they have finished a course, sign off grade"?
             
             Angela tasks:
             - populate .txt files with better data

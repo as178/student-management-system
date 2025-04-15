@@ -82,7 +82,8 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
                         validInput = true;
                         break;
                     case "3":
-                        //StudentModifyCourses add/remove courses methods                        
+                        StudentModifyCourses modifyCourses = new StudentModifyCourses(currentStudent);
+                        modifyCourses.validateUserInput();
                         validInput = true;
                         break;
                     default:

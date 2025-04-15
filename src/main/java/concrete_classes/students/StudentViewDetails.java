@@ -36,7 +36,15 @@ public class StudentViewDetails implements DashboardInterface, HeaderInterface, 
         System.out.println("Personal Email: " + currentStudent.getPersonalEmail());
         System.out.println("University Email: " + currentStudent.getUniEmail());
         System.out.println("Phone Number: " + currentStudent.getPhoneNumber());
-        System.out.println("Gender: " + currentStudent.getGender());
+        
+        String gender;
+        if (currentStudent.getGender() == 'F'){
+            gender = "Female";
+        } else {
+            gender = "Male";
+        
+        }
+        System.out.println("Gender: " + gender);
         System.out.println("Address: " + currentStudent.getAddress());
         HeadersUtil.printHeader("Please choose one of the options below:");
         System.out.println("1 - Modify Your Details\nb - Go Back (Student Dashboard)\nx - Exit");
