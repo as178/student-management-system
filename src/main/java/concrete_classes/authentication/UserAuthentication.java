@@ -5,6 +5,7 @@
 package concrete_classes.authentication;
 
 import concrete_classes.file_input_output.FilesManager;
+import concrete_classes.lecturer.Lecturer;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
 import concrete_classes.students.Student;
@@ -53,7 +54,19 @@ public class UserAuthentication {
                     } else {
                         HeadersUtil.printHeader("Incorrect credentials, please try again.");
                     }
+
+                } else if (FilesManager.currentUser instanceof Lecturer) {
+                    
+                    Lecturer currentLecturer = (Lecturer) FilesManager.currentUser;
+                    
+                    if (password.equals(currentLecturer.getPassword())) {
+                        return true;
+                    } else {
+                        HeadersUtil.printHeader("Incorrect credentials, please try again.");
+                    }
+                    
                 }
+
             } else {
                 HeadersUtil.printHeader("Invalid user, please try again.");
             }

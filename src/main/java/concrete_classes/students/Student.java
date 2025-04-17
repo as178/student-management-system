@@ -14,9 +14,9 @@ import java.util.HashMap;
  */
 public class Student extends User {
 
-    private String major;
-    private HashMap<String, Float> enrolledCourses;
-    private HashMap<String, Float> previousCourses;
+    protected String major;
+    protected HashMap<String, Float> enrolledCourses;
+    protected HashMap<String, Float> previousCourses;
 
     public Student(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address, String major) {
