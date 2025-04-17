@@ -12,7 +12,14 @@ import java.util.Scanner;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ * 
+ * This class authenticates the user based on the type of
+ * user they are. For example, if the user chose to login as a
+ * student their input credentials will be checked against the students
+ * records in the "allStudents.txt" file. The user can always go back to
+ * the main dashboard or exit the program throughout the entire process.
+ * 
  */
 public class UserAuthentication {
 
@@ -41,8 +48,16 @@ public class UserAuthentication {
                 return false;
             }
 
+            /*
+            check if user is in the loaded hashmap of all users
+            > if they are, load them as the "currentUser"
+                - check what type of user they are (e.g. Student), and then:
+                    - check their input credentials are correct
+                    - if not prompt user again with "Incorrect credentials" message
+            > otherwise, prompt user again with "Invalid user" message
+            */
             if (FilesManager.currentUsers.containsKey(usernameId)) {
-
+                
                 FilesManager.currentUser = FilesManager.currentUsers.get(usernameId);
 
                 if (FilesManager.currentUser instanceof Student) {

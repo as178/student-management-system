@@ -6,17 +6,25 @@ package concrete_classes.courses;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ * 
+ * This is the course class which holds all attributes regarding
+ * courses, as well as their respective get/set methods. All courses
+ * read from the "allCourses.txt" file are stored in a
+ * "public static HashSet<Course> allCourses" in the FilesManager,
+ * and thus the "equals" & "hashcode" methods have been overridden
+ * to compare courses based on their unique "courseId" identifiers.
+ * 
  */
 public class Course {
 
-    private String courseId;
-    private String courseName;
-    private String courseMajor;
-    private String coursePrerequisite;
-    private int courseEstimatedHours;
-    private String courseLecturer;
-    private String courseDescription;
+    protected String courseId;
+    protected String courseName;
+    protected String courseMajor;
+    protected String coursePrerequisite;
+    protected int courseEstimatedHours;
+    protected String courseLecturer;
+    protected String courseDescription;
 
     public Course(String courseId, String courseName, String courseMajor, String coursePrerequisite,
             int courseEstimatedHours, String courseLecturer, String courseDescription) {

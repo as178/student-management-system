@@ -6,8 +6,12 @@ package abstract_classes;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
  *
+ * The abstract class that is extended by every user within
+ * our program, as they all share similar attributes, and
+ * methods required to retrieve/modify those attributes.
+ * 
  */
 public abstract class User {
 
@@ -44,6 +48,11 @@ public abstract class User {
         return this.password;
     }
 
+    /*
+    This method is used during personal details viewing
+    sections, where the password shouldn't be outright shown
+    to the user (e.g. ***********).
+    */
     public String getSecretPassword() {
         String hashedPassword = "";
         for (int i = 0; i < this.password.length(); i++) {

@@ -249,7 +249,7 @@ public class FilesManager {
 
                 if (!allMajors.add(fileOutput)) {
                     HeadersUtil.printHeader("Notification from reading allMajors.txt: ",
-                            fileOutput + " wasn't added as it already", "exists in the majors list.");
+                            fileOutput + " wasn't added as it", "already exists in the majors list.");
                 }
             }
         } catch (IOException e) {

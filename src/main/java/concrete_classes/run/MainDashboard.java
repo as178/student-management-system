@@ -16,7 +16,7 @@ import interfaces.HeaderInterface;
  *
  * @author Angela Saric (24237573)
  *
- * Code which is executed first when the program is run.
+ * Dashboard which is executed first when the program is run.
  */
 public class MainDashboard implements DashboardInterface, HeaderInterface {
 
@@ -53,7 +53,7 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             - user can choose to exit or go back to the main dashboard screen
              */
             UserAuthentication userAuthentication = new UserAuthentication();
-            if (!userAuthentication.login()) {
+            if (!userAuthentication.login()) { //if user wants to go back, restart the loop
                 continue;
             }
 
@@ -75,10 +75,7 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             WILL
             - should lecturers be able to tell students "they have finished a course, sign off grade"?
             
-            Angela tasks:
-            - populate .txt files with better data
-            - go thru student stuff and tidy up everything, checking for wrapping, logic, etc. . .
-             */
+            */
         }
     }
 }
