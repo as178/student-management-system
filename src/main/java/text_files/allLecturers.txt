@@ -1,0 +1,5 @@
+14567890,password,Michael,Nguyen,12-03-1975,michael.nguyen@email.com,michael.nguyen@aut.ac.nz,0211234567,M,12 Oak Ave,401,Computer Science
+14567891,strongPass45,Sophia,Lee,25-08-1980,sophia.lee@email.com,sophia.lee@aut.ac.nz,0212345678,F,88 Pine St,402,Data Science
+14567892,secure789,James,Kumar,03-11-1969,james.kumar@email.com,james.kumar@aut.ac.nz,0213456789,M,10 River Rd,403,Networks & Cybersecurity
+14567893,pass456!,Emily,Williams,09-01-1985,emily.williams@email.com,emily.williams@aut.ac.nz,0214567890,F,23 Lake View Dr,404,Digital Services
+14567894,welcome2025,Daniel,Chen,30-07-1972,daniel.chen@email.com,daniel.chen@aut.ac.nz,0215678901,M,5 Maple Ln,405,Software Development
