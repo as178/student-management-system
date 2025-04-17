@@ -13,16 +13,26 @@ import java.util.Scanner;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ * 
+ * This class validates the initial login option the user chooses.
+ * 
+ * - It implements the InputValidation interface, overriding its method
+ * to check for initial user input and load up all users from respective
+ * files into the "public static LinkedHashMap<String, User> currentUsers"
+ * accordingly.
+ * 
+ * - Otherwise it prompts the user for valid input and keeps showing the
+ * MainDashboard menu.
+ * 
  */
 public class LoginOptionValidator implements InputValidationInterface {
 
     @Override
     public String validateUserInput() {
-
-        String userInput;
+        
         Scanner scan = new Scanner(System.in);
-        userInput = scan.nextLine();
+        String userInput = scan.nextLine();
 
         while (true) {
             NavigationUtil.checkExit(userInput);

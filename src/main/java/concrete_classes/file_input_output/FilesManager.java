@@ -136,6 +136,78 @@ public class FilesManager {
             HeadersUtil.printHeader("Error saving to file: allCourses.txt");
         }
     }
+          
+    public static void withdrawAllCourses(Student currentStudent) {
+        for (String courseId : currentStudent.getEnrolledCourses().keySet()) {
+            currentStudent.getPreviousCourses().put(courseId, -1f);
+        }
+        currentStudent.getEnrolledCourses().clear();
+
+        updateStudentCourseFile(currentStudent,
+                "src/main/java/text_files/studentsEnrolledCourses.txt",
+                currentStudent.getEnrolledCourses(), false);
+        updateStudentCourseFile(currentStudent,
+                "src/main/java/text_files/studentsPreviousCourses.txt",
+                currentStudent.getPreviousCourses(), true);
+    }
+
+    public static void updateStudentCourseFile(Student currentStudent, String path, HashMap<String, Float> studentsCourses, boolean append) {
+
+        ArrayList<String> fileOutputLines = new ArrayList<String>();
+        
+        try {
+            String fileOutput;
+            BufferedReader fileInput = new BufferedReader(new FileReader(path));
+
+            while ((fileOutput = fileInput.readLine()) != null) {
+                String[] currentLine = fileOutput.split(",");
+
+                if (currentLine[0].equals(String.valueOf(currentStudent.getId()))) {
+
+                    StringBuilder newLine;
+                    if (append) {
+                        newLine = new StringBuilder(fileOutput);
+
+                        HashSet<String> previousCourses = new HashSet<String>();
+                        for (int i = 1; i < currentLine.length; i += 2) {
+                            previousCourses.add(currentLine[i]);
+                        }
+
+                        for (HashMap.Entry<String, Float> currentCourse : studentsCourses.entrySet()) {
+                            if (!previousCourses.contains(currentCourse.getKey())) {
+                                newLine.append(",").append(currentCourse.getKey()).append(",").append(currentCourse.getValue());
+                            }
+                        }
+                    } else {
+                        newLine = new StringBuilder(currentStudent.getId() + "");
+                        for (HashMap.Entry<String, Float> currentCourse : studentsCourses.entrySet()) {
+                            newLine.append(",").append(currentCourse.getKey()).append(",").append(currentCourse.getValue());
+                        }
+                    }
+                    fileOutputLines.add(newLine.toString());
+
+                } else {
+                    fileOutputLines.add(fileOutput);
+                }
+            }
+            fileInput.close();
+        } catch (IOException e) {
+            HeadersUtil.printHeader("Error in updating student's courses,", "in relation to file reading.");
+            return;
+        }
+
+        try {
+            BufferedWriter fileOutput = new BufferedWriter(new FileWriter(path));
+
+            for (String output : fileOutputLines) {
+                fileOutput.write(output);
+                fileOutput.newLine();
+            }
+            fileOutput.close();
+        } catch (IOException e) {
+            HeadersUtil.printHeader("Error in updating student's courses,", "in relation to file writing.");
+        }
+    }
 
     public static void readEnrolledCourses(Student studentObj) {
         String lineOutput;
@@ -302,7 +374,7 @@ public class FilesManager {
 
                 if (!allMajors.add(fileOutput)) {
                     HeadersUtil.printHeader("Notification from reading allMajors.txt: ",
-                            fileOutput + " wasn't added as it already", "exists in the majors list.");
+                            fileOutput + " wasn't added as it", "already exists in the majors list.");
                 }
             }
         } catch (IOException e) {
@@ -333,9 +405,6 @@ public class FilesManager {
                     String address = currentLine[9];
                     String extention = currentLine[10];
                     String faculty = currentLine[11];
-
-                    System.out.println(lecturerId);
-                    System.out.println(password);
 
                     currentUsers.put(currentLine[0], new Lecturer(lecturerId, password, firstName, lastName, dateOfBirth,
                             personalEmail, uniEmail, phoneNumber, gender, address, extention, faculty));

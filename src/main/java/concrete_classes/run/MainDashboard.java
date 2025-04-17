@@ -16,7 +16,7 @@ import interfaces.HeaderInterface;
  *
  * @author Angela Saric (24237573)
  *
- * Code which is executed first when the program is run.
+ * Dashboard which is executed first when the program is run.
  */
 public class MainDashboard implements DashboardInterface, HeaderInterface {
 
@@ -53,12 +53,13 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             - user can choose to exit or go back to the main dashboard screen
              */
             UserAuthentication userAuthentication = new UserAuthentication();
-            if (!userAuthentication.login()) {
+            if (!userAuthentication.login()) { //if user wants to go back, restart the loop
                 continue;
             }
 
             /*
             based on user choice, call the appropriate dashboard and display their options. . .
+            (this is where the logic gets separated depending on the chosen dashboards)
              */
             String finalUserInput = DashboardUtil.displayDashboards(userInput).toLowerCase();
             NavigationUtil.checkExit(finalUserInput);
@@ -66,17 +67,15 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             /*
             - should we store students in a hashset instead?
                 - no for now
+            
+            If we feel like it later:
             - should students be able to change names?
-                - if we feel like it at the end
+            - should we implement the "confirm your password" feature?
             
-            Will tasks:
-            - adding more detailed "go back" print outs
-            - testing, change .txt files, see what the outputs are
+            WILL
+            - should lecturers be able to tell students "they have finished a course, sign off grade"?
             
-            Angela tasks:
-            - populate .txt files with better data
-            - go thru student stuff and tidy up everything, checking for wrapping, logic, etc. . .
-             */
+            */
         }
     }
 }
