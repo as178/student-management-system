@@ -33,7 +33,6 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
 
     @Override
     public void showMenu() {
-        System.out.println("List Of Courses:");
 
         if (courses.isEmpty()) {
             System.out.println("No courses assigned.");
@@ -44,14 +43,15 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
             Integer key = entry.getKey();
             Course course = entry.getValue();
 
-            System.out.println(key + ") " + course.getCourseId() + " - " + course.getCourseName());
+            System.out.println(key + " - " + course.getCourseId() + " - " + course.getCourseName());
         }
         System.out.println("b - Go Back (Lecturer Dashboard)\nx - Exit");
     }
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Manage My Courses");
+        HeadersUtil.printHeader("Manage My Courses", 
+                "Select a course to manage");
     }
 
     @Override

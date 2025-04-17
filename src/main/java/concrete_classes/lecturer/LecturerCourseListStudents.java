@@ -38,8 +38,7 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
             System.out.println("No Students Enrolled\nb - Go Back (Course Info)\nx - Exit");
 
         } else {
-            System.out.println("Students Enrolled in " + currentCourse.getCourseId() + " - " + currentCourse.getCourseName());
-            System.out.println("Student-ID, Name, Grade");
+            System.out.println("Student-ID, Name, Score\n");
 
             for (Map.Entry<Integer, String> entry : studentGrades.entrySet()) {
                 Integer id = entry.getKey();
@@ -48,18 +47,20 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
                 Student student = enrolledStudents.get(id);
 
                 if (student != null) {
-                    System.out.println(id + ", " + student.getFirstName() + " " + student.getLastName() + ", Grade:" + grade);
+                    System.out.println(id + ", " + student.getFirstName() + " " + student.getLastName() + " || " + grade);
                 } else {
-                    System.out.println("Student Not Found");
+                    HeadersUtil.printHeader("Student Not Found");
                 }
             }
-            System.out.println("\nEnter student ID to edit their grade\nb - Go Back (Course Info)\nx - Exit");
+            System.out.println("\nb - Go Back (Course Info)\nx - Exit");
         }
     }
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Enrolled Students");
+        HeadersUtil.printHeader("Enrolled Students",
+                currentCourse.getCourseId() + " - " + currentCourse.getCourseName(),
+                "Enter student ID to edit their grade");
     }
 
     @Override
