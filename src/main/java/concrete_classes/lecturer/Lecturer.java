@@ -2,6 +2,7 @@ package concrete_classes.lecturer;
 
 import abstract_classes.User;
 import concrete_classes.courses.Course;
+import concrete_classes.file_input_output.FilesManager;
 import java.util.HashMap;
 
 /*
@@ -43,5 +44,10 @@ public class Lecturer extends User {
         return id + "," + password + "," + firstName + "," + lastName + ","
                 + dateOfBirth + "," + personalEmail + "," + uniEmail + ","
                 + phoneNumber + "," + gender + "," + address + "," + extention + "," + faculty;
+    }
+
+    @Override
+    public String getUsersPath() {
+        return FilesManager.allLecturersFile;
     }
 }

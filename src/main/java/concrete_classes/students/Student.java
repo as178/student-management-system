@@ -5,6 +5,7 @@
 package concrete_classes.students;
 
 import abstract_classes.User;
+import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.GradesUtil;
 import java.util.HashMap;
 
@@ -72,5 +73,10 @@ public class Student extends User {
         return id + "," + password + "," + firstName + "," + lastName + ","
                 + dateOfBirth + "," + personalEmail + "," + uniEmail + ","
                 + phoneNumber + "," + gender + "," + address + "," + major;
+    }
+    
+    @Override
+    public String getUsersPath() {
+        return FilesManager.allStudentsFile;
     }
 }

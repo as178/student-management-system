@@ -21,11 +21,9 @@ import java.util.Scanner;
  */
 public class LecturerManageCourses implements DashboardInterface, HeaderInterface, InputValidationInterface {
 
-    //private Lecturer currentLecturer;
     private HashMap<Integer, Course> courses;
 
     public LecturerManageCourses(Lecturer currentLecturer) {
-        //this.currentLecturer = currentLecturer;
         FilesManager.readLecturerCourses(currentLecturer);
         FilesManager.readAllCourses();
         courses = currentLecturer.getCoursesTaught();
@@ -65,25 +63,21 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
             this.showMenu();
             String userInput = scan.nextLine();
 
-            if (NavigationUtil.backOrExit(userInput)) {
-                return "b";
-            }
-
             boolean validInput = false;
             while (!validInput) {
+                if (NavigationUtil.backOrExit(userInput)) {
+                    return "b";
+                }
                 try {
                     int courseKey = Integer.parseInt(userInput);
                     if (courses.containsKey(courseKey)) {
                         LecturerCourseInfo courseInfo = new LecturerCourseInfo(courses.get(courseKey));
                         courseInfo.validateUserInput();
                         validInput = true;
-                        break;
                     } else {
                         HeadersUtil.printHeader("Please pick a valid option.");
                         this.showMenu();
                         userInput = scan.nextLine();
-                        validInput = true;
-                        break;
                     }
                 } catch (NumberFormatException e) {
                     HeadersUtil.printHeader("Invalid input. Please enter a number.");

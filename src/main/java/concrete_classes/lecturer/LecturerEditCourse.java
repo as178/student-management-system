@@ -51,6 +51,7 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
     public String validateUserInput() {
         Scanner scan = new Scanner(System.in);
 
+        outerLoop:
         while (true) {
             this.showHeader();
             this.showMenu();
@@ -61,19 +62,20 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
 
             if (NavigationUtil.backOrExit(userInput)) {
                 FilesManager.allCourses.add(currentCourse);
-                FilesManager.saveAllCourses();
+                FilesManager.writeAllCourses();
                 return "b";
             }
 
             boolean validInput = false;
-
+            //inner loop
             while (!validInput) {
                 switch (userInput) {
                     case "1":
-                        System.out.print("New course name (b - Go Back (Edit Course) x - Exit): ");
+                        System.out.print("New course name (b - Go Back (Edit Course) x - Exit): "); //name limit of 46 chars
                         String nameInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(nameInput)) {
-                            return this.validateUserInput(); 
+                            //return this.validateUserInput(); 
+                            continue outerLoop;
                         }
                         currentCourse.setCourseName(nameInput);
                         validInput = true;
@@ -84,12 +86,12 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                             System.out.print("New estimated hours ((b - Go Back (Edit Course) x - Exit): ");
                             String hoursInput = scan.nextLine();
                             if (NavigationUtil.backOrExit(hoursInput)) {
-                                return this.validateUserInput(); 
+                                continue outerLoop;
                             }
                             try {
                                 int estimatedHours = Integer.parseInt(hoursInput);
                                 if (estimatedHours <= 0) {
-                                    System.out.println("Estimated hours must be greater than 0.");
+                                    System.out.println("Estimated hours must be greater than 0."); //or no bigger than 150
                                 } else {
                                     currentCourse.setCourseEstimatedHours(estimatedHours);
                                     validInput = true;
@@ -102,10 +104,10 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         break;
 
                     case "3":
-                        System.out.print("New description (b - Go Back (Edit Course) x - Exit): ");
+                        System.out.print("New description (b - Go Back (Edit Course) x - Exit): "); //character limit ?
                         String descInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(descInput)) {
-                            return this.validateUserInput();
+                            continue outerLoop;
                         }
                         currentCourse.setCourseDescription(descInput);
                         validInput = true;
@@ -116,12 +118,12 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         this.showMenu();
                         userInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(userInput)) {
-                            break; 
+                            return "b"; 
                         }
                 }
             }
             FilesManager.allCourses.add(currentCourse);
-            FilesManager.saveAllCourses();
+            FilesManager.writeAllCourses();
         }
     }
 }

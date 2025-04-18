@@ -24,8 +24,8 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
 
     public StudentViewAcademicDetails(Student currentStudent) {
         this.currentStudent = currentStudent;
-        FilesManager.readEnrolledCourses(currentStudent);
-        FilesManager.readPreviousCourses(currentStudent);
+        FilesManager.readCoursesFile(currentStudent, currentStudent.getEnrolledCourses(), FilesManager.studentsEnrolledCoursesFile);
+        FilesManager.readCoursesFile(currentStudent, currentStudent.getPreviousCourses(), FilesManager.studentsPreviousCoursesFile);
         FilesManager.readAllCourses();
     }
 

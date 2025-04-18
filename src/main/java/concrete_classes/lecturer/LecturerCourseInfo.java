@@ -5,6 +5,7 @@
 package concrete_classes.lecturer;
 
 import concrete_classes.courses.Course;
+import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
 import interfaces.DashboardInterface;
@@ -57,6 +58,7 @@ public class LecturerCourseInfo implements DashboardInterface, HeaderInterface, 
                     case "1":
                         LecturerCourseListStudents courseListStudents = new LecturerCourseListStudents(currentCourse);
                         courseListStudents.validateUserInput();
+                        FilesManager.readAllLecturers();
                         validInput = true;
                         break;
                     case "2":

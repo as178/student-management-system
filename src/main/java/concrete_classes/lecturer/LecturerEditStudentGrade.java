@@ -50,31 +50,33 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
 
         Scanner scan = new Scanner(System.in);
 
-        this.showHeader();
-
         while (true) {
+            this.showHeader();
             this.showMenu();
             String userInput = scan.nextLine();
-
-            if (NavigationUtil.backOrExit(userInput)) {
-                return "b";
-            }
-            try {
-                int newScore = Integer.parseInt(userInput);
-                if (newScore >= 0 && newScore <= 100) {
-                    studentGrades.put(currentStudent.getId(), userInput);
-                    FilesManager.writeEnrolledStudentsGrades(currentStudent.getId(), currentCourse.getCourseId(), userInput);
-                    HeadersUtil.printHeader("Grade updated successfully.");
+            
+            boolean validInput = false;
+            while (!validInput) {
+                if (NavigationUtil.backOrExit(userInput)) {
                     return "b";
-                } else {
-                    HeadersUtil.printHeader("Please enter a score between 0 - 100.");
+                }
+                try {
+                    int newScore = Integer.parseInt(userInput);
+                    if (newScore >= 0 && newScore <= 100) {
+                        studentGrades.put(currentStudent.getId(), userInput);
+                        FilesManager.writeEnrolledStudentsGrades(currentStudent.getId(), currentCourse.getCourseId(), userInput);
+                        HeadersUtil.printHeader("Grade updated successfully.");
+                        validInput = true;
+                    } else {
+                        HeadersUtil.printHeader("Please enter a score between 0 - 100.");
+                        this.showMenu();
+                        userInput = scan.nextLine();
+                    }
+                } catch (NumberFormatException e) {
+                    HeadersUtil.printHeader("Invalid input. Please enter a number.");
                     this.showMenu();
                     userInput = scan.nextLine();
                 }
-            } catch (NumberFormatException e) {
-                HeadersUtil.printHeader("Invalid input. Please enter a number.");
-                this.showMenu();
-                userInput = scan.nextLine();
             }
         }
     }
