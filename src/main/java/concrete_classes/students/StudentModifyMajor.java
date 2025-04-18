@@ -95,7 +95,7 @@ public class StudentModifyMajor implements DashboardInterface, HeaderInterface, 
                     currentStudent.setMajor(chosenMajor);
 
                     FilesManager.withdrawAllCourses(currentStudent);
-                    FilesManager.saveCurrentStudent(currentStudent);
+                    FilesManager.saveCurrentUser(currentStudent);
 
                     HeadersUtil.printHeader("Your major was successfully updated to: ",
                             chosenMajor + "!",

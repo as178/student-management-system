@@ -5,6 +5,7 @@
 package concrete_classes.students;
 
 import abstract_classes.User;
+import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.GradesUtil;
 import java.util.HashMap;
 
@@ -14,9 +15,9 @@ import java.util.HashMap;
  */
 public class Student extends User {
 
-    private String major;
-    private HashMap<String, Float> enrolledCourses;
-    private HashMap<String, Float> previousCourses;
+    protected String major;
+    protected HashMap<String, Float> enrolledCourses;
+    protected HashMap<String, Float> previousCourses;
 
     public Student(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address, String major) {
@@ -72,5 +73,10 @@ public class Student extends User {
         return id + "," + password + "," + firstName + "," + lastName + ","
                 + dateOfBirth + "," + personalEmail + "," + uniEmail + ","
                 + phoneNumber + "," + gender + "," + address + "," + major;
+    }
+    
+    @Override
+    public String getUsersPath() {
+        return FilesManager.allStudentsFile;
     }
 }

@@ -44,6 +44,10 @@ public class Course {
     public String getCourseName() {
         return this.courseName;
     }
+    
+    public void setCourseName(String newName){
+        this.courseName = newName;
+    }
 
     public String getCourseMajor() {
         return this.courseMajor;
@@ -56,6 +60,10 @@ public class Course {
     public int getCourseEstimatedHours() {
         return this.courseEstimatedHours;
     }
+    
+    public void setCourseEstimatedHours(int estimatedHours) {
+        this.courseEstimatedHours = estimatedHours;
+    }
 
     public String getCourseLecturer() {
         return this.courseLecturer;
@@ -63,6 +71,10 @@ public class Course {
 
     public String getCourseDescription() {
         return this.courseDescription;
+    }
+    
+    public void setCourseDescription(String newDescription){
+        this.courseDescription = newDescription;
     }
 
     @Override

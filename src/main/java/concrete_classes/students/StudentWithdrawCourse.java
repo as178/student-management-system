@@ -69,10 +69,7 @@ public class StudentWithdrawCourse implements DashboardInterface, HeaderInterfac
                         "('Enter' to continue, or enter in",
                         "'x' to Exit.)");
                 String userInput = scan.nextLine();
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
-                return "b";
+                NavigationUtil.checkExit(userInput);
             } else {
 
                 this.getCurrentCourses();
@@ -110,11 +107,9 @@ public class StudentWithdrawCourse implements DashboardInterface, HeaderInterfac
                         currentStudent.getEnrolledCourses().remove(chosenCourse.getCourseId());
                         currentStudent.getPreviousCourses().put(chosenCourse.getCourseId(), -1f);
                         
-                        FilesManager.updateStudentCourseFile(currentStudent,
-                                "src/main/java/text_files/studentsEnrolledCourses.txt",
+                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsEnrolledCoursesFile,
                                 currentStudent.getEnrolledCourses(), false);
-                        FilesManager.updateStudentCourseFile(currentStudent,
-                                "src/main/java/text_files/studentsPreviousCourses.txt",
+                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsPreviousCoursesFile,
                                 currentStudent.getPreviousCourses(), true);
 
                         HeadersUtil.printHeader("You have been successfully", "removed from " + chosenCourse.getCourseId() + ".");
@@ -127,6 +122,7 @@ public class StudentWithdrawCourse implements DashboardInterface, HeaderInterfac
                     }
                 }
             }
+            return "b";
         }
     }
 }
