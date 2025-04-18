@@ -8,12 +8,14 @@ import concrete_classes.courses.Course;
 import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
+import static concrete_classes.other.ValidationUtil.checkIntegerRange;
 import concrete_classes.students.Student;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
 import interfaces.InputValidationInterface;
 import java.util.HashMap;
 import java.util.Scanner;
+import org.apache.commons.text.WordUtils;
 
 /**
  *
@@ -35,14 +37,16 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
 
     @Override
     public void showMenu() {
-        System.out.println("Set grade for " + currentStudent.getId() + ", " + currentStudent.getFirstName() + " " + currentStudent.getLastName());
-        System.out.println("Current Grade:" + currentStudentGrade);
-        System.out.print("Enter updated score (b - Go Back (Enrolled Students) x - Exit):  ");
+        System.out.println("Current Grade: " + currentStudentGrade);
+        System.out.println("b - Go Back (Enrolled Students)\nx - Exit");
     }
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Edit Student Grade");
+        HeadersUtil.printHeader("Assign Student's Grade",
+                "Set grade for the following student:",
+                WordUtils.wrap(currentStudent.getId() + ", " + currentStudent.getFirstName() + " " + currentStudent.getLastName(), 46),
+                "Please enter their new grade below.");
     }
 
     @Override
@@ -54,29 +58,18 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
             this.showHeader();
             this.showMenu();
             String userInput = scan.nextLine();
-            
-            boolean validInput = false;
-            while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
-                try {
-                    int newScore = Integer.parseInt(userInput);
-                    if (newScore >= 0 && newScore <= 100) {
-                        studentGrades.put(currentStudent.getId(), userInput);
-                        FilesManager.writeEnrolledStudentsGrades(currentStudent.getId(), currentCourse.getCourseId(), userInput);
-                        HeadersUtil.printHeader("Grade updated successfully.");
-                        validInput = true;
-                    } else {
-                        HeadersUtil.printHeader("Please enter a score between 0 - 100.");
-                        this.showMenu();
-                        userInput = scan.nextLine();
-                    }
-                } catch (NumberFormatException e) {
-                    HeadersUtil.printHeader("Invalid input. Please enter a number.");
-                    this.showMenu();
-                    userInput = scan.nextLine();
-                }
+
+            if (NavigationUtil.backOrExit(userInput)) {
+                return "b";
+            }
+
+            if (checkIntegerRange(userInput, 0, 100)) {
+                studentGrades.put(currentStudent.getId(), userInput);
+                FilesManager.writeEnrolledStudentsGrades(currentStudent.getId(), currentCourse.getCourseId(), userInput);
+                HeadersUtil.printHeader("Grade assigned successfully!");
+                return "b";
+            } else {
+                HeadersUtil.printHeader("Please enter a number between 0 - 100.");
             }
         }
     }

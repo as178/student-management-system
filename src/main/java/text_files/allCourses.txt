@@ -29,7 +29,7 @@ DIGI606,Service-Oriented Architectures,Digital Services,DIGI604,50,Dr. Benjamin 
 COMP500,Introduction to Computer Science,Computer Science,None,40,Dr. Jane Smith,Foundation concepts in computing including logic and programming basics.
 COMP501,Discrete Structures in Computing,Computer Science,COMP500,45,Dr. Paul Chan,Introduction to discrete math, logic, and set theory in computing.
 DIGI604,Digital Transformation Strategies,Digital Services,DIGI501,45,Dr. Rachel Lim,Study of innovation, agility, and transformation in organizations.
-COMP603,Operating Systems Concepts,Computer Science,COMP601,50,Dr. Oliver Zheng,Covers memory management, processes, and system calls.
+COMP603,Operating Systems Concepts,Computer Science,COMP601,45,Dr. Oliver Zheng,Covers memory management, processes, and system calls.
 SOFT501,Foundations of Software Development,Software Development,None,40,Dr. Jack Wu,Introduces software development lifecycles and coding basics.
 COMP601,Object-Oriented Programming,Computer Science,COMP500,50,Dr. Emily Huang,Principles of OOP using Java with practical application focus.
 SOFT603,Web Application Development,Software Development,SOFT501,50,Dr. Liam Hart,Develops full-stack applications using HTML, CSS, JS, and frameworks.

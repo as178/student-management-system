@@ -31,10 +31,9 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
 
     @Override
     public void showMenu() {
-        System.out.println("List Of Courses:");
 
         if (courses.isEmpty()) {
-            System.out.println("No courses assigned.");
+            System.out.println("> No assigned courses . . .");
             return;
         }
 
@@ -42,14 +41,16 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
             Integer key = entry.getKey();
             Course course = entry.getValue();
 
-            System.out.println(key + ") " + course.getCourseId() + " - " + course.getCourseName());
+            System.out.println(key + " - " + course.getCourseId() + ", " + course.getCourseName());
         }
         System.out.println("b - Go Back (Lecturer Dashboard)\nx - Exit");
     }
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Manage My Courses");
+        HeadersUtil.printHeader("Manage My Courses",
+                "Please select a course to manage,",
+                "or see below for further options.");
     }
 
     @Override
@@ -80,7 +81,7 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
                         userInput = scan.nextLine();
                     }
                 } catch (NumberFormatException e) {
-                    HeadersUtil.printHeader("Invalid input. Please enter a number.");
+                    HeadersUtil.printHeader("Please enter a valid number.");
                     this.showMenu();
                     userInput = scan.nextLine();
                 }

@@ -33,18 +33,17 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
         System.out.println("> Estimated Hours: " + currentCourse.getCourseEstimatedHours());
         System.out.println("> Lecturer: " + currentCourse.getCourseLecturer());
         System.out.println("> Description:\n" + WordUtils.wrap(currentCourse.getCourseDescription(), 46));
-        System.out.println();
-        System.out.println("Selected course: " + currentCourse.getCourseId() + " - " + currentCourse.getCourseName());
-        System.out.println();
-        System.out.println("1) Edit Course Name");
-        System.out.println("2) Edit estimated course hours");
-        System.out.println("3) Edit Course Description");
-        System.out.println("b - Go Back (Course Info)\nx - Exit");
+        HeadersUtil.printHeader("Please choose one of the options below:");
+        System.out.println("1 - Edit Course Name");
+        System.out.println("2 - Edit Estimated Course Hours");
+        System.out.println("3 - Edit Course Description");
+        System.out.println("b - Go Back (Course Options)\nx - Exit");
     }
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Edit Course");
+        HeadersUtil.printHeader("Edit Course Information for:",
+                currentCourse.getCourseId() + ", " + currentCourse.getCourseName());
     }
 
     @Override
@@ -71,18 +70,21 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
             while (!validInput) {
                 switch (userInput) {
                     case "1":
-                        System.out.print("New course name (b - Go Back (Edit Course) x - Exit): "); //name limit of 46 chars
+                        HeadersUtil.printHeader("Please enter the new course name:");
+                        System.out.println("b - Go Back (Edit Course)\nx - Exit");
                         String nameInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(nameInput)) {
                             continue outerLoop;
                         }
                         currentCourse.setCourseName(nameInput);
+                        HeadersUtil.printHeader("Course name saved successfully!");
                         validInput = true;
                         break;
 
                     case "2":
+                        HeadersUtil.printHeader("Please enter the new estimated hours:");
                         while (true) {
-                            System.out.print("New estimated hours ((b - Go Back (Edit Course) x - Exit): ");
+                            System.out.println("b - Go Back (Edit Course)\nx - Exit");
                             String hoursInput = scan.nextLine();
                             if (NavigationUtil.backOrExit(hoursInput)) {
                                 continue outerLoop;
@@ -90,30 +92,34 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                             try {
                                 int estimatedHours = Integer.parseInt(hoursInput);
                                 if (estimatedHours <= 0) {
-                                    System.out.println("Estimated hours must be greater than 0."); //or no bigger than 150
+                                    HeadersUtil.printHeader("Estimated hours must be greater than 0.");
                                 } else {
                                     currentCourse.setCourseEstimatedHours(estimatedHours);
+                                    HeadersUtil.printHeader("Estimated hours saved successfully!");
                                     validInput = true;
                                     break;
                                 }
                             } catch (NumberFormatException e) {
-                                System.out.println("Invalid input. Please enter a number.");
+                                HeadersUtil.printHeader("Invalid input. Please enter a number.");
                             }
                         }
                         break;
 
                     case "3":
-                        System.out.print("New description (b - Go Back (Edit Course) x - Exit): "); //character limit or course desc cant be empty?
+                        HeadersUtil.printHeader("Please enter the new", "course description:");
+                        System.out.println("b - Go Back (Edit Course)\nx - Exit");
+
                         String descInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(descInput)) {
                             continue outerLoop;
                         }
                         currentCourse.setCourseDescription(descInput);
+                        HeadersUtil.printHeader("Course description saved successfully!");
                         validInput = true;
                         break;
 
                     default:
-                        HeadersUtil.printHeader("Please pick a valid option.");
+                        HeadersUtil.printHeader("Invalid option.");
                         this.showMenu();
                         userInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(userInput)) {
