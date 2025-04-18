@@ -4,6 +4,7 @@
  */
 package concrete_classes.authentication;
 
+import concrete_classes.admin.Admin;
 import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.lecturer.Lecturer;
 import concrete_classes.other.HeadersUtil;
@@ -14,13 +15,13 @@ import java.util.Scanner;
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
- * 
- * This class authenticates the user based on the type of
- * user they are. For example, if the user chose to login as a
- * student their input credentials will be checked against the students
- * records in the "allStudents.txt" file. The user can always go back to
- * the main dashboard or exit the program throughout the entire process.
- * 
+ *
+ * This class authenticates the user based on the type of user they are. For
+ * example, if the user chose to login as a student their input credentials will
+ * be checked against the students records in the "allStudents.txt" file. The
+ * user can always go back to the main dashboard or exit the program throughout
+ * the entire process.
+ *
  */
 public class UserAuthentication {
 
@@ -56,9 +57,9 @@ public class UserAuthentication {
                     - check their input credentials are correct
                     - if not prompt user again with "Incorrect credentials" message
             > otherwise, prompt user again with "Invalid user" message
-            */
+             */
             if (FilesManager.currentUsers.containsKey(usernameId)) {
-                
+
                 FilesManager.currentUser = FilesManager.currentUsers.get(usernameId);
 
                 if (FilesManager.currentUser instanceof Student) {
@@ -71,15 +72,25 @@ public class UserAuthentication {
                     }
 
                 } else if (FilesManager.currentUser instanceof Lecturer) {
-                    
+
                     Lecturer currentLecturer = (Lecturer) FilesManager.currentUser;
-                    
+
                     if (password.equals(currentLecturer.getPassword())) {
                         return true;
                     } else {
                         HeadersUtil.printHeader("Incorrect credentials, please try again.");
                     }
-                    
+
+                } else if (FilesManager.currentUser instanceof Admin) {
+
+                    Admin currentAdmin = (Admin) FilesManager.currentUser;
+
+                    if (password.equals(currentAdmin.getPassword())) {
+                        return true;
+                    } else {
+                        HeadersUtil.printHeader("Incorrect credentials, please try again.");
+                    }
+
                 }
 
             } else {

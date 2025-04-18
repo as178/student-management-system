@@ -5,6 +5,7 @@
 package concrete_classes.file_input_output;
 
 import abstract_classes.User;
+import concrete_classes.admin.Admin;
 import concrete_classes.courses.Course;
 import concrete_classes.lecturer.Lecturer;
 import concrete_classes.other.HeadersUtil;
@@ -31,6 +32,7 @@ public class FilesManager {
     public static final String allLecturersFile = "src/main/java/text_files/allLecturers.txt";
     public static final String allMajorsFile = "src/main/java/text_files/allMajors.txt";
     public static final String allStudentsFile = "src/main/java/text_files/allStudents.txt";
+    public static final String allAdminsFile = "src/main/java/text_files/allAdmins.txt";
     public static final String lecturerCoursesFile = "src/main/java/text_files/lecturerCourses.txt";
     public static final String studentsEnrolledCoursesFile = "src/main/java/text_files/studentsEnrolledCourses.txt";
     public static final String studentsPreviousCoursesFile = "src/main/java/text_files/studentsPreviousCourses.txt";
@@ -399,6 +401,38 @@ public class FilesManager {
             fileInput.close();
         } catch (IOException e) {
             HeadersUtil.printHeader("Error in reading from", "this file: lecturerCourses.txt");
+        }
+    }
+
+    //Admin methods
+    public static void readAllAdmins() {
+        currentUsers = new LinkedHashMap<String, User>();
+        String fileOutput;
+
+        try {
+            BufferedReader fileInput = new BufferedReader(new FileReader(allAdminsFile));
+
+            while ((fileOutput = fileInput.readLine()) != null) {
+                String[] currentLine = fileOutput.split(",");
+                if (currentLine.length == 10) {
+                    int lecturerId = Integer.parseInt(currentLine[0]);
+                    String password = currentLine[1];
+                    String firstName = currentLine[2];
+                    String lastName = currentLine[3];
+                    String dateOfBirth = currentLine[4];
+                    String personalEmail = currentLine[5];
+                    String uniEmail = currentLine[6];
+                    String phoneNumber = currentLine[7];
+                    Character gender = currentLine[8].charAt(0);
+                    String address = currentLine[9];
+
+                    currentUsers.put(currentLine[0], new Admin(lecturerId, password, firstName, lastName, dateOfBirth,
+                            personalEmail, uniEmail, phoneNumber, gender, address));
+                }
+            }
+            fileInput.close();
+        } catch (IOException e) {
+            HeadersUtil.printHeader("Error in reading from", "this file: allAdmins.txt");
         }
     }
 }
