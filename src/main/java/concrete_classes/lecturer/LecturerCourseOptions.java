@@ -17,11 +17,11 @@ import java.util.Scanner;
  *
  * @author williamniven
  */
-public class LecturerCourseInfo implements DashboardInterface, HeaderInterface, InputValidationInterface {
+public class LecturerCourseOptions implements DashboardInterface, HeaderInterface, InputValidationInterface {
 
     private Course currentCourse;
 
-    public LecturerCourseInfo(Course currentCourse) {
+    public LecturerCourseOptions(Course currentCourse) {
         this.currentCourse = currentCourse;
     }
 

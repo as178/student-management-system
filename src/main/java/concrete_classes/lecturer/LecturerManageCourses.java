@@ -72,7 +72,7 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
                 try {
                     int courseKey = Integer.parseInt(userInput);
                     if (courses.containsKey(courseKey)) {
-                        LecturerCourseInfo courseInfo = new LecturerCourseInfo(courses.get(courseKey));
+                        LecturerCourseOptions courseInfo = new LecturerCourseOptions(courses.get(courseKey));
                         courseInfo.validateUserInput();
                         validInput = true;
                     } else {
