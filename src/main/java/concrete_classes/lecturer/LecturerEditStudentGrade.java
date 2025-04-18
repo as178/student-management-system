@@ -8,8 +8,8 @@ import concrete_classes.courses.Course;
 import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
-import static concrete_classes.other.ValidationUtil.checkIntegerRange;
-import concrete_classes.students.Student;
+import concrete_classes.other.ValidationUtil;
+import concrete_classes.student.Student;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
 import interfaces.InputValidationInterface;
@@ -63,7 +63,7 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
                 return "b";
             }
 
-            if (checkIntegerRange(userInput, 0, 100)) {
+            if (ValidationUtil.checkIntegerRange(userInput, 0, 100)) {
                 studentGrades.put(currentStudent.getId(), userInput);
                 FilesManager.writeEnrolledStudentsGrades(currentStudent.getId(), currentCourse.getCourseId(), userInput);
                 HeadersUtil.printHeader("Grade assigned successfully!");
