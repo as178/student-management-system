@@ -38,7 +38,7 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
     @Override
     public void showMenu() {
         System.out.println("Current Grade: " + currentStudentGrade);
-        System.out.println("b - Go Back (Enrolled Students)\nx - Exit");
+        System.out.println("s - sign off student\nb - Go Back (Enrolled Students)\nx - Exit");
     }
 
     @Override
@@ -61,6 +61,31 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
 
             if (NavigationUtil.backOrExit(userInput)) {
                 return "b";
+            }
+
+            if (userInput.trim().toLowerCase().equals("S")) {
+                HeadersUtil.printHeader("Signing off",
+                        currentStudent.getId() + " - " + currentStudent.getFirstName() + " - " + currentStudent.getLastName(),
+                        "This will remove student from course");
+                System.out.print("y - yes, remove student\nb - back\nx - exit");
+                if (NavigationUtil.backOrExit(userInput)) {
+                    return "b";
+                }
+
+                if (userInput.trim().toLowerCase().equals("s")) {
+                    //couse id / grade
+                    FilesManager.readCoursesFile(currentStudent, currentStudent.getEnrolledCourses(), FilesManager.studentsEnrolledCoursesFile);
+                    //load previcouse cousersse
+                    FilesManager.readCoursesFile(currentStudent, currentStudent.getPreviousCourses(), FilesManager.studentsPreviousCoursesFile);
+                    //adds currentcourse and grade to pricouse courses hashmap
+                    currentStudent.getPreviousCourses().put(currentCourse.getCourseId(), currentStudent.getEnrolledCourses().get(currentCourse.getCourseId()));
+                    //remove from enrolled
+                    currentStudent.getEnrolledCourses().remove(currentCourse.getCourseId());
+                    //save enrolled 
+                    FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsEnrolledCoursesFile, currentStudent.getEnrolledCourses(), false);
+                    //save previous 
+                    FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsPreviousCoursesFile, currentStudent.getPreviousCourses(), true);
+                }
             }
 
             if (checkIntegerRange(userInput, 0, 100)) {
