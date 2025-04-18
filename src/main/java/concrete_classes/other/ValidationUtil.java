@@ -10,7 +10,8 @@ package concrete_classes.other;
  */
 public final class ValidationUtil {
 
-    private ValidationUtil() {}
+    private ValidationUtil() {
+    }
 
     public static boolean checkPassword(String password) {
         return !password.isBlank()
@@ -45,9 +46,13 @@ public final class ValidationUtil {
         }
         try {
             int validNumber = Integer.parseInt(inputNumber.trim());
-            return validNumber >= lowestNumber && validNumber <= highestNumber;
+            return checkIntegerRange(validNumber, lowestNumber, highestNumber);
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static boolean checkIntegerRange(int inputNumber, int lowestNumber, int highestNumber) {
+        return inputNumber >= lowestNumber && inputNumber <= highestNumber;
     }
 }

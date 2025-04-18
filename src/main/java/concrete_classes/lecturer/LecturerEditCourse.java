@@ -8,6 +8,7 @@ import concrete_classes.courses.Course;
 import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
+import concrete_classes.other.ValidationUtil;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
 import interfaces.InputValidationInterface;
@@ -76,31 +77,32 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         if (NavigationUtil.backOrExit(nameInput)) {
                             continue outerLoop;
                         }
-                        currentCourse.setCourseName(nameInput);
-                        HeadersUtil.printHeader("Course name saved successfully!");
-                        validInput = true;
-                        break;
 
+                        if (ValidationUtil.checkIntegerRange(nameInput.length(), 4, 46)) {
+                            currentCourse.setCourseName(nameInput);
+                            HeadersUtil.printHeader("Course name saved successfully!");
+                            validInput = true;
+                            break;
+                        } else {
+                            HeadersUtil.printHeader("Course name cant be empty,",
+                                    "must be below 47 characters.");
+                        }
+                        break;
                     case "2":
-                        HeadersUtil.printHeader("Please enter the new estimated hours:");
                         while (true) {
+                            HeadersUtil.printHeader("Please enter the new estimated hours:");
                             System.out.println("b - Go Back (Edit Course)\nx - Exit");
                             String hoursInput = scan.nextLine();
                             if (NavigationUtil.backOrExit(hoursInput)) {
                                 continue outerLoop;
                             }
-                            try {
-                                int estimatedHours = Integer.parseInt(hoursInput);
-                                if (estimatedHours <= 0) {
-                                    HeadersUtil.printHeader("Estimated hours must be greater than 0.");
-                                } else {
-                                    currentCourse.setCourseEstimatedHours(estimatedHours);
-                                    HeadersUtil.printHeader("Estimated hours saved successfully!");
-                                    validInput = true;
-                                    break;
-                                }
-                            } catch (NumberFormatException e) {
-                                HeadersUtil.printHeader("Invalid input. Please enter a number.");
+                            if (ValidationUtil.checkIntegerRange(hoursInput, 1, 150)) {
+                                currentCourse.setCourseEstimatedHours(Integer.parseInt(hoursInput));
+                                HeadersUtil.printHeader("Estimated hours saved successfully!");
+                                validInput = true;
+                                break;
+                            } else {
+                                HeadersUtil.printHeader("Estimated hours must be between 1 and 150.");
                             }
                         }
                         break;
@@ -113,9 +115,16 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         if (NavigationUtil.backOrExit(descInput)) {
                             continue outerLoop;
                         }
-                        currentCourse.setCourseDescription(descInput);
-                        HeadersUtil.printHeader("Course description saved successfully!");
-                        validInput = true;
+
+                        if (ValidationUtil.checkIntegerRange(descInput.length(), 5, 70)) {
+                            currentCourse.setCourseDescription(descInput);
+                            HeadersUtil.printHeader("Course description saved successfully!");
+                            validInput = true;
+                            break;
+                        } else {
+                            HeadersUtil.printHeader("Course description must be ",
+                                    "between 5-70 characters in length");
+                        }
                         break;
 
                     default:
@@ -123,7 +132,7 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         this.showMenu();
                         userInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(userInput)) {
-                            return "b"; 
+                            return "b";
                         }
                 }
             }
