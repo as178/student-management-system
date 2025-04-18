@@ -44,8 +44,8 @@ public class LoginOptionValidator implements InputValidationInterface {
                     FilesManager.readAllLecturers();
                     return userInput;
                 case "3":
-                    //FilesManager.readAllAdmins();
-                    //return userInput;
+                    FilesManager.readAllAdmins();
+                    return userInput;
                 default:
                     HeadersUtil.printHeader("Please pick a valid option.");
                     StudentManagementSystem.mainDashboard.showMenu();
