@@ -15,6 +15,7 @@ import interfaces.HeaderInterface;
 import interfaces.InputValidationInterface;
 import java.util.HashMap;
 import java.util.Scanner;
+import org.apache.commons.text.WordUtils;
 
 /**
  *
@@ -36,15 +37,16 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
 
     @Override
     public void showMenu() {
-        System.out.println("Current Score:" + currentStudentGrade);
+        System.out.println("Current Grade: " + currentStudentGrade);
         System.out.println("b - Go Back (Enrolled Students)\nx - Exit");
     }
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Edit Student Grade",
-                "Set grade for " + currentStudent.getId() + ", " + currentStudent.getFirstName() + " " + currentStudent.getLastName(),
-                "Enter students new score");
+        HeadersUtil.printHeader("Assign Student's Grade",
+                "Set grade for the following student:",
+                WordUtils.wrap(currentStudent.getId() + ", " + currentStudent.getFirstName() + " " + currentStudent.getLastName(), 46),
+                "Please enter their new grade below.");
     }
 
     @Override
@@ -65,7 +67,7 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
             if (checkIntegerRange(userInput, 0, 100)) {
                 studentGrades.put(currentStudent.getId(), userInput);
                 FilesManager.writeEnrolledStudentsGrades(currentStudent.getId(), currentCourse.getCourseId(), userInput);
-                HeadersUtil.printHeader("Score updated successfully.");
+                HeadersUtil.printHeader("Grade assigned successfully!");
                 return "b";
             } else {
                 HeadersUtil.printHeader("Please enter a number between 0 - 100.");

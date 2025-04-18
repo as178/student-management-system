@@ -35,10 +35,10 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
     @Override
     public void showMenu() {
         if (studentGrades.size() == 0) {
-            System.out.println("No Students Enrolled\nb - Go Back (Course Info)\nx - Exit");
+            System.out.println("> No students currently enrolled . . .\nb - Go Back (Course Info)\nx - Exit");
 
         } else {
-            System.out.println("Student-ID, Name, Score\n");
+            System.out.println("[ Student ID || Student Name, Student's Grade ]");
 
             for (Map.Entry<Integer, String> entry : studentGrades.entrySet()) {
                 Integer id = entry.getKey();
@@ -47,20 +47,22 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
                 Student student = enrolledStudents.get(id);
 
                 if (student != null) {
-                    System.out.println(id + ", " + student.getFirstName() + " " + student.getLastName() + " || " + grade);
+                    System.out.println(">  "+id + "  || " + student.getFirstName() + " " + student.getLastName() + ", " + grade);
                 } else {
-                    HeadersUtil.printHeader("Student Not Found");
+                    HeadersUtil.printHeader("> Student Not Found . . .");
                 }
             }
-            System.out.println("\nb - Go Back (Course Info)\nx - Exit");
+            HeadersUtil.printHeader("(See below for further options.)");
+            System.out.println("b - Go Back (Course Options)\nx - Exit");
         }
     }
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Enrolled Students",
-                currentCourse.getCourseId() + " - " + currentCourse.getCourseName(),
-                "Enter student ID to edit their grade");
+        HeadersUtil.printHeader("Currently Enrolled Students for:",
+                currentCourse.getCourseId() + ", " + currentCourse.getCourseName(),
+                "Please enter a Student's ID to",
+                "assign their grade.");
     }
 
     @Override
@@ -93,7 +95,7 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
                         validInput = true;
                         break;
                     } else {
-                        HeadersUtil.printHeader("Please pick a valid option.");
+                        HeadersUtil.printHeader("Please pick a valid student.");
                         this.showMenu();
                         userInput = scan.nextLine();
 
@@ -102,7 +104,7 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
                         }
                     }
                 } catch (NumberFormatException e) {
-                    HeadersUtil.printHeader("Invalid input. Please enter a number.");
+                    HeadersUtil.printHeader("Please enter a valid ID.");
                     this.showMenu();
                     userInput = scan.nextLine();
 

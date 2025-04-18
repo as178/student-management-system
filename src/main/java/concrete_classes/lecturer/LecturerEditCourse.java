@@ -35,15 +35,15 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
         System.out.println("> Description:\n" + WordUtils.wrap(currentCourse.getCourseDescription(), 46));
         HeadersUtil.printHeader("Please choose one of the options below:");
         System.out.println("1 - Edit Course Name");
-        System.out.println("2 - Edit estimated course hours");
+        System.out.println("2 - Edit Estimated Course Hours");
         System.out.println("3 - Edit Course Description");
-        System.out.println("b - Go Back (Course Info)\nx - Exit");
+        System.out.println("b - Go Back (Course Options)\nx - Exit");
     }
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Edit Course",
-                currentCourse.getCourseId() + " - " + currentCourse.getCourseName());
+        HeadersUtil.printHeader("Edit Course Information for:",
+                currentCourse.getCourseId() + ", " + currentCourse.getCourseName());
     }
 
     @Override
@@ -69,19 +69,20 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
             while (!validInput) {
                 switch (userInput) {
                     case "1":
-                        HeadersUtil.printHeader("Enter the new course name");
+                        HeadersUtil.printHeader("Please enter the new course name:");
                         System.out.println("b - Go Back (Edit Course)\nx - Exit");
                         String nameInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(nameInput)) {
                             return this.validateUserInput();
                         }
                         currentCourse.setCourseName(nameInput);
+                        HeadersUtil.printHeader("Course name saved successfully!");
                         validInput = true;
                         break;
 
                     case "2":
+                        HeadersUtil.printHeader("Please enter the new estimated hours:");
                         while (true) {
-                            HeadersUtil.printHeader("Enter the estimated hours");
                             System.out.println("b - Go Back (Edit Course)\nx - Exit");
                             String hoursInput = scan.nextLine();
                             if (NavigationUtil.backOrExit(hoursInput)) {
@@ -93,6 +94,7 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                                     HeadersUtil.printHeader("Estimated hours must be greater than 0.");
                                 } else {
                                     currentCourse.setCourseEstimatedHours(estimatedHours);
+                                    HeadersUtil.printHeader("Estimated hours saved successfully!");
                                     validInput = true;
                                     break;
                                 }
@@ -103,18 +105,19 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         break;
 
                     case "3":
-                        HeadersUtil.printHeader("Enter the new description");
+                        HeadersUtil.printHeader("Please enter the new", "course description:");
                         System.out.println("b - Go Back (Edit Course)\nx - Exit");
                         String descInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(descInput)) {
                             return this.validateUserInput();
                         }
                         currentCourse.setCourseDescription(descInput);
+                        HeadersUtil.printHeader("Course description saved successfully!");
                         validInput = true;
                         break;
 
                     default:
-                        HeadersUtil.printHeader("Please pick a valid option.");
+                        HeadersUtil.printHeader("Invalid option.");
                         this.showMenu();
                         userInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(userInput)) {

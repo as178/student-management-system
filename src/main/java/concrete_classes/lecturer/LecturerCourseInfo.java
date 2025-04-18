@@ -33,8 +33,9 @@ public class LecturerCourseInfo implements DashboardInterface, HeaderInterface, 
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Course Info",
-                "Options for " + currentCourse.getCourseId() + " - " + currentCourse.getCourseName());
+        HeadersUtil.printHeader("Course Options",
+                "Below are available options for:",
+                currentCourse.getCourseId() + ", " + currentCourse.getCourseName());
     }
 
     @Override
