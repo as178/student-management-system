@@ -63,7 +63,7 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
                 return "b";
             }
 
-            if (userInput.trim().toLowerCase().equals("S")) {
+            if (userInput.trim().toLowerCase().equals("s")) {
                 HeadersUtil.printHeader("Signing off",
                         currentStudent.getId() + " - " + currentStudent.getFirstName() + " - " + currentStudent.getLastName(),
                         "This will remove student from course");
