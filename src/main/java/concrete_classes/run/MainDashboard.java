@@ -63,25 +63,6 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
              */
             String finalUserInput = DashboardUtil.displayDashboards(userInput);
             NavigationUtil.checkExit(finalUserInput);
-
-            /*
-            - should we store students in a hashset instead?
-                - no for now
-            
-            If we feel like it later:
-            - should students be able to change names?
-            - should we implement the "confirm your password" feature?
-            
-            Angela:
-            - double check some imports (editStudentGrade class)
-            - should lecturers be able to tell students "they have finished a course, sign off grade"?
-            - add faculty extra info into abstract method for lecturer
-            
-            OTHER:
-            - generate .txt files
-            - comments
-            
-            */
         }
     }
 }

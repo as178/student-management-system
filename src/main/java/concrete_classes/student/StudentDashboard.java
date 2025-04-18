@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package concrete_classes.students;
+package concrete_classes.student;
 
 import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
