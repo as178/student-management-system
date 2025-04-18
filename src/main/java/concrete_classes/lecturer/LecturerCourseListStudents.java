@@ -61,7 +61,8 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
         HeadersUtil.printHeader("Currently Enrolled Students for:",
                 currentCourse.getCourseId() + ", " + currentCourse.getCourseName(),
                 "Please enter a Student's ID to",
-                "assign their grade.");
+                "assign their grade or",
+                "or sign their grade sign off.");
     }
 
     @Override
