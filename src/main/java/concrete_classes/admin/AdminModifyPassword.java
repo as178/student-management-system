@@ -28,7 +28,8 @@ public class AdminModifyPassword implements DashboardInterface, HeaderInterface,
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Modify Password,");
+        HeadersUtil.printHeader("Modify User's Password",
+                "Please see further options below.");
     }
 
     @Override
@@ -41,7 +42,8 @@ public class AdminModifyPassword implements DashboardInterface, HeaderInterface,
         System.out.println("Phone Number: " + currentUser.getPhoneNumber());
         System.out.println("Gender: " + (currentUser.getGender() == 'F' ? "Female" : "Male"));
         System.out.println("Address: " + currentUser.getAddress());
-        System.out.println("\n1 - Modify Password\nb - Go Back (Load User)\nx - Exit");
+        HeadersUtil.printHeader("Please pick one of the following.");
+        System.out.println("1 - Modify Password\nb - Go Back (Load Another User)\nx - Exit");
     }
 
     @Override
@@ -49,6 +51,7 @@ public class AdminModifyPassword implements DashboardInterface, HeaderInterface,
 
         Scanner scan = new Scanner(System.in);
 
+        outerLoop:
         while (true) {
 
             this.showHeader();
@@ -63,12 +66,12 @@ public class AdminModifyPassword implements DashboardInterface, HeaderInterface,
                 switch (userInput) {
                     case "1":
                         if (this.modifyPassword(scan).equalsIgnoreCase("b")) {
-                            return "b";
+                            continue outerLoop;
                         }
                         validInput = true;
                         break;
                     default:
-                        HeadersUtil.printHeader("Please pick a valid option.");
+                        HeadersUtil.printHeader("Invalid option.");
                         this.showMenu();
                         userInput = scan.nextLine();
                 }
@@ -77,7 +80,7 @@ public class AdminModifyPassword implements DashboardInterface, HeaderInterface,
     }
 
     private String modifyPassword(Scanner scan) {
-        HeadersUtil.printHeader("Please type in your new password below or",
+        HeadersUtil.printHeader("Please type in the new password below or",
                 "type 'b' to go back (Modify Menu), or 'x' to exit.");
         String newPassword = scan.nextLine().trim();
 
@@ -99,7 +102,7 @@ public class AdminModifyPassword implements DashboardInterface, HeaderInterface,
 
         currentUser.setPassword(newPassword);
         FilesManager.saveCurrentUser(currentUser);
-        HeadersUtil.printHeader("Your password has been updated successfully!");
+        HeadersUtil.printHeader("The user's password has", "been updated successfully!");
         return "continue";
     }
 }

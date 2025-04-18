@@ -21,8 +21,9 @@ public class AdminLoadUser implements InputValidationInterface, DashboardInterfa
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Load User,",
-                "Enter the users ID:");
+        HeadersUtil.printHeader("Load User",
+                "Please enter the ID of the user",
+                "you wish to modify the password of.");
     }
 
     @Override
@@ -66,9 +67,10 @@ public class AdminLoadUser implements InputValidationInterface, DashboardInterfa
                     modifyPassword.validateUserInput();
                 }
 
-                if (validInput == false) {
+                if (!validInput) {
                     HeadersUtil.printHeader("User not found,",
-                            "Enter a valid ID");
+                            "please provide a valid ID.");
+                    this.showMenu();
                 }
             }
         }
