@@ -24,12 +24,10 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
 
     private Course currentCourse;
     private HashMap<Integer, String> studentGrades;
-    //private HashMap<Integer, Student> enrolledStudents;
 
     public LecturerCourseListStudents(Course currentCourse) {
         this.currentCourse = currentCourse;
         this.studentGrades = FilesManager.readEnrolledStudentsGrades(currentCourse.getCourseId());
-        //enrolledStudents = FilesManager.readEnrolledStudents(studentGrades);
         FilesManager.readAllStudents();
     }
 

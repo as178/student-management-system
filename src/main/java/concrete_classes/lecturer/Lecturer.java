@@ -15,20 +15,14 @@ import java.util.HashMap;
  */
 public class Lecturer extends User {
 
-    protected String extention;
     protected String faculty;
     protected HashMap<Integer, Course> coursesTaught;
 
     public Lecturer(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
-            String uniEmail, String phoneNumber, Character gender, String address, String extention, String faculty) {
+            String uniEmail, String phoneNumber, Character gender, String address, String faculty) {
         super(id, password, firstName, lastName, dateOfBirth, personalEmail, uniEmail, phoneNumber, gender, address);
-        this.extention = extention;
         this.faculty = faculty;
         this.coursesTaught = new HashMap<Integer, Course>();
-    }
-
-    public String getExtention() {
-        return this.extention;
     }
 
     public String getFaculty() {
@@ -43,7 +37,7 @@ public class Lecturer extends User {
     public String toString() {
         return id + "," + password + "," + firstName + "," + lastName + ","
                 + dateOfBirth + "," + personalEmail + "," + uniEmail + ","
-                + phoneNumber + "," + gender + "," + address + "," + extention + "," + faculty;
+                + phoneNumber + "," + gender + "," + address + "," + faculty;
     }
 
     @Override

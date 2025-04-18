@@ -74,7 +74,6 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         System.out.print("New course name (b - Go Back (Edit Course) x - Exit): "); //name limit of 46 chars
                         String nameInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(nameInput)) {
-                            //return this.validateUserInput(); 
                             continue outerLoop;
                         }
                         currentCourse.setCourseName(nameInput);
@@ -104,7 +103,7 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         break;
 
                     case "3":
-                        System.out.print("New description (b - Go Back (Edit Course) x - Exit): "); //character limit ?
+                        System.out.print("New description (b - Go Back (Edit Course) x - Exit): "); //character limit or course desc cant be empty?
                         String descInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(descInput)) {
                             continue outerLoop;

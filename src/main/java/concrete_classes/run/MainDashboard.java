@@ -72,24 +72,19 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             - should students be able to change names?
             - should we implement the "confirm your password" feature?
             
-            
-            WILL
-            - should lecturers be able to tell students "they have finished a course, sign off grade"?
-            
-            notes after tidy up, quick things to improve:
-            - is it better to load up all files right at the beginning of the program
-            - lecturer extension not being used or shown anywhere, faculty not being shown anywhere
-            - in all users uniEmail and DOB not really being utilised
-                - could admin somehow use this info? or could this info be used in some way
-                  anywhere else in the program? even if just being displayed and reformatted
-                  e.g. what i did with gender for example
+            Will:
             - lecturer edit course should have restrictions ==> ValidationUtil methods
-            - linked or not linked for the static variables?
+            - rename LecturerCourseInfo to LecturerCourseOptions
+            
+            Angela:
+            - double check some imports (editStudentGrade class)
+            - should lecturers be able to tell students "they have finished a course, sign off grade"?
+            - add faculty extra info into abstract method for lecturer
             
             GIT:
-            - commit changes to local fake main
-            - check out CUI
-            - commit the final changes to fake main after discussion
+            - commit changes to local fake main [DONE]
+            - check out CUI [DONE]
+            - commit the final changes to fake main after discussion [DONE]
             
             - push my local fake main to remote fake main (after checking out CUI)
             - merge CUI branch to fake main (Will)

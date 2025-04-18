@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -38,9 +39,8 @@ public class FilesManager {
     public static LinkedHashMap<String, User> currentUsers;
     public static User currentUser;
 
-    //should make these linked too?
-    public static HashSet<Course> allCourses;
-    public static HashSet<String> allMajors;
+    public static LinkedHashSet<Course> allCourses;
+    public static LinkedHashSet<String> allMajors;
 
     public static void saveCurrentUser(User currentUser) {
         currentUsers.put(currentUser.getId() + "", currentUser);
@@ -95,7 +95,7 @@ public class FilesManager {
     }
 
     public static void readAllCourses() {
-        allCourses = new HashSet<Course>();
+        allCourses = new LinkedHashSet<Course>();
         String fileOutput;
 
         try {
@@ -248,7 +248,6 @@ public class FilesManager {
         }
     }
 
-    //potential refactor?
     public static HashMap<Integer, String> readEnrolledStudentsGrades(String courseID) {
         HashMap<Integer, String> studentGrades = new HashMap<>();
         String lineOutput;
@@ -318,44 +317,8 @@ public class FilesManager {
         }
     }
 
-//    public static HashMap<Integer, Student> readEnrolledStudents(HashMap<Integer, String> studentGrades) {
-//        HashMap<Integer, Student> enrolledStudents = new HashMap<>();
-//        String fileOutput;
-//
-//        try {
-//            BufferedReader fileInput = new BufferedReader(new FileReader(allStudentsFile));
-//            while ((fileOutput = fileInput.readLine()) != null) {
-//                String[] currentLine = fileOutput.split(",");
-//                if (currentLine.length == 11) {
-//
-//                    int studentId = Integer.parseInt(currentLine[0]);
-//
-//                    if (studentGrades.containsKey(studentId)) {
-//                        String password = currentLine[1];
-//                        String firstName = currentLine[2];
-//                        String lastName = currentLine[3];
-//                        String dateOfBirth = currentLine[4];
-//                        String personalEmail = currentLine[5];
-//                        String uniEmail = currentLine[6];
-//                        String phoneNumber = currentLine[7];
-//                        Character gender = currentLine[8].charAt(0);
-//                        String address = currentLine[9];
-//                        String major = currentLine[10];
-//
-//                        enrolledStudents.put(Integer.parseInt(currentLine[0]), new Student(studentId, password, firstName, lastName, dateOfBirth,
-//                                personalEmail, uniEmail, phoneNumber, gender, address, major));
-//                    }
-//                }
-//            }
-//
-//            fileInput.close();
-//        } catch (IOException e) {
-//            HeadersUtil.printHeader("Error in reading from", "this file: allStudents.txt");
-//        }
-//        return enrolledStudents;
-//    }
     public static void readAllMajors() {
-        allMajors = new HashSet<String>();
+        allMajors = new LinkedHashSet<String>();
 
         try (BufferedReader fileInput = new BufferedReader(new FileReader(allMajorsFile))) {
             String fileOutput;
@@ -383,7 +346,7 @@ public class FilesManager {
 
             while ((fileOutput = fileInput.readLine()) != null) {
                 String[] currentLine = fileOutput.split(",");
-                if (currentLine.length == 12) {
+                if (currentLine.length == 11) {
                     int lecturerId = Integer.parseInt(currentLine[0]);
                     String password = currentLine[1];
                     String firstName = currentLine[2];
@@ -394,11 +357,10 @@ public class FilesManager {
                     String phoneNumber = currentLine[7];
                     Character gender = currentLine[8].charAt(0);
                     String address = currentLine[9];
-                    String extention = currentLine[10];
-                    String faculty = currentLine[11];
+                    String faculty = currentLine[10];
 
                     currentUsers.put(currentLine[0], new Lecturer(lecturerId, password, firstName, lastName, dateOfBirth,
-                            personalEmail, uniEmail, phoneNumber, gender, address, extention, faculty));
+                            personalEmail, uniEmail, phoneNumber, gender, address, faculty));
                 }
             }
             fileInput.close();
