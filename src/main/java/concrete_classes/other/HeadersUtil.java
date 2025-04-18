@@ -16,7 +16,7 @@ public final class HeadersUtil {
         int numberOfLines = 50;
         String lines = "=".repeat(numberOfLines);
         System.out.println(lines);
-
+        
         for (String headerLine : headerText) {
             int headerLineLength = headerLine.length();
             int numberOfSpaces = (numberOfLines - headerLineLength) / 2;

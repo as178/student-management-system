@@ -49,7 +49,7 @@ public class LecturerDashboard implements InputValidationInterface, DashboardInt
                 }
                 switch (userInput) {
                     case "1":
-                        LecturerVeiwDetails viewDetails = new LecturerVeiwDetails(currentLecturer);
+                        LecturerViewDetails viewDetails = new LecturerViewDetails(currentLecturer);
                         viewDetails.validateUserInput();
                         validInput = true;
                         break;

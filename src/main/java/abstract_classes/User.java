@@ -40,6 +40,8 @@ public abstract class User {
         this.address = address;
     }
 
+    public abstract String getUsersPath();
+    
     public int getId() {
         return this.id;
     }

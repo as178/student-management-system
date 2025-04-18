@@ -61,7 +61,7 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             based on user choice, call the appropriate dashboard and display their options. . .
             (this is where the logic gets separated depending on the chosen dashboards)
              */
-            String finalUserInput = DashboardUtil.displayDashboards(userInput).toLowerCase();
+            String finalUserInput = DashboardUtil.displayDashboards(userInput);
             NavigationUtil.checkExit(finalUserInput);
 
             /*
@@ -72,8 +72,32 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
             - should students be able to change names?
             - should we implement the "confirm your password" feature?
             
-            WILL
+            Will:
+            - lecturer edit course should have restrictions ==> ValidationUtil methods
+            - rename LecturerCourseInfo to LecturerCourseOptions
+            
+            Angela:
+            - double check some imports (editStudentGrade class)
             - should lecturers be able to tell students "they have finished a course, sign off grade"?
+            - add faculty extra info into abstract method for lecturer
+            
+            GIT:
+            - commit changes to local fake main [DONE]
+            - check out CUI [DONE]
+            - commit the final changes to fake main after discussion [DONE]
+            
+            - push my local fake main to remote fake main (after checking out CUI)
+            - merge CUI branch to fake main (Will)
+                - resolve conflicts
+            
+            - do final little changes in fake main (^ Will)
+            - commit fake main to main
+            
+            - work on admin
+            
+            OTHER:
+            - generate .txt files
+            - comments
             
             */
         }

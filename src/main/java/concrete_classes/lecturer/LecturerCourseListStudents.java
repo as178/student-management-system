@@ -24,12 +24,11 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
 
     private Course currentCourse;
     private HashMap<Integer, String> studentGrades;
-    private HashMap<Integer, Student> enrolledStudents;
 
     public LecturerCourseListStudents(Course currentCourse) {
         this.currentCourse = currentCourse;
-        studentGrades = FilesManager.loadEnrolledStudentsGrades(currentCourse.getCourseId());
-        enrolledStudents = FilesManager.loadEnrolledStudents(studentGrades);
+        this.studentGrades = FilesManager.readEnrolledStudentsGrades(currentCourse.getCourseId());
+        FilesManager.readAllStudents();
     }
 
     @Override
@@ -44,7 +43,7 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
                 Integer id = entry.getKey();
                 String grade = entry.getValue();
 
-                Student student = enrolledStudents.get(id);
+                Student student = (Student) FilesManager.currentUsers.get(id.toString());
 
                 if (student != null) {
                     System.out.println(">  "+id + "  || " + student.getFirstName() + " " + student.getLastName() + ", " + grade);
@@ -76,41 +75,33 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
             this.showMenu();
             String userInput = scan.nextLine();
 
-            if (NavigationUtil.backOrExit(userInput)) {
-                return "b";
-            }
-
             boolean validInput = false;
             while (!validInput) {
+                if (NavigationUtil.backOrExit(userInput)) {
+                    return "b";
+                }
                 try {
-                    int studentID = Integer.parseInt(userInput);
-                    if (enrolledStudents.containsKey(studentID) && studentGrades.containsKey(studentID)) {
+                    Integer studentID = Integer.parseInt(userInput);
+                    
+                    if (FilesManager.currentUsers.containsKey(studentID.toString()) && studentGrades.containsKey(studentID)) {
                         LecturerEditStudentGrade editStudentGrade = new LecturerEditStudentGrade(
                                 currentCourse,
-                                enrolledStudents.get(studentID),
+                                (Student) FilesManager.currentUsers.get(studentID.toString()),
                                 Integer.parseInt(studentGrades.get(studentID)),
                                 studentGrades
                         );
+                        
                         editStudentGrade.validateUserInput();
                         validInput = true;
-                        break;
                     } else {
                         HeadersUtil.printHeader("Please pick a valid student.");
                         this.showMenu();
                         userInput = scan.nextLine();
-
-                        if (NavigationUtil.backOrExit(userInput)) {
-                            return "b";
-                        }
                     }
                 } catch (NumberFormatException e) {
                     HeadersUtil.printHeader("Please enter a valid ID.");
                     this.showMenu();
                     userInput = scan.nextLine();
-
-                    if (NavigationUtil.backOrExit(userInput)) {
-                        return "b";
-                    }
                 }
             }
         }

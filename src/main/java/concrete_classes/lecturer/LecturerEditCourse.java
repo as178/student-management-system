@@ -50,6 +50,7 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
     public String validateUserInput() {
         Scanner scan = new Scanner(System.in);
 
+        outerLoop:
         while (true) {
             this.showHeader();
             this.showMenu();
@@ -60,12 +61,12 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
 
             if (NavigationUtil.backOrExit(userInput)) {
                 FilesManager.allCourses.add(currentCourse);
-                FilesManager.saveAllCourses();
+                FilesManager.writeAllCourses();
                 return "b";
             }
 
             boolean validInput = false;
-
+            //inner loop
             while (!validInput) {
                 switch (userInput) {
                     case "1":
@@ -73,7 +74,7 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         System.out.println("b - Go Back (Edit Course)\nx - Exit");
                         String nameInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(nameInput)) {
-                            return this.validateUserInput();
+                            continue outerLoop;
                         }
                         currentCourse.setCourseName(nameInput);
                         HeadersUtil.printHeader("Course name saved successfully!");
@@ -86,7 +87,7 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                             System.out.println("b - Go Back (Edit Course)\nx - Exit");
                             String hoursInput = scan.nextLine();
                             if (NavigationUtil.backOrExit(hoursInput)) {
-                                return this.validateUserInput();
+                                continue outerLoop;
                             }
                             try {
                                 int estimatedHours = Integer.parseInt(hoursInput);
@@ -107,9 +108,10 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                     case "3":
                         HeadersUtil.printHeader("Please enter the new", "course description:");
                         System.out.println("b - Go Back (Edit Course)\nx - Exit");
+
                         String descInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(descInput)) {
-                            return this.validateUserInput();
+                            continue outerLoop;
                         }
                         currentCourse.setCourseDescription(descInput);
                         HeadersUtil.printHeader("Course description saved successfully!");
@@ -121,12 +123,12 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         this.showMenu();
                         userInput = scan.nextLine();
                         if (NavigationUtil.backOrExit(userInput)) {
-                            break;
+                            return "b"; 
                         }
                 }
             }
             FilesManager.allCourses.add(currentCourse);
-            FilesManager.saveAllCourses();
+            FilesManager.writeAllCourses();
         }
     }
 }

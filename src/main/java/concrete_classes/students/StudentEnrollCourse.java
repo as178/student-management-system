@@ -86,10 +86,7 @@ public class StudentEnrollCourse implements DashboardInterface, HeaderInterface,
                         "('Enter' to continue, or enter in",
                         "'x' to Exit.)");
                 String userInput = scan.nextLine();
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
-                return "b";
+                NavigationUtil.checkExit(userInput);
             } else {
 
                 this.getAvailableCourses();
@@ -129,11 +126,9 @@ public class StudentEnrollCourse implements DashboardInterface, HeaderInterface,
                         }
                         currentStudent.getEnrolledCourses().put(chosenCourse.getCourseId(), null);
 
-                        FilesManager.updateStudentCourseFile(currentStudent,
-                                "src/main/java/text_files/studentsEnrolledCourses.txt",
+                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsEnrolledCoursesFile,
                                 currentStudent.getEnrolledCourses(), false);
-                        FilesManager.updateStudentCourseFile(currentStudent,
-                                "src/main/java/text_files/studentsPreviousCourses.txt",
+                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsPreviousCoursesFile,
                                 currentStudent.getPreviousCourses(), false);
 
                         HeadersUtil.printHeader("Enrollment successful!", "Welcome to " + chosenCourse.getCourseId() + "!");
@@ -146,6 +141,7 @@ public class StudentEnrollCourse implements DashboardInterface, HeaderInterface,
                     }
                 }
             }
+            return "b";
         }
     }
 }

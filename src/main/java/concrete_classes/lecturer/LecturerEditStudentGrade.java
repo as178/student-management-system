@@ -54,9 +54,8 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
 
         Scanner scan = new Scanner(System.in);
 
-        this.showHeader();
-
         while (true) {
+            this.showHeader();
             this.showMenu();
             String userInput = scan.nextLine();
 
