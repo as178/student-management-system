@@ -74,17 +74,27 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
 
                 if (userInput.trim().toLowerCase().equals("s")) {
                     //couse id / grade
-                    FilesManager.readCoursesFile(currentStudent, currentStudent.getEnrolledCourses(), FilesManager.studentsEnrolledCoursesFile);
+                    FilesManager.readCoursesFile(currentStudent, 
+                            currentStudent.getEnrolledCourses(), 
+                            FilesManager.studentsEnrolledCoursesFile);
                     //load previcouse cousersse
-                    FilesManager.readCoursesFile(currentStudent, currentStudent.getPreviousCourses(), FilesManager.studentsPreviousCoursesFile);
+                    FilesManager.readCoursesFile(currentStudent, 
+                            currentStudent.getPreviousCourses(), 
+                            FilesManager.studentsPreviousCoursesFile);
                     //adds currentcourse and grade to pricouse courses hashmap
                     currentStudent.getPreviousCourses().put(currentCourse.getCourseId(), currentStudent.getEnrolledCourses().get(currentCourse.getCourseId()));
                     //remove from enrolled
                     currentStudent.getEnrolledCourses().remove(currentCourse.getCourseId());
                     //save enrolled 
-                    FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsEnrolledCoursesFile, currentStudent.getEnrolledCourses(), false);
+                    FilesManager.updateStudentCourseFile(currentStudent, 
+                            FilesManager.studentsEnrolledCoursesFile, 
+                            currentStudent.getEnrolledCourses(), 
+                            false);
                     //save previous 
-                    FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsPreviousCoursesFile, currentStudent.getPreviousCourses(), true);
+                    FilesManager.updateStudentCourseFile(currentStudent, 
+                            FilesManager.studentsPreviousCoursesFile, 
+                            currentStudent.getPreviousCourses(), 
+                            true);
                 }
             }
 
