@@ -84,8 +84,8 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                             validInput = true;
                             break;
                         } else {
-                            HeadersUtil.printHeader("Course name cant be empty,",
-                                    "must be below 47 characters.");
+                            HeadersUtil.printHeader("Course name cant be empty",
+                                    "and must be below 47 characters.");
                         }
                         break;
                     case "2":
@@ -123,7 +123,8 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                             break;
                         } else {
                             HeadersUtil.printHeader("Course description must be ",
-                                    "between 5-70 characters in length");
+                                    "between 5 and 70 characters",
+                                    "in length.");
                         }
                         break;
 
