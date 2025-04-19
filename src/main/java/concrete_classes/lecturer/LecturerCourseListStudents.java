@@ -27,12 +27,16 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
 
     public LecturerCourseListStudents(Course currentCourse) {
         this.currentCourse = currentCourse;
-        this.studentGrades = FilesManager.readEnrolledStudentsGrades(currentCourse.getCourseId());
+        this.studentGrades = new HashMap<Integer, String>();
         FilesManager.readAllStudents();
     }
 
     @Override
     public void showMenu() {
+
+        this.studentGrades.clear();
+        this.studentGrades = FilesManager.readEnrolledStudentsGrades(currentCourse.getCourseId());
+
         if (studentGrades.size() == 0) {
             System.out.println("> No students currently enrolled . . .\nb - Go Back (Course Info)\nx - Exit");
 
@@ -41,12 +45,12 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
 
             for (Map.Entry<Integer, String> entry : studentGrades.entrySet()) {
                 Integer id = entry.getKey();
-                String grade = entry.getValue();
+                String grade = (entry.getValue() != null) ? entry.getValue() : "N/A";
 
                 Student student = (Student) FilesManager.currentUsers.get(id.toString());
 
                 if (student != null) {
-                    System.out.println(">  "+id + "  || " + student.getFirstName() + " " + student.getLastName() + ", " + grade);
+                    System.out.println(">  " + id + "  || " + student.getFirstName() + " " + student.getLastName() + ", " + grade);
                 } else {
                     HeadersUtil.printHeader("> Student Not Found . . .");
                 }
@@ -61,7 +65,8 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
         HeadersUtil.printHeader("Currently Enrolled Students for:",
                 currentCourse.getCourseId() + ", " + currentCourse.getCourseName(),
                 "Please enter a Student's ID to",
-                "assign their grade.");
+                "configure their grade and see",
+                "further options.");
     }
 
     @Override
@@ -81,16 +86,24 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
                     return "b";
                 }
                 try {
-                    Integer studentID = Integer.parseInt(userInput);
-                    
+                    Integer studentID = Integer.valueOf(userInput);
+
                     if (FilesManager.currentUsers.containsKey(studentID.toString()) && studentGrades.containsKey(studentID)) {
+
+                        Integer studentParsedGrade;
+                        try {
+                            studentParsedGrade = Integer.parseInt(studentGrades.get(studentID));
+                        } catch (NumberFormatException | NullPointerException e) {
+                            studentParsedGrade = null;
+                        }
+
                         LecturerEditStudentGrade editStudentGrade = new LecturerEditStudentGrade(
                                 currentCourse,
                                 (Student) FilesManager.currentUsers.get(studentID.toString()),
-                                Integer.parseInt(studentGrades.get(studentID)),
+                                studentParsedGrade,
                                 studentGrades
                         );
-                        
+
                         editStudentGrade.validateUserInput();
                         validInput = true;
                     } else {

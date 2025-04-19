@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -37,12 +36,12 @@ public class FilesManager {
     public static final String studentsEnrolledCoursesFile = "src/main/java/text_files/studentsEnrolledCourses.txt";
     public static final String studentsPreviousCoursesFile = "src/main/java/text_files/studentsPreviousCourses.txt";
 
-    //using linked hashmap to keep the order of which the users are stored within the files
+    //using linked hashmap to keep the order of which the users are stored within the files for clarity 
     public static LinkedHashMap<String, User> currentUsers;
     public static User currentUser;
 
-    public static LinkedHashSet<Course> allCourses;
-    public static LinkedHashSet<String> allMajors;
+    public static HashSet<Course> allCourses;
+    public static HashSet<String> allMajors;
 
     public static void saveCurrentUser(User currentUser) {
         currentUsers.put(currentUser.getId() + "", currentUser);
@@ -97,7 +96,7 @@ public class FilesManager {
     }
 
     public static void readAllCourses() {
-        allCourses = new LinkedHashSet<Course>();
+        allCourses = new HashSet<Course>();
         String fileOutput;
 
         try {
@@ -320,7 +319,7 @@ public class FilesManager {
     }
 
     public static void readAllMajors() {
-        allMajors = new LinkedHashSet<String>();
+        allMajors = new HashSet<String>();
 
         try (BufferedReader fileInput = new BufferedReader(new FileReader(allMajorsFile))) {
             String fileOutput;

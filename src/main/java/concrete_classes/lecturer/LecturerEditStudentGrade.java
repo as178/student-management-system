@@ -25,10 +25,11 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
 
     private Course currentCourse;
     private Student currentStudent;
-    private int currentStudentGrade;
+    private Integer currentStudentGrade;
     HashMap<Integer, String> studentGrades;
 
-    public LecturerEditStudentGrade(Course currentCourse, Student currentStudent, int currentStudentGrade, HashMap<Integer, String> studentGrades) {
+    public LecturerEditStudentGrade(Course currentCourse, Student currentStudent,
+            Integer currentStudentGrade, HashMap<Integer, String> studentGrades) {
         this.currentCourse = currentCourse;
         this.currentStudent = currentStudent;
         this.currentStudentGrade = currentStudentGrade;
@@ -37,16 +38,16 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
 
     @Override
     public void showMenu() {
-        System.out.println("Current Grade: " + currentStudentGrade);
-        System.out.println("b - Go Back (Enrolled Students)\nx - Exit");
+        System.out.println("s - Sign Off Student\nb - Go Back (Enrolled Students)\nx - Exit");
     }
 
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Assign Student's Grade",
-                "Set grade for the following student:",
+        HeadersUtil.printHeader("Configure grade for the following student:",
                 WordUtils.wrap(currentStudent.getId() + ", " + currentStudent.getFirstName() + " " + currentStudent.getLastName(), 46),
-                "Please enter their new grade below.");
+                "Please enter their new grade below,",
+                "or alternatively sign-off the student's",
+                "current grade.");
     }
 
     @Override
@@ -57,19 +58,74 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
         while (true) {
             this.showHeader();
             this.showMenu();
-            String userInput = scan.nextLine();
+            String userInput = scan.nextLine().trim();
 
-            if (NavigationUtil.backOrExit(userInput)) {
-                return "b";
-            }
+            while (true) {
+                if (NavigationUtil.backOrExit(userInput)) {
+                    return "b";
+                }
 
-            if (ValidationUtil.checkIntegerRange(userInput, 0, 100)) {
-                studentGrades.put(currentStudent.getId(), userInput);
-                FilesManager.writeEnrolledStudentsGrades(currentStudent.getId(), currentCourse.getCourseId(), userInput);
-                HeadersUtil.printHeader("Grade assigned successfully!");
-                return "b";
-            } else {
-                HeadersUtil.printHeader("Please enter a number between 0 - 100.");
+                if (userInput.equalsIgnoreCase("s")) {
+                    HeadersUtil.printHeader("Signing Off:",
+                            WordUtils.wrap(currentStudent.getId() + ", " + currentStudent.getFirstName()
+                                    + " " + currentStudent.getLastName(), 46),
+                            "This will remove the student from",
+                            "your course, and their grade will be",
+                            "transferred to their record.",
+                            "Proceed with sign off?");
+
+                    System.out.print("y - Yes, Sign Off Student\nb - Back (Configure Grade)\nx - Exit\n");
+                    userInput = scan.nextLine().trim();
+
+                    boolean validInput = false;
+                    while (!validInput) {
+                        if (NavigationUtil.backOrExit(userInput)) {
+                            return "b";
+                        } else if (userInput.equalsIgnoreCase("y")) {
+
+                            //load student's enrolled courses to their enrolledCourses hashmap
+                            FilesManager.readCoursesFile(currentStudent, currentStudent.getEnrolledCourses(),
+                                    FilesManager.studentsEnrolledCoursesFile);
+
+                            //load student's previous courses to their previousCourses hashmap
+                            FilesManager.readCoursesFile(currentStudent, currentStudent.getPreviousCourses(),
+                                    FilesManager.studentsPreviousCoursesFile);
+
+                            //add the current course and student's grade to their previousCourses hashmap
+                            currentStudent.getPreviousCourses().put(currentCourse.getCourseId(), currentStudent.getEnrolledCourses().get(currentCourse.getCourseId()));
+
+                            //remove the same course from the student's enrolledCourses hashmap
+                            currentStudent.getEnrolledCourses().remove(currentCourse.getCourseId());
+
+                            //save changes in both hashmaps to their respective .txt files
+                            FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsEnrolledCoursesFile,
+                                    currentStudent.getEnrolledCourses(), false);
+                            FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsPreviousCoursesFile,
+                                    currentStudent.getPreviousCourses(), true);
+
+                            HeadersUtil.printHeader("Thank you, the student was", "successfully signed off!");
+                            validInput = true;
+                        } else {
+                            HeadersUtil.printHeader("Invalid input, please pick one of the following:");
+                            System.out.print("y - Yes, Sign Off Student\nb - Back (Configure Grade)\nx - Exit\n");
+                            userInput = scan.nextLine().trim();
+                        }
+                    }
+                    return "b";
+                    
+                } else {
+                    if (ValidationUtil.checkIntegerRange(userInput, 0, 100)) {
+                        studentGrades.put(currentStudent.getId(), userInput);
+                        FilesManager.writeEnrolledStudentsGrades(currentStudent.getId(), currentCourse.getCourseId(), userInput);
+                        HeadersUtil.printHeader("Grade assigned successfully!");
+                        break;
+                    } else {
+                        HeadersUtil.printHeader("Please enter a number between 0 - 100,",
+                                "or see available options below.");
+                        this.showMenu();
+                        userInput = scan.nextLine().trim();
+                    }
+                }
             }
         }
     }
