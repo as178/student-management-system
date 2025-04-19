@@ -9,7 +9,7 @@ import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
 import concrete_classes.other.ValidationUtil;
-import concrete_classes.students.Student;
+import concrete_classes.student.Student;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
 import interfaces.InputValidationInterface;

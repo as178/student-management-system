@@ -9,7 +9,7 @@ import concrete_classes.admin.Admin;
 import concrete_classes.courses.Course;
 import concrete_classes.lecturer.Lecturer;
 import concrete_classes.other.HeadersUtil;
-import concrete_classes.students.Student;
+import concrete_classes.student.Student;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;

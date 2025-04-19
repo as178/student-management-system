@@ -6,7 +6,7 @@ package concrete_classes.other;
 
 import concrete_classes.admin.AdminDashboard;
 import concrete_classes.lecturer.LecturerDashboard;
-import concrete_classes.students.StudentDashboard;
+import concrete_classes.student.StudentDashboard;
 
 /**
  *

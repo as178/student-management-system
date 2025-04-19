@@ -13,8 +13,13 @@ import abstract_classes.UserViewDetails;
  */
 public class LecturerViewDetails extends UserViewDetails {
 
-    public LecturerViewDetails(Lecturer currentLecturer){
+    public LecturerViewDetails(Lecturer currentLecturer) {
         super(currentLecturer);
+    }
+
+    @Override
+    public void showExtraDetails() {
+        System.out.println("Faculty: " + ((Lecturer) currentUser).getFaculty());
     }
 
     @Override

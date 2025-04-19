@@ -7,6 +7,7 @@ package abstract_classes;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
 import interfaces.DashboardInterface;
+import interfaces.ExtraDetailsInterface;
 import interfaces.HeaderInterface;
 import interfaces.InputValidationInterface;
 import java.util.Scanner;
@@ -15,11 +16,11 @@ import java.util.Scanner;
  *
  * @author Angela Saric (24237573)
  */
-public abstract class UserViewDetails implements DashboardInterface, HeaderInterface, InputValidationInterface {
+public abstract class UserViewDetails implements DashboardInterface, HeaderInterface, InputValidationInterface, ExtraDetailsInterface {
 
     protected abstract UserModifyDetails modifyDetails();
     protected User currentUser;
-
+    
     public UserViewDetails(User currentUser) {
         this.currentUser = currentUser;
     }
@@ -32,6 +33,7 @@ public abstract class UserViewDetails implements DashboardInterface, HeaderInter
     @Override
     public void showMenu() {
         System.out.println("ID: " + currentUser.getId());
+        this.showExtraDetails();
         System.out.println("Name: " + currentUser.getFirstName() + " " + currentUser.getLastName());
         System.out.println("Date of Birth: " + currentUser.getDateOfBirth());
         System.out.println("Personal Email: " + currentUser.getPersonalEmail());
@@ -43,6 +45,9 @@ public abstract class UserViewDetails implements DashboardInterface, HeaderInter
         System.out.println("1 - Modify Your Details\nb - Go Back (Lecturer Dashboard)\nx - Exit");
     }
 
+    @Override
+    public void showExtraDetails(){}
+    
     @Override
     public String validateUserInput() {
         Scanner scan = new Scanner(System.in);

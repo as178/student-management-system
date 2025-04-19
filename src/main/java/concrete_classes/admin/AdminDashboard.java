@@ -28,7 +28,7 @@ public class AdminDashboard implements InputValidationInterface, DashboardInterf
 
     @Override
     public void showMenu() {
-        System.out.println("1 - View My Details\n2 - Changes A Users Password\nb - Go Back (Logout)\nx - Exit");
+        System.out.println("1 - View My Details\n2 - Change a User's Password\nb - Go Back (Logout)\nx - Exit");
     }
 
     @Override
