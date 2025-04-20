@@ -31,6 +31,8 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
         FilesManager.readAllStudents();
     }
 
+    //prints message if no students are found 
+    //prints out the ID, full name, and grade of the student
     @Override
     public void showMenu() {
 
@@ -60,6 +62,8 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
         }
     }
 
+    //show course id and name
+    //tell the user to enter a students ID
     @Override
     public void showHeader() {
         HeadersUtil.printHeader("Currently Enrolled Students for:",
@@ -69,6 +73,10 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
                 "further options.");
     }
 
+    //takes ID input
+    //checks if target ID exsits in FilesManager currentUsers and in studentGrades
+    //passes course object, casted student object from FilesManager currentUsers, student's grade, and students grade hashmap
+    //to lectuer edit students grade class 
     @Override
     public String validateUserInput() {
 
@@ -98,10 +106,10 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
                         }
 
                         LecturerEditStudentGrade editStudentGrade = new LecturerEditStudentGrade(
-                                currentCourse,
-                                (Student) FilesManager.currentUsers.get(studentID.toString()),
-                                studentParsedGrade,
-                                studentGrades
+                                currentCourse, //course object
+                                (Student) FilesManager.currentUsers.get(studentID.toString()), //casted student object
+                                studentParsedGrade, //student's grade
+                                studentGrades //hashmap of students grade
                         );
 
                         editStudentGrade.validateUserInput();

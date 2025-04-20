@@ -11,7 +11,7 @@ import abstract_classes.UserModifyDetails;
  * @author williamniven
  */
 public class LecturerModifyDetails extends UserModifyDetails {
-
+    //allows user to modify details 
     public LecturerModifyDetails(Lecturer currentLecturer) {
         super(currentLecturer);
     }

@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class Lecturer extends User {
 
     protected String faculty;
-    protected HashMap<Integer, Course> coursesTaught;
+    protected HashMap<Integer, Course> coursesTaught; //storing a course with an idex for menu operations
 
     public Lecturer(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address, String faculty) {

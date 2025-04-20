@@ -32,6 +32,7 @@ public class AdminModifyPassword implements DashboardInterface, HeaderInterface,
                 "Please see further options below.");
     }
 
+    //show information about target user
     @Override
     public void showMenu() {
         System.out.println("ID: " + currentUser.getId());
@@ -46,6 +47,7 @@ public class AdminModifyPassword implements DashboardInterface, HeaderInterface,
         System.out.println("1 - Modify Password\nb - Go Back (Load Another User)\nx - Exit");
     }
 
+    //allows user to set password for target user 
     @Override
     public String validateUserInput() {
 
@@ -79,6 +81,8 @@ public class AdminModifyPassword implements DashboardInterface, HeaderInterface,
         }
     }
 
+    //takes intput and checks password meets requirements 
+    //saves current user with changes back to file 
     private String modifyPassword(Scanner scan) {
         HeadersUtil.printHeader("Please type in the new password below or",
                 "type 'b' to go back (Modify Menu), or 'x' to exit.");

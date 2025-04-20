@@ -20,17 +20,21 @@ public class AdminDashboard implements InputValidationInterface, DashboardInterf
 
     private Admin currentAdmin = (Admin) FilesManager.currentUser;
 
+    //print current admins full name 
     @Override
     public void showHeader() {
         HeadersUtil.printHeader("Welcome to the Admin Dashboard,",
                 currentAdmin.getFirstName() + " " + currentAdmin.getLastName() + "!", "What would you like to do?");
     }
 
+    //print admins options
     @Override
     public void showMenu() {
         System.out.println("1 - View My Details\n2 - Change a User's Password\nb - Go Back (Logout)\nx - Exit");
     }
 
+    //allows admin to select choise
+    //passes admin option to AdminViewDetails class
     @Override
     public String validateUserInput() {
 

@@ -25,12 +25,17 @@ public class LecturerDashboard implements InputValidationInterface, DashboardInt
         HeadersUtil.printHeader("Welcome to the Lecturer Dashboard,",
                 currentLecturer.getFirstName() + " " + currentLecturer.getLastName() + "!", "What would you like to do?");
     }
-
+    
+    //prints options to lecturer
+    //1 - View My Details
+    //2 - Manage My Courses
     @Override
     public void showMenu() {
         System.out.println("1 - View My Details\n2 - Manage My Courses\nb - Go Back (Logout)\nx - Exit");
     }
     
+    //creates isntance of the class by passing in currentLectuerer object
+    //enables user to enter dashboard for each option
     @Override
     public String validateUserInput() {
 

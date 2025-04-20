@@ -41,6 +41,7 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
         System.out.println("s - Sign Off Student\nb - Go Back (Enrolled Students)\nx - Exit");
     }
 
+    //display selected students id and fullname
     @Override
     public void showHeader() {
         HeadersUtil.printHeader("Configure grade for the following student:",
@@ -50,6 +51,8 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
                 "current grade.");
     }
 
+    //allow user to sign off student from the course with "s"
+    //allows user to set a new grade for the student 
     @Override
     public String validateUserInput() {
 
@@ -114,6 +117,9 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
                     return "b";
                     
                 } else {
+                    //check the range of the new grade is between 0 - 100
+                    //save changes to the studentGrades
+                    //save the studentGrades to the file
                     if (ValidationUtil.checkIntegerRange(userInput, 0, 100)) {
                         studentGrades.put(currentStudent.getId(), userInput);
                         FilesManager.writeEnrolledStudentsGrades(currentStudent.getId(), currentCourse.getCourseId(), userInput);

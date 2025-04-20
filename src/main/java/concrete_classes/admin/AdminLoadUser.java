@@ -19,6 +19,7 @@ import java.util.Scanner;
  */
 public class AdminLoadUser implements InputValidationInterface, DashboardInterface, HeaderInterface {
 
+    //askes user to enter id of target user
     @Override
     public void showHeader() {
         HeadersUtil.printHeader("Load User",
@@ -31,6 +32,10 @@ public class AdminLoadUser implements InputValidationInterface, DashboardInterfa
         System.out.println("b - Go Back (Admin Dashboard)\nx - Exit");
     }
 
+    //user can input targetid
+    //loads all studnets and checks for target id
+    //if not found then load all admins and find id
+    //AdminModifyPassword class called
     @Override
     public String validateUserInput() {
 

@@ -23,12 +23,17 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
 
     private HashMap<Integer, Course> courses;
 
+    //constructor that takes currentLectuer object input
+    //readLecturerCourses loads hashmap in lectuer object with an idex and Course object
+    //loads that hashmap into local courses hashmap
     public LecturerManageCourses(Lecturer currentLecturer) {
         FilesManager.readLecturerCourses(currentLecturer);
         FilesManager.readAllCourses();
         courses = currentLecturer.getCoursesTaught();
     }
 
+    //prints the courses that the currentLectuer object teaches with index - course name
+    //if not courses assigned then message is printed
     @Override
     public void showMenu() {
 
@@ -46,6 +51,7 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
         System.out.println("b - Go Back (Lecturer Dashboard)\nx - Exit");
     }
 
+    //header telling user to select a course 
     @Override
     public void showHeader() {
         HeadersUtil.printHeader("Manage My Courses",
@@ -53,6 +59,11 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
                 "or see below for further options.");
     }
 
+    //displayes header and menu options 
+    //method for user slecting a course from the local hashmap
+    //user selectes course by index (key) 
+    //the selected course object is passed into LecturerCourseOptions class
+    //calling validateUserInput method jumps into that dashboard
     @Override
     public String validateUserInput() {
 

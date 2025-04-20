@@ -25,6 +25,7 @@ public class LecturerCourseOptions implements DashboardInterface, HeaderInterfac
         this.currentCourse = currentCourse;
     }
 
+    //display options for the course to the user
     @Override
     public void showMenu() {
         System.out.println("1 - List Students");
@@ -32,6 +33,7 @@ public class LecturerCourseOptions implements DashboardInterface, HeaderInterfac
         System.out.println("b - Go Back (Manage Courses)\nx - Exit");
     }
 
+    //display the course id and name to the user 
     @Override
     public void showHeader() {
         HeadersUtil.printHeader("Course Options",
@@ -39,6 +41,9 @@ public class LecturerCourseOptions implements DashboardInterface, HeaderInterfac
                 currentCourse.getCourseId() + ", " + currentCourse.getCourseName());
     }
 
+    //displays header and menu options 
+    //switch case for the two options for the current course
+    //each case creates an instance of the respective class passing the currentCourse object 
     @Override
     public String validateUserInput() {
 

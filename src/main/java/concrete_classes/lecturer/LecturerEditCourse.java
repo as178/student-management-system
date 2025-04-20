@@ -27,6 +27,7 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
         this.currentCourse = currentCourse;
     }
 
+    //shows info about the current course object
     @Override
     public void showMenu() {
         System.out.println("> Major: " + currentCourse.getCourseMajor());
@@ -41,12 +42,19 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
         System.out.println("b - Go Back (Course Options)\nx - Exit");
     }
 
+    //prints current course id and name
     @Override
     public void showHeader() {
         HeadersUtil.printHeader("Edit Course Information for:",
                 currentCourse.getCourseId() + ", " + currentCourse.getCourseName());
     }
 
+    //allows user to select and modify name, esimated hours, and description
+    //name has to be between 4 - 46 characters long
+    //esimated hours between 1 - 150 hours
+    //descriptoin between 5 - 70 characters
+    //after changes are made the course object is added to allCourses to updated the info 
+    //and allCourses is saved
     @Override
     public String validateUserInput() {
         Scanner scan = new Scanner(System.in);
