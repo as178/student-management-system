@@ -10,11 +10,12 @@ import concrete_classes.student.StudentDashboard;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
  * 
  * Depending on the authentication result of the user
  * logging in, this utility class will call the appropriate
- * dashboards to display to the user.
+ * dashboards to display to the user. It will otherwise return "b"
+ * to go back.
  */
 public final class DashboardUtil {
    

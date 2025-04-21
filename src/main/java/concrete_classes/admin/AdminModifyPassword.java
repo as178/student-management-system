@@ -5,25 +5,26 @@
 package concrete_classes.admin;
 
 import abstract_classes.User;
-import concrete_classes.file_input_output.FilesManager;
+import abstract_classes.UserModifyDetails;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
-import concrete_classes.other.ValidationUtil;
-import interfaces.DashboardInterface;
-import interfaces.HeaderInterface;
-import interfaces.InputValidationInterface;
 import java.util.Scanner;
 
 /**
  *
- * @author williamniven
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * This class extends the abstract UserModifyDetails class for editing personal
+ * details, which is used by every user. In this context, the targetUser is
+ * passed into the class and their get & set methods are used for information
+ * access/manipulation. This class enables admins to change the 'target' user's
+ * password and see their information.
+ *
  */
-public class AdminModifyPassword implements DashboardInterface, HeaderInterface, InputValidationInterface {
+public class AdminModifyPassword extends UserModifyDetails {
 
-    private User currentUser;
-
-    public AdminModifyPassword(User currentUser) {
-        this.currentUser = currentUser;
+    public AdminModifyPassword(User targetUser) {
+        super(targetUser);
     }
 
     @Override
@@ -47,7 +48,17 @@ public class AdminModifyPassword implements DashboardInterface, HeaderInterface,
         System.out.println("1 - Modify Password\nb - Go Back (Load Another User)\nx - Exit");
     }
 
-    //allows user to set password for target user 
+    /*
+    Within this class we override the majority of the methods within
+    the UserModifyDetails class to better suit the context.
+    The validateUserInput method calls on the modifyPassword method
+    from the superclass.
+    
+    Otherwise, the primary logic behind the validateUserInput method remains
+    the same with an outer/inner loop combination for dashboard
+    re-displaying and re-prompting in case of invalid input.
+    Again the user is always given the option to go back or exit.
+     */
     @Override
     public String validateUserInput() {
 
@@ -58,55 +69,27 @@ public class AdminModifyPassword implements DashboardInterface, HeaderInterface,
 
             this.showHeader();
             this.showMenu();
-            String userInput = scan.nextLine();
+            String userInput = scan.nextLine().trim();
 
+            //inner loop
             boolean validInput = false;
             while (!validInput) {
                 if (NavigationUtil.backOrExit(userInput)) {
                     return "b";
                 }
                 switch (userInput) {
-                    case "1":
-                        if (this.modifyPassword(scan).equalsIgnoreCase("b")) {
-                            continue outerLoop;
+                    case "1": //only valid choice, triggers dashboard to modify user's password
+                        if (super.modifyPassword(scan).equalsIgnoreCase("b")) {
+                            continue outerLoop; //restart the loop if user wishes to go back
                         }
-                        validInput = true;
+                        validInput = true; //confirms valid input
                         break;
-                    default:
+                    default: //otherwise, re-prompt
                         HeadersUtil.printHeader("Invalid option.");
                         this.showMenu();
-                        userInput = scan.nextLine();
+                        userInput = scan.nextLine().trim();
                 }
             }
         }
-    }
-
-    //takes intput and checks password meets requirements 
-    //saves current user with changes back to file 
-    private String modifyPassword(Scanner scan) {
-        HeadersUtil.printHeader("Please type in the new password below or",
-                "type 'b' to go back (Modify Menu), or 'x' to exit.");
-        String newPassword = scan.nextLine().trim();
-
-        if (NavigationUtil.backOrExit(newPassword)) {
-            return "b";
-        }
-        while (!ValidationUtil.checkPassword(newPassword)) {
-            HeadersUtil.printHeader("Passwords cannot contain commas or",
-                    "periods, be empty or blank, and",
-                    "must be at least 8 characters long.",
-                    "Please try again.",
-                    "(Type 'b' to go back (Modify Menu),",
-                    " or 'x' to exit.)");
-            newPassword = scan.nextLine().trim();
-            if (NavigationUtil.backOrExit(newPassword)) {
-                return "b";
-            }
-        }
-
-        currentUser.setPassword(newPassword);
-        FilesManager.saveCurrentUser(currentUser);
-        HeadersUtil.printHeader("The user's password has", "been updated successfully!");
-        return "continue";
     }
 }

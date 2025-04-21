@@ -8,10 +8,20 @@ import abstract_classes.UserModifyDetails;
 
 /**
  *
- * @author williamniven
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * This class extends the abstract UserModifyDetails class for editing personal
+ * details, which is used by every user. In this context, the currentLecturer is
+ * passed into the class and their get & set methods are used for information
+ * access.
+ *
  */
 public class LecturerModifyDetails extends UserModifyDetails {
-    //allows user to modify details 
+    /*
+    As all the logic and methods are defined within the UserModifyDetails class,
+    we only need to have a constructor in this class which will pass in the
+    currently logged in lecturer (calling the super() constructor).    
+     */
     public LecturerModifyDetails(Lecturer currentLecturer) {
         super(currentLecturer);
     }

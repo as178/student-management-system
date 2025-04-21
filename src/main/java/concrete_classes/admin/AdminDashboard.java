@@ -14,7 +14,10 @@ import java.util.Scanner;
 
 /**
  *
- * @author williamniven
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * This is the dashboard that shows admins their options upon logging in.
+ * 
  */
 public class AdminDashboard implements InputValidationInterface, DashboardInterface, HeaderInterface {
 
@@ -33,8 +36,12 @@ public class AdminDashboard implements InputValidationInterface, DashboardInterf
         System.out.println("1 - View My Details\n2 - Change a User's Password\nb - Go Back (Logout)\nx - Exit");
     }
 
-    //allows admin to select choise
-    //passes admin option to AdminViewDetails class
+    /*
+    Primary logic behind the validateUserInput method remains
+    the same with an outer/inner loop combination for dashboard
+    re-displaying and re-prompting in case of invalid input.
+    Again the user is always given the option to go back or exit.
+     */
     @Override
     public String validateUserInput() {
 
@@ -44,7 +51,7 @@ public class AdminDashboard implements InputValidationInterface, DashboardInterf
 
             this.showHeader();
             this.showMenu();
-            String userInput = scan.nextLine();
+            String userInput = scan.nextLine().trim();
 
             boolean validInput = false;
             while (!validInput) {
@@ -52,20 +59,22 @@ public class AdminDashboard implements InputValidationInterface, DashboardInterf
                     return "b";
                 }
                 switch (userInput) {
-                    case "1":
+                    case "1": 
                         AdminViewDetails viewDetails = new AdminViewDetails(currentAdmin);
-                        viewDetails.validateUserInput();
-                        validInput = true;
+                        //triggers the personal details viewing dashboard
+                        viewDetails.validateUserInput(); 
+                        validInput = true; //confirms valid input, breaks the inner loop
                         break;
                     case "2":
                         AdminLoadUser loadUser = new AdminLoadUser();
+                        //other option when admin wants to edit a user's password
                         loadUser.validateUserInput();
                         validInput = true;
                         break;
-                    default:
+                    default: //otherwise, re-prompt
                         HeadersUtil.printHeader("Please pick a valid option.");
                         this.showMenu();
-                        userInput = scan.nextLine();
+                        userInput = scan.nextLine().trim();
                 }
             }
         }

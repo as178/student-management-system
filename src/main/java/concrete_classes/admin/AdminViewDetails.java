@@ -9,14 +9,31 @@ import abstract_classes.UserViewDetails;
 
 /**
  *
- * @author williamniven
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * This class extends the abstract UserViewDetails class for viewing personal
+ * details, which is used by every user. In this context, the currentAdmin is
+ * passed into the class and their get & set methods are used for information
+ * access.
+ *
  */
 public class AdminViewDetails extends UserViewDetails {
+
+    /*
+    As all the logic and methods are defined within the UserViewDetails class,
+    we only need to have a constructor which will pass in the
+    currently logged in admin (calling the super() constructor).
     
-    public AdminViewDetails(Admin currentAdmin){
+    We also need to override the abstract modifyDetails method within this
+    viewing class, in order for the method to return the appropriate modify class
+    (in this case it returns an AdminModifyDetails class, with the currently logged
+    in admin being passed into it; the FilesManager currentUser, casted to Admin).
+     */
+    
+    public AdminViewDetails(Admin currentAdmin) {
         super(currentAdmin);
     }
-    
+
     @Override
     protected UserModifyDetails modifyDetails() {
         return new AdminModifyDetails((Admin) currentUser);

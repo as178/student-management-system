@@ -15,11 +15,16 @@ import java.util.Scanner;
 
 /**
  *
- * @author williamniven
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * This class allows admins to search for any user regardless of
+ * whether they are a student or a lecturer, and calls on another
+ * class to enable them to edit that 'target' user's password.
+ *
  */
 public class AdminLoadUser implements InputValidationInterface, DashboardInterface, HeaderInterface {
 
-    //askes user to enter id of target user
+    //asks admin to enter id of target user
     @Override
     public void showHeader() {
         HeadersUtil.printHeader("Load User",
@@ -32,14 +37,25 @@ public class AdminLoadUser implements InputValidationInterface, DashboardInterfa
         System.out.println("b - Go Back (Admin Dashboard)\nx - Exit");
     }
 
-    //user can input targetid
-    //loads all studnets and checks for target id
-    //if not found then load all admins and find id
-    //AdminModifyPassword class called
+
+    /*
+    - admin is prompted to input target id
+        - loads all students and checks if target id is present
+          in FilesManager currentUsers hashmap 
+        - if not found then loads all lecturers the same way and
+          checks if target id is present in hashmap
+    - AdminModifyPassword class called if target id is found
+        - otherwise, admin is re-prompted to enter a valid id
+    
+    Primary logic behind the validateUserInput method remains
+    the same with an outer/inner loop combination for dashboard
+    re-displaying and re-prompting in case of invalid input.
+    Again the user is always given the option to go back or exit.
+     */
     @Override
     public String validateUserInput() {
 
-        Scanner scan = new Scanner(System.in); 
+        Scanner scan = new Scanner(System.in);
 
         while (true) {
 
@@ -48,8 +64,8 @@ public class AdminLoadUser implements InputValidationInterface, DashboardInterfa
 
             boolean validInput = false;
             while (!validInput) {
-                String userInput = scan.nextLine();
-                
+                String userInput = scan.nextLine().trim();
+
                 if (NavigationUtil.backOrExit(userInput)) {
                     return "b";
                 }

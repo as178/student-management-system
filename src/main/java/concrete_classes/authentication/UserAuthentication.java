@@ -34,7 +34,7 @@ public class UserAuthentication {
         while (true) {
             HeadersUtil.printHeader("Please type in your username (ID)", "or select one of the following:");
             System.out.println("b - Go Back (Login Options)\nx - Exit");
-            usernameId = scan.nextLine();
+            usernameId = scan.nextLine().trim();
             /*
             if userInput = b, return back to the main dashboard
             if userInput = x, exit the program immediately
@@ -45,7 +45,7 @@ public class UserAuthentication {
 
             HeadersUtil.printHeader("Please type in your password", "or select one of the following:");
             System.out.println("b - Go Back (Login Options)\nx - Exit");
-            password = scan.nextLine();
+            password = scan.nextLine().trim();
             if (NavigationUtil.backOrExit(password)) {
                 return false;
             }
@@ -62,7 +62,7 @@ public class UserAuthentication {
 
                 FilesManager.currentUser = FilesManager.currentUsers.get(usernameId);
 
-                if (FilesManager.currentUser instanceof Student) {
+                if (FilesManager.currentUser instanceof Student) { //checking if it's a student
                     Student currentStudent = (Student) FilesManager.currentUser;
 
                     if (password.equals(currentStudent.getPassword())) {
@@ -71,7 +71,7 @@ public class UserAuthentication {
                         HeadersUtil.printHeader("Incorrect credentials, please try again.");
                     }
 
-                } else if (FilesManager.currentUser instanceof Lecturer) {
+                } else if (FilesManager.currentUser instanceof Lecturer) { //checking if it's a lecturer
 
                     Lecturer currentLecturer = (Lecturer) FilesManager.currentUser;
 
@@ -81,7 +81,7 @@ public class UserAuthentication {
                         HeadersUtil.printHeader("Incorrect credentials, please try again.");
                     }
 
-                } else if (FilesManager.currentUser instanceof Admin) {
+                } else if (FilesManager.currentUser instanceof Admin) { //checking if it's an admin
 
                     Admin currentAdmin = (Admin) FilesManager.currentUser;
 

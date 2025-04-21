@@ -19,7 +19,11 @@ import org.apache.commons.text.WordUtils;
 
 /**
  *
- * @author williamniven
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * This class enables the lecturer to edit the grades of students
+ * who are currently enrolled in their courses.
+ *
  */
 public class LecturerEditStudentGrade implements DashboardInterface, HeaderInterface, InputValidationInterface {
 
@@ -50,9 +54,17 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
                 "or alternatively sign-off the student's",
                 "current grade.");
     }
-
-    //allow user to sign off student from the course with "s"
-    //allows user to set a new grade for the student 
+    
+    /*
+    The following method:
+    - allows lecturer to sign off student from the course with "s"
+    - allows lecturer to set a new grade for the student 
+    
+    The primary logic behind the validateUserInput method remains
+    the same with an outer/inner loop combination for dashboard
+    re-displaying and re-prompting in case of invalid input.
+    Again the user is always given the option to go back or exit.
+     */
     @Override
     public String validateUserInput() {
 
@@ -108,7 +120,7 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
 
                             HeadersUtil.printHeader("Thank you, the student was", "successfully signed off!");
                             validInput = true;
-                        } else {
+                        } else { //else re-prompt
                             HeadersUtil.printHeader("Invalid input, please pick one of the following:");
                             System.out.print("y - Yes, Sign Off Student\nb - Back (Configure Grade)\nx - Exit\n");
                             userInput = scan.nextLine().trim();
@@ -118,14 +130,14 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
                     
                 } else {
                     //check the range of the new grade is between 0 - 100
-                    //save changes to the studentGrades
-                    //save the studentGrades to the file
+                    //save the student's new grade to the studentGrades hashmap
+                    //save the student's new grade into studentsEnrolledCourses.txt
                     if (ValidationUtil.checkIntegerRange(userInput, 0, 100)) {
                         studentGrades.put(currentStudent.getId(), userInput);
                         FilesManager.writeEnrolledStudentsGrades(currentStudent.getId(), currentCourse.getCourseId(), userInput);
                         HeadersUtil.printHeader("Grade assigned successfully!");
                         break;
-                    } else {
+                    } else { //else re-prompt
                         HeadersUtil.printHeader("Please enter a number between 0 - 100,",
                                 "or see available options below.");
                         this.showMenu();

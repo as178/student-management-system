@@ -17,7 +17,11 @@ import org.apache.commons.text.WordUtils;
 
 /**
  *
- * @author williamniven
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * This class enables lecturer to edit their courses' details,
+ * and reflects these changes within the allCourses.txt file.
+ *
  */
 public class LecturerEditCourse implements DashboardInterface, HeaderInterface, InputValidationInterface {
 
@@ -49,12 +53,22 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                 currentCourse.getCourseId() + ", " + currentCourse.getCourseName());
     }
 
-    //allows user to select and modify name, esimated hours, and description
-    //name has to be between 4 - 46 characters long
-    //esimated hours between 1 - 150 hours
-    //descriptoin between 5 - 70 characters
-    //after changes are made the course object is added to allCourses to updated the info 
-    //and allCourses is saved
+    
+    /*
+    The following method:
+    - allows lecturer to select and modify course name, esimated hours, and description
+        - course name has to be between 4 - 46 characters long
+        - esimated hours between 1 - 150 hours
+        - descriptoin between 5 - 70 characters
+    - after changes are made, the course object is added to the allCourses hashset
+      to update the course information
+    - and these changes are reflected within the allCourses.txt file
+    
+    The primary logic behind the validateUserInput method remains
+    the same with an outer/inner loop combination for dashboard
+    re-displaying and re-prompting in case of invalid input.
+    Again the user is always given the option to go back or exit.
+     */
     @Override
     public String validateUserInput() {
         Scanner scan = new Scanner(System.in);
@@ -66,8 +80,9 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
 
             FilesManager.allCourses.remove(currentCourse);
 
-            String userInput = scan.nextLine();
+            String userInput = scan.nextLine().trim();
 
+            //save currentCourse before going back
             if (NavigationUtil.backOrExit(userInput)) {
                 FilesManager.allCourses.add(currentCourse);
                 FilesManager.writeAllCourses();
@@ -136,16 +151,18 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         }
                         break;
 
-                    default:
+                    default: //invalid input ==> re-prompt
                         HeadersUtil.printHeader("Invalid option.");
                         this.showMenu();
-                        userInput = scan.nextLine();
+                        userInput = scan.nextLine().trim();
                         if (NavigationUtil.backOrExit(userInput)) {
                             return "b";
                         }
                 }
             }
+            //save currentCourse within the hashset
             FilesManager.allCourses.add(currentCourse);
+            //update the allCourses.txt file
             FilesManager.writeAllCourses();
         }
     }

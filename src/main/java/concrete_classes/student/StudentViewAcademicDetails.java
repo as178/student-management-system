@@ -16,7 +16,12 @@ import java.util.Scanner;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * This class displays the student's academic information at a glance, this
+ * includes their GPA, major, current courses and grades. Further options are
+ * also displayed.
+ *
  */
 public class StudentViewAcademicDetails implements DashboardInterface, HeaderInterface, InputValidationInterface {
 
@@ -24,6 +29,9 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
 
     public StudentViewAcademicDetails(Student currentStudent) {
         this.currentStudent = currentStudent;
+        //loads up the currently logged in student's
+        //enrolledCourses and previousCourses hashmaps
+        //as well as the allCourses hashset
         FilesManager.readCoursesFile(currentStudent, currentStudent.getEnrolledCourses(), FilesManager.studentsEnrolledCoursesFile);
         FilesManager.readCoursesFile(currentStudent, currentStudent.getPreviousCourses(), FilesManager.studentsPreviousCoursesFile);
         FilesManager.readAllCourses();
@@ -31,7 +39,7 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
 
     @Override
     public void showMenu() {
-        System.out.println("My GPA: "+ String.format("%.2f", currentStudent.getGPA()));
+        System.out.println("My GPA: " + String.format("%.2f", currentStudent.getGPA()));
         System.out.println("My Major: " + currentStudent.getMajor());
         System.out.println("My Current Courses & Grades (Maximum of 8): ");
 
@@ -55,6 +63,12 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
         HeadersUtil.printHeader("My Academic Details");
     }
 
+    /*
+    The primary logic behind the validateUserInput method remains
+    the same with an outer/inner loop combination for dashboard
+    re-displaying and re-prompting in case of invalid input.
+    Again the user is always given the option to go back or exit.
+     */
     @Override
     public String validateUserInput() {
         Scanner scan = new Scanner(System.in);
@@ -73,23 +87,26 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
                 switch (userInput) {
                     case "1":
                         StudentViewCourses viewCourses = new StudentViewCourses(currentStudent);
+                        //displays detailed information about the courses student takes/has taken
                         viewCourses.validateUserInput();
                         validInput = true;
                         break;
                     case "2":
                         StudentModifyMajor modifyMajor = new StudentModifyMajor(currentStudent);
+                        //enables student to change their major
                         modifyMajor.validateUserInput();
                         validInput = true;
                         break;
                     case "3":
                         StudentModifyCourses modifyCourses = new StudentModifyCourses(currentStudent);
+                        //enables student to enroll into and/or withdraw from courses
                         modifyCourses.validateUserInput();
-                        validInput = true;
+                        validInput = true; //confirm valid input
                         break;
-                    default:
+                    default: //otherwise, re-prompt
                         HeadersUtil.printHeader("Invalid input, please see below", "for valid options.");
                         this.showMenu();
-                        userInput = scan.nextLine();
+                        userInput = scan.nextLine().trim();
                 }
             }
         }

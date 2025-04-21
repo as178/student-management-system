@@ -1,10 +1,20 @@
-24229618,password123,John,Doe,15-05-2000,john.doe@email.com,john.doe@aut.ac.nz,0211234567,M,123 Main St,Computer Science
-24237573,password,Jane,Smith,22-08-1999,smith.jane@icloud.com,jane.smith@aut.ac.nz,+64213456789,F,40 Smith Rd New Jersey Jersey 4512,Data Science
-22358946,password789,Alan,Brown,30-11-2001,alan.brown@email.com,alan.brown@aut.ac.nz,0211357246,M,789 Pine St,Networks & Cybersecurity
-21568973,password012,Emily,White,11-02-2000,emily.white@email.com,emily.white@aut.ac.nz,0219876543,F,321 Birch St,Data Science
-23568741,password345,Michael,Green,05-12-1998,michael.green@email.com,michael.green@aut.ac.nz,0213456789,M,654 Elm St,Digital Services
-25698745,password678,Sarah,Black,14-07-1999,sarah.black@email.com,sarah.black@aut.ac.nz,0216543210,F,987 Maple St,Networks & Cybersecurity
-65874622,password901,David,Lee,18-09-2000,david.lee@email.com,david.lee@aut.ac.nz,0218765432,M,135 Cedar St,Digital Services
-13256875,password234,Laura,Harris,23-01-2001,laura.harris@email.com,laura.harris@aut.ac.nz,0214321987,F,246 Redwood St,Software Development
-26895785,password567,James,Wilson,29-03-2000,james.wilson@email.com,james.wilson@aut.ac.nz,0218761234,M,369 Fir St,Software Development
-23654975,password890,Anna,Clark,17-10-1998,anna.clark@email.com,anna.clark@aut.ac.nz,0212468135,F,741 Willow St,Software Development
+24229618,mySchoolPass,John,Doe,13-06-1999,driftshot88@yahoo.com,john.doe@aut.ac.nz,0211234567,M,123 Main St Mount Albert Auckland 1025,Computer Science
+24237573,myPassStudent,Jane,Smith,20-09-2000,icecloud47@gmail.com,jane.smith@aut.ac.nz,+64213456789,F,40 Smith Rd Epsom Auckland 1051,Data Science
+23123456,omegaFlash91,Alan,Brown,30-11-2001,stormfire99@icloud.com,alan.brown@aut.ac.nz,0203456789,M,789 Pine St Sandringham Auckland 1025,Networks & Cybersecurity
+21478523,crimsonLeaf7,Emily,White,11-02-2000,berryjuice7@yahoo.com,emily.white@aut.ac.nz,0229876543,F,321 Birch St Northcote Auckland 0627,Data Science
+22245678,moonriseStar22,Michael,Green,05-12-1998,foxtrack92@gmail.com,michael.green@aut.ac.nz,+64213456712,M,654 Elm St Mount Eden Auckland 1024,Digital Services
+23546789,orchidTree99,Sarah,Black,14-07-1999,lunabeam33@icloud.com,sarah.black@aut.ac.nz,0216543210,F,987 Maple St Mission Bay Auckland 1071,Networks & Cybersecurity
+24689123,zebraRunner42,David,Lee,18-09-2000,rockwolf78@gmail.com,david.lee@aut.ac.nz,+64219827364,M,135 Cedar St Greenlane Auckland 1051,Digital Services
+21746392,deltaRacer12,Laura,Harris,23-01-2001,silverflame22@yahoo.com,laura.harris@aut.ac.nz,0221453987,F,246 Redwood St Glen Innes Auckland 1072,Software Development
+23457981,violetTiger55,James,Wilson,29-03-2000,gearboost18@gmail.com,james.wilson@aut.ac.nz,0218761234,M,369 Fir St New Lynn Auckland 0600,Software Development
+24197635,sunsetWave88,Anna,Clark,17-10-1998,orbitalspin44@icloud.com,anna.clark@aut.ac.nz,0212468135,F,741 Willow St Manukau Auckland 2104,Software Development
+21487953,novaSparkle1,Ethan,Nguyen,02-06-1999,stormwheel29@yahoo.com,ethan.nguyen@aut.ac.nz,+64214738219,M,81 Riverbank St Pakuranga Auckland 2010,Computer Science
+22431975,shadowPath77,Alice,King,13-04-2000,dawnflash35@gmail.com,alice.king@aut.ac.nz,0217439268,F,92 Moonrise St Mount Roskill Auckland 1041,Digital Services
+23315642,rapidLion99,Brian,Wu,20-12-1998,skytide76@icloud.com,brian.wu@aut.ac.nz,0201112456,M,58 Forest Hill Hillcrest Auckland 0627,Networks & Cybersecurity
+21247698,winterGlow33,Chloe,Rose,27-03-2001,wildtree55@yahoo.com,chloe.rose@aut.ac.nz,0213928172,F,19 Thunder Ln Henderson Auckland 0610,Data Science
+24538976,falconDash25,Daniel,Kaur,16-08-2000,nightarrow38@gmail.com,daniel.kaur@aut.ac.nz,0221984736,M,27 Summit Hill Howick Auckland 2014,Software Development
+22158793,braveEcho66,Olivia,Turner,04-11-1999,lightpath79@icloud.com,olivia.turner@aut.ac.nz,+64213489174,F,73 Horizon Rd Meadowbank Auckland 1072,Computer Science
+23214768,cosmicDrift7,Noah,Wong,10-07-2000,darkflame18@yahoo.com,noah.wong@aut.ac.nz,0203948721,M,64 Sunset Blvd Point Chevalier Auckland 1022,Networks & Cybersecurity
+24357692,risingComet93,Mia,Patel,01-09-1998,gearcore92@gmail.com,mia.patel@aut.ac.nz,0219834751,F,31 Galaxy Rise Newmarket Auckland 1023,Data Science
+22678912,jetBlazer52,Liam,Evans,25-05-2001,arcstream88@icloud.com,liam.evans@aut.ac.nz,0228365912,M,50 Volcano Rd Mount Wellington Auckland 1060,Digital Services
+21837645,blazeHawk34,Ava,Scott,08-10-1999,nimbleshade64@gmail.com,ava.scott@aut.ac.nz,+64217894567,F,86 Crystal Grove Parnell Auckland 1052,Computer Science

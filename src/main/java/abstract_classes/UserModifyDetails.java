@@ -15,7 +15,13 @@ import java.util.Scanner;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * The main modify class for editing personal details, which is used by every
+ * user. The currentUser is passed into the class and their get & set methods
+ * are used for information access. The class implements needed dashboards
+ * and overrides their methods as required.
+ *
  */
 public abstract class UserModifyDetails implements DashboardInterface, HeaderInterface, InputValidationInterface {
 
@@ -39,6 +45,13 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
         HeadersUtil.printHeader("What would you like to modify?");
     }
 
+    /*
+    Validates the user's input in relation to what they
+    want to modify. If no valid input is chosen, the user is
+    prompted again. As with the rest of our program, the user
+    always has the choice to go back to the previous dashboard
+    or completely exit the program.
+     */
     @Override
     public String validateUserInput() {
         Scanner scan = new Scanner(System.in);
@@ -48,7 +61,7 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
             this.showHeader();
             this.showMenu();
 
-            String userInput = scan.nextLine().trim().toLowerCase();
+            String userInput = scan.nextLine().trim();
 
             //inner loop
             boolean validInput = false;
@@ -58,46 +71,71 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
                 }
 
                 switch (userInput) {
-                    case "1":
+                    case "1": //modify user's password
                         if (this.modifyPassword(scan).equalsIgnoreCase("b")) {
-                            continue outerLoop;
+                            continue outerLoop; //restart the loop if user wishes to go back
                         }
-                        validInput = true;
+                        validInput = true; //otherwise confirm valid input
                         break;
 
-                    case "2":
+                    case "2": //modify user's email
                         if (this.modifyEmail(scan).equalsIgnoreCase("b")) {
                             continue outerLoop;
                         }
                         validInput = true;
                         break;
 
-                    case "3":
+                    case "3": //modify user's phone number
                         if (this.modifyPhoneNumber(scan).equalsIgnoreCase("b")) {
                             continue outerLoop;
                         }
                         validInput = true;
                         break;
 
-                    case "4":
+                    case "4": //modify user's address
                         if (this.modifyAddress(scan).equalsIgnoreCase("b")) {
                             continue outerLoop;
                         }
                         validInput = true;
                         break;
 
-                    default:
+                    default: //invalid input ==> re-prompt
                         HeadersUtil.printHeader("Invalid input, please pick", "a valid field to modify.");
                         this.showMenu();
-                        userInput = scan.nextLine();
+                        userInput = scan.nextLine().trim();
                 }
             }
         }
     }
 
-    private String modifyPassword(Scanner scan) {
-        HeadersUtil.printHeader("Please type in your new password below or",
-                "type 'b' to go back (Modify Menu), or 'x' to exit.");
+    /*
+    The following are protected methods that the validateUserInput
+    method above calls on if the user wishes to change their details.
+    They are protected as they may be used individually within
+    classes that extend this class, or if we wish to tweak their
+    behaviour by overriding them for any given user.
+    
+    They:
+    - prompt the user for their new information
+    - always check if the user wants to go back or exit
+    - if not they call on ValidationUtil's methods which
+      enforce our restrictions for each of the fields
+      (and help with further formatting)
+        - if the user's input doesn't match these
+          restrictions, they are re-prompted with
+          descriptive messages to remind them of the
+          restrictions
+    - finally, the new valid information is put in
+      place via the user's set methods
+    - the user is then immediately saved using the
+      FilesManager method for saving the currentUser
+      and a success message is printed
+    - return "continue" as a sign of valid input
+     */
+    protected String modifyPassword(Scanner scan) {
+        HeadersUtil.printHeader("Please type in the new password below or",
+                "type 'b' to go back (Modify Menu),",
+                "or 'x' to exit.");
         String newPassword = scan.nextLine().trim();
 
         if (NavigationUtil.backOrExit(newPassword)) {
@@ -118,11 +156,11 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
 
         currentUser.setPassword(newPassword);
         FilesManager.saveCurrentUser(currentUser);
-        HeadersUtil.printHeader("Your password has been updated successfully!");
+        HeadersUtil.printHeader("Password updated successfully!");
         return "continue";
     }
 
-    private String modifyEmail(Scanner scan) {
+    protected String modifyEmail(Scanner scan) {
         HeadersUtil.printHeader("Please type in your new email below or",
                 "type 'b' to go back (Modify Menu),",
                 " or 'x' to exit.");
@@ -147,7 +185,7 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
         return "continue";
     }
 
-    private String modifyPhoneNumber(Scanner scan) {
+    protected String modifyPhoneNumber(Scanner scan) {
         HeadersUtil.printHeader("Please type in your new phone number below",
                 "(e.g. xxx xxx xxxx, +xx xx xxx xxxx, xxxxxxxxxx)",
                 "or type 'b' to go back (Modify Menu),",
@@ -169,11 +207,11 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
 
         currentUser.setPhoneNumber(ValidationUtil.formatPhoneNumber(newPhoneNumber));
         FilesManager.saveCurrentUser(currentUser);
-        HeadersUtil.printHeader("Your phone number has been updated successfully!");
+        HeadersUtil.printHeader("Your phone number has been", "updated successfully!");
         return "continue";
     }
 
-    private String modifyAddress(Scanner scan) {
+    protected String modifyAddress(Scanner scan) {
         HeadersUtil.printHeader("Please type in your new address below",
                 "(e.g. 123 Street Name Suburb City 1234).", "No commas allowed.",
                 "Type 'b' to go back (Modify Menu),",

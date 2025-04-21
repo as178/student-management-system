@@ -1,6 +1,3 @@
-14567001,password,Isla,Roberts,21-08-1999,isla.roberts@email.com,isla.roberts@aut.ac.nz,0213456789,F,32 Hillcrest Way
-14567002,bravoSecure,Leo,Martinez,03-12-2002,leo.martinez@email.com,leo.martinez@aut.ac.nz,0214567890,M,88 Pinewood Dr
-14567003,charlieDev,Ava,Kumar,15-04-1998,ava.kumar@email.com,ava.kumar@aut.ac.nz,0215678901,F,7 Willow Ct
-14567004,deltaLogin,Max,Thompson,27-06-2001,max.thompson@email.com,max.thompson@aut.ac.nz,0216789012,M,45 Coastal Rd
-14567005,echoAccess,Mia,Lopez,09-11-2000,mia.lopez@email.com,mia.lopez@aut.ac.nz,0217890123,F,29 Oakridge Ave
-14567006,foxtrot2025,Oscar,Ng,05-02-1997,oscar.ng@email.com,oscar.ng@aut.ac.nz,0218901234,M,11 Lakeside Dr
+10567001,adminpassword123,Isla,Roberts,21-08-1999,robertsIsla@gmail.com,isla.roberts@aut.ac.nz,0213456789,F,32 Hillcrest Way Greenlane Auckland 1061
+10567002,bravoSecure,Leo,Martinez,03-12-2002,leoZ2002@icloud.com,leo.martinez@aut.ac.nz,0214567890,M,88 Pinewood Dr Mount Roskill Auckland 1041
+10567003,charlieDev,Ava,Kumar,15-04-1998,kumara2@yahoo.com,ava.kumar@aut.ac.nz,0215678901,F,7 Willow Ct Epsom Auckland 1023

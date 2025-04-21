@@ -16,9 +16,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+
 /**
  *
- * @author williamniven
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * This class displays students which are in a particular course,
+ * along with further options open to the lecturer.
+ * 
  */
 public class LecturerCourseListStudents implements DashboardInterface, HeaderInterface, InputValidationInterface {
 
@@ -28,7 +33,7 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
     public LecturerCourseListStudents(Course currentCourse) {
         this.currentCourse = currentCourse;
         this.studentGrades = new HashMap<Integer, String>();
-        FilesManager.readAllStudents();
+        FilesManager.readAllStudents(); //load up all students into the currentUsers hashmap
     }
 
     //prints message if no students are found 
@@ -36,7 +41,9 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
     @Override
     public void showMenu() {
 
+        //clear the list in order to update each time the menu is shown
         this.studentGrades.clear();
+        //get the students' grades for this particular course
         this.studentGrades = FilesManager.readEnrolledStudentsGrades(currentCourse.getCourseId());
 
         if (studentGrades.size() == 0) {
@@ -73,10 +80,22 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
                 "further options.");
     }
 
-    //takes ID input
-    //checks if target ID exsits in FilesManager currentUsers and in studentGrades
-    //passes course object, casted student object from FilesManager currentUsers, student's grade, and students grade hashmap
-    //to lectuer edit students grade class 
+    
+    
+    /*
+    The following validation method:
+    - takes ID input
+    - checks if target ID exsits in FilesManager currentUsers and in studentGrades
+    - passes the course object, casted student object from FilesManager currentUsers,
+      the student's grade, and students grade hashmap into the
+      LecturerEditStudentGrade class, which will enable lecturer to configure a student's
+      grade
+    
+    The primary logic behind the validateUserInput method remains
+    the same with an outer/inner loop combination for dashboard
+    re-displaying and re-prompting in case of invalid input.
+    Again the user is always given the option to go back or exit.
+     */
     @Override
     public String validateUserInput() {
 
@@ -86,7 +105,7 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
 
             this.showHeader();
             this.showMenu();
-            String userInput = scan.nextLine();
+            String userInput = scan.nextLine().trim();
 
             boolean validInput = false;
             while (!validInput) {
@@ -97,8 +116,11 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
                     Integer studentID = Integer.valueOf(userInput);
 
                     if (FilesManager.currentUsers.containsKey(studentID.toString()) && studentGrades.containsKey(studentID)) {
-
+                        
                         Integer studentParsedGrade;
+                        //parsing grade with this block of code to ensure no bugs
+                        //occur when trying to assign grades to students that currently
+                        //have "null" as their grade
                         try {
                             studentParsedGrade = Integer.parseInt(studentGrades.get(studentID));
                         } catch (NumberFormatException | NullPointerException e) {
@@ -112,17 +134,19 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
                                 studentGrades //hashmap of students grade
                         );
 
-                        editStudentGrade.validateUserInput();
-                        validInput = true;
+                        editStudentGrade.validateUserInput(); //call the class to edit student's grade
+                        validInput = true; //confirm valid input 
                     } else {
+                        //otherwise provide a valid student id
                         HeadersUtil.printHeader("Please pick a valid student.");
                         this.showMenu();
-                        userInput = scan.nextLine();
+                        userInput = scan.nextLine().trim();
                     }
+                //if the user doesn't enter a number
                 } catch (NumberFormatException e) {
                     HeadersUtil.printHeader("Please enter a valid ID.");
                     this.showMenu();
-                    userInput = scan.nextLine();
+                    userInput = scan.nextLine().trim();
                 }
             }
         }

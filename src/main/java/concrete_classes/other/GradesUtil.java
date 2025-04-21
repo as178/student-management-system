@@ -6,7 +6,18 @@ package concrete_classes.other;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ * 
+ * This class has 2 methods which are used when dealing with grades:
+ * 
+ * - convertFloatToGrade, which converts a float (grade) to a proper
+ *   letter grade (where null is turned to N/A, not assigned, and
+ *   -1 is treated as Withdrawn)
+ * 
+ * - convertFloatToGPA, which converts a float (grade) to a grade point,
+ *   used when calculating the student's GPA; -1 and null don't affect
+ *   the average thus 0 is returned
+ * 
  */
 public final class GradesUtil {
 

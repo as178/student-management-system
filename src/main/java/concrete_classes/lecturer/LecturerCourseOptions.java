@@ -15,7 +15,12 @@ import java.util.Scanner;
 
 /**
  *
- * @author williamniven
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * This class displays options the lecturer has for a specific
+ * course they are teaching. They may choose to edit course details
+ * or go through to see a list of currently enrolled students.
+ * 
  */
 public class LecturerCourseOptions implements DashboardInterface, HeaderInterface, InputValidationInterface {
 
@@ -41,9 +46,18 @@ public class LecturerCourseOptions implements DashboardInterface, HeaderInterfac
                 currentCourse.getCourseId() + ", " + currentCourse.getCourseName());
     }
 
-    //displays header and menu options 
-    //switch case for the two options for the current course
-    //each case creates an instance of the respective class passing the currentCourse object 
+    /*
+    The following method:
+    - displays header and menu options 
+    - has a switch case for the two options for the current course
+        - each case creates an instance of the respective class, where
+          we are passing in the currentCourse object
+    
+    The primary logic behind the validateUserInput method remains
+    the same with an outer/inner loop combination for dashboard
+    re-displaying and re-prompting in case of invalid input.
+    Again the user is always given the option to go back or exit.
+     */
     @Override
     public String validateUserInput() {
 
@@ -53,7 +67,7 @@ public class LecturerCourseOptions implements DashboardInterface, HeaderInterfac
 
             this.showHeader();
             this.showMenu();
-            String userInput = scan.nextLine();
+            String userInput = scan.nextLine().trim();
 
             boolean validInput = false;
             while (!validInput) {
@@ -63,19 +77,19 @@ public class LecturerCourseOptions implements DashboardInterface, HeaderInterfac
                 switch (userInput) {
                     case "1":
                         LecturerCourseListStudents courseListStudents = new LecturerCourseListStudents(currentCourse);
-                        courseListStudents.validateUserInput();
+                        courseListStudents.validateUserInput(); //see students
                         FilesManager.readAllLecturers();
                         validInput = true;
                         break;
                     case "2":
                         LecturerEditCourse editCourse = new LecturerEditCourse(currentCourse);
-                        editCourse.validateUserInput();
+                        editCourse.validateUserInput(); // edit the course's details
                         validInput = true;
                         break;
-                    default:
+                    default: //otherwise, re-prompt
                         HeadersUtil.printHeader("Please pick a valid option.");
                         this.showMenu();
-                        userInput = scan.nextLine();
+                        userInput = scan.nextLine().trim();
                 }
             }
         }

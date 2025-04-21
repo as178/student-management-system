@@ -14,7 +14,7 @@ import interfaces.HeaderInterface;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * Dashboard which is executed first when the program is run.
  */
