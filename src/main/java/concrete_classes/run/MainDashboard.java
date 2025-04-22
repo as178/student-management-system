@@ -6,6 +6,7 @@ package concrete_classes.run;
 
 import concrete_classes.authentication.LoginOptionValidator;
 import concrete_classes.authentication.UserAuthentication;
+import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.DashboardUtil;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
@@ -33,6 +34,10 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
     public void run() {
 
         while (true) {
+            //Precaution for reloading users
+            if (FilesManager.currentUsers != null){
+                FilesManager.currentUsers.clear();
+            }
             /* shows the main dashboard header and menu options */
             this.showHeader();
             this.showMenu();

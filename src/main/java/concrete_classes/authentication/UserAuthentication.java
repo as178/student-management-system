@@ -28,13 +28,11 @@ public class UserAuthentication {
     public boolean login() {
 
         Scanner scan = new Scanner(System.in);
-        String usernameId;
-        String password;
 
         while (true) {
             HeadersUtil.printHeader("Please type in your username (ID)", "or select one of the following:");
             System.out.println("b - Go Back (Login Options)\nx - Exit");
-            usernameId = scan.nextLine().trim();
+            String usernameId = scan.nextLine().trim();
             /*
             if userInput = b, return back to the main dashboard
             if userInput = x, exit the program immediately
@@ -45,7 +43,7 @@ public class UserAuthentication {
 
             HeadersUtil.printHeader("Please type in your password", "or select one of the following:");
             System.out.println("b - Go Back (Login Options)\nx - Exit");
-            password = scan.nextLine().trim();
+            String password = scan.nextLine().trim();
             if (NavigationUtil.backOrExit(password)) {
                 return false;
             }
