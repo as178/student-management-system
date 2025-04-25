@@ -8,7 +8,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
-        <exec.mainClass>concrete_classes.StudentManagementSystem</exec.mainClass>
+        <exec.mainClass>concrete_classes.run.StudentManagementSystem</exec.mainClass>
     </properties>
     <build>
         <plugins>
@@ -19,7 +19,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>concrete_classes.StudentManagementSystem</mainClass>
+                            <mainClass>concrete_classes.run.StudentManagementSystem</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
