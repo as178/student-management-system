@@ -1,0 +1,3 @@
+10567001,adminpassword123,Isla,Roberts,21-08-1999,robertsIsla@gmail.com,isla.roberts@aut.ac.nz,0213456789,F,32 Hillcrest Way Greenlane Auckland 1061
+10567002,bravoSecure,Leo,Martinez,03-12-2002,leoZ2002@icloud.com,leo.martinez@aut.ac.nz,0214567890,M,88 Pinewood Dr Mount Roskill Auckland 1041
+10567003,charlieDev,Ava,Kumar,15-04-1998,kumara2@yahoo.com,ava.kumar@aut.ac.nz,0215678901,F,7 Willow Ct Epsom Auckland 1023

@@ -6,7 +6,13 @@ package concrete_classes.other;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ * 
+ * This class has one method that is used everywhere throughout the
+ * program. It wraps given sets of strings into a presentable header,
+ * while also centering the text within the given length of 50.
+ * It provides our program with aesthetic consistency.
+ * 
  */
 public final class HeadersUtil {
 

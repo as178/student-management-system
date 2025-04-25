@@ -6,7 +6,12 @@ package concrete_classes.other;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ * 
+ * This class handles the full shutdown of the program;
+ * prior to shutdown it prints out a message to let the user
+ * know the program will terminate.
+ * 
  */
 public final class ProgramShutdownUtil {
 

@@ -8,10 +8,9 @@ package interfaces;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  * 
- * This is the InputValidation interface, which has the method for
- * validating user input within any dashboard. It is the core of our
- * looping logic and enabling user options.
+ * This is the ExtraDetails interface, which has the method for
+ * showing extra details a user may have attached to them.
  */
-public interface InputValidationInterface {
-    public String validateUserInput();
+public interface ExtraDetailsInterface {
+    public void showExtraDetails();
 }

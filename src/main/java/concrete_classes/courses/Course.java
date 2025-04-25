@@ -14,6 +14,8 @@ package concrete_classes.courses;
  * "public static HashSet<Course> allCourses" in the FilesManager,
  * and thus the "equals" & "hashcode" methods have been overridden
  * to compare courses based on their unique "courseId" identifiers.
+ * When writing the courses, the toString method is used to facilitate
+ * the formatting into "allCourses.txt".
  * 
  */
 public class Course {
@@ -75,6 +77,13 @@ public class Course {
     
     public void setCourseDescription(String newDescription){
         this.courseDescription = newDescription;
+    }
+    
+    @Override
+    public String toString(){
+        return this.courseId + "," + this.courseName + "," + this.courseMajor
+                + "," + this.coursePrerequisite + "," + this.courseEstimatedHours
+                + "," + this.courseLecturer + "," + this.courseDescription;
     }
 
     @Override

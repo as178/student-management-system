@@ -4,17 +4,18 @@
  */
 package concrete_classes.run;
 
+import concrete_classes.authentication.LoginOptionValidator;
 import concrete_classes.authentication.UserAuthentication;
+import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.DashboardUtil;
 import concrete_classes.other.HeadersUtil;
-import concrete_classes.authentication.LoginOptionValidator;
 import concrete_classes.other.NavigationUtil;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * Dashboard which is executed first when the program is run.
  */
@@ -33,6 +34,10 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
     public void run() {
 
         while (true) {
+            //Precaution for reloading users
+            if (FilesManager.currentUsers != null){
+                FilesManager.currentUsers.clear();
+            }
             /* shows the main dashboard header and menu options */
             this.showHeader();
             this.showMenu();
@@ -63,43 +68,6 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
              */
             String finalUserInput = DashboardUtil.displayDashboards(userInput);
             NavigationUtil.checkExit(finalUserInput);
-
-            /*
-            - should we store students in a hashset instead?
-                - no for now
-            
-            If we feel like it later:
-            - should students be able to change names?
-            - should we implement the "confirm your password" feature?
-            
-            Will:
-            - lecturer edit course should have restrictions ==> ValidationUtil methods
-            - rename LecturerCourseInfo to LecturerCourseOptions
-            
-            Angela:
-            - double check some imports (editStudentGrade class)
-            - should lecturers be able to tell students "they have finished a course, sign off grade"?
-            - add faculty extra info into abstract method for lecturer
-            
-            GIT:
-            - commit changes to local fake main [DONE]
-            - check out CUI [DONE]
-            - commit the final changes to fake main after discussion [DONE]
-            
-            - push my local fake main to remote fake main (after checking out CUI)
-            - merge CUI branch to fake main (Will)
-                - resolve conflicts
-            
-            - do final little changes in fake main (^ Will)
-            - commit fake main to main
-            
-            - work on admin
-            
-            OTHER:
-            - generate .txt files
-            - comments
-            
-            */
         }
     }
 }

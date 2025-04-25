@@ -1,40 +1,40 @@
-DATA604,Big Data Technologies,Data Science,DATA501,50,Dr. Alisha Khan,Introduces Hadoop, Spark, and NoSQL data systems.
-DATA605,Data Visualization and Storytelling,Data Science,STAT602,45,Dr. Helen Brooks,Transforms data into compelling visual insights using modern tools.
-DATA606,Machine Learning in Practice,Data Science,COMP607,50,Dr. Ramesh Iyer,Hands-on ML projects using real-world datasets and Python libraries.
-DATA607,Natural Language Processing,Data Science,COMP607,45,Dr. Chloe Zhang,Focuses on text analysis, sentiment detection, and language modeling.
-INFS603,User-Centered Design,Digital Services,DIGI501,40,Dr. Chris Naidoo,Focuses on designing services tailored to user needs and experiences.
-INFS604,Information Systems Strategy,Digital Services,DIGI604,50,Dr. Howard Kim,Aligns information systems with organizational goals and digital growth.
-DIGI610,IT Project Management,Digital Services,None,45,Dr. Monica Cheung,Covers planning, execution, and monitoring of IT-related projects.
-DIGI611,Design Thinking in IT,Digital Services,DIGI501,40,Dr. Nathan Reid,Applies design thinking principles to solve real-world service challenges.
-STAT602,Applied Statistics,Data Science,DATA501,45,Dr. Emma Tarrant,Real-world applications of statistical analysis and visualization.
-COMP610,Human-Computer Interaction,Computer Science,COMP500,40,Dr. Mei Chen,Design and evaluation of user interfaces and human-centric systems.
-DIGI612,Emerging Technologies and Innovation,Digital Services,DIGI604,45,Dr. Samira Abbas,Studies the impact of AI, blockchain, and XR on digital services.
-COMP611,Parallel and Distributed Systems,Computer Science,COMP603,50,Dr. Victor Long,Introduces parallel computing models and distributed architectures.
-SOFT612,Advanced Software Design Patterns,Software Development,SOFT603,50,Dr. Irene Valdez,Focuses on reusable solutions and architectural strategies.
-CYBR601,Principles of Cybersecurity,Networks & Cybersecurity,NETS501,45,Dr. Talia Singh,Covers core security concepts including risk, threats, and controls.
-SOFT611,Software Testing & QA,Software Development,SOFT602,40,Dr. Karl Schmidt,Explores testing strategies including unit, integration, and system testing.
-DATA501,Introduction to Data Science,Data Science,None,35,Dr. Isaac Nartey,Covers tools and basic methods used in data science workflows.
-CYBR604,Cryptography and Network Security,Networks & Cybersecurity,CYBR601,50,Dr. Hannah Zhao,Explores encryption, SSL/TLS, and authentication.
-CYBR605,Security Risk Management,Networks & Cybersecurity,CYBR601,45,Dr. Fiona Clarke,Frameworks and tools for identifying and mitigating cybersecurity risks.
-CYBR606,Digital Forensics,Networks & Cybersecurity,CYBR604,50,Dr. Ava Nichols,Investigates digital crime scenes, recovery techniques, and legal aspects.
-SOFT610,Secure Coding Practices,Software Development,SOFT602,45,Dr. Angela Kim,Covers best practices in writing secure and resilient software.
-SOFT608,Mobile App Development,Software Development,SOFT603,50,Dr. Tom Franklin,Designs and builds apps for Android and iOS using modern tools.
-SOFT605,Version Control and DevOps,Software Development,SOFT501,40,Dr. Priya Desai,Teaches Git, CI/CD pipelines, and automation principles.
-NETS603,Wireless and Mobile Networks,Networks & Cybersecurity,NETS501,40,Dr. Marcus Tao,Examines 4G/5G systems, mobile IP, and security challenges.
-NETS501,Networking Fundamentals,Networks & Cybersecurity,None,40,Dr. Tim Rangi,Introduction to OSI model, protocols, and packet transmission.
-DIGI501,Introduction to Digital Services,Digital Services,None,35,Dr. Sara Wood,Foundations of delivering digital services in modern IT ecosystems.
-NETS606,IoT Network Design,Networks & Cybersecurity,NETS501,40,Dr. Omar Salim,Builds secure, scalable IoT systems and protocols.
-NETS605,Cloud Infrastructure,Networks & Cybersecurity,NETS501,45,Dr. Liam Wong,Covers cloud architecture, virtualization, and secure deployment.
-DIGI606,Service-Oriented Architectures,Digital Services,DIGI604,50,Dr. Benjamin Tan,Explores SOA principles and their application in digital platforms.
-COMP500,Introduction to Computer Science,Computer Science,None,40,Dr. Jane Smith,Foundation concepts in computing including logic and programming basics.
-COMP501,Discrete Structures in Computing,Computer Science,COMP500,45,Dr. Paul Chan,Introduction to discrete math, logic, and set theory in computing.
-DIGI604,Digital Transformation Strategies,Digital Services,DIGI501,45,Dr. Rachel Lim,Study of innovation, agility, and transformation in organizations.
-COMP603,Operating Systems Concepts,Computer Science,COMP601,50,Dr. Oliver Zheng,Covers memory management, processes, and system calls.
-SOFT501,Foundations of Software Development,Software Development,None,40,Dr. Jack Wu,Introduces software development lifecycles and coding basics.
-COMP601,Object-Oriented Programming,Computer Science,COMP500,50,Dr. Emily Huang,Principles of OOP using Java with practical application focus.
-SOFT603,Web Application Development,Software Development,SOFT501,50,Dr. Liam Hart,Develops full-stack applications using HTML, CSS, JS, and frameworks.
-DATA610,Ethics in Data Science,Data Science,None,30,Dr. Morgan Patel,Analyzes data privacy, fairness, and ethical implications.
-SOFT602,Agile Development Techniques,Software Development,SOFT501,45,Dr. Maya Singh,Focuses on Agile, Scrum, and iterative project delivery.
-COMP607,Data Mining and Machine Learning,Data Science,STAT602,50,Dr. Kevin Zhou,Focuses on algorithms like clustering, classification, and regression.
-COMP608,Algorithms and Data Structures II,Computer Science,COMP601,50,Dr. Zain Patel,In-depth study of algorithmic strategies and data organization.
-COMP606,Computer Architecture,Computer Science,COMP500,40,Dr. Nina Lee,Explores CPU design, memory hierarchy, and digital logic.
+DATA604,Big Data Technologies,Data Science,DATA501,150,Dr. Daniel White,Introduces Hadoop, Spark, and NoSQL data systems.
+DATA605,Data Visualization and Storytelling,Data Science,STAT602,145,Dr. Jason Hall,Transforms data into compelling visual insights using modern tools.
+DATA606,Machine Learning in Practice,Data Science,DATA610,150,Dr. Edward Thompson,Hands-on ML projects using real-world datasets and Python libraries.
+DATA607,Natural Language Processing,Data Science,DATA606,145,Dr. Daniel White,Focuses on text analysis, sentiment detection, and language modeling.
+INFS603,User-Centered Design,Digital Services,DIGI501,140,Dr. Linda Martinez,Focuses on designing services tailored to user needs and experiences.
+INFS604,Information Systems Strategy,Digital Services,DIGI604,150,Dr. Christopher Adams,Aligns information systems with organizational goals and digital growth.
+DIGI610,IT Project Management,Digital Services,None,145,Dr. James Lee,Covers planning, execution, and monitoring of IT-related projects.
+DIGI611,Design Thinking in IT,Digital Services,DIGI501,140,Dr. Linda Martinez,Applies design thinking principles to solve real-world service challenges.
+STAT602,Applied Statistics,Data Science,DATA501,145,Dr. Jason Hall,Real-world applications of statistical analysis and visualization.
+COMP610,Human-Computer Interaction,Computer Science,COMP500,140,Dr. Natalie Kaur,Design and evaluation of user interfaces and human-centric systems.
+DIGI612,Emerging Technologies and Innovation,Digital Services,DIGI604,145,Dr. Steven Young,Studies the impact of AI, blockchain, and XR on digital services.
+COMP611,Parallel and Distributed Systems,Computer Science,COMP603,150,Dr. Isabelle Jones,Introduces parallel computing models and distributed architectures.
+SOFT612,Advanced Software Design Patterns,Software Development,SOFT603,150,Dr. Sharon Base,Focuses on reusable solutions and architectural strategies.
+CYBR601,Principles of Cybersecurity,Networks & Cybersecurity,NETS501,145,Dr. Susan Patel,Covers core security concepts including risk, threats, and controls.
+SOFT611,Software Testing & QA,Software Development,SOFT602,140,Dr. Karen Davis,Explores testing strategies including unit, integration, and system testing.
+CYBR604,Cryptography and Network Security,Networks & Cybersecurity,CYBR601,150,Dr. Laura Murphy,Explores encryption, SSL/TLS, and authentication.
+DATA501,Introduction to Data Science,Data Science,None,140,Dr. Richard Nguyen,Covers tools and basic methods used in data science workflows.
+CYBR605,Security Risk Management,Networks & Cybersecurity,CYBR601,145,Dr. Susan Patel,Frameworks and tools for identifying and mitigating cybersecurity risks.
+CYBR606,Digital Forensics,Networks & Cybersecurity,CYBR604,150,Dr. Laura Murphy,Investigates digital crime scenes, recovery techniques, and legal aspects.
+SOFT610,Secure Coding Practices,Software Development,SOFT602,145,Dr. Thomas Brown,Covers best practices in writing secure and resilient software.
+SOFT608,Mobile App Development,Software Development,SOFT603,150,Dr. Amy Clark,Designs and builds apps for Android and iOS using modern tools.
+SOFT605,Version Control and DevOps,Software Development,SOFT501,140,Dr. Sharon Base,Teaches Git, CI/CD pipelines, and automation principles.
+NETS603,Wireless and Mobile Networks,Networks & Cybersecurity,NETS501,140,Dr. Rachel Ng,Examines 4G/5G systems, mobile IP, and security challenges.
+NETS501,Networking Fundamentals,Networks & Cybersecurity,None,140,Dr. Anna Taylor,Introduction to OSI model, protocols, and packet transmission.
+DIGI501,Introduction to Digital Services,Digital Services,None,135,Dr. James Lee,Foundations of delivering digital services in modern IT ecosystems.
+NETS606,IoT Network Design,Networks & Cybersecurity,NETS501,140,Dr. Rachel Ng,Builds secure, scalable IoT systems and protocols.
+NETS605,Cloud Infrastructure,Networks & Cybersecurity,NETS501,145,Dr. Anna Taylor,Covers cloud architecture, virtualization, and secure deployment.
+DIGI606,Service-Oriented Architectures,Digital Services,DIGI604,150,Dr. Christopher Adams,Explores SOA principles and their application in digital platforms.
+COMP500,Introduction to Computer Science,Computer Science,None,140,Dr. Melissa Williams,Foundation concepts in computing including logic and programming basics.
+COMP501,Discrete Structures in Computing,Computer Science,COMP500,145,Dr. Brian Walker,Introduction to discrete math, logic, and set theory in computing.
+DIGI604,Digital Transformation Strategies,Digital Services,DIGI501,145,Dr. Steven Young,Study of innovation, agility, and transformation in organizations.
+COMP603,Operating Systems Concepts,Computer Science,COMP601,145,Dr. Isabelle Jones,Covers memory management, processes, and system calls.
+SOFT501,Foundations of Software Development,Software Development,None,140,Dr. Amy Clark,Introduces software development lifecycles and coding basics.
+COMP601,Object-Oriented Programming,Computer Science,COMP500,150,Dr. Natalie Kaur,Principles of OOP using Java with practical application focus.
+SOFT603,Web Application Development,Software Development,SOFT501,150,Dr. Karen Davis,Develops full-stack applications using HTML, CSS, JS, and frameworks.
+DATA610,Ethics in Data Science,Data Science,None,130,Dr. Richard Nguyen,Analyzes data privacy, fairness, and ethical implications.
+SOFT602,Agile Development Techniques,Software Development,SOFT501,145,Dr. Thomas Brown,Focuses on Agile, Scrum, and iterative project delivery.
+COMP607,Data Mining and Machine Learning,Data Science,STAT602,150,Dr. Edward Thompson,Focuses on algorithms like clustering, classification, and regression.
+COMP608,Algorithms and Data Structures II,Computer Science,COMP601,150,Dr. Brian Walker,In-depth study of algorithmic strategies and data organization.
+COMP606,Computer Architecture,Computer Science,COMP500,140,Dr. Melissa Williams,Explores CPU design, memory hierarchy, and digital logic.

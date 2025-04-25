@@ -6,10 +6,10 @@ package interfaces;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
  * 
  * This is the Dashboard interface, which has the method for
- * showing the CUI within any dashboard.
+ * showing the CUI/menu within any dashboard.
  */
 public interface DashboardInterface {
     public void showMenu();

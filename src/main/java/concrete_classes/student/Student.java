@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package concrete_classes.students;
+package concrete_classes.student;
 
 import abstract_classes.User;
 import concrete_classes.file_input_output.FilesManager;
@@ -11,7 +11,12 @@ import java.util.HashMap;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * The Student class extends User and overrides the toString method which is
+ * later on used within the FilesManager class. The getUsersPath method is
+ * overriden to return the allStudents.txt file.
+ *
  */
 public class Student extends User {
 
@@ -31,6 +36,11 @@ public class Student extends User {
         return this.major;
     }
 
+    /*
+    Calculates the student's GPA based on the grades
+    they have in their enrolledCourses and previousCourses
+    hashmaps.
+     */
     public float getGPA() {
         float gradePoints = 0;
         int numberOfCourses = 0;
@@ -63,8 +73,8 @@ public class Student extends User {
     public HashMap<String, Float> getPreviousCourses() {
         return this.previousCourses;
     }
-    
-    public void setMajor(String newMajor){
+
+    public void setMajor(String newMajor) {
         this.major = newMajor;
     }
 
@@ -74,7 +84,7 @@ public class Student extends User {
                 + dateOfBirth + "," + personalEmail + "," + uniEmail + ","
                 + phoneNumber + "," + gender + "," + address + "," + major;
     }
-    
+
     @Override
     public String getUsersPath() {
         return FilesManager.allStudentsFile;

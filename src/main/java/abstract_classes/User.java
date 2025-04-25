@@ -40,6 +40,10 @@ public abstract class User {
         this.address = address;
     }
 
+    /*
+    An abstract method to be overriden by every user
+    for providing the path to their 'allUsers' file.
+    */
     public abstract String getUsersPath();
     
     public int getId() {

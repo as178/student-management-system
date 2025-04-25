@@ -6,7 +6,7 @@ package concrete_classes.run;
 
 /**
  *
- * @author Angela Saric (24237573)
+ * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * Main method; runs the program.
  */

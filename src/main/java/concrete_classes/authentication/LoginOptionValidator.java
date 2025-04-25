@@ -32,7 +32,7 @@ public class LoginOptionValidator implements InputValidationInterface {
     public String validateUserInput() {
         
         Scanner scan = new Scanner(System.in);
-        String userInput = scan.nextLine();
+        String userInput = scan.nextLine().trim();
 
         while (true) {
             NavigationUtil.checkExit(userInput);
@@ -44,12 +44,12 @@ public class LoginOptionValidator implements InputValidationInterface {
                     FilesManager.readAllLecturers();
                     return userInput;
                 case "3":
-                    //FilesManager.readAllAdmins();
-                    //return userInput;
+                    FilesManager.readAllAdmins();
+                    return userInput;
                 default:
                     HeadersUtil.printHeader("Please pick a valid option.");
                     StudentManagementSystem.mainDashboard.showMenu();
-                    userInput = scan.nextLine();
+                    userInput = scan.nextLine().trim();
             }
         }
     }
