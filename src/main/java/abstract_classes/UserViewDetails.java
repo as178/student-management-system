@@ -59,7 +59,7 @@ public abstract class UserViewDetails implements DashboardInterface, HeaderInter
         System.out.println("Gender: " + (currentUser.getGender() == 'F' ? "Female" : "Male"));
         System.out.println("Address: " + currentUser.getAddress());
         HeadersUtil.printHeader("Please choose one of the options below:");
-        System.out.println("1 - Modify Your Details\nb - Go Back (Lecturer Dashboard)\nx - Exit");
+        System.out.println("1 - Modify Your Details\nb - Go Back (User Dashboard)\nx - Exit");
     }
 
     /*

@@ -1,5 +1,5 @@
 24229618,mySchoolPass,John,Doe,13-06-1999,driftshot88@yahoo.com,john.doe@aut.ac.nz,0211234567,M,123 Main St Mount Albert Auckland 1025,Computer Science
-24237573,myPassStudent,Jane,Smith,20-09-2000,icecloud47@gmail.com,jane.smith@aut.ac.nz,+64213456789,F,40 Smith Rd Epsom Auckland 1051,Data Science
+24237573,myPassStudent,Jane,Smith,20-09-2000,icecloud47@gmail.com,jane.smith@aut.ac.nz,+64213456789,F,40 Smith Rd Epsom Auckland 1051,Computer Science
 23123456,omegaFlash91,Alan,Brown,30-11-2001,stormfire99@icloud.com,alan.brown@aut.ac.nz,0203456789,M,789 Pine St Sandringham Auckland 1025,Networks & Cybersecurity
 21478523,crimsonLeaf7,Emily,White,11-02-2000,berryjuice7@yahoo.com,emily.white@aut.ac.nz,0229876543,F,321 Birch St Northcote Auckland 0627,Data Science
 22245678,moonriseStar22,Michael,Green,05-12-1998,foxtrack92@gmail.com,michael.green@aut.ac.nz,+64213456712,M,654 Elm St Mount Eden Auckland 1024,Digital Services
