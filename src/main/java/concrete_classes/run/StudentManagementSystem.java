@@ -15,6 +15,6 @@ public class StudentManagementSystem {
     public static MainDashboard mainDashboard = new MainDashboard();
     
     public static void main(String[] args) {
-        mainDashboard.run();
+        //mainDashboard.run();
     }
 }
