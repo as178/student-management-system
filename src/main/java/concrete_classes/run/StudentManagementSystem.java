@@ -4,6 +4,8 @@
  */
 package concrete_classes.run;
 
+import model.DatabaseManager;
+
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
@@ -16,5 +18,7 @@ public class StudentManagementSystem {
     
     public static void main(String[] args) {
         //mainDashboard.run();
+        DatabaseManager databaseManager = new DatabaseManager();
+        
     }
 }

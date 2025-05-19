@@ -4,6 +4,7 @@
  */
 package model;
 
+import concrete_classes.other.PopUpUtil;
 import concrete_classes.other.ProgramShutdownUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,27 +14,29 @@ import java.sql.SQLException;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * Database manager class which initializes the database and makes the tables,
- * as well as making sure that none of the tables already exist.
+ * Database manager class which initializes the database and controls the
+ * connection status.
  *
  */
 public final class DatabaseManager {
 
     //Statement to create the database + connection 
     private static final String url = "jdbc:derby:StudentManagementSystemDB; create=true";
-    private static Connection connection;
+    private Connection connection;
 
     /*
     Constructor to initalise the database and its tables
     when called. Depending on the initialisation status of the
     database, the program will either proceed to make tables
-    or stop in order to prevent further errors from occuring.
+    and populate the tables or stop in order to prevent further
+    errors from occuring.
      */
     public DatabaseManager() {
 
-        if (initialiseConnection()) {
+        if (this.initialiseConnection()) {
             //proceed with creating the tables
-            //createTables();
+            DatabaseTablesCreation tablesCreation = new DatabaseTablesCreation(this.connection);
+            tablesCreation.createTables();
         } else {
             //shut down program
             ProgramShutdownUtil.shutdown();
@@ -44,13 +47,12 @@ public final class DatabaseManager {
     Initialises the connection to the databases, returning
     a boolean to confirm state of the initilisation.
      */
-    public static boolean initialiseConnection() {
+    public boolean initialiseConnection() {
         try {
             connection = DriverManager.getConnection(url);
-            System.out.println("Initial connection to database has successfully established.");
             return true;
         } catch (SQLException ex) {
-            System.out.println("Initial connection to database has failed to establish.");
+            PopUpUtil.displayError("Initial connection to database has failed to establish.");
             return false;
         }
     }
@@ -59,13 +61,13 @@ public final class DatabaseManager {
     Closes the connection to the database, or otherwise lets
     the user know the connection failed to close.
      */
-    public static void closeConnection() {
+    public void closeConnection() {
         if (connection != null) {
             try {
                 connection.close();
-                System.out.println("The connection to the database has closed successfully.");
+                PopUpUtil.displayInfo("The connection to the database has closed successfully.");
             } catch (SQLException ex) {
-                System.out.println("The connection to the database has failed to close.");
+                PopUpUtil.displayError("The connection to the database has failed to close.");
             }
         }
     }

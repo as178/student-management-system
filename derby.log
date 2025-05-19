@@ -1,0 +1,20 @@
+Tue May 20 02:55:36 NZST 2025 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Tue May 20 02:55:36 NZST 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0196-e90b-067c-ffff82b23bcd 
+on database directory C:\Users\shado\OneDrive - AUT University\COMP603 - Program Design and Construction\1 - Assignments\student-management-system\StudentManagementSystemDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
+Loaded from file:/C:/Users/shado/OneDrive%20-%20AUT%20University/COMP603%20-%20Program%20Design%20and%20Construction/Week%208%20-%20Java%20Database%20Connectivity%20(JDBC)/db-derby-10.14.2.0-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=21.0.5+9-LTS-239
+user.dir=C:\Users\shado\OneDrive - AUT University\COMP603 - Program Design and Construction\Week 8 - Java Database Connectivity (JDBC)\db-derby-10.14.2.0-bin
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\shado\OneDrive - AUT University\COMP603 - Program Design and Construction\1 - Assignments\student-management-system
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Tue May 20 02:56:25 NZST 2025: Shutting down Derby engine
+----------------------------------------------------------------
+Tue May 20 02:56:25 NZST 2025:
+Shutting down instance a816c00e-0196-e90b-067c-ffff82b23bcd on database directory C:\Users\shado\OneDrive - AUT University\COMP603 - Program Design and Construction\1 - Assignments\student-management-system\StudentManagementSystemDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
+----------------------------------------------------------------
