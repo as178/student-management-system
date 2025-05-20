@@ -37,4 +37,4 @@ DATA610,Ethics in Data Science,Data Science,None,130,Dr. Richard Nguyen,Analyzes
 SOFT602,Agile Development Techniques,Software Development,SOFT501,145,Dr. Thomas Brown,Focuses on Agile, Scrum, and iterative project delivery.
 COMP607,Data Mining and Machine Learning,Data Science,STAT602,150,Dr. Edward Thompson,Focuses on algorithms like clustering, classification, and regression.
 COMP608,Algorithms and Data Structures II,Computer Science,COMP601,150,Dr. Brian Walker,In-depth study of algorithmic strategies and data organization.
-COMP606,Computer Architecture,Computer Science,COMP500,140,Dr. Melissa Williams,Explores CPU design, memory hierarchy, and digital logic.
+COMP606,Computer Architecture,Computer Science,COMP500,140,Dr. Melissa Williams,Covers CPU design, memory hierarchy, and logic circuits.

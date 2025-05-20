@@ -20,14 +20,11 @@ public final class ValidationUtil {
     User passwords must:
     - not be empty
     - be between 8 and 30 chars
-    - not contain commas or periods
      */
     public static boolean checkPassword(String password) {
         return !password.isBlank()
                 && password.length() >= 8
-                && password.length() <= 30
-                && !password.contains(",")
-                && !password.contains(".");
+                && password.length() <= 30;
     }
 
     public static boolean checkEmail(String email) {
