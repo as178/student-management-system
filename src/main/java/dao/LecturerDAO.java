@@ -2,19 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package concrete_classes.run;
+package dao;
 
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
- *
- * Main method; runs the program.
+ * 
+ * This Data Access Object is responsible for any Lecturer related
+ * queries. It is derived from out original FilesManager class.
+ * 
  */
-public class StudentManagementSystem {
-
-    public static MainDashboard mainDashboard = new MainDashboard();
+public class LecturerDAO {
     
-    public static void main(String[] args) {
-        mainDashboard.run();
-    }
+    
+    
 }

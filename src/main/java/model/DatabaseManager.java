@@ -65,7 +65,6 @@ public final class DatabaseManager {
         if (connection != null) {
             try {
                 connection.close();
-                PopUpUtil.displayInfo("The connection to the database has closed successfully.");
             } catch (SQLException ex) {
                 PopUpUtil.displayError("The connection to the database has failed to close.");
             }

@@ -12,6 +12,7 @@ import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
+import model.DatabaseManager;
 
 /**
  *
@@ -33,41 +34,42 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
 
     public void run() {
 
-        while (true) {
-            //Precaution for reloading users
-            if (FilesManager.currentUsers != null){
-                FilesManager.currentUsers.clear();
-            }
-            /* shows the main dashboard header and menu options */
-            this.showHeader();
-            this.showMenu();
-
-            /*
-            validates main dashboard user input
-            - if user input is invalid ==> prompted again
-            - if input is valid ==> return the user type and load up the users hashmap
-                relative to the chosen user type
-            - user can choose to exit anytime
-             */
-            LoginOptionValidator loginOption = new LoginOptionValidator();
-            String userInput = loginOption.validateUserInput(); //"1", "2", etc. . .
-
-            /*
-            authenticates user by asking them for a username and password, and
-            prompts user with helpful messages if invalid input is given
-            - user can choose to exit or go back to the main dashboard screen
-             */
-            UserAuthentication userAuthentication = new UserAuthentication();
-            if (!userAuthentication.login()) { //if user wants to go back, restart the loop
-                continue;
-            }
-
-            /*
-            based on user choice, call the appropriate dashboard and display their options. . .
-            (this is where the logic gets separated depending on the chosen dashboards)
-             */
-            String finalUserInput = DashboardUtil.displayDashboards(userInput);
-            NavigationUtil.checkExit(finalUserInput);
-        }
+//        while (true) {
+//            //Precaution for reloading users
+//            if (FilesManager.currentUsers != null){
+//                FilesManager.currentUsers.clear();
+//            }
+//            /* shows the main dashboard header and menu options */
+//            this.showHeader();
+//            this.showMenu();
+//
+//            /*
+//            validates main dashboard user input
+//            - if user input is invalid ==> prompted again
+//            - if input is valid ==> return the user type and load up the users hashmap
+//                relative to the chosen user type
+//            - user can choose to exit anytime
+//             */
+//            LoginOptionValidator loginOption = new LoginOptionValidator();
+//            String userInput = loginOption.validateUserInput(); //"1", "2", etc. . .
+//
+//            /*
+//            authenticates user by asking them for a username and password, and
+//            prompts user with helpful messages if invalid input is given
+//            - user can choose to exit or go back to the main dashboard screen
+//             */
+//            UserAuthentication userAuthentication = new UserAuthentication();
+//            if (!userAuthentication.login()) { //if user wants to go back, restart the loop
+//                continue;
+//            }
+//
+//            /*
+//            based on user choice, call the appropriate dashboard and display their options. . .
+//            (this is where the logic gets separated depending on the chosen dashboards)
+//             */
+//            String finalUserInput = DashboardUtil.displayDashboards(userInput);
+//            NavigationUtil.checkExit(finalUserInput);
+//        }
+        DatabaseManager databaseManager = new DatabaseManager();
     }
 }
