@@ -34,6 +34,8 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
 
     public void run() {
 
+        DatabaseManager databaseManager = new DatabaseManager();
+        
 //        while (true) {
 //            //Precaution for reloading users
 //            if (FilesManager.currentUsers != null){
@@ -70,6 +72,6 @@ public class MainDashboard implements DashboardInterface, HeaderInterface {
 //            String finalUserInput = DashboardUtil.displayDashboards(userInput);
 //            NavigationUtil.checkExit(finalUserInput);
 //        }
-        DatabaseManager databaseManager = new DatabaseManager();
+//        
     }
 }

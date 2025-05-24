@@ -1,20 +1,13 @@
-Tue May 20 22:49:03 NZST 2025 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Tue May 20 22:49:04 NZST 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0196-ed4f-aba7-ffff82b23bcd 
+Sun May 25 01:18:35 NZST 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0197-0272-0140-000017799170 
 on database directory C:\Users\shado\OneDrive - AUT University\COMP603 - Program Design and Construction\1 - Assignments\student-management-system\StudentManagementSystemDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
-Loaded from file:/C:/Users/shado/OneDrive%20-%20AUT%20University/COMP603%20-%20Program%20Design%20and%20Construction/Week%208%20-%20Java%20Database%20Connectivity%20(JDBC)/db-derby-10.14.2.0-bin/lib/derby.jar
+Loaded from file:/C:/Users/shado/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=21.0.5+9-LTS-239
-user.dir=C:\Users\shado\OneDrive - AUT University\COMP603 - Program Design and Construction\Week 8 - Java Database Connectivity (JDBC)\db-derby-10.14.2.0-bin
+user.dir=C:\Users\shado\OneDrive - AUT University\COMP603 - Program Design and Construction\1 - Assignments\student-management-system
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
-derby.system.home=C:\Users\shado\OneDrive - AUT University\COMP603 - Program Design and Construction\1 - Assignments\student-management-system
+derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Tue May 20 22:52:54 NZST 2025: Shutting down Derby engine
-----------------------------------------------------------------
-Tue May 20 22:52:55 NZST 2025:
-Shutting down instance a816c00e-0196-ed4f-aba7-ffff82b23bcd on database directory C:\Users\shado\OneDrive - AUT University\COMP603 - Program Design and Construction\1 - Assignments\student-management-system\StudentManagementSystemDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
-----------------------------------------------------------------

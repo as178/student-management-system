@@ -22,7 +22,7 @@ public final class DatabaseManager {
 
     //Statement to create the database + connection 
     private static final String url = "jdbc:derby:StudentManagementSystemDB; create=true";
-    private Connection connection;
+    private static Connection connection;
 
     /*
     Constructor to initalise the database and its tables
@@ -44,10 +44,17 @@ public final class DatabaseManager {
     }
 
     /*
+    Returns current connection for consistency and maintenance.
+    */
+    public static Connection getCurrentConnection(){
+        return DatabaseManager.connection;
+    }
+    
+    /*
     Initialises the connection to the databases, returning
     a boolean to confirm state of the initilisation.
      */
-    public boolean initialiseConnection() {
+    public static boolean initialiseConnection() {
         try {
             connection = DriverManager.getConnection(url);
             return true;
@@ -61,7 +68,7 @@ public final class DatabaseManager {
     Closes the connection to the database, or otherwise lets
     the user know the connection failed to close.
      */
-    public void closeConnection() {
+    public static void closeConnection() {
         if (connection != null) {
             try {
                 connection.close();
