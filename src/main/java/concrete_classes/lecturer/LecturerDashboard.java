@@ -66,9 +66,9 @@ public class LecturerDashboard implements InputValidationInterface, DashboardInt
 //                }
                 switch (userInput) {
                     case "1":
-                        LecturerViewDetails viewDetails = new LecturerViewDetails(currentLecturer);
-                        //displays the lecturer's personal details
-                        viewDetails.validateUserInput();
+//                        LecturerViewDetails viewDetails = new LecturerViewDetails(currentLecturer);
+//                        //displays the lecturer's personal details
+//                        viewDetails.validateUserInput();
                         validInput = true;
                         break;
                     case "2":

@@ -4,7 +4,6 @@
  */
 package view;
 
-import concrete_classes.other.GUIConfigUtil;
 import controller.LoginController;
 import javax.swing.*;
 import java.awt.*;
@@ -23,9 +22,6 @@ public class LoginView extends JFrame {
 
     public LoginView(String roleCommand) {
         setTitle("Student Management System: Login");
-        setSize(GUIConfigUtil.width, GUIConfigUtil.height);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
 
         //Initial styling for main panel
         JPanel mainPanel = new JPanel();

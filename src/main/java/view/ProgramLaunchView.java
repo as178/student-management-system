@@ -4,7 +4,6 @@
  */
 package view;
 
-import concrete_classes.other.GUIConfigUtil;
 import controller.ProgramLaunchController;
 import javax.swing.*;
 import java.awt.*;
@@ -18,11 +17,7 @@ import java.awt.*;
 public class ProgramLaunchView extends JFrame {
 
     public ProgramLaunchView() {
-
         setTitle("Student Management System");
-        setSize(GUIConfigUtil.width, GUIConfigUtil.height);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
 
         //6 rows for 2 labels & 4 buttons, with spacing
         JPanel mainPanel = new JPanel(new GridLayout(6, 1, 20, 20));
@@ -31,7 +26,7 @@ public class ProgramLaunchView extends JFrame {
         //Labels
         JLabel textLabel = new JLabel("Welcome to the Student Management System!");
         JLabel textLabel2 = new JLabel("Please pick an option below:");
-        textLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        textLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
         textLabel2.setFont(new Font("SansSerif", Font.PLAIN, 16));
         textLabel2.setHorizontalAlignment(SwingConstants.CENTER);

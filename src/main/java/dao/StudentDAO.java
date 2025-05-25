@@ -95,6 +95,8 @@ public class StudentDAO implements UserDAOInterface<User> {
 
         } catch (SQLException ex) {
             PopUpUtil.displayError("An error occurred while updating Student.");
+        } finally {
+            PopUpUtil.displayInfo("Details updated successfully!");
         }
     }
 

@@ -5,7 +5,6 @@
 package controller.student_controllers;
 
 import concrete_classes.other.NavigationUtil;
-import concrete_classes.other.ProgramShutdownUtil;
 import concrete_classes.student.Student;
 import controller.UserController;
 import java.awt.event.ActionEvent;
@@ -13,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import view.LoginView;
 import view.StudentDashboardView;
+import view.StudentViewDetailsView;
 
 /**
  *
@@ -59,7 +59,7 @@ public class StudentDashboardController implements ActionListener {
 
         switch (command) {
             case "1": //View My Details
-                //NavigationUtil.newFrame(new StudentViewDetailsView(student));
+                NavigationUtil.newFrame(new StudentViewDetailsView(currentStudent));
                 break;
             case "2": //View My Academic Details
                 //NavigationUtil.newFrame(new StudentAcademicDetailsView(student));

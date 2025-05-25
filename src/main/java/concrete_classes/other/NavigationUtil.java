@@ -19,16 +19,22 @@ public final class NavigationUtil {
 
     private static JFrame currentFrame;
 
-    private NavigationUtil() {}
+    private NavigationUtil() {
+    }
 
     public static void initialFrame(JFrame initialFrame) {
         currentFrame = initialFrame;
+        currentFrame.setSize(700, 550);
+        currentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        currentFrame.setLocationRelativeTo(null);
         currentFrame.setVisible(true);
     }
 
     public static void newFrame(JFrame newFrame) {
         currentFrame.dispose();
         currentFrame = newFrame;
+        currentFrame.setSize(700, 550);
+        currentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         currentFrame.setLocationRelativeTo(null);
         currentFrame.setVisible(true);
     }

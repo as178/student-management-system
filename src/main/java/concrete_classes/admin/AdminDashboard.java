@@ -60,9 +60,9 @@ public class AdminDashboard implements InputValidationInterface, DashboardInterf
 //                }
                 switch (userInput) {
                     case "1": 
-                        AdminViewDetails viewDetails = new AdminViewDetails(currentAdmin);
-                        //triggers the personal details viewing dashboard
-                        viewDetails.validateUserInput(); 
+//                        AdminViewDetails viewDetails = new AdminViewDetails(currentAdmin);
+//                        //triggers the personal details viewing dashboard
+//                        viewDetails.validateUserInput(); 
                         validInput = true; //confirms valid input, breaks the inner loop
                         break;
                     case "2":

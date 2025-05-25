@@ -58,8 +58,8 @@ public class StudentDashboard implements InputValidationInterface, DashboardInte
 //                }
                 switch (userInput) {
                     case "1":
-                        StudentViewDetails viewDetails = new StudentViewDetails(currentStudent);
-                        viewDetails.validateUserInput(); //allows students to see their personal details and further options
+//                        StudentViewDetails viewDetails = new StudentViewDetails(currentStudent);
+//                        viewDetails.validateUserInput(); //allows students to see their personal details and further options
                         validInput = true;
                         break;
                     case "2":

@@ -4,7 +4,6 @@
  */
 package view;
 
-import concrete_classes.other.GUIConfigUtil;
 import concrete_classes.student.Student;
 import controller.student_controllers.StudentDashboardController;
 import javax.swing.*;
@@ -18,16 +17,10 @@ import java.awt.*;
  */
 public class StudentDashboardView extends JFrame {
 
-    private JButton viewDetailsButton;
-    private JButton viewAcademicButton;
-    private JButton logoutButton;
-    private JButton exitButton;
+    private JButton viewDetailsButton, viewAcademicButton, logoutButton, exitButton;
 
     public StudentDashboardView(Student currentStudent) {
         setTitle("Student Management System: Student Dashboard");
-        setSize(GUIConfigUtil.width, GUIConfigUtil.height);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
 
         JLabel welcomeLabel = new JLabel("Welcome to the Student Dashboard,");
         JLabel nameLabel = new JLabel(currentStudent.getFirstName() + " " + currentStudent.getLastName() + "!");
@@ -70,7 +63,7 @@ public class StudentDashboardView extends JFrame {
         (respective controller).
          */
         StudentDashboardController controller = new StudentDashboardController(this, currentStudent);
-        viewDetailsButton.setActionCommand("1"); 
+        viewDetailsButton.setActionCommand("1");
         viewAcademicButton.setActionCommand("2");
         logoutButton.setActionCommand("b");
         exitButton.setActionCommand("x");

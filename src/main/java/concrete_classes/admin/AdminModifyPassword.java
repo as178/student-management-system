@@ -5,9 +5,7 @@
 package concrete_classes.admin;
 
 import abstract_classes.User;
-import abstract_classes.UserModifyDetails;
 import concrete_classes.other.HeadersUtil;
-import concrete_classes.other.NavigationUtil;
 import java.util.Scanner;
 
 /**
@@ -21,32 +19,31 @@ import java.util.Scanner;
  * password and see their information.
  *
  */
-public class AdminModifyPassword extends UserModifyDetails {
+public class AdminModifyPassword {
 
     public AdminModifyPassword(User targetUser) {
-        super(targetUser);
+        //super(targetUser);
     }
 
-    @Override
     public void showHeader() {
         HeadersUtil.printHeader("Modify User's Password",
                 "Please see further options below.");
     }
 
     //show information about target user
-    @Override
-    public void showMenu() {
-        System.out.println("ID: " + currentUser.getId());
-        System.out.println("Name: " + currentUser.getFirstName() + " " + currentUser.getLastName());
-        System.out.println("Date of Birth: " + currentUser.getDateOfBirth());
-        System.out.println("Personal Email: " + currentUser.getPersonalEmail());
-        System.out.println("University Email: " + currentUser.getUniEmail());
-        System.out.println("Phone Number: " + currentUser.getPhoneNumber());
-        System.out.println("Gender: " + (currentUser.getGender() == 'F' ? "Female" : "Male"));
-        System.out.println("Address: " + currentUser.getAddress());
-        HeadersUtil.printHeader("Please pick one of the following.");
-        System.out.println("1 - Modify Password\nb - Go Back (Load Another User)\nx - Exit");
-    }
+//    @Override
+//    public void showMenu() {
+//        System.out.println("ID: " + currentUser.getId());
+//        System.out.println("Name: " + currentUser.getFirstName() + " " + currentUser.getLastName());
+//        System.out.println("Date of Birth: " + currentUser.getDateOfBirth());
+//        System.out.println("Personal Email: " + currentUser.getPersonalEmail());
+//        System.out.println("University Email: " + currentUser.getUniEmail());
+//        System.out.println("Phone Number: " + currentUser.getPhoneNumber());
+//        System.out.println("Gender: " + (currentUser.getGender() == 'F' ? "Female" : "Male"));
+//        System.out.println("Address: " + currentUser.getAddress());
+//        HeadersUtil.printHeader("Please pick one of the following.");
+//        System.out.println("1 - Modify Password\nb - Go Back (Load Another User)\nx - Exit");
+//    }
 
     /*
     Within this class we override the majority of the methods within
@@ -59,7 +56,6 @@ public class AdminModifyPassword extends UserModifyDetails {
     re-displaying and re-prompting in case of invalid input.
     Again the user is always given the option to go back or exit.
      */
-    @Override
     public String validateUserInput() {
 
         Scanner scan = new Scanner(System.in);
@@ -68,7 +64,7 @@ public class AdminModifyPassword extends UserModifyDetails {
         while (true) {
 
             this.showHeader();
-            this.showMenu();
+            //this.showMenu();
             String userInput = scan.nextLine().trim();
 
             //inner loop
@@ -79,14 +75,14 @@ public class AdminModifyPassword extends UserModifyDetails {
 //                }
                 switch (userInput) {
                     case "1": //only valid choice, triggers dashboard to modify user's password
-                        if (super.modifyPassword(scan).equalsIgnoreCase("b")) {
-                            continue outerLoop; //restart the loop if user wishes to go back
-                        }
+//                        if (super.modifyPassword(scan).equalsIgnoreCase("b")) {
+//                            continue outerLoop; //restart the loop if user wishes to go back
+//                        }
                         validInput = true; //confirms valid input
                         break;
                     default: //otherwise, re-prompt
                         HeadersUtil.printHeader("Invalid option.");
-                        this.showMenu();
+                        //this.showMenu();
                         userInput = scan.nextLine().trim();
                 }
             }
