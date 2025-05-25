@@ -4,9 +4,8 @@
  */
 package abstract_classes;
 
-import concrete_classes.lecturer.Lecturer;
 import concrete_classes.admin.Admin;
-import view.*;
+import concrete_classes.lecturer.Lecturer;
 import concrete_classes.other.NavigationUtil;
 import concrete_classes.other.PopUpUtil;
 import concrete_classes.other.ValidationUtil;
@@ -15,10 +14,11 @@ import controller.UserController;
 import dao.AdminDAO;
 import dao.LecturerDAO;
 import dao.StudentDAO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+import view.*;
 
 /**
  *
@@ -149,7 +149,7 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
                     } else if (currentUser instanceof Lecturer) {
                         //NavigationUtil.newFrame(new LecturerDashboardView((Lecturer) currentUser));
                     } else if (currentUser instanceof Admin) {
-                        //NavigationUtil.newFrame(new AdminDashboardView((Admin) currentUser));
+                        NavigationUtil.newFrame(new AdminDashboardView((Admin) currentUser));
                     }
                 }
             }
