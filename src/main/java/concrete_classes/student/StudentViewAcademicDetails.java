@@ -80,9 +80,9 @@ public class StudentViewAcademicDetails implements DashboardInterface, HeaderInt
 
             boolean validInput = false;
             while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
 
                 switch (userInput) {
                     case "1":

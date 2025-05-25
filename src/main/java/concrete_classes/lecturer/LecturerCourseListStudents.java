@@ -109,9 +109,9 @@ public class LecturerCourseListStudents implements DashboardInterface, HeaderInt
 
             boolean validInput = false;
             while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
                 try {
                     Integer studentID = Integer.valueOf(userInput);
 

@@ -4,6 +4,10 @@
  */
 package concrete_classes.run;
 
+import concrete_classes.other.NavigationUtil;
+import model.DatabaseManager;
+import view.ProgramLaunchView;
+
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
@@ -12,9 +16,9 @@ package concrete_classes.run;
  */
 public class StudentManagementSystem {
 
-    public static MainDashboard mainDashboard = new MainDashboard();
-    
     public static void main(String[] args) {
-        mainDashboard.run();
+        DatabaseManager databaseManager = new DatabaseManager();
+        ProgramLaunchView programLaunchView = new ProgramLaunchView();
+        NavigationUtil.initialFrame(programLaunchView); 
     }
 }

@@ -74,9 +74,9 @@ public class AdminModifyPassword extends UserModifyDetails {
             //inner loop
             boolean validInput = false;
             while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
                 switch (userInput) {
                     case "1": //only valid choice, triggers dashboard to modify user's password
                         if (super.modifyPassword(scan).equalsIgnoreCase("b")) {

@@ -82,12 +82,12 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
 
             String userInput = scan.nextLine().trim();
 
-            //save currentCourse before going back
-            if (NavigationUtil.backOrExit(userInput)) {
-                FilesManager.allCourses.add(currentCourse);
-                FilesManager.writeAllCourses();
-                return "b";
-            }
+//            //save currentCourse before going back
+//            if (NavigationUtil.backOrExit(userInput)) {
+//                FilesManager.allCourses.add(currentCourse);
+//                FilesManager.writeAllCourses();
+//                return "b";
+//            }
 
             boolean validInput = false;
             //inner loop
@@ -97,9 +97,9 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         HeadersUtil.printHeader("Please enter the new course name:");
                         System.out.println("b - Go Back (Edit Course)\nx - Exit");
                         String nameInput = scan.nextLine();
-                        if (NavigationUtil.backOrExit(nameInput)) {
-                            continue outerLoop;
-                        }
+//                        if (NavigationUtil.backOrExit(nameInput)) {
+//                            continue outerLoop;
+//                        }
 
                         if (ValidationUtil.checkIntegerRange(nameInput.length(), 4, 46)) {
                             currentCourse.setCourseName(nameInput);
@@ -116,9 +116,9 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                             HeadersUtil.printHeader("Please enter the new estimated hours:");
                             System.out.println("b - Go Back (Edit Course)\nx - Exit");
                             String hoursInput = scan.nextLine();
-                            if (NavigationUtil.backOrExit(hoursInput)) {
-                                continue outerLoop;
-                            }
+//                            if (NavigationUtil.backOrExit(hoursInput)) {
+//                                continue outerLoop;
+//                            }
                             if (ValidationUtil.checkIntegerRange(hoursInput, 1, 150)) {
                                 currentCourse.setCourseEstimatedHours(Integer.parseInt(hoursInput));
                                 HeadersUtil.printHeader("Estimated hours saved successfully!");
@@ -135,9 +135,9 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         System.out.println("b - Go Back (Edit Course)\nx - Exit");
 
                         String descInput = scan.nextLine();
-                        if (NavigationUtil.backOrExit(descInput)) {
-                            continue outerLoop;
-                        }
+//                        if (NavigationUtil.backOrExit(descInput)) {
+//                            continue outerLoop;
+//                        }
 
                         if (ValidationUtil.checkIntegerRange(descInput.length(), 5, 70)) {
                             currentCourse.setCourseDescription(descInput);
@@ -155,9 +155,9 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
                         HeadersUtil.printHeader("Invalid option.");
                         this.showMenu();
                         userInput = scan.nextLine().trim();
-                        if (NavigationUtil.backOrExit(userInput)) {
-                            return "b";
-                        }
+//                        if (NavigationUtil.backOrExit(userInput)) {
+//                            return "b";
+//                        }
                 }
             }
             //save currentCourse within the hashset

@@ -86,10 +86,10 @@ public class StudentModifyMajor implements DashboardInterface, HeaderInterface, 
             this.showHeader();
             this.showMenu();
             String userInput = scan.nextLine().trim();
-
-            if (NavigationUtil.backOrExit(userInput)) {
-                return "b";
-            }
+//
+//            if (NavigationUtil.backOrExit(userInput)) {
+//                return "b";
+//            }
 
             //validation loop to check if the option the student has selected is valid
             //based on the listOfMajors list
@@ -99,9 +99,9 @@ public class StudentModifyMajor implements DashboardInterface, HeaderInterface, 
                 HeadersUtil.printHeader("Invalid input, please pick a valid option.");
                 this.showMenu();
                 userInput = scan.nextLine().trim();
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
             }
 
             //if the userInput is valid, parse into a validOption integer
@@ -126,37 +126,37 @@ public class StudentModifyMajor implements DashboardInterface, HeaderInterface, 
             boolean validInput = false;
             while (!validInput) {
 
-                //check if they want to go back or exit
-                if (NavigationUtil.backOrExit(userInput)) {
-                    validInput = true; //confirm valid input and restart outer loop
-
-                //otherwise, if they confirmed the modification
-                } else if (userInput.equalsIgnoreCase("y")) {
-
-                    //update the student's major to be the new one they chose
-                    currentStudent.setMajor(chosenMajor);
-
-                    //withdraw them from all their current courses
-                    FilesManager.withdrawAllCourses(currentStudent);
-                    
-                    //save the changes to the student
-                    FilesManager.saveCurrentUser(currentStudent);
-
-                    //print success message
-                    HeadersUtil.printHeader("Your major was successfully updated to: ",
-                            chosenMajor + "!",
-                            "To enroll into your new courses enter in 'b'",
-                            "and select '3 - Change Courses'.");
-
-                    //confirm valid input
-                    validInput = true;
-
-                //otherwise, re-prompt the student
-                } else {
-                    HeadersUtil.printHeader("Invalid input, please pick one of the following:");
-                    System.out.println("y - Yes, Change My Major\nb - Go Back (Available Majors)\nx - Exit");
-                    userInput = scan.nextLine().trim();
-                }
+//                //check if they want to go back or exit
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    validInput = true; //confirm valid input and restart outer loop
+//
+//                //otherwise, if they confirmed the modification
+//                } else if (userInput.equalsIgnoreCase("y")) {
+//
+//                    //update the student's major to be the new one they chose
+//                    currentStudent.setMajor(chosenMajor);
+//
+//                    //withdraw them from all their current courses
+//                    FilesManager.withdrawAllCourses(currentStudent);
+//                    
+//                    //save the changes to the student
+//                    FilesManager.saveCurrentUser(currentStudent);
+//
+//                    //print success message
+//                    HeadersUtil.printHeader("Your major was successfully updated to: ",
+//                            chosenMajor + "!",
+//                            "To enroll into your new courses enter in 'b'",
+//                            "and select '3 - Change Courses'.");
+//
+//                    //confirm valid input
+//                    validInput = true;
+//
+//                //otherwise, re-prompt the student
+//                } else {
+//                    HeadersUtil.printHeader("Invalid input, please pick one of the following:");
+//                    System.out.println("y - Yes, Change My Major\nb - Go Back (Available Majors)\nx - Exit");
+//                    userInput = scan.nextLine().trim();
+//                }
             }
         }
     }

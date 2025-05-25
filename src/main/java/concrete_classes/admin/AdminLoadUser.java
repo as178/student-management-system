@@ -66,9 +66,9 @@ public class AdminLoadUser implements InputValidationInterface, DashboardInterfa
             while (!validInput) {
                 String userInput = scan.nextLine().trim();
 
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
 
                 FilesManager.readAllStudents();
                 if (FilesManager.currentUsers.containsKey(userInput)) {

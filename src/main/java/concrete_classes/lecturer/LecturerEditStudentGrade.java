@@ -76,9 +76,9 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
             String userInput = scan.nextLine().trim();
 
             while (true) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
 
                 if (userInput.equalsIgnoreCase("s")) {
                     HeadersUtil.printHeader("Signing Off:",
@@ -94,37 +94,37 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
 
                     boolean validInput = false;
                     while (!validInput) {
-                        if (NavigationUtil.backOrExit(userInput)) {
-                            return "b";
-                        } else if (userInput.equalsIgnoreCase("y")) {
-
-                            //load student's enrolled courses to their enrolledCourses hashmap
-                            FilesManager.readCoursesFile(currentStudent, currentStudent.getEnrolledCourses(),
-                                    FilesManager.studentsEnrolledCoursesFile);
-
-                            //load student's previous courses to their previousCourses hashmap
-                            FilesManager.readCoursesFile(currentStudent, currentStudent.getPreviousCourses(),
-                                    FilesManager.studentsPreviousCoursesFile);
-
-                            //add the current course and student's grade to their previousCourses hashmap
-                            currentStudent.getPreviousCourses().put(currentCourse.getCourseId(), currentStudent.getEnrolledCourses().get(currentCourse.getCourseId()));
-
-                            //remove the same course from the student's enrolledCourses hashmap
-                            currentStudent.getEnrolledCourses().remove(currentCourse.getCourseId());
-
-                            //save changes in both hashmaps to their respective .txt files
-                            FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsEnrolledCoursesFile,
-                                    currentStudent.getEnrolledCourses(), false);
-                            FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsPreviousCoursesFile,
-                                    currentStudent.getPreviousCourses(), true);
-
-                            HeadersUtil.printHeader("Thank you, the student was", "successfully signed off!");
-                            validInput = true;
-                        } else { //else re-prompt
-                            HeadersUtil.printHeader("Invalid input, please pick one of the following:");
-                            System.out.print("y - Yes, Sign Off Student\nb - Back (Configure Grade)\nx - Exit\n");
-                            userInput = scan.nextLine().trim();
-                        }
+//                        if (NavigationUtil.backOrExit(userInput)) {
+//                            return "b";
+//                        } else if (userInput.equalsIgnoreCase("y")) {
+//
+//                            //load student's enrolled courses to their enrolledCourses hashmap
+//                            FilesManager.readCoursesFile(currentStudent, currentStudent.getEnrolledCourses(),
+//                                    FilesManager.studentsEnrolledCoursesFile);
+//
+//                            //load student's previous courses to their previousCourses hashmap
+//                            FilesManager.readCoursesFile(currentStudent, currentStudent.getPreviousCourses(),
+//                                    FilesManager.studentsPreviousCoursesFile);
+//
+//                            //add the current course and student's grade to their previousCourses hashmap
+//                            currentStudent.getPreviousCourses().put(currentCourse.getCourseId(), currentStudent.getEnrolledCourses().get(currentCourse.getCourseId()));
+//
+//                            //remove the same course from the student's enrolledCourses hashmap
+//                            currentStudent.getEnrolledCourses().remove(currentCourse.getCourseId());
+//
+//                            //save changes in both hashmaps to their respective .txt files
+//                            FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsEnrolledCoursesFile,
+//                                    currentStudent.getEnrolledCourses(), false);
+//                            FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsPreviousCoursesFile,
+//                                    currentStudent.getPreviousCourses(), true);
+//
+//                            HeadersUtil.printHeader("Thank you, the student was", "successfully signed off!");
+//                            validInput = true;
+//                        } else { //else re-prompt
+//                            HeadersUtil.printHeader("Invalid input, please pick one of the following:");
+//                            System.out.print("y - Yes, Sign Off Student\nb - Back (Configure Grade)\nx - Exit\n");
+//                            userInput = scan.nextLine().trim();
+//                        }
                     }
                     return "b";
                     

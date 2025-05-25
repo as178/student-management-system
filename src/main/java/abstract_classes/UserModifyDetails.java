@@ -66,9 +66,9 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
             //inner loop
             boolean validInput = false;
             while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
 
                 switch (userInput) {
                     case "1": //modify user's password
@@ -138,9 +138,9 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
                 "or 'x' to exit.");
         String newPassword = scan.nextLine().trim();
 
-        if (NavigationUtil.backOrExit(newPassword)) {
-            return "b";
-        }
+//        if (NavigationUtil.backOrExit(newPassword)) {
+//            return "b";
+//        }
         while (!ValidationUtil.checkPassword(newPassword)) {
             HeadersUtil.printHeader("Passwords cannot contain commas or",
                     "periods, be empty or blank, and",
@@ -149,9 +149,9 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
                     "(Type 'b' to go back (Modify Menu),",
                     " or 'x' to exit.)");
             newPassword = scan.nextLine().trim();
-            if (NavigationUtil.backOrExit(newPassword)) {
-                return "b";
-            }
+//            if (NavigationUtil.backOrExit(newPassword)) {
+//                return "b";
+//            }
         }
 
         currentUser.setPassword(newPassword);
@@ -166,17 +166,17 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
                 " or 'x' to exit.");
         String newEmail = scan.nextLine().trim();
 
-        if (NavigationUtil.backOrExit(newEmail)) {
-            return "b";
-        }
+//        if (NavigationUtil.backOrExit(newEmail)) {
+//            return "b";
+//        }
         while (!ValidationUtil.checkEmail(newEmail)) {
             HeadersUtil.printHeader("Invalid email address format, please try again.",
                     "(Type 'b' to go back (Modify Menu),",
                     " or 'x' to exit.)");
             newEmail = scan.nextLine().trim();
-            if (NavigationUtil.backOrExit(newEmail)) {
-                return "b";
-            }
+//            if (NavigationUtil.backOrExit(newEmail)) {
+//                return "b";
+//            }
         }
 
         currentUser.setPersonalEmail(newEmail);
@@ -192,17 +192,17 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
                 " or 'x' to exit.");
         String newPhoneNumber = scan.nextLine().trim();
 
-        if (NavigationUtil.backOrExit(newPhoneNumber)) {
-            return "b";
-        }
+//        if (NavigationUtil.backOrExit(newPhoneNumber)) {
+//            return "b";
+//        }
         while (!ValidationUtil.checkPhoneNumber(newPhoneNumber)) {
             HeadersUtil.printHeader("Invalid phone number, please try again.",
                     "(Type 'b' to go back (Modify Menu),",
                     " or 'x' to exit.)");
             newPhoneNumber = scan.nextLine().trim();
-            if (NavigationUtil.backOrExit(newPhoneNumber)) {
-                return "b";
-            }
+//            if (NavigationUtil.backOrExit(newPhoneNumber)) {
+//                return "b";
+//            }
         }
 
         currentUser.setPhoneNumber(ValidationUtil.formatPhoneNumber(newPhoneNumber));
@@ -218,17 +218,17 @@ public abstract class UserModifyDetails implements DashboardInterface, HeaderInt
                 " or 'x' to exit.");
         String newAddress = scan.nextLine();
 
-        if (NavigationUtil.backOrExit(newAddress)) {
-            return "b";
-        }
+//        if (NavigationUtil.backOrExit(newAddress)) {
+//            return "b";
+//        }
         while (!ValidationUtil.checkAddress(newAddress)) {
             HeadersUtil.printHeader("Invalid address, please try again.",
                     "(Type 'b' to go back (Modify Menu),",
                     " or 'x' to exit.)");
             newAddress = scan.nextLine();
-            if (NavigationUtil.backOrExit(newAddress)) {
-                return "b";
-            }
+//            if (NavigationUtil.backOrExit(newAddress)) {
+//                return "b";
+//            }
         }
 
         currentUser.setAddress(newAddress);

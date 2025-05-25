@@ -37,16 +37,16 @@ public class UserAuthentication {
             if userInput = b, return back to the main dashboard
             if userInput = x, exit the program immediately
              */
-            if (NavigationUtil.backOrExit(usernameId)) {
-                return false;
-            }
+//            if (NavigationUtil.backOrExit(usernameId)) {
+//                return false;
+//            }
 
             HeadersUtil.printHeader("Please type in your password", "or select one of the following:");
             System.out.println("b - Go Back (Login Options)\nx - Exit");
             String password = scan.nextLine().trim();
-            if (NavigationUtil.backOrExit(password)) {
-                return false;
-            }
+//            if (NavigationUtil.backOrExit(password)) {
+//                return false;
+//            }
 
             /*
             check if user is in the loaded hashmap of all users

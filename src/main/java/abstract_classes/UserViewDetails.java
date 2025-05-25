@@ -87,9 +87,9 @@ public abstract class UserViewDetails implements DashboardInterface, HeaderInter
 
             boolean validInput = false;
             while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
 
                 switch (userInput) {
                     case "1":

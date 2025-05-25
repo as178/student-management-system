@@ -94,7 +94,7 @@ public class StudentWithdrawCourse implements DashboardInterface, HeaderInterfac
                 String userInput = scan.nextLine().trim();
                 //check if the student wants to exit the program,
                 //otherwise they will be taken, to the previous dashboard by default
-                NavigationUtil.checkExit(userInput);
+               // NavigationUtil.checkExit(userInput);
             } else {
 
                 this.getCurrentCourses();
@@ -102,9 +102,9 @@ public class StudentWithdrawCourse implements DashboardInterface, HeaderInterfac
                 this.showMenu();
                 String userInput = scan.nextLine().trim();
 
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
 
                 //validation loop to check if the option the student has selected is valid
                 //based on the currentCourses list
@@ -114,9 +114,9 @@ public class StudentWithdrawCourse implements DashboardInterface, HeaderInterfac
                     HeadersUtil.printHeader("Invalid input, please see below", "for valid options.");
                     this.showMenu();
                     userInput = scan.nextLine().trim();
-                    if (NavigationUtil.backOrExit(userInput)) {
-                        return "b";
-                    }
+//                    if (NavigationUtil.backOrExit(userInput)) {
+//                        return "b";
+//                    }
                 }
 
                 //if the userInput is valid, parse into a validOption integer
@@ -136,38 +136,38 @@ public class StudentWithdrawCourse implements DashboardInterface, HeaderInterfac
                 boolean validInput = false;
                 while (!validInput) {
 
-                    //check if they want to go back or exit
-                    if (NavigationUtil.backOrExit(userInput)) {
-                        return "b";
-
-                    //otherwise, if they confirmed the withdrawal
-                    } else if (userInput.equalsIgnoreCase("y")) {
-
-                        //remove the chosen course from the student's enrolledCourses hashmap
-                        currentStudent.getEnrolledCourses().remove(chosenCourse.getCourseId());
-                        
-                        //then put the course into the student's previousCourses hashmap
-                        //with the grade set to -1 (withdrawn)
-                        currentStudent.getPreviousCourses().put(chosenCourse.getCourseId(), -1f);
-                        
-                        //reflect the changes within studentsEnrolledCourses.txt and studentsPreviousCourses.txt
-                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsEnrolledCoursesFile,
-                                currentStudent.getEnrolledCourses(), false);
-                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsPreviousCoursesFile,
-                                currentStudent.getPreviousCourses(), true);
-
-                        //print a success message
-                        HeadersUtil.printHeader("You have been successfully", "removed from " + chosenCourse.getCourseId() + ".");
-
-                        //and confirm the valid input
-                        validInput = true;
-                        
-                    //otherwise, re-prompt the student
-                    } else {
-                        HeadersUtil.printHeader("Invalid input, please pick one of the following:");
-                        System.out.println("y - Yes, Withdraw From Course\nb - Go Back (Current Courses)\nx - Exit");
-                        userInput = scan.nextLine().trim();
-                    }
+//                    //check if they want to go back or exit
+//                    if (NavigationUtil.backOrExit(userInput)) {
+//                        return "b";
+//
+//                    //otherwise, if they confirmed the withdrawal
+//                    } else if (userInput.equalsIgnoreCase("y")) {
+//
+//                        //remove the chosen course from the student's enrolledCourses hashmap
+//                        currentStudent.getEnrolledCourses().remove(chosenCourse.getCourseId());
+//                        
+//                        //then put the course into the student's previousCourses hashmap
+//                        //with the grade set to -1 (withdrawn)
+//                        currentStudent.getPreviousCourses().put(chosenCourse.getCourseId(), -1f);
+//                        
+//                        //reflect the changes within studentsEnrolledCourses.txt and studentsPreviousCourses.txt
+//                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsEnrolledCoursesFile,
+//                                currentStudent.getEnrolledCourses(), false);
+//                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsPreviousCoursesFile,
+//                                currentStudent.getPreviousCourses(), true);
+//
+//                        //print a success message
+//                        HeadersUtil.printHeader("You have been successfully", "removed from " + chosenCourse.getCourseId() + ".");
+//
+//                        //and confirm the valid input
+//                        validInput = true;
+//                        
+//                    //otherwise, re-prompt the student
+//                    } else {
+//                        HeadersUtil.printHeader("Invalid input, please pick one of the following:");
+//                        System.out.println("y - Yes, Withdraw From Course\nb - Go Back (Current Courses)\nx - Exit");
+//                        userInput = scan.nextLine().trim();
+//                    }
                 }
             }
             //go back by default after if statement is finished

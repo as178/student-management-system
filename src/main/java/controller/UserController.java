@@ -27,6 +27,8 @@ public class UserController {
     private static HashMap<String, User> currentUsers;
     private static User currentUser;
 
+    private UserController() {}
+    
     //get + set methods to allow the currentUser(s) to be retrieved
     //or updated if needed
     public static void setCurrentUser(User currentUser) {
@@ -46,10 +48,8 @@ public class UserController {
     }
 
     //wipes the currently logged in user from memory
-    //also resets the currentUsers
     public static void logOutCurrentUser() {
         UserController.currentUser = null;
-        UserController.currentUsers = null;
     }
 
     //saves currently logged in user depending on their type

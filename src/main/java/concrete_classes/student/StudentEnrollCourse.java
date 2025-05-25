@@ -137,7 +137,7 @@ public class StudentEnrollCourse implements DashboardInterface, HeaderInterface,
                 String userInput = scan.nextLine().trim();
                 //check if the student wants to exit the program,
                 //otherwise they will be taken, to the previous dashboard by default
-                NavigationUtil.checkExit(userInput);
+                //NavigationUtil.checkExit(userInput);
             } else {
                 
                 this.getAvailableCourses();
@@ -145,9 +145,9 @@ public class StudentEnrollCourse implements DashboardInterface, HeaderInterface,
                 this.showMenu();
                 String userInput = scan.nextLine().trim();
                 
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
                 
                 //validation loop to check if the option the student has selected is valid
                 //based on the availableCourses list
@@ -157,9 +157,9 @@ public class StudentEnrollCourse implements DashboardInterface, HeaderInterface,
                     HeadersUtil.printHeader("Invalid input, please pick a valid option.");
                     this.showMenu();
                     userInput = scan.nextLine().trim();
-                    if (NavigationUtil.backOrExit(userInput)) {
-                        return "b";
-                    }
+//                    if (NavigationUtil.backOrExit(userInput)) {
+//                        return "b";
+//                    }
                 }
                 
                 //if the userInput is valid, parse into a validOption integer
@@ -179,40 +179,40 @@ public class StudentEnrollCourse implements DashboardInterface, HeaderInterface,
                 boolean validInput = false;
                 while (!validInput) {
                     
-                    //check if they want to go back or exit
-                    if (NavigationUtil.backOrExit(userInput)) {
-                        return "b";
-                    
-                    //otherwise, if they confirmed the enrollment
-                    } else if (userInput.equalsIgnoreCase("y")) {
-                        
-                        //if the course the student wants to enroll into is in their previousCourses
-                        //hashmap, remove it
-                        if (currentStudent.getPreviousCourses().containsKey(chosenCourse.getCourseId())) {
-                            currentStudent.getPreviousCourses().remove(chosenCourse.getCourseId());
-                        }
-                        
-                        //put the course the student wants to take into their enrolledCourses hashmap
-                        currentStudent.getEnrolledCourses().put(chosenCourse.getCourseId(), null);
-                        
-                        //reflect the changes within studentsEnrolledCourses.txt and studentsPreviousCourses.txt
-                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsEnrolledCoursesFile,
-                                currentStudent.getEnrolledCourses(), false);
-                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsPreviousCoursesFile,
-                                currentStudent.getPreviousCourses(), false);
-                        
-                        //print a success message
-                        HeadersUtil.printHeader("Enrollment successful!", "Welcome to " + chosenCourse.getCourseId() + "!");
-                        
-                        //and confirm the valid input
-                        validInput = true;
-                        
-                    //otherwise, re-prompt the student
-                    } else {
-                        HeadersUtil.printHeader("Invalid input, please pick one of the following:");
-                        System.out.println("y - Yes, Enroll Me\nb - Go Back (Available Courses)\nx - Exit");
-                        userInput = scan.nextLine().trim();
-                    }
+//                    //check if they want to go back or exit
+//                    if (NavigationUtil.backOrExit(userInput)) {
+//                        return "b";
+//                    
+//                    //otherwise, if they confirmed the enrollment
+//                    } else if (userInput.equalsIgnoreCase("y")) {
+//                        
+//                        //if the course the student wants to enroll into is in their previousCourses
+//                        //hashmap, remove it
+//                        if (currentStudent.getPreviousCourses().containsKey(chosenCourse.getCourseId())) {
+//                            currentStudent.getPreviousCourses().remove(chosenCourse.getCourseId());
+//                        }
+//                        
+//                        //put the course the student wants to take into their enrolledCourses hashmap
+//                        currentStudent.getEnrolledCourses().put(chosenCourse.getCourseId(), null);
+//                        
+//                        //reflect the changes within studentsEnrolledCourses.txt and studentsPreviousCourses.txt
+//                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsEnrolledCoursesFile,
+//                                currentStudent.getEnrolledCourses(), false);
+//                        FilesManager.updateStudentCourseFile(currentStudent, FilesManager.studentsPreviousCoursesFile,
+//                                currentStudent.getPreviousCourses(), false);
+//                        
+//                        //print a success message
+//                        HeadersUtil.printHeader("Enrollment successful!", "Welcome to " + chosenCourse.getCourseId() + "!");
+//                        
+//                        //and confirm the valid input
+//                        validInput = true;
+//                        
+//                    //otherwise, re-prompt the student
+//                    } else {
+//                        HeadersUtil.printHeader("Invalid input, please pick one of the following:");
+//                        System.out.println("y - Yes, Enroll Me\nb - Go Back (Available Courses)\nx - Exit");
+//                        userInput = scan.nextLine().trim();
+//                    }
                 }
             }
             //go back by default after if statement is finished

@@ -88,9 +88,9 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
 
             boolean validInput = false;
             while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
                 try {
                     int courseKey = Integer.parseInt(userInput); //parse user input into int courseKey
                     if (courses.containsKey(courseKey)) { //check if local courses hashmap contains the key

@@ -124,17 +124,17 @@ public class StudentViewCourses implements DashboardInterface, HeaderInterface, 
 
             boolean validInput = false;
             while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
 
                 switch (userInput) {
                     case "1":
                         this.showPreviouscourses(); //show details about previous courses
                         userInput = scan.nextLine().trim(); //allow student to enter when ready
-                        if (NavigationUtil.backOrExit(userInput)) { //check if they want to go back or exit
-                            return "b";
-                        }
+//                        if (NavigationUtil.backOrExit(userInput)) { //check if they want to go back or exit
+//                            return "b";
+//                        }
                         validInput = true; //confirm valid input
                         break;
                     default: //otherwise, re-prompt

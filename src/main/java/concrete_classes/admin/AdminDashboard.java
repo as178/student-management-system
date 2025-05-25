@@ -55,9 +55,9 @@ public class AdminDashboard implements InputValidationInterface, DashboardInterf
 
             boolean validInput = false;
             while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
                 switch (userInput) {
                     case "1": 
                         AdminViewDetails viewDetails = new AdminViewDetails(currentAdmin);

@@ -71,9 +71,9 @@ public class LecturerCourseOptions implements DashboardInterface, HeaderInterfac
 
             boolean validInput = false;
             while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
                 switch (userInput) {
                     case "1":
                         LecturerCourseListStudents courseListStudents = new LecturerCourseListStudents(currentCourse);

@@ -53,9 +53,9 @@ public class StudentDashboard implements InputValidationInterface, DashboardInte
 
             boolean validInput = false;
             while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
                 switch (userInput) {
                     case "1":
                         StudentViewDetails viewDetails = new StudentViewDetails(currentStudent);

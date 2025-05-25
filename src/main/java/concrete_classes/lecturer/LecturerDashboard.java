@@ -61,9 +61,9 @@ public class LecturerDashboard implements InputValidationInterface, DashboardInt
 
             boolean validInput = false;
             while (!validInput) {
-                if (NavigationUtil.backOrExit(userInput)) {
-                    return "b";
-                }
+//                if (NavigationUtil.backOrExit(userInput)) {
+//                    return "b";
+//                }
                 switch (userInput) {
                     case "1":
                         LecturerViewDetails viewDetails = new LecturerViewDetails(currentLecturer);

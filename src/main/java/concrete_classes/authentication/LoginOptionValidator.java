@@ -35,7 +35,7 @@ public class LoginOptionValidator implements InputValidationInterface {
         String userInput = scan.nextLine().trim();
 
         while (true) {
-            NavigationUtil.checkExit(userInput);
+            //NavigationUtil.checkExit(userInput);
             switch (userInput) {
                 case "1":
                     FilesManager.readAllStudents();
@@ -48,7 +48,7 @@ public class LoginOptionValidator implements InputValidationInterface {
                     return userInput;
                 default:
                     HeadersUtil.printHeader("Please pick a valid option.");
-                    StudentManagementSystem.mainDashboard.showMenu();
+                    //StudentManagementSystem.mainDashboard.showMenu();
                     userInput = scan.nextLine().trim();
             }
         }
