@@ -5,7 +5,7 @@
 package view;
 
 import concrete_classes.admin.Admin;
-import controller.student_controllers.AdminDashboardController;
+import controller.admin_controllers.AdminDashboardController;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
