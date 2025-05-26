@@ -30,7 +30,7 @@ public class AdminLoadUserView extends JFrame {
         setTitle("Student Management System: Admin Dashboard");
 
         JLabel promptLabel = new JLabel("Enter a UserID");
-        promptLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        promptLabel.setFont(new Font("Monospaced", Font.PLAIN, 16));
         promptLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         userIdField = new JTextField(10);
@@ -42,7 +42,7 @@ public class AdminLoadUserView extends JFrame {
         Dimension buttonSize = new Dimension(240, 40);
         for (JButton button : buttons) {
             button.setPreferredSize(buttonSize);
-            button.setFont(new Font("SansSerif", Font.PLAIN, 14));
+            button.setFont(new Font("Monospaced", Font.PLAIN, 14));
         }
 
         JPanel mainPanel = new JPanel(new GridLayout(7, 1, 15, 15));

@@ -54,7 +54,7 @@ public class AdminModifyPasswordView extends JFrame {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
 
         JLabel headerLabel = new JLabel("View/Modify User Information", SwingConstants.CENTER);
-        headerLabel.setFont(new Font("SansSerif", Font.BOLD, 21));
+        headerLabel.setFont(new Font("Monospaced", Font.BOLD, 21));
         mainPanel.add(headerLabel, BorderLayout.NORTH);
 
         JPanel formPanel = buildFormPanel();
@@ -72,8 +72,8 @@ public class AdminModifyPasswordView extends JFrame {
     private JPanel buildFormPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        Font labelFont = new Font("SansSerif", Font.BOLD, 16);
-        Font labelFont2 = new Font("SansSerif", Font.PLAIN, 14);
+        Font labelFont = new Font("Monospaced", Font.BOLD, 16);
+        Font labelFont2 = new Font("Monospaced", Font.PLAIN, 14);
 
         panel.add(Box.createVerticalStrut(10));
         panel.add(createLabel("Full Name:", labelFont));
@@ -120,7 +120,7 @@ public class AdminModifyPasswordView extends JFrame {
 
     private JLabel createHintLabel(String text) {
         JLabel hint = new JLabel(text);
-        hint.setFont(new Font("SansSerif", Font.ITALIC, 13));
+        hint.setFont(new Font("Monospaced", Font.ITALIC, 13));
         hint.setForeground(Color.GRAY);
         return hint;
     }

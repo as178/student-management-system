@@ -31,9 +31,9 @@ public class AdminDashboardView extends JFrame {
         JLabel nameLabel = new JLabel(currentAdmin.getFirstName() + " " + currentAdmin.getLastName() + "!");
         JLabel promptLabel = new JLabel("What would you like to do?");
 
-        welcomeLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
-        nameLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
-        promptLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        welcomeLabel.setFont(new Font("Monospaced", Font.PLAIN, 16));
+        nameLabel.setFont(new Font("Monospaced", Font.BOLD, 18));
+        promptLabel.setFont(new Font("Monospaced", Font.PLAIN, 16));
 
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -48,7 +48,7 @@ public class AdminDashboardView extends JFrame {
         Dimension buttonSize = new Dimension(240, 40);
         for (JButton button : buttons) {
             button.setPreferredSize(buttonSize);
-            button.setFont(new Font("SansSerif", Font.PLAIN, 14));
+            button.setFont(new Font("Monospaced", Font.PLAIN, 14));
         }
 
         JPanel mainPanel = new JPanel(new GridLayout(7, 1, 15, 15));
