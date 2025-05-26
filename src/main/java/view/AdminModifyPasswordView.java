@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package abstract_classes;
+package view;
 
+import abstract_classes.User;
 import concrete_classes.admin.Admin;
 import concrete_classes.lecturer.Lecturer;
 import concrete_classes.other.NavigationUtil;
@@ -14,28 +15,39 @@ import controller.UserController;
 import dao.AdminDAO;
 import dao.LecturerDAO;
 import dao.StudentDAO;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
-import view.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
- *
- * View which is shown when a User wishes to view and/or modify their personal
- * information.
  */
-public abstract class UserViewAndModifyDetailsView extends JFrame {
+public class AdminModifyPasswordView extends JFrame {
 
     private User currentUser;
+    private Admin currentAdmin;
     private JPasswordField passwordField;
-    private JTextField emailField, phoneField, addressField;
 
-    public UserViewAndModifyDetailsView(User currentUser) {
+    public AdminModifyPasswordView(User currentUser, Admin currentAdmin) {
 
         this.currentUser = currentUser;
+        this.currentAdmin = currentAdmin;
+
         setTitle("Student Management System: User View/Modify Details");
 
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -84,23 +96,17 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Email:", labelFont));
         panel.add(createHintLabel("e.g. user@example.com"));
-        emailField = new JTextField(currentUser.getPersonalEmail());
-        emailField.setFont(labelFont2);
-        panel.add(emailField);
+        panel.add(createLabel(currentUser.getPersonalEmail(), labelFont2));
 
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Phone Number:", labelFont));
         panel.add(createHintLabel("e.g. xxx xxx xxxx, +xx xx xxx xxxx, xxxxxxxxxx"));
-        phoneField = new JTextField(currentUser.getPhoneNumber());
-        phoneField.setFont(labelFont2);
-        panel.add(phoneField);
+        panel.add(createLabel(currentUser.getPhoneNumber(), labelFont2));
 
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Address:", labelFont));
         panel.add(createHintLabel("e.g. 123 Street Name Suburb City 1234. No commas allowed."));
-        addressField = new JTextField(currentUser.getAddress());
-        addressField.setFont(labelFont2);
-        panel.add(addressField);
+        panel.add(createLabel(currentUser.getAddress(), labelFont2));
         panel.add(Box.createVerticalStrut(10));
 
         return panel;
@@ -144,13 +150,7 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
                 );
 
                 if (confirmation == JOptionPane.YES_OPTION) {
-                    if (currentUser instanceof Student) {
-                        NavigationUtil.newFrame(new StudentDashboardView((Student) currentUser));
-                    } else if (currentUser instanceof Lecturer) {
-                        //NavigationUtil.newFrame(new LecturerDashboardView((Lecturer) currentUser));
-                    } else if (currentUser instanceof Admin) {
-                        NavigationUtil.newFrame(new AdminDashboardView((Admin) currentUser));
-                    }
+                    NavigationUtil.newFrame(new AdminDashboardView((Admin) currentAdmin));
                 }
             }
         });
@@ -171,34 +171,13 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
 
     private void handleSave() {
         String newPassword = new String(passwordField.getPassword()).trim();
-        String newEmail = emailField.getText().trim();
-        String newPhone = phoneField.getText().trim();
-        String newAddress = addressField.getText().trim();
 
         if (!ValidationUtil.checkPassword(newPassword)) {
             PopUpUtil.displayError("Passwords must be 8 to 30 characters,\nplease try again.");
             return;
         }
 
-        if (!ValidationUtil.checkEmail(newEmail)) {
-            PopUpUtil.displayError("Invalid email address,\nplease try again.");
-            return;
-        }
-
-        if (!ValidationUtil.checkPhoneNumber(newPhone)) {
-            PopUpUtil.displayError("Invalid phone number,\nplease try again.");
-            return;
-        }
-
-        if (!ValidationUtil.checkAddress(newAddress)) {
-            PopUpUtil.displayError("Invalid address format,\nplease try again.");
-            return;
-        }
-
         currentUser.setPassword(newPassword);
-        currentUser.setPersonalEmail(newEmail);
-        currentUser.setPhoneNumber(ValidationUtil.formatPhoneNumber(newPhone));
-        currentUser.setAddress(newAddress);
 
         if (currentUser instanceof Student) {
             StudentDAO studentDAO = new StudentDAO();

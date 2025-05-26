@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import view.AdminDashboardView;
 import view.AdminLoadUserView;
+import view.AdminModifyPasswordView;
 
 /**
  *
@@ -48,21 +49,25 @@ public class AdminLoadUserControllers implements ActionListener {
         }
 
         if ("1".equalsIgnoreCase(command)) {
-            
+            boolean found = false;
             searchUserID = view.getUserIdField().getText().trim();
             
             //try to load user by the provided id 
             StudentDAO students = new StudentDAO();
             loadedUsers = students.getAllUsers();
             if (loadedUsers.containsKey(searchUserID)){
-
+                found = true;
+                NavigationUtil.newFrame(new AdminModifyPasswordView((User) loadedUsers.get(searchUserID), currentAdmin));
             }
 
             LecturerDAO lecturers = new LecturerDAO();
             loadedUsers = lecturers.getAllUsers();
             if (loadedUsers.containsKey(searchUserID)){
-
-            }else{
+                found = true;
+                NavigationUtil.newFrame(new AdminModifyPasswordView((User) loadedUsers.get(searchUserID), currentAdmin));
+            }
+            
+            if (found == false){
                 PopUpUtil.displayError("User with ID: " + searchUserID + " not found!");
             }
         }
