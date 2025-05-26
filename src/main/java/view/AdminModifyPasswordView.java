@@ -5,6 +5,7 @@
 package view;
 
 import abstract_classes.User;
+import abstract_classes.UserViewAndModifyDetailsView;
 import concrete_classes.admin.Admin;
 import concrete_classes.lecturer.Lecturer;
 import concrete_classes.other.NavigationUtil;
@@ -12,68 +13,34 @@ import concrete_classes.other.PopUpUtil;
 import concrete_classes.other.ValidationUtil;
 import concrete_classes.student.Student;
 import controller.UserController;
-import dao.AdminDAO;
 import dao.LecturerDAO;
 import dao.StudentDAO;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
 
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  */
-public class AdminModifyPasswordView extends JFrame {
+public class AdminModifyPasswordView extends UserViewAndModifyDetailsView {
 
-    private User currentUser;
     private Admin currentAdmin;
-    private JPasswordField passwordField;
 
-    public AdminModifyPasswordView(User currentUser, Admin currentAdmin) {
-
-        this.currentUser = currentUser;
+    public AdminModifyPasswordView(User userToModify, Admin currentAdmin) {
+        super(userToModify);
         this.currentAdmin = currentAdmin;
-
-        setTitle("Student Management System: User View/Modify Details");
-
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
-
-        JLabel headerLabel = new JLabel("View/Modify User Information", SwingConstants.CENTER);
-        headerLabel.setFont(new Font("Monospaced", Font.BOLD, 21));
-        mainPanel.add(headerLabel, BorderLayout.NORTH);
-
-        JPanel formPanel = buildFormPanel();
-        JScrollPane scrollPane = new JScrollPane(formPanel);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
-
-        JPanel buttonPanel = buildButtonPanel();
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-
-        setContentPane(mainPanel);
-        setVisible(true);
     }
 
-    private JPanel buildFormPanel() {
+    @Override
+    protected JPanel buildFormPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        Font labelFont = new Font("Monospaced", Font.BOLD, 16);
-        Font labelFont2 = new Font("Monospaced", Font.PLAIN, 14);
+        Font labelFont = new Font("SansSerif", Font.BOLD, 16);
+        Font labelFont2 = new Font("SansSerif", Font.PLAIN, 14);
 
         panel.add(Box.createVerticalStrut(10));
         panel.add(createLabel("Full Name:", labelFont));
@@ -96,80 +63,24 @@ public class AdminModifyPasswordView extends JFrame {
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Email:", labelFont));
         panel.add(createHintLabel("e.g. user@example.com"));
-        panel.add(createLabel(currentUser.getPersonalEmail(), labelFont2));
+        panel.add(createLabel(currentUser.getPersonalEmail(), labelFont2));  // as label
 
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Phone Number:", labelFont));
         panel.add(createHintLabel("e.g. xxx xxx xxxx, +xx xx xxx xxxx, xxxxxxxxxx"));
-        panel.add(createLabel(currentUser.getPhoneNumber(), labelFont2));
+        panel.add(createLabel(currentUser.getPhoneNumber(), labelFont2));  // as label
 
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Address:", labelFont));
         panel.add(createHintLabel("e.g. 123 Street Name Suburb City 1234. No commas allowed."));
-        panel.add(createLabel(currentUser.getAddress(), labelFont2));
+        panel.add(createLabel(currentUser.getAddress(), labelFont2));  // as label
+
         panel.add(Box.createVerticalStrut(10));
-
         return panel;
     }
 
-    private JLabel createLabel(String text, Font font) {
-        JLabel label = new JLabel(text);
-        label.setFont(font);
-        return label;
-    }
-
-    private JLabel createHintLabel(String text) {
-        JLabel hint = new JLabel(text);
-        hint.setFont(new Font("Monospaced", Font.ITALIC, 13));
-        hint.setForeground(Color.GRAY);
-        return hint;
-    }
-
-    private JPanel buildButtonPanel() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-
-        JButton saveButton = new JButton("Save Changes");
-        JButton backButton = new JButton("Back");
-        JButton exitButton = new JButton("Exit");
-
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleSave();
-            }
-        });
-
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int confirmation = JOptionPane.showConfirmDialog(
-                        null,
-                        "Are you sure you want to go back?\nYour changes won't be saved.",
-                        "Go Back Confirmation",
-                        JOptionPane.YES_NO_OPTION
-                );
-
-                if (confirmation == JOptionPane.YES_OPTION) {
-                    NavigationUtil.newFrame(new AdminDashboardView((Admin) currentAdmin));
-                }
-            }
-        });
-
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                NavigationUtil.exitProgram();
-            }
-        });
-
-        panel.add(saveButton);
-        panel.add(backButton);
-        panel.add(exitButton);
-
-        return panel;
-    }
-
-    private void handleSave() {
+    @Override
+    protected void handleSave() {
         String newPassword = new String(passwordField.getPassword()).trim();
 
         if (!ValidationUtil.checkPassword(newPassword)) {
@@ -189,10 +100,20 @@ public class AdminModifyPasswordView extends JFrame {
             lecturerDAO.update(currentUser);
             UserController.setCurrentUsers(lecturerDAO.getAllUsers());
 
-        } else if (currentUser instanceof Admin) {
-            AdminDAO adminDAO = new AdminDAO();
-            adminDAO.update(currentUser);
-            UserController.setCurrentUsers(adminDAO.getAllUsers());
+        }
+    }
+
+    @Override
+    protected void handleBack() {
+        int confirmation = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to go back?\nYour changes won't be saved.",
+                "Go Back Confirmation",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirmation == JOptionPane.YES_OPTION) {
+            NavigationUtil.newFrame(new AdminDashboardView(currentAdmin));
         }
     }
 }
