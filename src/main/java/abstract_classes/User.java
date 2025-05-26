@@ -39,12 +39,6 @@ public abstract class User {
         this.gender = gender;
         this.address = address;
     }
-
-    /*
-    An abstract method to be overriden by every user
-    for providing the path to their 'allUsers' file.
-    */
-    public abstract String getUsersPath();
     
     public int getId() {
         return this.id;
@@ -52,19 +46,6 @@ public abstract class User {
 
     public String getPassword() {
         return this.password;
-    }
-
-    /*
-    This method is used during personal details viewing
-    sections, where the password shouldn't be outright shown
-    to the user (e.g. ***********).
-    */
-    public String getSecretPassword() {
-        String hashedPassword = "";
-        for (int i = 0; i < this.password.length(); i++) {
-            hashedPassword += "*";
-        }
-        return hashedPassword;
     }
 
     public String getFirstName() {

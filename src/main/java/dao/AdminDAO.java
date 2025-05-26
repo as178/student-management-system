@@ -5,7 +5,7 @@
 package dao;
 
 import abstract_classes.User;
-import concrete_classes.admin.Admin;
+import objects.Admin;
 import concrete_classes.other.PopUpUtil;
 import java.sql.Connection;
 import java.sql.Date;
@@ -59,7 +59,9 @@ public class AdminDAO implements UserDAOInterface<User> {
 
         } catch (SQLException ex) {
             PopUpUtil.displayError(ex.getMessage());
-        }
+        } 
+        
+        PopUpUtil.displayInfo("Details updated successfully!");
     }
 
     /*
@@ -100,7 +102,7 @@ public class AdminDAO implements UserDAOInterface<User> {
     }
 
     /*
-    Method to get admin by input of ID.
+    Method to get Admin by input of ID.
      */
     @Override
     public User getById(int id) {

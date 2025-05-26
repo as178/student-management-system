@@ -6,7 +6,7 @@ package dao;
 
 import abstract_classes.User;
 import concrete_classes.other.PopUpUtil;
-import concrete_classes.student.Student;
+import objects.Student;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -95,9 +95,9 @@ public class StudentDAO implements UserDAOInterface<User> {
 
         } catch (SQLException ex) {
             PopUpUtil.displayError("An error occurred while updating Student.");
-        } finally {
-            PopUpUtil.displayInfo("Details updated successfully!");
         }
+
+        PopUpUtil.displayInfo("Details updated successfully!");
     }
 
     /*

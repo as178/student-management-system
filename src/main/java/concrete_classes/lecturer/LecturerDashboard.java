@@ -4,6 +4,7 @@
  */
 package concrete_classes.lecturer;
 
+import objects.Lecturer;
 import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;

@@ -5,9 +5,9 @@
 package controller;
 
 import abstract_classes.User;
-import concrete_classes.admin.Admin;
-import concrete_classes.lecturer.Lecturer;
-import concrete_classes.student.Student;
+import objects.Admin;
+import objects.Lecturer;
+import objects.Student;
 import dao.AdminDAO;
 import dao.LecturerDAO;
 import dao.StudentDAO;

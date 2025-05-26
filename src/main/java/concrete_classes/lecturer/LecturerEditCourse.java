@@ -4,16 +4,14 @@
  */
 package concrete_classes.lecturer;
 
-import concrete_classes.courses.Course;
+import objects.Course;
 import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
-import concrete_classes.other.NavigationUtil;
 import concrete_classes.other.ValidationUtil;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
 import interfaces.InputValidationInterface;
 import java.util.Scanner;
-import org.apache.commons.text.WordUtils;
 
 /**
  *
@@ -38,7 +36,7 @@ public class LecturerEditCourse implements DashboardInterface, HeaderInterface, 
         System.out.println("> Prerequisite: " + currentCourse.getCoursePrerequisite());
         System.out.println("> Estimated Hours: " + currentCourse.getCourseEstimatedHours());
         System.out.println("> Lecturer: " + currentCourse.getCourseLecturer());
-        System.out.println("> Description:\n" + WordUtils.wrap(currentCourse.getCourseDescription(), 46));
+        //System.out.println("> Description:\n" + WordUtils.wrap(currentCourse.getCourseDescription(), 46));
         HeadersUtil.printHeader("Please choose one of the options below:");
         System.out.println("1 - Edit Course Name");
         System.out.println("2 - Edit Estimated Course Hours");

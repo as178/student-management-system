@@ -5,11 +5,11 @@
 package concrete_classes.file_input_output;
 
 import abstract_classes.User;
-import concrete_classes.admin.Admin;
-import concrete_classes.courses.Course;
-import concrete_classes.lecturer.Lecturer;
+import objects.Admin;
+import objects.Course;
+import objects.Lecturer;
 import concrete_classes.other.HeadersUtil;
-import concrete_classes.student.Student;
+import objects.Student;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -66,7 +66,7 @@ public class FilesManager {
      */
     public static void saveCurrentUser(User currentUser) {
         currentUsers.put(currentUser.getId() + "", currentUser);
-        writeAllUsers(currentUser.getClass(), currentUser.getUsersPath());
+        //writeAllUsers(currentUser.getClass(), currentUser.getUsersPath());
     }
 
     /*
@@ -554,7 +554,7 @@ public class FilesManager {
 
                                 //put the index and corresponding course object into 
                                 //the lecturer's coursesTaught hashmap
-                                lecturerObj.getCoursesTaught().put(index, course);
+                                //lecturerObj.getCoursesTaught().put(index, course);
 
                                 //increase the index
                                 index++;

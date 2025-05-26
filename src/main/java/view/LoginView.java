@@ -13,6 +13,9 @@ import java.awt.*;
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * View which is shown when a user chooses to login into the program.
+ * 
+ * Controller: LoginController
+ *
  */
 public class LoginView extends JFrame {
 
@@ -30,20 +33,19 @@ public class LoginView extends JFrame {
 
         //Title label styling
         JLabel titleLabel = new JLabel("Please enter your credentials below:");
-        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+        titleLabel.setFont(new Font("Monospaced", Font.BOLD, 19));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-        //Form panel, input text fields
+        //Form panel, input text fields for username and password
         JPanel formPanel = new JPanel(new GridLayout(2, 2, 15, 15));
-        formPanel.setMaximumSize(new Dimension(400, 100));
 
         JLabel usernameLabel = new JLabel("Username (ID):");
-        usernameLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        usernameLabel.setFont(new Font("Monospaced", Font.PLAIN, 17));
         usernameId = new JTextField();
 
         JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        passwordLabel.setFont(new Font("Monospaced", Font.PLAIN, 17));
         password = new JPasswordField();
 
         formPanel.add(usernameLabel);
@@ -52,45 +54,44 @@ public class LoginView extends JFrame {
         formPanel.add(password);
 
         //Buttons panel
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 20, 0));
-        buttonPanel.setMaximumSize(new Dimension(400, 40));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
         loginButton = new JButton("Login");
         backButton = new JButton("Back");
         exitButton = new JButton("Exit");
 
-        //Buttons styling
+        //Buttons styling and config
         JButton[] buttons = {loginButton, backButton, exitButton};
+        LoginController controller = new LoginController(this);
+
         for (JButton button : buttons) {
-            button.setPreferredSize(new Dimension(120, 40));
-            button.setFont(new Font("SansSerif", Font.PLAIN, 14));
+            button.setFont(new Font("Monospaced", Font.BOLD, 14));
             buttonPanel.add(button);
+            button.addActionListener(controller); //controller will handle events
         }
 
-        //Adding components to main panel
-        mainPanel.add(titleLabel);
-        mainPanel.add(formPanel);
-        mainPanel.add(Box.createVerticalStrut(20)); // spacing
-        mainPanel.add(buttonPanel);
-
-        //Adding main panel to this frame
-        this.add(mainPanel);
-        
-        /*
-        Setting up action commands for each button, and giving them all action listeners
-        (respective controller).
-        */
-        LoginController controller = new LoginController(this);
+        //Set action commands for controller
         loginButton.setActionCommand(roleCommand); //user's type, who they want to login as 
         backButton.setActionCommand("b");
         exitButton.setActionCommand("x");
 
-        for (JButton button : buttons) {
-            button.addActionListener(controller);
-        }
+        //Adding components to main panel
+        mainPanel.add(titleLabel);
+        mainPanel.add(formPanel);
+        mainPanel.add(Box.createVerticalStrut(35)); //spacing
+        mainPanel.add(buttonPanel);
+
+        //Wrapper class for centering main panel
+        JPanel wrapper = new JPanel(new GridBagLayout());
+        wrapper.add(mainPanel);
+
+        //Adding wrapper to this frame
+        this.add(wrapper);        
     }
 
+    /*
+    Methods for retrieving user input from text fields.
+     */
     public String getUsername() {
         return usernameId.getText().trim();
     }

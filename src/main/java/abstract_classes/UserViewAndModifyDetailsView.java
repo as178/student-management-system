@@ -4,13 +4,13 @@
  */
 package abstract_classes;
 
-import concrete_classes.lecturer.Lecturer;
-import concrete_classes.admin.Admin;
-import view.*;
+import view.student_view.StudentDashboardView;
+import objects.Lecturer;
+import objects.Admin;
 import concrete_classes.other.NavigationUtil;
 import concrete_classes.other.PopUpUtil;
 import concrete_classes.other.ValidationUtil;
-import concrete_classes.student.Student;
+import objects.Student;
 import controller.UserController;
 import dao.AdminDAO;
 import dao.LecturerDAO;
@@ -25,45 +25,60 @@ import java.awt.event.ActionListener;
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * View which is shown when a User wishes to view and/or modify their personal
- * information.
+ * information. The GUI and logic is merged into one class for easy of
+ * understanding and general use case.
+ *
  */
 public abstract class UserViewAndModifyDetailsView extends JFrame {
 
     private User currentUser;
-    private JPasswordField passwordField;
+    private JPasswordField passwordField; //special text field to hide password being typed in
     private JTextField emailField, phoneField, addressField;
 
     public UserViewAndModifyDetailsView(User currentUser) {
 
         this.currentUser = currentUser;
-        setTitle("Student Management System: User View/Modify Details");
+        this.setTitle("Student Management System: View/Modify Your Details");
 
+        //Main panel
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
 
+        //Header title
         JLabel headerLabel = new JLabel("View/Modify your Information", SwingConstants.CENTER);
-        headerLabel.setFont(new Font("SansSerif", Font.BOLD, 21));
-        mainPanel.add(headerLabel, BorderLayout.NORTH);
+        headerLabel.setFont(new Font("Monospaced", Font.BOLD, 18));
 
+        //Wrapper panel for header title, lower padding ==> main panel
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
+        headerPanel.add(headerLabel, BorderLayout.CENTER);
+        mainPanel.add(headerPanel, BorderLayout.NORTH);
+
+        //Scrollable panel where all the information is presented to the user, added to main panel
         JPanel formPanel = buildFormPanel();
         JScrollPane scrollPane = new JScrollPane(formPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
+        //Buttons at the bottom of frame
         JPanel buttonPanel = buildButtonPanel();
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        setContentPane(mainPanel);
-        setVisible(true);
+        //Child components inserted
+        this.setContentPane(mainPanel);
     }
 
+    /*
+    Method to configure the form panel.
+     */
     private JPanel buildFormPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        Font labelFont = new Font("SansSerif", Font.BOLD, 16);
-        Font labelFont2 = new Font("SansSerif", Font.PLAIN, 14);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); //laying out components top to bottom
 
-        panel.add(Box.createVerticalStrut(10));
+        Font labelFont = new Font("Monospaced", Font.BOLD, 16); //font for smaller headers
+        Font labelFont2 = new Font("Monospaced", Font.PLAIN, 14); //font for information
+
+        panel.add(Box.createVerticalStrut(10)); //spacings inserted for nicer visuals
         panel.add(createLabel("Full Name:", labelFont));
         panel.add(createLabel(currentUser.getFirstName() + " " + currentUser.getLastName(), labelFont2));
 
@@ -106,26 +121,53 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
         return panel;
     }
 
+    /*
+    Small helper method for making quick labels with a specified font.
+     */
     private JLabel createLabel(String text, Font font) {
         JLabel label = new JLabel(text);
         label.setFont(font);
         return label;
     }
 
+    /*
+    Small helper method for making quick labels for providing the
+    user with formatting hints for editable fields.
+     */
     private JLabel createHintLabel(String text) {
         JLabel hint = new JLabel(text);
-        hint.setFont(new Font("SansSerif", Font.ITALIC, 13));
+        hint.setFont(new Font("Monospaced", Font.ITALIC, 13));
         hint.setForeground(Color.GRAY);
         return hint;
     }
 
+    /*
+    Method for configuring the button panel.
+     */
     private JPanel buildButtonPanel() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10)); //each row to be centered with custom gaps
 
         JButton saveButton = new JButton("Save Changes");
         JButton backButton = new JButton("Back");
         JButton exitButton = new JButton("Exit");
 
+        /*
+        Adding action listeners for buttons:
+        
+        - "Save Changes" calls on the handleSave() method
+            to handling saving of user inputs from the
+            text fields to the correct tables in the
+            database.
+        
+        - "Back" lets the user know their changes won't
+            be saved and takes them back to their
+            respective dashboard depending on the type
+            of user they are.
+        
+        - "Exit" calls on the NavigationUtil.exitProgram();
+            and confirms the user's choice before
+            quitting the program.
+         */
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -136,12 +178,8 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int confirmation = JOptionPane.showConfirmDialog(
-                        null,
-                        "Are you sure you want to go back?\nYour changes won't be saved.",
-                        "Go Back Confirmation",
-                        JOptionPane.YES_NO_OPTION
-                );
+                int confirmation = PopUpUtil.displayConfirmInfo(
+                        "Are you sure you want to go back?\nYour changes won't be saved.");
 
                 if (confirmation == JOptionPane.YES_OPTION) {
                     if (currentUser instanceof Student) {
@@ -162,13 +200,23 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
             }
         });
 
-        panel.add(saveButton);
-        panel.add(backButton);
-        panel.add(exitButton);
+        //Quick array and for loop for final config and adding buttons to the panel
+        JButton[] buttons = {saveButton, backButton, exitButton};
+        for (JButton button : buttons) {
+            button.setFont(new Font("Monospaced", Font.BOLD, 14));
+            panel.add(button);
+        }
 
         return panel;
     }
 
+    /*
+    This method takes the input from all the text fields and checks
+    them using the ValidationUtil (established rules and restrictions
+    for the information). If a restriction is breached the user is 
+    alerted, otherwise their information is saved in memory and in
+    the database.
+     */
     private void handleSave() {
         String newPassword = new String(passwordField.getPassword()).trim();
         String newEmail = emailField.getText().trim();
@@ -200,6 +248,7 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
         currentUser.setPhoneNumber(ValidationUtil.formatPhoneNumber(newPhone));
         currentUser.setAddress(newAddress);
 
+        //Call appropriate DAO based on user type and save user
         if (currentUser instanceof Student) {
             StudentDAO studentDAO = new StudentDAO();
             studentDAO.update(currentUser);

@@ -4,18 +4,16 @@
  */
 package concrete_classes.lecturer;
 
-import concrete_classes.courses.Course;
+import objects.Course;
 import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
-import concrete_classes.other.NavigationUtil;
 import concrete_classes.other.ValidationUtil;
-import concrete_classes.student.Student;
+import objects.Student;
 import interfaces.DashboardInterface;
 import interfaces.HeaderInterface;
 import interfaces.InputValidationInterface;
 import java.util.HashMap;
 import java.util.Scanner;
-import org.apache.commons.text.WordUtils;
 
 /**
  *
@@ -48,11 +46,11 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
     //display selected students id and fullname
     @Override
     public void showHeader() {
-        HeadersUtil.printHeader("Configure grade for the following student:",
-                WordUtils.wrap(currentStudent.getId() + ", " + currentStudent.getFirstName() + " " + currentStudent.getLastName(), 46),
-                "Please enter their new grade below,",
-                "or alternatively sign-off the student's",
-                "current grade.");
+//        HeadersUtil.printHeader("Configure grade for the following student:",
+//                WordUtils.wrap(currentStudent.getId() + ", " + currentStudent.getFirstName() + " " + currentStudent.getLastName(), 46),
+//                "Please enter their new grade below,",
+//                "or alternatively sign-off the student's",
+//                "current grade.");
     }
     
     /*
@@ -81,13 +79,13 @@ public class LecturerEditStudentGrade implements DashboardInterface, HeaderInter
 //                }
 
                 if (userInput.equalsIgnoreCase("s")) {
-                    HeadersUtil.printHeader("Signing Off:",
-                            WordUtils.wrap(currentStudent.getId() + ", " + currentStudent.getFirstName()
-                                    + " " + currentStudent.getLastName(), 46),
-                            "This will remove the student from",
-                            "your course, and their grade will be",
-                            "transferred to their record.",
-                            "Proceed with sign off?");
+//                    HeadersUtil.printHeader("Signing Off:",
+//                            WordUtils.wrap(currentStudent.getId() + ", " + currentStudent.getFirstName()
+//                                    + " " + currentStudent.getLastName(), 46),
+//                            "This will remove the student from",
+//                            "your course, and their grade will be",
+//                            "transferred to their record.",
+//                            "Proceed with sign off?");
 
                     System.out.print("y - Yes, Sign Off Student\nb - Back (Configure Grade)\nx - Exit\n");
                     userInput = scan.nextLine().trim();

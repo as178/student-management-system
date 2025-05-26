@@ -5,14 +5,16 @@
 package controller.student_controllers;
 
 import concrete_classes.other.NavigationUtil;
-import concrete_classes.student.Student;
+import concrete_classes.other.PopUpUtil;
+import objects.Student;
 import controller.UserController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import view.LoginView;
-import view.StudentDashboardView;
-import view.StudentViewDetailsView;
+import view.student_view.StudentAcademicDetailsView;
+import view.student_view.StudentDashboardView;
+import view.student_view.StudentViewDetailsView;
 
 /**
  *
@@ -43,12 +45,7 @@ public class StudentDashboardController implements ActionListener {
 
         if ("b".equalsIgnoreCase(command)) {
 
-            int confirmation = JOptionPane.showConfirmDialog(
-                    null,
-                    "Are you sure you want to logout?",
-                    "Logout Confirmation",
-                    JOptionPane.YES_NO_OPTION
-            );
+            int confirmation = PopUpUtil.displayConfirmInfo("Are you sure you want to logout?");
 
             if (confirmation == JOptionPane.YES_OPTION) {
                 NavigationUtil.newFrame(new LoginView("1"));
@@ -62,7 +59,7 @@ public class StudentDashboardController implements ActionListener {
                 NavigationUtil.newFrame(new StudentViewDetailsView(currentStudent));
                 break;
             case "2": //View My Academic Details
-                //NavigationUtil.newFrame(new StudentAcademicDetailsView(student));
+                NavigationUtil.newFrame(new StudentAcademicDetailsView(currentStudent));
                 break;
         }
     }

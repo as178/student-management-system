@@ -4,7 +4,8 @@
  */
 package concrete_classes.lecturer;
 
-import concrete_classes.courses.Course;
+import objects.Lecturer;
+import objects.Course;
 import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.HeadersUtil;
 import concrete_classes.other.NavigationUtil;
@@ -32,7 +33,7 @@ public class LecturerManageCourses implements DashboardInterface, HeaderInterfac
     public LecturerManageCourses(Lecturer currentLecturer) {
         FilesManager.readLecturerCourses(currentLecturer);
         FilesManager.readAllCourses();
-        courses = currentLecturer.getCoursesTaught();
+        //courses = currentLecturer.getCoursesTaught();
     }
 
     //prints the courses that the currentLectuer object teaches with index - course name

@@ -4,9 +4,9 @@
  */
 package dao.dao_interfaces;
 
-import concrete_classes.courses.Course;
-import concrete_classes.lecturer.Lecturer;
-import concrete_classes.student.Student;
+import objects.Course;
+import objects.Lecturer;
+import objects.Student;
 import java.util.HashMap;
 
 /**
@@ -21,7 +21,7 @@ public interface CourseDAOInterface {
     public Course getById(String id);
 
     public HashMap<String, Course> getAllCourses();
-
+    
     public void readLecturerCourses(Lecturer lecturerObj);
 
     public void readStudentsCourses(Student currentStudent,

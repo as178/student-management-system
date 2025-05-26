@@ -14,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * Database manager class which initializes the database and controls the
+ * Database manager class which initialises the database and controls the
  * connection status.
  *
  */
@@ -28,7 +28,7 @@ public final class DatabaseManager {
     Constructor to initalise the database and its tables
     when called. Depending on the initialisation status of the
     database, the program will either proceed to make tables
-    and populate the tables or stop in order to prevent further
+    and populate the tables or shutdown in order to prevent further
     errors from occuring.
      */
     public DatabaseManager() {

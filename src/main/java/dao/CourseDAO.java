@@ -4,10 +4,10 @@
  */
 package dao;
 
-import concrete_classes.courses.Course;
-import concrete_classes.lecturer.Lecturer;
+import objects.Course;
+import objects.Lecturer;
 import concrete_classes.other.PopUpUtil;
-import concrete_classes.student.Student;
+import objects.Student;
 import dao.dao_interfaces.CourseDAOInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,22 +34,22 @@ public class CourseDAO implements CourseDAOInterface {
      */
     @Override
     public Course getById(String id) {
-        String sqlStatement = "SELECT * FROM Course WHERE code = ?";
+        String sqlStatement = "SELECT * FROM Course WHERE id = ?";
         Course course = null;
 
         try {
             PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
-            preparedStatement.setNString(1, id);
+            preparedStatement.setString(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
                 course = new Course(
-                        rs.getString("course_id"),
+                        rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("major"),
-                        rs.getString("prerequisite"),
+                        rs.getString("prerequisite_id"),
                         rs.getInt("estimated_hours"),
-                        rs.getString("lecturer"),
+                        rs.getString("lecturer_id"),
                         rs.getString("description")
                 );
             }
@@ -62,8 +62,8 @@ public class CourseDAO implements CourseDAOInterface {
 
     /*
     This method returns all courses from the course table.
-    A simple hashmap is used to store these courses and their
-    course codes for easy lookup.
+    A simple HashMap is used to store these courses and their
+    course codes for efficient lookup.
      */
     @Override
     public HashMap<String, Course> getAllCourses() {
@@ -76,12 +76,12 @@ public class CourseDAO implements CourseDAOInterface {
 
             while (rs.next()) {
                 Course newCourse = new Course(
-                        rs.getString("course_id"),
+                        rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("major"),
-                        rs.getString("prerequisite"),
+                        rs.getString("prerequisite_id"),
                         rs.getInt("estimated_hours"),
-                        rs.getString("lecturer"),
+                        rs.getString("lecturer_id"),
                         rs.getString("description")
                 );
 
@@ -97,13 +97,13 @@ public class CourseDAO implements CourseDAOInterface {
 
     /*
     This method reads the Course table for courses with a particular lecturer's id
-    and populates that lecturer's coursesTaught hashmap.
+    and populates that lecturer's coursesTaught hashmap; i.e. it retrieves
+    the courses a particular lecturer teaches.
      */
     @Override
     public void readLecturerCourses(Lecturer lecturerObj) {
-        int index = 1;
         HashMap<String, Course> allCourses = this.getAllCourses();
-        String sqlStatement = "SELECT code FROM Course WHERE lecturer_id = ?";
+        String sqlStatement = "SELECT id FROM Course WHERE lecturer_id = ?";
 
         try {
             PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
@@ -111,9 +111,9 @@ public class CourseDAO implements CourseDAOInterface {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                String courseCode = rs.getString("code");
-                Course taughtCourse = allCourses.get(courseCode);
-                lecturerObj.getCoursesTaught().put(index++, taughtCourse);
+                String courseId = rs.getString("id");
+                Course taughtCourse = allCourses.get(courseId);
+                lecturerObj.getCoursesTaught().put(courseId, taughtCourse);
             }
 
         } catch (SQLException ex) {
@@ -129,25 +129,25 @@ public class CourseDAO implements CourseDAOInterface {
     It does so by taking the currently logged in student, their courses hashmap (current enrollments or pevious),
     and a boolean for choosing which table to update from. It iterates through the rows which have the student's id,
     and stores their course code and grade for the course into the provided hashmap.
+    
+    It will initially clear the hashmap in case there is no entries within the table.
      */
     @Override
     public void readStudentsCourses(Student currentStudent, HashMap<String, Float> studentsCourses, boolean previous) {
         String tableName = previous ? "PreviousCourse" : "EnrolledCourse";
-        String sqlStatement = "SELECT course_code, grade FROM " + tableName + " WHERE student_id = ?";
+        String sqlStatement = "SELECT course_id, grade FROM " + tableName + " WHERE student_id = ?";
 
         try {
             PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
-
             preparedStatement.setInt(1, currentStudent.getId());
             ResultSet rs = preparedStatement.executeQuery();
 
             studentsCourses.clear();
 
             while (rs.next()) {
-                String courseCode = rs.getString("course_code");
-                Float grade;
-                grade = rs.wasNull() ? null : rs.getFloat("grade");
-                studentsCourses.put(courseCode, grade);
+                String courseId = rs.getString("course_id");
+                Float grade = rs.getObject("grade", Float.class); //retrieving object in case grade is null
+                studentsCourses.put(courseId, grade);
             }
 
         } catch (SQLException ex) {
@@ -157,22 +157,24 @@ public class CourseDAO implements CourseDAOInterface {
 
     /*
     Method to add a course to EnrolledCourse/PreviousCourse for a particular
-    student, depending on the needs/context of the program.
+    student, depending on the needs/context of the program.; e.g. a student could 
+    be enrolling into a new course, EnrolleCourse table addition, or they withdrew
+    from a course which needs to be added to the PreviousCourse table.
      */
     @Override
-    public void addCourseToTable(int studentId, String courseCode, Float grade, boolean previous) {
+    public void addCourseToTable(int studentId, String courseId, Float grade, boolean previous) {
         String tableName = previous ? "PreviousCourse" : "EnrolledCourse";
-        String sqlStatement = "INSERT INTO " + tableName + " (student_id, course_code, grade) VALUES (?, ?, ?)";
+        String sqlStatement = "INSERT INTO " + tableName + " (student_id, course_id, grade) VALUES (?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
 
             preparedStatement.setInt(1, studentId);
-            preparedStatement.setString(2, courseCode);
+            preparedStatement.setString(2, courseId);
             if (grade == null) {
-                preparedStatement.setNull(3, Types.FLOAT);
+                preparedStatement.setNull(3, Types.FLOAT); //null case
             } else {
-                preparedStatement.setFloat(3, grade);
+                preparedStatement.setFloat(3, grade); //regular grade 
             }
 
             preparedStatement.executeUpdate();
@@ -187,14 +189,14 @@ public class CourseDAO implements CourseDAOInterface {
     student, depending on the needs/context of the program.
      */
     @Override
-    public void removeCourseFromTable(int studentId, String courseCode, boolean previous) {
+    public void removeCourseFromTable(int studentId, String courseId, boolean previous) {
         String tableName = previous ? "PreviousCourse" : "EnrolledCourse";
-        String sqlStatement = "DELETE FROM " + tableName + " WHERE student_id = ? AND course_code = ?";
+        String sqlStatement = "DELETE FROM " + tableName + " WHERE student_id = ? AND course_id = ?";
 
         try {
             PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
             preparedStatement.setInt(1, studentId);
-            preparedStatement.setString(2, courseCode);
+            preparedStatement.setString(2, courseId);
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
@@ -207,15 +209,15 @@ public class CourseDAO implements CourseDAOInterface {
     particular course within the EnrolledCourse table.
      */
     @Override
-    public void updateEnrolledCourseTable(int studentId, String courseCode, Float newGrade) {
+    public void updateEnrolledCourseTable(int studentId, String courseId, Float newGrade) {
 
-        String sqlStatement = "UPDATE EnrolledCourse SET grade = ? WHERE student_id = ? AND course_code = ?";
+        String sqlStatement = "UPDATE EnrolledCourse SET grade = ? WHERE student_id = ? AND course_id = ?";
 
         try {
             PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
             preparedStatement.setFloat(1, newGrade);
             preparedStatement.setInt(2, studentId);
-            preparedStatement.setString(3, courseCode);
+            preparedStatement.setString(3, courseId);
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
@@ -233,21 +235,21 @@ public class CourseDAO implements CourseDAOInterface {
     > otherwise the grade is saved as a String
      */
     @Override
-    public HashMap<Integer, String> readEnrolledStudentsGrades(String courseCode) {
+    public HashMap<Integer, String> readEnrolledStudentsGrades(String courseId) {
         HashMap<Integer, String> studentGrades = new HashMap<>();
-        String sqlStatement = "SELECT student_id, grade FROM EnrolledCourse WHERE course_code = ?";
+        String sqlStatement = "SELECT student_id, grade FROM EnrolledCourse WHERE course_id = ?";
 
         try {
             PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
 
-            preparedStatement.setString(1, courseCode);
+            preparedStatement.setString(1, courseId);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 int studentId = rs.getInt("student_id");
-                Float grade = rs.getFloat("grade");
+                Float grade = rs.getObject("grade", Float.class);
 
-                if (rs.wasNull()) {
+                if (grade == null) {
                     studentGrades.put(studentId, null);
                 } else if (grade == -1.0f) {
                     studentGrades.put(studentId, "Withdrawn");
@@ -268,12 +270,11 @@ public class CourseDAO implements CourseDAOInterface {
      */
     @Override
     public void updateCourse(Course course) {
-        String sqlStatement = "UPDATE Course SET name = ?, major = ?, prerequisite = ?, estimated_hours = ?,"
-                + "lecturer = ?, description = ? WHERE code = ?";
+        String sqlStatement = "UPDATE Course SET name = ?, major = ?, prerequisite_id = ?, estimated_hours = ?,"
+                + "lecturer_id = ?, description = ? WHERE id = ?";
 
         try {
             PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
-            ResultSet rs = preparedStatement.executeQuery();
 
             preparedStatement.setString(1, course.getCourseName());
             preparedStatement.setString(2, course.getCourseMajor());
@@ -287,7 +288,9 @@ public class CourseDAO implements CourseDAOInterface {
 
         } catch (SQLException ex) {
             PopUpUtil.displayError("Error in updating " + course.getCourseId() + " in the Course table.");
-        }
+        } 
+        
+        PopUpUtil.displayInfo("Course updated successfully!");
     }
 
     /*
@@ -299,13 +302,13 @@ public class CourseDAO implements CourseDAOInterface {
         HashMap<String, Float> enrolledCourses = currentStudent.getEnrolledCourses();
 
         //iterate thru student's list of current enrollments
-        for (String courseCode : enrolledCourses.keySet()) {
+        for (String courseId : enrolledCourses.keySet()) {
 
             //place enrolled course into PreviousCourse table with -1.0 grade (withdrawn)
-            this.addCourseToTable(currentStudent.getId(), courseCode, -1f, true);
+            this.addCourseToTable(currentStudent.getId(), courseId, -1f, true);
 
             //remove that same course from EnrolledCourse table
-            this.removeCourseFromTable(currentStudent.getId(), courseCode, false);
+            this.removeCourseFromTable(currentStudent.getId(), courseId, false);
         }
     }
 }

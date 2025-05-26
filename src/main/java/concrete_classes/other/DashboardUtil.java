@@ -6,7 +6,6 @@ package concrete_classes.other;
 
 import concrete_classes.admin.AdminDashboard;
 import concrete_classes.lecturer.LecturerDashboard;
-import concrete_classes.student.StudentDashboard;
 
 /**
  *
@@ -24,8 +23,8 @@ public final class DashboardUtil {
     public static String displayDashboards(String userInput){
         switch(userInput){
             case "1":
-                StudentDashboard studentDashboard = new StudentDashboard();
-                return studentDashboard.validateUserInput();
+//                StudentDashboard studentDashboard = new StudentDashboard();
+//                return studentDashboard.validateUserInput();
             case "2":
                 LecturerDashboard lecturerDashboard = new LecturerDashboard();
                 return lecturerDashboard.validateUserInput();

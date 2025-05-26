@@ -12,7 +12,11 @@ import java.awt.*;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * View which is shown first when the program is run.
+ * View which is shown first when the program is run. It allows the
+ * user to pick which type of user they wish to login as.
+ * 
+ * Controller: ProgramLaunchController
+ * 
  */
 public class ProgramLaunchView extends JFrame {
 
@@ -26,50 +30,39 @@ public class ProgramLaunchView extends JFrame {
         //Labels
         JLabel textLabel = new JLabel("Welcome to the Student Management System!");
         JLabel textLabel2 = new JLabel("Please pick an option below:");
-        textLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
+        textLabel.setFont(new Font("Monospaced", Font.BOLD, 19));
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        textLabel2.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        textLabel2.setFont(new Font("Monospaced", Font.PLAIN, 17));
         textLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 
+        //Adding labels to main panel
+        mainPanel.add(textLabel);
+        mainPanel.add(textLabel2);
+        
         //Buttons
         JButton studentButton = new JButton("Student");
         JButton lecturerButton = new JButton("Lecturer");
         JButton adminButton = new JButton("Admin");
         JButton exitButton = new JButton("Exit");
 
-        //Styling for the buttons
+        //Styling  + config for the buttons
         JButton[] buttons = {studentButton, lecturerButton, adminButton, exitButton};
-        Dimension buttonSize = new Dimension(220, 45);
-        Font buttonFont = new Font("SansSerif", Font.PLAIN, 16);
+        ProgramLaunchController controller = new ProgramLaunchController(this);
 
         for (JButton button : buttons) {
-            button.setPreferredSize(buttonSize);
-            button.setFont(buttonFont);
+            button.setFont(new Font("Monospaced", Font.BOLD, 16));
+            button.setPreferredSize(new Dimension(220, 45));
+            button.addActionListener(controller);
+            mainPanel.add(button);
         }
 
-        //Adding components to main panel
-        mainPanel.add(textLabel);
-        mainPanel.add(textLabel2);
-        mainPanel.add(studentButton);
-        mainPanel.add(lecturerButton);
-        mainPanel.add(adminButton);
-        mainPanel.add(exitButton);
-
-        //Adding main panel to frame
-        this.add(mainPanel);
-
-        /*
-        Setting up action commands for each button, and giving them all action listeners
-        (respective controller).
-        */
-        ProgramLaunchController controller = new ProgramLaunchController(this);
+        //Action commands for controller to handle
         studentButton.setActionCommand("1");
         lecturerButton.setActionCommand("2");
         adminButton.setActionCommand("3");
         exitButton.setActionCommand("x");
 
-        for (JButton button : buttons) {
-            button.addActionListener(controller);
-        }
+        //Adding main panel to frame
+        this.add(mainPanel);
     }
 }

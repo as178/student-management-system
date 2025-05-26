@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package concrete_classes.student;
+package objects;
 
 import abstract_classes.User;
-import concrete_classes.file_input_output.FilesManager;
 import concrete_classes.other.GradesUtil;
 import java.util.HashMap;
 
@@ -13,9 +12,8 @@ import java.util.HashMap;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * The Student class extends User and overrides the toString method which is
- * later on used within the FilesManager class. The getUsersPath method is
- * overriden to return the allStudents.txt file.
+ * The Student class extends User and provides basic student
+ * attributes and methods to retrieve them.
  *
  */
 public class Student extends User {
@@ -76,17 +74,5 @@ public class Student extends User {
 
     public void setMajor(String newMajor) {
         this.major = newMajor;
-    }
-
-    @Override
-    public String toString() {
-        return id + "," + password + "," + firstName + "," + lastName + ","
-                + dateOfBirth + "," + personalEmail + "," + uniEmail + ","
-                + phoneNumber + "," + gender + "," + address + "," + major;
-    }
-
-    @Override
-    public String getUsersPath() {
-        return FilesManager.allStudentsFile;
     }
 }

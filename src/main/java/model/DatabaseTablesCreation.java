@@ -17,8 +17,9 @@ import java.sql.Statement;
  *
  * This class provides the methods to create all the necessary tables for our
  * program as well as the insertion of initial data that comes with the program.
- * If any tables already exist, there is a method in place to ensure they are
- * dropped before being created.
+ * 
+ * If any tables already exist/the database is established, they aren't recreated,
+ * ensuring the current information for a user is saved and kept.
  *
  */
 public class DatabaseTablesCreation {
@@ -75,7 +76,9 @@ public class DatabaseTablesCreation {
     }
 
     /*
-    Below are methods for creating individual tables.
+    Below are methods for creating individual tables. They enforce
+    CHECKs and CONSTRAINTs which relate to our program's Objects
+    and the restrictions imposed on data.
      */
     private void createMajorTable() {
         try {
@@ -138,15 +141,15 @@ public class DatabaseTablesCreation {
         try {
             this.statement.executeUpdate(
                     "CREATE TABLE Course (\n"
-                    + "code VARCHAR(7) PRIMARY KEY,\n"
+                    + "id VARCHAR(7) PRIMARY KEY,\n"
                     + "name VARCHAR(46) NOT NULL CHECK (LENGTH(name) BETWEEN 4 AND 46),\n"
                     + "major VARCHAR(50) NOT NULL,\n"
-                    + "prerequisite_code VARCHAR(7),\n"
+                    + "prerequisite_id VARCHAR(7),\n"
                     + "estimated_hours INT NOT NULL CHECK (estimated_hours BETWEEN 1 AND 150),\n"
                     + "lecturer_id INT,\n"
                     + "description VARCHAR(70) NOT NULL CHECK (LENGTH(description) BETWEEN 5 AND 70),\n"
                     + "FOREIGN KEY (lecturer_id) REFERENCES Lecturer(id),\n"
-                    + "FOREIGN KEY (prerequisite_code) REFERENCES Course(code),\n"
+                    + "FOREIGN KEY (prerequisite_id) REFERENCES Course(id),\n"
                     + "FOREIGN KEY (major) REFERENCES Major(name)\n"
                     + ")"
             );
@@ -183,11 +186,11 @@ public class DatabaseTablesCreation {
             this.statement.executeUpdate(
                     "CREATE TABLE EnrolledCourse (\n"
                     + "student_id INT NOT NULL,\n"
-                    + "course_code VARCHAR(7) NOT NULL,\n"
+                    + "course_id VARCHAR(7) NOT NULL,\n"
                     + "grade FLOAT CHECK (grade IS NULL OR grade = -1 OR (grade >= 0.0 AND grade <= 100.0)),\n"
-                    + "PRIMARY KEY (student_id, course_code),\n"
+                    + "PRIMARY KEY (student_id, course_id),\n"
                     + "FOREIGN KEY (student_id) REFERENCES Student(id),\n"
-                    + "FOREIGN KEY (course_code) REFERENCES Course(code)\n"
+                    + "FOREIGN KEY (course_id) REFERENCES Course(id)\n"
                     + ")"
             );
         } catch (SQLException ex) {
@@ -200,11 +203,11 @@ public class DatabaseTablesCreation {
             this.statement.executeUpdate(
                     "CREATE TABLE PreviousCourse (\n"
                     + "student_id INT NOT NULL,\n"
-                    + "course_code VARCHAR(7) NOT NULL,\n"
+                    + "course_id VARCHAR(7) NOT NULL,\n"
                     + "grade FLOAT CHECK (grade IS NULL OR grade = -1 OR (grade >= 0.0 AND grade <= 100.0)),\n"
-                    + "PRIMARY KEY (student_id, course_code),\n"
+                    + "PRIMARY KEY (student_id, course_id),\n"
                     + "FOREIGN KEY (student_id) REFERENCES Student(id),\n"
-                    + "FOREIGN KEY (course_code) REFERENCES Course(code)\n"
+                    + "FOREIGN KEY (course_id) REFERENCES Course(id)\n"
                     + ")"
             );
         } catch (SQLException ex) {

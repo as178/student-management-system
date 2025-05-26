@@ -8,8 +8,8 @@ package concrete_classes.other;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * This class has validation methods used when userInput is requested; it
- * enforces restrictions required for certain fields within the program.
+ * This class has validation methods used to check and validate user input;
+ * it enforces restrictions required for certain fields within the program.
  *
  */
 public final class ValidationUtil {
@@ -44,14 +44,14 @@ public final class ValidationUtil {
     }
 
     public static String formatPhoneNumber(String phoneNumber) {
-        //removes whitespaces from the phonenumber, replacing them with an empty string
+        //removes whitespaces from the phone number, replacing them with an empty string
         return phoneNumber.replaceAll("\\s+", "");
     }
 
     public static boolean checkAddress(String address) {
         //check format of address is "number, 4–6 words, then 4 digit postcode"
         //e.g. 123 Street Name Suburb City 1234
-        //ensures no commas are included
+        //ensures no commas are included (aesthetic choice in this project)
         return address.matches("^\\d+\\s+(?:[A-Za-z-]+\\s+){3,5}[A-Za-z-]+\\s+\\d{4}$")
                 && !address.contains(",");
     }

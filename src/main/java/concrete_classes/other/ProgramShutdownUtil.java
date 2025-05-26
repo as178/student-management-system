@@ -8,7 +8,7 @@ package concrete_classes.other;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * This class handles the full shutdown of the program.
+ * This utility class handles the full shutdown of the program.
  *
  */
 public final class ProgramShutdownUtil {

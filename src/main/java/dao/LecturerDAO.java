@@ -5,7 +5,7 @@
 package dao;
 
 import abstract_classes.User;
-import concrete_classes.lecturer.Lecturer;
+import objects.Lecturer;
 import concrete_classes.other.PopUpUtil;
 import java.sql.Connection;
 import java.sql.Date;
@@ -96,6 +96,8 @@ public class LecturerDAO implements UserDAOInterface<User> {
         } catch (SQLException ex) {
             PopUpUtil.displayError("An error occurred while updating Lecturer.");
         }
+
+        PopUpUtil.displayInfo("Details updated successfully!");
     }
 
     /*
