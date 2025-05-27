@@ -9,6 +9,7 @@ import dao.CourseDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import objects.Lecturer;
+import view.lecturer_view.LecturerCourseStudentsListView;
 import view.lecturer_view.LecturerDashboardView;
 import view.lecturer_view.LecturerEditCoursesView;
 import view.lecturer_view.LecturerManageCoursesView;
@@ -24,7 +25,6 @@ import view.lecturer_view.LecturerManageCoursesView;
 public class LecturerManageCoursesController implements ActionListener {
 
     private LecturerManageCoursesView view1;
-    //private StudentEnrollCoursesView view2;
     private Lecturer currentLecturer;
     private CourseDAO courseDAO;
 
@@ -33,12 +33,6 @@ public class LecturerManageCoursesController implements ActionListener {
         this.currentLecturer = currentLecturer;
         this.courseDAO = new CourseDAO();
     }
-//    
-//    public StudentModifyCoursesController(StudentEnrollCoursesView view, Student currentStudent) {
-//        this.view2 = view;
-//        this.currentStudent = currentStudent;
-//        this.courseDAO = new CourseDAO();
-//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -50,7 +44,7 @@ public class LecturerManageCoursesController implements ActionListener {
                 break;
 
             case "l":
-                //NavigationUtil.newFrame(new StudentAcademicDetailsView(currentStudent));
+                NavigationUtil.newFrame(new LecturerCourseStudentsListView(courseDAO.getById(command[1])));
                 break;
 
             case "b":

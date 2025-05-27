@@ -19,6 +19,8 @@ import java.awt.*;
  * This class displays the courses the lecturer user is teaching; further
  * options are provided for editing the course information and listing students
  * within a chosen course (grades configuration).
+ * 
+ * Controller: LecturerManageCoursesController
  *
  */
 public class LecturerManageCoursesView extends JFrame {

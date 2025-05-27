@@ -230,7 +230,6 @@ public class CourseDAO implements CourseDAOInterface {
     for a specific course. It returns a hashmap of students' ids and their grades.
     
     - if the grade is:
-    > "-1.0" ==> the student is considered "Withdrawn"
     > "null" ==> the student hasn't be graded yet
     > otherwise the grade is saved as a String
      */
@@ -251,8 +250,6 @@ public class CourseDAO implements CourseDAOInterface {
 
                 if (grade == null) {
                     studentGrades.put(studentId, null);
-                } else if (grade == -1.0f) {
-                    studentGrades.put(studentId, "Withdrawn");
                 } else {
                     studentGrades.put(studentId, String.valueOf(grade));
                 }

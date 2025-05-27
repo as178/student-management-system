@@ -8,8 +8,8 @@ package concrete_classes.other;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * This class has validation methods used to check and validate user input;
- * it enforces restrictions required for certain fields within the program.
+ * This class has validation methods used to check and validate user input; it
+ * enforces restrictions required for certain fields within the program.
  *
  */
 public final class ValidationUtil {
@@ -74,5 +74,21 @@ public final class ValidationUtil {
     //version of method to be called whenever the input is an integer
     public static boolean checkIntegerRange(int inputNumber, int lowestNumber, int highestNumber) {
         return inputNumber >= lowestNumber && inputNumber <= highestNumber; //returns whether the input number is within given range
+    }
+
+    //version of above to be called when dealing with float values
+    public static boolean checkFloatRange(String inputFloat, int lowestFloat, int highestFloat) {
+        //if the inputFloat String is empty or null
+        if (inputFloat == null || inputFloat.trim().isBlank()) {
+            return false;
+        }
+        try {
+            //otherwisse parse into a validFloat Integer
+            int validFloat = Integer.parseInt(inputFloat.trim());
+            //check if the float is within the given range
+            return validFloat >= lowestFloat && validFloat <= highestFloat;
+        } catch (NumberFormatException e) { //if it's not a valid float, return false
+            return false;
+        }
     }
 }

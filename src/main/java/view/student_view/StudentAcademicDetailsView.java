@@ -20,6 +20,9 @@ import java.util.HashMap;
  * includes their GPA, major, current courses and grades. Further options are
  * also displayed.
  *
+ * Controller: StudentAcademicDetailsController
+ *
+ *
  */
 public class StudentAcademicDetailsView extends JFrame {
 

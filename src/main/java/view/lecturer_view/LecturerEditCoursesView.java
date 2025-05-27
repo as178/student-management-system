@@ -21,7 +21,7 @@ import java.awt.event.ActionListener;
  *
  * View which is shown when a Lecturer wishes to update course information of
  * the courses they teach.
- *
+ * 
  */
 public class LecturerEditCoursesView extends JFrame {
 

@@ -20,7 +20,7 @@ public final class PopUpUtil {
 
     /*
     Informative pop-ups, with small customisations for Information, Errors & Warnings.
-    */
+     */
     public static void displayInfo(String message) {
         JOptionPane.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -35,7 +35,7 @@ public final class PopUpUtil {
 
     /*
     Confirmation pop-ups for user actions (Information) and alerts (Warnings).
-    */
+     */
     public static int displayConfirmWarning(String message) {
         return JOptionPane.showConfirmDialog(
                 null, message, "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -44,5 +44,12 @@ public final class PopUpUtil {
     public static int displayConfirmInfo(String message) {
         return JOptionPane.showConfirmDialog(
                 null, message, "Information", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /*
+    Input pop-up for user input.
+     */
+    public static String displayInputInfo(String message) {
+        return JOptionPane.showInputDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
 }

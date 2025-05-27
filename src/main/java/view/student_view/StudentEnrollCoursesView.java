@@ -90,7 +90,7 @@ public class StudentEnrollCoursesView extends JFrame {
             }
             
             //text formatting for displaying course id and names, as well as prerequisites
-            String prerequisite = (course.getCoursePrerequisite() == null ? "  None" : course.getCoursePrerequisite());
+            String prerequisite = (course.getCoursePrerequisite() == null ? " None" : course.getCoursePrerequisite());
             JLabel courseLabel = new JLabel("  >  " + course.getCourseId() + "   --->   " + prerequisite);
             courseLabel.setFont(new Font("Monospaced", Font.PLAIN, 16));
             courseLabel.setPreferredSize(new Dimension(400, 25)); // Fixed width label

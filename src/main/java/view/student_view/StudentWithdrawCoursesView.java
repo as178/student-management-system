@@ -22,6 +22,8 @@ import javax.swing.*;
  *
  * This class displays the student's current enrollments and provides them with
  * further options (to enroll into more courses or withdraw from enrollments).
+ * 
+ * Controller: StudentModifyCoursesController
  *
  */
 public class StudentWithdrawCoursesView extends JFrame {
@@ -100,7 +102,7 @@ public class StudentWithdrawCoursesView extends JFrame {
                     row.setBorder(BorderFactory.createEmptyBorder(4, 0, 4, 0));
 
                     coursePanel.add(row);
-                    coursePanel.add(Box.createVerticalStrut(6)); // Optional: consistent tight spacing
+                    coursePanel.add(Box.createVerticalStrut(6)); 
 
                 }
             }
