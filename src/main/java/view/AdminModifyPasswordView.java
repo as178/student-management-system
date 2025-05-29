@@ -39,8 +39,8 @@ public class AdminModifyPasswordView extends UserViewAndModifyDetailsView {
     protected JPanel buildFormPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        Font labelFont = new Font("SansSerif", Font.BOLD, 16);
-        Font labelFont2 = new Font("SansSerif", Font.PLAIN, 14);
+        Font labelFont = new Font("Monospaced", Font.BOLD, 16);
+        Font labelFont2 = new Font("Monospaced", Font.PLAIN, 14);
 
         panel.add(Box.createVerticalStrut(10));
         panel.add(createLabel("Full Name:", labelFont));

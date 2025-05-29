@@ -5,15 +5,15 @@
 package view;
 
 import abstract_classes.UserViewAndModifyDetailsView;
-import concrete_classes.admin.Admin;
+import concrete_classes.lecturer.Lecturer;
 
 /**
  *
- * @author Angela Saric (24237573) & William Niven (24229618)
+ * @author williamniven
  */
-public class AdminViewDetailsView extends UserViewAndModifyDetailsView {
-
-    public AdminViewDetailsView(Admin currentAdmin) {
-        super(currentAdmin);
+public class LecturerViewDetailsView extends UserViewAndModifyDetailsView {
+    
+    public LecturerViewDetailsView(Lecturer currentLecturer){
+        super(currentLecturer);
     }
 }

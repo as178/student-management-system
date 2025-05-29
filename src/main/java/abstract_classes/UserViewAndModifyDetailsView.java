@@ -166,7 +166,7 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
             if (currentUser instanceof Student) {
                 NavigationUtil.newFrame(new StudentDashboardView((Student) currentUser));
             } else if (currentUser instanceof Lecturer) {
-                //NavigationUtil.newFrame(new LecturerDashboardView((Lecturer) currentUser));
+                NavigationUtil.newFrame(new LecturerDashboardView((Lecturer) currentUser));
             } else if (currentUser instanceof Admin) {
                 NavigationUtil.newFrame(new AdminDashboardView((Admin) currentUser));
             }
