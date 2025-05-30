@@ -14,6 +14,7 @@ import objects.Lecturer;
 import view.LoginView;
 import view.lecturer_view.LecturerDashboardView;
 import view.lecturer_view.LecturerManageCoursesView;
+import view.lecturer_view.LecturerViewDetailsView;
 
 /**
  *
@@ -55,7 +56,7 @@ public class LecturerDashboardController implements ActionListener {
 
         switch (command) {
             case "1": //View My Details
-                //NavigationUtil.newFrame(new StudentViewDetailsView(currentLecturer));
+                NavigationUtil.newFrame(new LecturerViewDetailsView(currentLecturer));
                 break;
             case "2": //Manage My Courses
                 NavigationUtil.newFrame(new LecturerManageCoursesView(currentLecturer));
