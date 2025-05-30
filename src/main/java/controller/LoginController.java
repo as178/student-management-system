@@ -7,12 +7,14 @@ package controller;
 import abstract_classes.User;
 import concrete_classes.other.NavigationUtil;
 import concrete_classes.other.PopUpUtil;
-import objects.Student;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import objects.Admin;
 import objects.Lecturer;
+import objects.Student;
 import view.LoginView;
 import view.ProgramLaunchView;
+import view.admin_view.AdminDashboardView;
 import view.lecturer_view.LecturerDashboardView;
 import view.student_view.StudentDashboardView;
 
@@ -64,7 +66,7 @@ public class LoginController implements ActionListener {
                         NavigationUtil.newFrame(new LecturerDashboardView((Lecturer) UserController.getCurrentUser()));
                         break;
                     case "3":
-                        //NavigationUtil.newFrame(new AdminDashboardView());
+                        NavigationUtil.newFrame(new AdminDashboardView((Admin) UserController.getCurrentUser()));
                         break;
                 }
             } else {

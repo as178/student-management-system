@@ -4,21 +4,23 @@
  */
 package abstract_classes;
 
-import view.student_view.StudentDashboardView;
-import objects.Lecturer;
-import objects.Admin;
 import concrete_classes.other.NavigationUtil;
 import concrete_classes.other.PopUpUtil;
 import concrete_classes.other.ValidationUtil;
-import objects.Student;
 import controller.UserController;
 import dao.AdminDAO;
 import dao.LecturerDAO;
 import dao.StudentDAO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+import objects.Admin;
+import objects.Lecturer;
+import objects.Student;
+import view.admin_view.AdminDashboardView;
+import view.lecturer_view.LecturerDashboardView;
+import view.student_view.StudentDashboardView;
 
 /**
  *
@@ -31,9 +33,9 @@ import java.awt.event.ActionListener;
  */
 public abstract class UserViewAndModifyDetailsView extends JFrame {
 
-    private User currentUser;
-    private JPasswordField passwordField; //special text field to hide password being typed in
-    private JTextField emailField, phoneField, addressField;
+    public User currentUser;
+    public JPasswordField passwordField; //special text field to hide password being typed in
+    protected JTextField emailField, phoneField, addressField;
 
     public UserViewAndModifyDetailsView(User currentUser) {
 
@@ -71,7 +73,7 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
     /*
     Method to configure the form panel.
      */
-    private JPanel buildFormPanel() {
+    protected JPanel buildFormPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); //laying out components top to bottom
 
@@ -124,7 +126,7 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
     /*
     Small helper method for making quick labels with a specified font.
      */
-    private JLabel createLabel(String text, Font font) {
+    protected JLabel createLabel(String text, Font font) {
         JLabel label = new JLabel(text);
         label.setFont(font);
         return label;
@@ -134,7 +136,7 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
     Small helper method for making quick labels for providing the
     user with formatting hints for editable fields.
      */
-    private JLabel createHintLabel(String text) {
+    protected JLabel createHintLabel(String text) {
         JLabel hint = new JLabel(text);
         hint.setFont(new Font("Monospaced", Font.ITALIC, 13));
         hint.setForeground(Color.GRAY);
@@ -144,7 +146,7 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
     /*
     Method for configuring the button panel.
      */
-    private JPanel buildButtonPanel() {
+    protected JPanel buildButtonPanel() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10)); //each row to be centered with custom gaps
 
         JButton saveButton = new JButton("Save Changes");
@@ -178,18 +180,7 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int confirmation = PopUpUtil.displayConfirmInfo(
-                        "Are you sure you want to go back?\nYour changes won't be saved.");
-
-                if (confirmation == JOptionPane.YES_OPTION) {
-                    if (currentUser instanceof Student) {
-                        NavigationUtil.newFrame(new StudentDashboardView((Student) currentUser));
-                    } else if (currentUser instanceof Lecturer) {
-                        //NavigationUtil.newFrame(new LecturerDashboardView((Lecturer) currentUser));
-                    } else if (currentUser instanceof Admin) {
-                        //NavigationUtil.newFrame(new AdminDashboardView((Admin) currentUser));
-                    }
-                }
+                handleBack();
             }
         });
 
@@ -217,7 +208,7 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
     alerted, otherwise their information is saved in memory and in
     the database.
      */
-    private void handleSave() {
+    protected void handleSave() {
         String newPassword = new String(passwordField.getPassword()).trim();
         String newEmail = emailField.getText().trim();
         String newPhone = phoneField.getText().trim();
@@ -263,6 +254,21 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
             AdminDAO adminDAO = new AdminDAO();
             adminDAO.update(currentUser);
             UserController.setCurrentUsers(adminDAO.getAllUsers());
+        }
+    }
+
+    protected void handleBack() {
+        int confirmation = PopUpUtil.displayConfirmInfo(
+                "Are you sure you want to go back?\nYour changes won't be saved.");
+
+        if (confirmation == JOptionPane.YES_OPTION) {
+            if (currentUser instanceof Student) {
+                NavigationUtil.newFrame(new StudentDashboardView((Student) currentUser));
+            } else if (currentUser instanceof Lecturer) {
+                NavigationUtil.newFrame(new LecturerDashboardView((Lecturer) currentUser));
+            } else if (currentUser instanceof Admin) {
+                NavigationUtil.newFrame(new AdminDashboardView((Admin) currentUser));
+            }
         }
     }
 }
