@@ -4,9 +4,8 @@
  */
 package abstract_classes;
 
-import concrete_classes.lecturer.Lecturer;
 import concrete_classes.admin.Admin;
-import view.*;
+import concrete_classes.lecturer.Lecturer;
 import concrete_classes.other.NavigationUtil;
 import concrete_classes.other.PopUpUtil;
 import concrete_classes.other.ValidationUtil;
@@ -15,10 +14,11 @@ import controller.UserController;
 import dao.AdminDAO;
 import dao.LecturerDAO;
 import dao.StudentDAO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+import view.*;
 
 /**
  *
@@ -29,8 +29,8 @@ import java.awt.event.ActionListener;
  */
 public abstract class UserViewAndModifyDetailsView extends JFrame {
 
-    private User currentUser;
-    private JPasswordField passwordField;
+    protected User currentUser;
+    protected JPasswordField passwordField;
     private JTextField emailField, phoneField, addressField;
 
     public UserViewAndModifyDetailsView(User currentUser) {
@@ -41,8 +41,8 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
 
-        JLabel headerLabel = new JLabel("View/Modify your Information", SwingConstants.CENTER);
-        headerLabel.setFont(new Font("SansSerif", Font.BOLD, 21));
+        JLabel headerLabel = new JLabel("View/Modify User Information", SwingConstants.CENTER);
+        headerLabel.setFont(new Font("Monospaced", Font.BOLD, 21));
         mainPanel.add(headerLabel, BorderLayout.NORTH);
 
         JPanel formPanel = buildFormPanel();
@@ -57,11 +57,11 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
         setVisible(true);
     }
 
-    private JPanel buildFormPanel() {
+    protected JPanel buildFormPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        Font labelFont = new Font("SansSerif", Font.BOLD, 16);
-        Font labelFont2 = new Font("SansSerif", Font.PLAIN, 14);
+        Font labelFont = new Font("Monospaced", Font.BOLD, 16);
+        Font labelFont2 = new Font("Monospaced", Font.PLAIN, 14);
 
         panel.add(Box.createVerticalStrut(10));
         panel.add(createLabel("Full Name:", labelFont));
@@ -106,20 +106,20 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
         return panel;
     }
 
-    private JLabel createLabel(String text, Font font) {
+    protected JLabel createLabel(String text, Font font) {
         JLabel label = new JLabel(text);
         label.setFont(font);
         return label;
     }
 
-    private JLabel createHintLabel(String text) {
+    protected JLabel createHintLabel(String text) {
         JLabel hint = new JLabel(text);
-        hint.setFont(new Font("SansSerif", Font.ITALIC, 13));
+        hint.setFont(new Font("Monospaced", Font.ITALIC, 13));
         hint.setForeground(Color.GRAY);
         return hint;
     }
 
-    private JPanel buildButtonPanel() {
+    protected JPanel buildButtonPanel() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
         JButton saveButton = new JButton("Save Changes");
@@ -136,22 +136,7 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int confirmation = JOptionPane.showConfirmDialog(
-                        null,
-                        "Are you sure you want to go back?\nYour changes won't be saved.",
-                        "Go Back Confirmation",
-                        JOptionPane.YES_NO_OPTION
-                );
-
-                if (confirmation == JOptionPane.YES_OPTION) {
-                    if (currentUser instanceof Student) {
-                        NavigationUtil.newFrame(new StudentDashboardView((Student) currentUser));
-                    } else if (currentUser instanceof Lecturer) {
-                        //NavigationUtil.newFrame(new LecturerDashboardView((Lecturer) currentUser));
-                    } else if (currentUser instanceof Admin) {
-                        //NavigationUtil.newFrame(new AdminDashboardView((Admin) currentUser));
-                    }
-                }
+                handleBack();
             }
         });
 
@@ -169,7 +154,26 @@ public abstract class UserViewAndModifyDetailsView extends JFrame {
         return panel;
     }
 
-    private void handleSave() {
+    protected void handleBack() {
+        int confirmation = JOptionPane.showConfirmDialog(
+                null,
+                "Are you sure you want to go back?\nYour changes won't be saved.",
+                "Go Back Confirmation",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirmation == JOptionPane.YES_OPTION) {
+            if (currentUser instanceof Student) {
+                NavigationUtil.newFrame(new StudentDashboardView((Student) currentUser));
+            } else if (currentUser instanceof Lecturer) {
+                NavigationUtil.newFrame(new LecturerDashboardView((Lecturer) currentUser));
+            } else if (currentUser instanceof Admin) {
+                NavigationUtil.newFrame(new AdminDashboardView((Admin) currentUser));
+            }
+        }
+    }
+
+    protected void handleSave() {
         String newPassword = new String(passwordField.getPassword()).trim();
         String newEmail = emailField.getText().trim();
         String newPhone = phoneField.getText().trim();
