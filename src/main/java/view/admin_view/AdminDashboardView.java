@@ -22,7 +22,7 @@ import objects.Admin;
  */
 public class AdminDashboardView extends JFrame {
 
-    private JButton viewDetailsButton, changeuserpasswordButton, logoutButton, exitButton;
+    private JButton viewDetailsButton, changeUserPasswordButton, createNewUserButton,logoutButton, exitButton;
 
     public AdminDashboardView(Admin currentAdmin) {
         setTitle("Student management System: Admin Dashboard");
@@ -40,24 +40,26 @@ public class AdminDashboardView extends JFrame {
         promptLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         viewDetailsButton = new JButton("View My Details");
-        changeuserpasswordButton = new JButton("Change A Users Password");
+        changeUserPasswordButton = new JButton("Change A Users Password");
+        createNewUserButton = new JButton("Create New User");
         logoutButton = new JButton("Logout");
         exitButton = new JButton("Exit");
 
-        JButton[] buttons = {viewDetailsButton, changeuserpasswordButton, logoutButton, exitButton};
+        JButton[] buttons = {viewDetailsButton, changeUserPasswordButton, createNewUserButton,logoutButton, exitButton};
         Dimension buttonSize = new Dimension(240, 40);
         for (JButton button : buttons) {
             button.setPreferredSize(buttonSize);
             button.setFont(new Font("Monospaced", Font.PLAIN, 14));
         }
 
-        JPanel mainPanel = new JPanel(new GridLayout(7, 1, 15, 15));
+        JPanel mainPanel = new JPanel(new GridLayout(0, 1, 15, 15));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 60, 30, 60));
         mainPanel.add(welcomeLabel);
         mainPanel.add(nameLabel);
         mainPanel.add(promptLabel);
         mainPanel.add(viewDetailsButton);
-        mainPanel.add(changeuserpasswordButton);
+        mainPanel.add(changeUserPasswordButton);
+        mainPanel.add(createNewUserButton);
         mainPanel.add(logoutButton);
         mainPanel.add(exitButton);
 
@@ -69,7 +71,8 @@ public class AdminDashboardView extends JFrame {
          */
         AdminDashboardController controller = new AdminDashboardController(this, currentAdmin);
         viewDetailsButton.setActionCommand("1");
-        changeuserpasswordButton.setActionCommand("2");
+        changeUserPasswordButton.setActionCommand("2");
+        createNewUserButton.setActionCommand("3");
         logoutButton.setActionCommand("b");
         exitButton.setActionCommand("x");
 

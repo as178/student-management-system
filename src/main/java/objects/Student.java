@@ -21,6 +21,9 @@ public class Student extends User {
     protected String major;
     protected HashMap<String, Float> enrolledCourses;
     protected HashMap<String, Float> previousCourses;
+    
+    public Student(){
+    }
 
     public Student(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address, String major) {

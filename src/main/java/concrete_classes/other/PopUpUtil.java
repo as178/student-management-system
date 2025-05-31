@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
  */
 public final class PopUpUtil {
 
-    private PopUpUtil() {}
+    private PopUpUtil() {
+    }
 
     /*
     Informative pop-ups, with small customisations for Information, Errors & Warnings.
@@ -51,5 +52,28 @@ public final class PopUpUtil {
      */
     public static String displayInputInfo(String message) {
         return JOptionPane.showInputDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    //returns String for object creation
+    public static String CreateUserTypeSelection() {
+        Object[] options = {"Student", "Lecturer"};
+
+        int selection = JOptionPane.showOptionDialog(null,
+                "Which type of user would you like to create?",
+                "Select User Type",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0] //default selection
+        );
+        
+        if (selection == 0) {
+            return "Student";
+        } else if (selection == 1) {
+            return "Lecturer";
+        } else {
+            return null; // User closed the dialog
+        }
     }
 }

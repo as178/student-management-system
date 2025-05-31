@@ -4,13 +4,18 @@
  */
 package controller.admin_controllers;
 
+import abstract_classes.User;
 import concrete_classes.other.NavigationUtil;
+import concrete_classes.other.PopUpUtil;
 import controller.UserController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import objects.Admin;
+import objects.Lecturer;
+import objects.Student;
 import view.LoginView;
+import view.admin_view.AdminCreateUserView;
 import view.admin_view.AdminDashboardView;
 import view.admin_view.AdminLoadUserView;
 import view.admin_view.AdminViewDetailsView;
@@ -53,13 +58,19 @@ public class AdminDashboardController implements ActionListener {
                 return;
             }
         }
-        
+
         switch (command) {
             case "1":
                 NavigationUtil.newFrame(new AdminViewDetailsView(currentAdmin));
                 break;
             case "2":
                 NavigationUtil.newFrame(new AdminLoadUserView(currentAdmin));
+            case "3":
+                String userType = PopUpUtil.CreateUserTypeSelection();
+                if (userType != null) {
+                    User newUser = userType.equals("Student") ? new Student() : new Lecturer();
+                    NavigationUtil.newFrame(new AdminCreateUserView(newUser, currentAdmin));
+                }  
         }
     }
 }

@@ -19,6 +19,9 @@ public class Lecturer extends User {
 
     protected String faculty;
     protected HashMap<String, Course> coursesTaught;
+    
+    public Lecturer(){
+    }
 
     public Lecturer(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address, String faculty) {
