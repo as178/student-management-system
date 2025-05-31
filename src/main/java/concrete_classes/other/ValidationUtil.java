@@ -91,4 +91,9 @@ public final class ValidationUtil {
             return false;
         }
     }
+    
+    //check if name is 1-50 char
+    public static boolean checkNameLength(String name){
+        return (name.length() > 0 && name.length() <= 50);
+    }
 }

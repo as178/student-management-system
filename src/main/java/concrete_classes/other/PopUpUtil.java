@@ -55,7 +55,7 @@ public final class PopUpUtil {
     }
 
     //returns String for object creation
-    public static String CreateUserTypeSelection() {
+    public static String createUserTypeSelection() {
         Object[] options = {"Student", "Lecturer"};
 
         int selection = JOptionPane.showOptionDialog(null,
@@ -68,12 +68,13 @@ public final class PopUpUtil {
                 options[0] //default selection
         );
         
-        if (selection == 0) {
-            return "Student";
-        } else if (selection == 1) {
-            return "Lecturer";
-        } else {
-            return null; // User closed the dialog
+        switch(selection){
+            case 0:
+                return "Student";
+            case 1:
+                return "Lecturer";
+            default:
+                return null;
         }
     }
 }

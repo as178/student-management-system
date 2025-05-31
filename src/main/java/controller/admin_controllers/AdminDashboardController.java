@@ -65,12 +65,14 @@ public class AdminDashboardController implements ActionListener {
                 break;
             case "2":
                 NavigationUtil.newFrame(new AdminLoadUserView(currentAdmin));
+                break;
             case "3":
-                String userType = PopUpUtil.CreateUserTypeSelection();
+                String userType = PopUpUtil.createUserTypeSelection();
                 if (userType != null) {
                     User newUser = userType.equals("Student") ? new Student() : new Lecturer();
                     NavigationUtil.newFrame(new AdminCreateUserView(newUser, currentAdmin));
-                }  
+                }
+                break;
         }
     }
 }

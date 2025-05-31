@@ -27,7 +27,6 @@ public abstract class User {
     protected String address;
     
     public User(){
-        
     }
 
     public User(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,

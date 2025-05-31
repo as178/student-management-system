@@ -62,17 +62,14 @@ public class AdminModifyPasswordView extends UserViewAndModifyDetailsView {
 
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Email:", labelFont));
-        panel.add(createHintLabel("e.g. user@example.com"));
         panel.add(createLabel(currentUser.getPersonalEmail(), labelFont2));  // as label
 
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Phone Number:", labelFont));
-        panel.add(createHintLabel("e.g. xxx xxx xxxx, +xx xx xxx xxxx, xxxxxxxxxx"));
         panel.add(createLabel(currentUser.getPhoneNumber(), labelFont2));  // as label
 
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Address:", labelFont));
-        panel.add(createHintLabel("e.g. 123 Street Name Suburb City 1234. No commas allowed."));
         panel.add(createLabel(currentUser.getAddress(), labelFont2));  // as label
 
         panel.add(Box.createVerticalStrut(10));

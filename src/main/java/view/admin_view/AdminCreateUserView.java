@@ -9,7 +9,10 @@ import abstract_classes.UserViewAndModifyDetailsView;
 import concrete_classes.other.NavigationUtil;
 import concrete_classes.other.PopUpUtil;
 import concrete_classes.other.ValidationUtil;
+import dao.LecturerDAO;
+import dao.StudentDAO;
 import java.awt.Font;
+import java.util.Random;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -37,10 +40,10 @@ public class AdminCreateUserView extends UserViewAndModifyDetailsView {
         super(newUser);
         this.newUser = newUser;
         this.currentAdmin = currentAdmin;
-        this.setTitle("Create New User");
+        this.setTitle("Student Management System: Create New User");
     }
 
-    private JTextField firstNameField, lastNameField, dobField, uniEmailField;
+    private JTextField firstNameField, lastNameField, dobField;
 
     //radio buttons for choosing gender
     private JRadioButton maleRadio, femaleRadio;
@@ -75,12 +78,6 @@ public class AdminCreateUserView extends UserViewAndModifyDetailsView {
         dobField = new JTextField();
         dobField.setFont(labelFont2);
         panel.add(dobField);
-
-        panel.add(Box.createVerticalStrut(20));
-        panel.add(createLabel("University Email:", labelFont));
-        uniEmailField = new JTextField();
-        uniEmailField.setFont(labelFont2);
-        panel.add(uniEmailField);
 
         //Gender Stuff
         panel.add(Box.createVerticalStrut(20));
@@ -157,11 +154,10 @@ public class AdminCreateUserView extends UserViewAndModifyDetailsView {
 
     @Override
     protected void handleSave() {
-        int id;
+        int id = generateNewUserID(currentUser);
         String firstName = firstNameField.getText().trim();
         String lastName = lastNameField.getText().trim();
         String dob = dobField.getText().trim();
-        String uniEmail = uniEmailField.getText().trim();
         String password = new String(passwordField.getPassword()).trim();
         String email = emailField.getText().trim();
         String phone = phoneField.getText().trim();
@@ -175,6 +171,9 @@ public class AdminCreateUserView extends UserViewAndModifyDetailsView {
             gender = 'M';
         } else if (femaleRadio.isSelected()) {
             gender = 'F';
+        } else {
+            PopUpUtil.displayError("Please select gender,\nplease try again.");
+            return;
         }
 
         if (!ValidationUtil.checkPassword(password)) {
@@ -187,12 +186,6 @@ public class AdminCreateUserView extends UserViewAndModifyDetailsView {
             return;
         }
 
-        if (!ValidationUtil.checkEmail(uniEmail)) {
-            PopUpUtil.displayError("Invalid email address,\nplease try again.");
-            return;
-        }
-
-        //check a gender has been selected
         if (gender == null) {
             PopUpUtil.displayError("Please select a gender.");
             return;
@@ -208,10 +201,19 @@ public class AdminCreateUserView extends UserViewAndModifyDetailsView {
             return;
         }
 
-        if (firstName == null || lastName == null) {
-            PopUpUtil.displayError("Invalid name,\nplease try again.");
+        //word limit 1-50 for first and last name in validation util 
+        if (!ValidationUtil.checkNameLength(firstName)) {
+            PopUpUtil.displayError("First name must be from 1 - 50 characters,\nplease try again.");
             return;
         }
+
+        if (!ValidationUtil.checkNameLength(lastName)) {
+            PopUpUtil.displayError("Last name be from 1 - 50 characters,\nplease try again.");
+            return;
+        }
+
+        //Create email from firstname.lastname.aut.ac.nz .lower()
+        String uniEmail = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@aut.ac.nz";
 
         /*
         if (newUser instanceof Student) {
@@ -238,6 +240,38 @@ public class AdminCreateUserView extends UserViewAndModifyDetailsView {
             NavigationUtil.newFrame(new AdminDashboardView(currentAdmin));
         }
          */
+    }
+
+    //null or user obj
+    private int generateNewUserID(User currentUser) {
+        Random rand = new Random();
+        if (currentUser instanceof Student) {
+            //student id range id BETWEEN 20000000 AND 29999999
+            int randomId = 20000000 + rand.nextInt(10000000);
+
+            StudentDAO studentDAO = new StudentDAO();
+
+            while (studentDAO.getById(randomId) != null) {
+                //regenerate randomId
+                randomId = 20000000 + rand.nextInt(10000000);
+            }
+
+            return randomId;
+
+        } else if (currentUser instanceof Lecturer) {
+            //lecturer id range id BETWEEN 14000000 AND 16000000
+            int randomId = 14000000 + rand.nextInt(2000000);
+
+            LecturerDAO lecturerDAO = new LecturerDAO();
+
+            while (lecturerDAO.getById(randomId) != null) {
+                //regenerate randomId
+                randomId = 20000000 + rand.nextInt(10000000);
+            }
+
+            return randomId;
+        }
+        return 0;
     }
 
     @Override
