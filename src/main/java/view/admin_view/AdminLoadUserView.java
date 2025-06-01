@@ -5,6 +5,7 @@
 package view.admin_view;
 
 import controller.UserController;
+import controller.admin_controllers.AdminLoadUserController;
 import java.awt.*;
 import javax.swing.*;
 import objects.Admin;
