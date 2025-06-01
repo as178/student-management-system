@@ -91,4 +91,12 @@ public final class ValidationUtil {
             return false;
         }
     }
+    
+    /*
+    checks the length of the name is between 1 - 50 characters long 
+    returns boolean value
+    */
+    public static boolean checkNameLength(String name){
+        return (name.length() > 0 && name.length() <= 50);
+    }
 }

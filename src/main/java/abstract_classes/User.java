@@ -8,12 +8,11 @@ package abstract_classes;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * The abstract class that is extended by every user within
- * our program, as they all share similar attributes, and
- * methods required to retrieve/modify those attributes.
- * An abstract method for saving a currently logged in user
- * is included and must be implemented by every User.
- * 
+ * The abstract class that is extended by every user within our program, as they
+ * all share similar attributes, and methods required to retrieve/modify those
+ * attributes. An abstract method for saving a currently logged in user is
+ * included and must be implemented by every User.
+ *
  */
 public abstract class User {
 
@@ -28,6 +27,13 @@ public abstract class User {
     protected Character gender;
     protected String address;
 
+    /*
+    default constructor to create a blank user
+    used when admin creates a new Student or lecturer user
+     */
+    public User() {
+    }
+
     public User(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address) {
         this.id = id;
@@ -41,7 +47,7 @@ public abstract class User {
         this.gender = gender;
         this.address = address;
     }
-    
+
     public int getId() {
         return this.id;
     }
@@ -97,10 +103,10 @@ public abstract class User {
     public void setAddress(String newAddress) {
         this.address = newAddress;
     }
-    
+
     /*
     Abstract method to be overriden by all users;
     saves their information to memory + database.
-    */
+     */
     public abstract void saveCurrrentUser();
 }

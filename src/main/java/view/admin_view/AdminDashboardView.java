@@ -20,13 +20,13 @@ import objects.Admin;
  */
 public class AdminDashboardView extends JFrame {
 
-    private JButton viewDetailsButton, changeuserpasswordButton, logoutButton, exitButton;
+    private JButton viewDetailsButton, changeUserPasswordButton, createNewUserButton,logoutButton, exitButton;
 
     public AdminDashboardView(Admin currentAdmin) {
         setTitle("Student management System: Admin Dashboard");
 
         //Main panel config
-        JPanel mainPanel = new JPanel(new GridLayout(7, 1, 15, 15));
+        JPanel mainPanel = new JPanel(new GridLayout(8, 1, 15, 15));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 60, 30, 60));
 
         //Initial text labels to greet the admin
@@ -47,11 +47,12 @@ public class AdminDashboardView extends JFrame {
 
         //Buttons, config + styling
         viewDetailsButton = new JButton("View My Details");
-        changeuserpasswordButton = new JButton("Change a User's Password");
+        changeUserPasswordButton = new JButton("Change a User's Password");
+        createNewUserButton = new JButton("Create a New User");
         logoutButton = new JButton("Logout");
         exitButton = new JButton("Exit");
 
-        JButton[] buttons = {viewDetailsButton, changeuserpasswordButton, logoutButton, exitButton};
+        JButton[] buttons = {viewDetailsButton, changeUserPasswordButton, createNewUserButton, logoutButton, exitButton};
         AdminDashboardController controller = new AdminDashboardController(currentAdmin);
 
         for (JButton button : buttons) {
@@ -63,7 +64,8 @@ public class AdminDashboardView extends JFrame {
 
         //Action commands for controller to handle
         viewDetailsButton.setActionCommand("1");
-        changeuserpasswordButton.setActionCommand("2");
+        changeUserPasswordButton.setActionCommand("2");
+        createNewUserButton.setActionCommand("3");
         logoutButton.setActionCommand("b");
         exitButton.setActionCommand("x");
         

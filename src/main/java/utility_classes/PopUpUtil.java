@@ -52,4 +52,32 @@ public final class PopUpUtil {
     public static String displayInputInfo(String message) {
         return JOptionPane.showInputDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    /*
+    pop-up when create new user button is pressed by admin
+    asks admin which user type to create student / lecturer 
+    2 buttons created with each user type 
+    */
+    public static String createUserTypeSelection() {
+        Object[] options = {"Student", "Lecturer"};
+
+        int selection = JOptionPane.showOptionDialog(null,
+                "Which type of user would you like to create?",
+                "Select User Type",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0] //default selection
+        );
+        
+        switch(selection){
+            case 0:
+                return "Student";
+            case 1:
+                return "Lecturer";
+            default:
+                return null;
+        }
+    }
 }

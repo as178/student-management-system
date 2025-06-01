@@ -22,6 +22,13 @@ public class Lecturer extends User {
     protected String faculty;
     protected HashMap<String, Course> coursesTaught;
 
+    /*
+    default constructor to create a blank user
+    used when admin creates a new lecturer user
+     */
+    public Lecturer() {
+    }
+
     public Lecturer(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address, String faculty) {
         super(id, password, firstName, lastName, dateOfBirth, personalEmail, uniEmail, phoneNumber, gender, address);

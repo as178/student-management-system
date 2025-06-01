@@ -24,6 +24,13 @@ public class Student extends User {
     protected HashMap<String, Float> enrolledCourses;
     protected HashMap<String, Float> previousCourses;
 
+    /*
+    default constructor to create a blank user
+    used when admin creates a new Student user
+     */
+    public Student(){
+    }
+    
     public Student(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address, String major) {
         super(id, password, firstName, lastName, dateOfBirth, personalEmail, uniEmail, phoneNumber, gender, address);
