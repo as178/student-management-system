@@ -5,79 +5,68 @@
 package view.admin_view;
 
 import controller.admin_controllers.AdminDashboardController;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import java.awt.*;
+import javax.swing.*;
 import objects.Admin;
 
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * View which is shown when an Admin logs into the program.
+ *
+ * Controller: AdminDashboardController
+ *
  */
 public class AdminDashboardView extends JFrame {
 
-    private JButton viewDetailsButton, changeUserPasswordButton, createNewUserButton,logoutButton, exitButton;
+    private JButton viewDetailsButton, changeuserpasswordButton, logoutButton, exitButton;
 
     public AdminDashboardView(Admin currentAdmin) {
         setTitle("Student management System: Admin Dashboard");
 
+        //Main panel config
+        JPanel mainPanel = new JPanel(new GridLayout(7, 1, 15, 15));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 60, 30, 60));
+
+        //Initial text labels to greet the admin
         JLabel welcomeLabel = new JLabel("Welcome to the Admin Dashboard,");
         JLabel nameLabel = new JLabel(currentAdmin.getFirstName() + " " + currentAdmin.getLastName() + "!");
         JLabel promptLabel = new JLabel("What would you like to do?");
 
-        welcomeLabel.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        nameLabel.setFont(new Font("Monospaced", Font.BOLD, 18));
-        promptLabel.setFont(new Font("Monospaced", Font.PLAIN, 16));
+        welcomeLabel.setFont(new Font("Monospaced", Font.PLAIN, 18));
+        nameLabel.setFont(new Font("Monospaced", Font.BOLD, 19));
+        promptLabel.setFont(new Font("Monospaced", Font.PLAIN, 18));
 
-        welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        promptLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        //Centering the text labels + adding them to main panel
+        JLabel[] jlabels = {welcomeLabel, nameLabel, promptLabel};
+        for (JLabel label : jlabels) {
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            mainPanel.add(label);
+        }
 
+        //Buttons, config + styling
         viewDetailsButton = new JButton("View My Details");
-        changeUserPasswordButton = new JButton("Change A Users Password");
-        createNewUserButton = new JButton("Create New User");
+        changeuserpasswordButton = new JButton("Change a User's Password");
         logoutButton = new JButton("Logout");
         exitButton = new JButton("Exit");
 
-        JButton[] buttons = {viewDetailsButton, changeUserPasswordButton, createNewUserButton,logoutButton, exitButton};
-        Dimension buttonSize = new Dimension(240, 40);
+        JButton[] buttons = {viewDetailsButton, changeuserpasswordButton, logoutButton, exitButton};
+        AdminDashboardController controller = new AdminDashboardController(currentAdmin);
+
         for (JButton button : buttons) {
-            button.setPreferredSize(buttonSize);
-            button.setFont(new Font("Monospaced", Font.PLAIN, 14));
+            button.setPreferredSize(new Dimension(240, 40));
+            button.setFont(new Font("Monospaced", Font.BOLD, 14));
+            button.addActionListener(controller);
+            mainPanel.add(button);
         }
 
-        JPanel mainPanel = new JPanel(new GridLayout(0, 1, 15, 15));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 60, 30, 60));
-        mainPanel.add(welcomeLabel);
-        mainPanel.add(nameLabel);
-        mainPanel.add(promptLabel);
-        mainPanel.add(viewDetailsButton);
-        mainPanel.add(changeUserPasswordButton);
-        mainPanel.add(createNewUserButton);
-        mainPanel.add(logoutButton);
-        mainPanel.add(exitButton);
-
-        this.add(mainPanel);
-
-        /*
-        Setting up action commands for each button, and giving them all action listeners
-        (respective controller).
-         */
-        AdminDashboardController controller = new AdminDashboardController(this, currentAdmin);
+        //Action commands for controller to handle
         viewDetailsButton.setActionCommand("1");
-        changeUserPasswordButton.setActionCommand("2");
-        createNewUserButton.setActionCommand("3");
+        changeuserpasswordButton.setActionCommand("2");
         logoutButton.setActionCommand("b");
         exitButton.setActionCommand("x");
-
-        for (JButton button : buttons) {
-            button.addActionListener(controller);
-        }
+        
+        this.add(mainPanel);
     }
 }

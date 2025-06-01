@@ -4,7 +4,6 @@
  */
 package controller.admin_controllers;
 
-import abstract_classes.User;
 import concrete_classes.other.NavigationUtil;
 import concrete_classes.other.PopUpUtil;
 import controller.UserController;
@@ -12,25 +11,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import objects.Admin;
-import objects.Lecturer;
-import objects.Student;
 import view.LoginView;
-import view.admin_view.AdminCreateUserView;
-import view.admin_view.AdminDashboardView;
 import view.admin_view.AdminLoadUserView;
 import view.admin_view.AdminViewDetailsView;
 
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * This Controller is responsible for any Admin dashboard related
+ * implementations.
+ *
  */
 public class AdminDashboardController implements ActionListener {
 
-    private AdminDashboardView view;
     private Admin currentAdmin;
 
-    public AdminDashboardController(AdminDashboardView view, Admin currentAdmin) {
-        this.view = view;
+    public AdminDashboardController(Admin currentAdmin) {
         this.currentAdmin = currentAdmin;
     }
 
@@ -38,40 +35,26 @@ public class AdminDashboardController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
 
-        if ("x".equalsIgnoreCase(command)) {
-            NavigationUtil.exitProgram();
-            return;
-        }
-
-        if ("b".equalsIgnoreCase(command)) {
-
-            int confirmation = JOptionPane.showConfirmDialog(
-                    null,
-                    "Are you sure you want to logout?",
-                    "Logout Confirmation",
-                    JOptionPane.YES_NO_OPTION
-            );
-
-            if (confirmation == JOptionPane.YES_OPTION) {
-                NavigationUtil.newFrame(new LoginView("1"));
-                UserController.logOutCurrentUser();
-                return;
-            }
-        }
-
         switch (command) {
-            case "1":
+            case "1": //dashboard for viewing and modifying personal information
                 NavigationUtil.newFrame(new AdminViewDetailsView(currentAdmin));
                 break;
-            case "2":
+            case "2": //dashboard for loading up any student/lecturer user to change their password
                 NavigationUtil.newFrame(new AdminLoadUserView(currentAdmin));
                 break;
-            case "3":
-                String userType = PopUpUtil.createUserTypeSelection();
-                if (userType != null) {
-                    User newUser = userType.equals("Student") ? new Student() : new Lecturer();
-                    NavigationUtil.newFrame(new AdminCreateUserView(newUser, currentAdmin));
+            case "b": //going back will log the admin out
+
+                //confirmation pop up 
+                int confirmation = PopUpUtil.displayConfirmInfo("Are you sure you want to logout?");
+
+                //if confirmed, go back to the login window for admins + logout current admin
+                if (confirmation == JOptionPane.YES_OPTION) {
+                    NavigationUtil.newFrame(new LoginView("3"));
+                    UserController.logOutCurrentUser();
                 }
+                break;
+            case "x": //shutdown
+                NavigationUtil.exitProgram();
                 break;
         }
     }
