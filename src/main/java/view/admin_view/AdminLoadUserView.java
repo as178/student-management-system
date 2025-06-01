@@ -4,22 +4,21 @@
  */
 package view.admin_view;
 
-import controller.admin_controllers.AdminLoadUserControllers;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import controller.UserController;
+import controller.admin_controllers.AdminLoadUserController;
+import java.awt.*;
+import javax.swing.*;
 import objects.Admin;
 
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
+ *
+ * View which is shown when an Admin wishes to search up a user that they want
+ * to modify the password for.
+ *
+ * Controller: AdminLoadUserController
+ *
  */
 public class AdminLoadUserView extends JFrame {
 
@@ -27,49 +26,67 @@ public class AdminLoadUserView extends JFrame {
     private JTextField userIdField;
 
     public AdminLoadUserView(Admin currentAdmin) {
-        setTitle("Student Management System: Admin Dashboard");
+        setTitle("Student Management System: User Look-Up");
 
-        JLabel promptLabel = new JLabel("Enter a UserID");
-        promptLabel.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        promptLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        //Initial styling for main panel
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 80, 40, 80));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        userIdField = new JTextField(10);
+        //Title label styling
+        JLabel titleLabel = new JLabel("Please enter a User's ID below:");
+        titleLabel.setFont(new Font("Monospaced", Font.BOLD, 18));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+        //Form panel
+        JPanel formPanel = new JPanel(new GridLayout(2, 2, 15, 15));
+
+        //Adding field to form panel + styling
+        userIdField = new JTextField();
+        userIdField.setPreferredSize(new Dimension(200, 30)); //width 200, height 30
+        formPanel.add(userIdField);
+
+        //Buttons panel + buttons
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+
         searchButton = new JButton("Search");
         backButton = new JButton("Back");
         exitButton = new JButton("Exit");
 
+        //Buttons styling and config
         JButton[] buttons = {searchButton, backButton, exitButton};
-        Dimension buttonSize = new Dimension(240, 40);
+        AdminLoadUserController controller = new AdminLoadUserController(this, (Admin) UserController.getCurrentUser());
+
         for (JButton button : buttons) {
-            button.setPreferredSize(buttonSize);
-            button.setFont(new Font("Monospaced", Font.PLAIN, 14));
+            button.setFont(new Font("Monospaced", Font.BOLD, 14));
+            buttonPanel.add(button);
+            button.addActionListener(controller); //controller will handle events
         }
 
-        JPanel mainPanel = new JPanel(new GridLayout(7, 1, 15, 15));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 60, 30, 60));
-        mainPanel.add(promptLabel);
-        mainPanel.add(userIdField);
-        mainPanel.add(searchButton);
-        mainPanel.add(backButton);
-        mainPanel.add(exitButton);
-
-        this.add(mainPanel);
-
-        /*
-        Setting up action commands for each button, and giving them all action listeners
-        (respective controller).
-         */
-        AdminLoadUserControllers controller = new AdminLoadUserControllers(this, currentAdmin);
+        //Set action commands for controller
         searchButton.setActionCommand("1");
         backButton.setActionCommand("b");
         exitButton.setActionCommand("x");
 
-        for (JButton button : buttons) {
-            button.addActionListener(controller);
-        }
+        //Adding components to main panel
+        mainPanel.add(titleLabel);
+        mainPanel.add(formPanel);
+        mainPanel.add(buttonPanel);
+
+        //Wrapper class for centering main panel
+        JPanel wrapper = new JPanel(new GridBagLayout());
+        wrapper.add(mainPanel);
+
+        //Adding wrapper to this frame
+        this.add(wrapper);
     }
 
-    public JTextField getUserIdField() {
-        return userIdField;
+    /*
+    Small helper method for retrieving admin's
+    input from the text field.
+     */
+    public String getUserIdField() {
+        return userIdField.getText();
     }
 }
