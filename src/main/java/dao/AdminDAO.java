@@ -24,7 +24,7 @@ import dao.dao_interfaces.UserDAOInterface;
  * derived from out original FilesManager class.
  *
  */
-public class AdminDAO implements UserDAOInterface<User> {
+public class AdminDAO implements UserDAOInterface<Admin> {
 
     private Connection currentConnection = DatabaseManager.getCurrentConnection();
 
@@ -33,9 +33,7 @@ public class AdminDAO implements UserDAOInterface<User> {
     Admin table.
      */
     @Override
-    public void update(User user) {
-
-        Admin admin = (Admin) user;
+    public void update(Admin admin) {
 
         String sqlStatement = "UPDATE Admin SET password = ?, first_name = ?, last_name = ?, date_of_birth = ?, "
                 + "personal_email = ?, university_email = ?, phone_number = ?, gender = ?, address = ? "
@@ -105,7 +103,7 @@ public class AdminDAO implements UserDAOInterface<User> {
     Method to get Admin by input of ID.
      */
     @Override
-    public User getById(int id) {
+    public Admin getById(int id) {
         String sqlStatement = "SELECT * FROM Admin WHERE id = ?";
         Admin admin = null;
 

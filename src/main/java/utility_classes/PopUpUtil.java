@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
  */
 public final class PopUpUtil {
 
-    private PopUpUtil() {}
+    private PopUpUtil() {
+    }
 
     /*
     Informative pop-ups, with small customisations for Information, Errors & Warnings.
@@ -52,15 +53,17 @@ public final class PopUpUtil {
     public static String displayInputInfo(String message) {
         return JOptionPane.showInputDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
-    
-    /*
-    pop-up when create new user button is pressed by admin
-    asks admin which user type to create student / lecturer 
-    2 buttons created with each user type 
-    */
-    public static String createUserTypeSelection() {
-        Object[] options = {"Student", "Lecturer"};
 
+    /*
+    A specific method used by Admins when creating new users.
+    Asks admin which user type to create, student / lecturer;
+    2 buttons are displayed with each user type and a string
+    is returned depending on selected type.
+     */
+    public static String displayUserTypeSelection() {
+        String[] options = {"Student", "Lecturer"}; //two types
+
+        //options pop-up to let the admin choose
         int selection = JOptionPane.showOptionDialog(null,
                 "Which type of user would you like to create?",
                 "Select User Type",
@@ -70,8 +73,9 @@ public final class PopUpUtil {
                 options,
                 options[0] //default selection
         );
-        
-        switch(selection){
+
+        //return selected option or null if cancelled 
+        switch (selection) {
             case 0:
                 return "Student";
             case 1:

@@ -4,6 +4,11 @@
  */
 package utility_classes;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
@@ -25,6 +30,35 @@ public final class ValidationUtil {
         return !password.isBlank()
                 && password.length() >= 8
                 && password.length() <= 30;
+    }
+
+    //users within the program must be at least 16 years old
+    public static boolean checkDateOfBirth(String userInputDOB) {
+
+        //set date format same as is in the database
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        try {
+            LocalDate dateOfBirth = LocalDate.parse(userInputDOB, format);
+
+            //make sure the user is at least 16 years old
+            //by checking the length of time between now
+            //and when the user was born
+            LocalDate today = LocalDate.now();
+            int years = Period.between(dateOfBirth, today).getYears();
+
+            if (years < 16) {
+                PopUpUtil.displayError("The user must be at least 16 years old.");
+                return false;
+            }
+
+        } catch (DateTimeParseException e) {
+            PopUpUtil.displayError("Invalid date and/or format, please\nensure a YYYY-MM-DD format is being used.");
+            return false;
+        }
+
+        //else if the date of birth entered is correctly formatted + appropriate ==> return true
+        return true;
     }
 
     public static boolean checkEmail(String email) {
@@ -90,13 +124,5 @@ public final class ValidationUtil {
         } catch (NumberFormatException e) { //if it's not a valid float, return false
             return false;
         }
-    }
-    
-    /*
-    checks the length of the name is between 1 - 50 characters long 
-    returns boolean value
-    */
-    public static boolean checkNameLength(String name){
-        return (name.length() > 0 && name.length() <= 50);
     }
 }

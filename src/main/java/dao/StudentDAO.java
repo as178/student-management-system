@@ -5,6 +5,7 @@
 package dao;
 
 import abstract_classes.User;
+import dao.dao_interfaces.UserCreationDAOInterface;
 import utility_classes.PopUpUtil;
 import objects.Student;
 import java.sql.Connection;
@@ -24,7 +25,7 @@ import dao.dao_interfaces.UserDAOInterface;
  * derived from out original FilesManager class.
  *
  */
-public class StudentDAO implements UserDAOInterface<User> {
+public class StudentDAO implements UserDAOInterface<Student>, UserCreationDAOInterface<Student> {
 
     private Connection currentConnection = DatabaseManager.getCurrentConnection();
 
@@ -32,7 +33,7 @@ public class StudentDAO implements UserDAOInterface<User> {
     Method to get student by input of ID.
      */
     @Override
-    public User getById(int id) {
+    public Student getById(int id) {
         String sqlStatement = "SELECT * FROM Student WHERE id = ?";
         Student student = null;
 
@@ -68,9 +69,7 @@ public class StudentDAO implements UserDAOInterface<User> {
     Student table.
      */
     @Override
-    public void update(User user) {
-
-        Student student = (Student) user;
+    public void update(Student student) {
 
         String sqlStatement = "UPDATE Student SET password = ?, first_name = ?, last_name = ?, date_of_birth = ?, "
                 + "personal_email = ?, university_email = ?, phone_number = ?, gender = ?, address = ?, major = ? "
@@ -138,4 +137,39 @@ public class StudentDAO implements UserDAOInterface<User> {
         return allStudents;
     }
 
+    /*
+    This method takes a Student user and inserts
+    them into the Student table.
+     */
+    @Override
+    public void createNewUser(Student newStudent) {
+
+        String sqlStatement = "INSERT INTO Student (id, password, first_name, last_name, date_of_birth, personal_email, university_email, "
+                + "phone_number, gender, address, major) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
+
+            preparedStatement.setInt(1, newStudent.getId());
+            preparedStatement.setString(2, newStudent.getPassword());
+            preparedStatement.setString(3, newStudent.getFirstName());
+            preparedStatement.setString(4, newStudent.getLastName());
+            preparedStatement.setDate(5, Date.valueOf(newStudent.getDateOfBirth()));
+            preparedStatement.setString(6, newStudent.getPersonalEmail());
+            preparedStatement.setString(7, newStudent.getUniEmail());
+            preparedStatement.setString(8, newStudent.getPhoneNumber());
+            preparedStatement.setString(9, String.valueOf(newStudent.getGender()));
+            preparedStatement.setString(10, newStudent.getAddress());
+            preparedStatement.setString(11, newStudent.getMajor());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            PopUpUtil.displayError("An error occurred while registering new Student.");
+        }
+
+        PopUpUtil.displayInfo("The following Student was registered successfully!\n"
+                + newStudent.getId() + ", " + newStudent.getFirstName() + " " + newStudent.getLastName());
+    }
 }

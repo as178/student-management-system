@@ -5,6 +5,7 @@
 package dao;
 
 import abstract_classes.User;
+import dao.dao_interfaces.UserCreationDAOInterface;
 import objects.Lecturer;
 import utility_classes.PopUpUtil;
 import java.sql.Connection;
@@ -24,7 +25,7 @@ import dao.dao_interfaces.UserDAOInterface;
  * is derived from out original FilesManager class.
  *
  */
-public class LecturerDAO implements UserDAOInterface<User> {
+public class LecturerDAO implements UserDAOInterface<Lecturer>, UserCreationDAOInterface<Lecturer> {
 
     private Connection currentConnection = DatabaseManager.getCurrentConnection();
 
@@ -32,7 +33,7 @@ public class LecturerDAO implements UserDAOInterface<User> {
     Method to get student by input of ID.
      */
     @Override
-    public User getById(int id) {
+    public Lecturer getById(int id) {
         String sqlStatement = "SELECT * FROM Lecturer WHERE id = ?";
         Lecturer lecturer = null;
 
@@ -68,9 +69,7 @@ public class LecturerDAO implements UserDAOInterface<User> {
     Lecturer table.
      */
     @Override
-    public void update(User user) {
-
-        Lecturer lecturer = (Lecturer) user;
+    public void update(Lecturer lecturer) {
 
         String sqlStatement = "UPDATE Lecturer SET password = ?, first_name = ?, last_name = ?, date_of_birth = ?, "
                 + "personal_email = ?, university_email = ?, phone_number = ?, gender = ?, address = ?, faculty = ? "
@@ -136,5 +135,41 @@ public class LecturerDAO implements UserDAOInterface<User> {
         }
 
         return allLecturers;
+    }
+
+    /*
+    This method takes a Lecturer user and inserts
+    them into the Lecturer table.
+     */
+    @Override
+    public void createNewUser(Lecturer newLecturer) {
+
+        String sqlStatement = "INSERT INTO Lecturer (id, password, first_name, last_name, date_of_birth, personal_email, university_email, "
+                + "phone_number, gender, address, faculty) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
+
+            preparedStatement.setInt(1, newLecturer.getId());
+            preparedStatement.setString(2, newLecturer.getPassword());
+            preparedStatement.setString(3, newLecturer.getFirstName());
+            preparedStatement.setString(4, newLecturer.getLastName());
+            preparedStatement.setDate(5, Date.valueOf(newLecturer.getDateOfBirth()));
+            preparedStatement.setString(6, newLecturer.getPersonalEmail());
+            preparedStatement.setString(7, newLecturer.getUniEmail());
+            preparedStatement.setString(8, newLecturer.getPhoneNumber());
+            preparedStatement.setString(9, String.valueOf(newLecturer.getGender()));
+            preparedStatement.setString(10, newLecturer.getAddress());
+            preparedStatement.setString(11, newLecturer.getFaculty());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            PopUpUtil.displayError("An error occurred while registering new Lecturer.");
+        }
+
+        PopUpUtil.displayInfo("The following Lecturer was registered successfully!\n"
+                + newLecturer.getId() + ", " + newLecturer.getFirstName() + " " + newLecturer.getLastName());
     }
 }

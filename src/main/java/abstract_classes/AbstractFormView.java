@@ -14,11 +14,10 @@ import utility_classes.NavigationUtil;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * General abstract form viewing class which is extended by any
- * view class with input fields/viewing fields. This class handles
- * a lot of the GUI setup and leaves the unique details and nitty
- * gritty logic to the classes extending it. Using this class
- * ensures a consistent style throughout our program.
+ * General abstract form viewing class which is extended by any view class with
+ * input fields/viewing fields. This class handles a lot of the GUI setup and
+ * leaves the unique details and nitty gritty logic to the classes extending it.
+ * Using this class ensures a consistent style throughout our program.
  *
  */
 public abstract class AbstractFormView<T> extends JFrame {
@@ -81,6 +80,28 @@ public abstract class AbstractFormView<T> extends JFrame {
         hint.setFont(new Font("Monospaced", Font.ITALIC, 13));
         hint.setForeground(Color.GRAY);
         return hint;
+    }
+
+    /*
+    Small helper method for making rows which will hold labels and
+    other components (text fields) nicely spaced and on top of each
+    other within the form.
+     */
+    protected JPanel createFormRow(JLabel label, JComponent input) {
+        JPanel row = new JPanel();
+        row.setLayout(new BoxLayout(row, BoxLayout.Y_AXIS)); //everything displayed on top of each other
+        row.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0)); //padding between rows
+
+        //aligning labels and components left
+        label.setAlignmentX(Component.LEFT_ALIGNMENT);
+        input.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        //adding to the row: label, small spacing, then component ==> vertically
+        row.add(label);
+        row.add(Box.createVerticalStrut(5));
+        row.add(input);
+
+        return row;
     }
 
     /*

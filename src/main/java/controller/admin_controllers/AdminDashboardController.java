@@ -4,7 +4,6 @@
  */
 package controller.admin_controllers;
 
-import abstract_classes.User;
 import utility_classes.NavigationUtil;
 import controller.UserController;
 import java.awt.event.ActionEvent;
@@ -15,8 +14,8 @@ import objects.Lecturer;
 import objects.Student;
 import utility_classes.PopUpUtil;
 import view.LoginView;
-import view.admin_view.AdminCreateUserView;
 import view.admin_view.AdminLoadUserView;
+import view.admin_view.AdminRegisterNewUserView;
 import view.admin_view.AdminViewDetailsView;
 
 /**
@@ -47,15 +46,14 @@ public class AdminDashboardController implements ActionListener {
                 NavigationUtil.newFrame(new AdminLoadUserView(currentAdmin));
                 break;
             case "3":
-                String userType = PopUpUtil.createUserTypeSelection(); //returns Student or Lecturer String
-                if (userType != null) { 
-                    if (userType == "Student"){
-                        Student newUser = new Student(); //if Student type clicked create new empty student
-                        NavigationUtil.newFrame(new AdminCreateUserView(newUser, currentAdmin));
-                    } else if (userType == "Lecturer"){
-                        Lecturer newUser = new Lecturer(); //if Lecturer type clicked create new empty lecturer
-                        NavigationUtil.newFrame(new AdminCreateUserView(newUser, currentAdmin));
-                    }
+                //returns user type as String or remains null if admin cancels
+                String userType = PopUpUtil.displayUserTypeSelection();
+
+                if (userType != null) { //if admin has made a choice
+
+                    //display dashboard for making new user according to type
+                    NavigationUtil.newFrame(new AdminRegisterNewUserView(
+                            (userType.equals("Student")) ? new Student() : new Lecturer()));
                 }
                 break;
             case "b": //going back will log the admin out
