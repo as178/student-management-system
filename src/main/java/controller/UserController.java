@@ -5,12 +5,6 @@
 package controller;
 
 import abstract_classes.User;
-import objects.Admin;
-import objects.Lecturer;
-import objects.Student;
-import dao.AdminDAO;
-import dao.LecturerDAO;
-import dao.StudentDAO;
 import java.util.HashMap;
 
 /**
@@ -50,18 +44,5 @@ public class UserController {
     //wipes the currently logged in user from memory
     public static void logOutCurrentUser() {
         UserController.currentUser = null;
-    }
-
-    //saves currently logged in user depending on their type
-    public static void saveCurrrentUser() {
-        if (UserController.currentUser instanceof Student) {
-            new StudentDAO().update(currentUser);
-
-        } else if (UserController.currentUser instanceof Lecturer) {
-            new LecturerDAO().update(currentUser);
-
-        } else if (UserController.currentUser instanceof Admin) {
-            new AdminDAO().update(currentUser);
-        }
     }
 }

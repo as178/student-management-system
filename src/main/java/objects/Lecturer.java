@@ -5,15 +5,17 @@
 package objects;
 
 import abstract_classes.User;
+import controller.UserController;
+import dao.LecturerDAO;
 import java.util.HashMap;
 
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * The Lecturer class extends User and provides basic lecturer
- * attributes and methods to retrieve them.
- * 
+ * The Lecturer class extends User and provides basic lecturer attributes and
+ * methods to retrieve them.
+ *
  */
 public class Lecturer extends User {
 
@@ -33,5 +35,12 @@ public class Lecturer extends User {
 
     public HashMap<String, Course> getCoursesTaught() {
         return this.coursesTaught;
+    }
+
+    @Override
+    public void saveCurrrentUser() {
+        LecturerDAO lecturerDAO = new LecturerDAO();
+        lecturerDAO.update(this);
+        UserController.setCurrentUsers(lecturerDAO.getAllUsers());
     }
 }

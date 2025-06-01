@@ -5,19 +5,27 @@
 package objects;
 
 import abstract_classes.User;
+import controller.UserController;
+import dao.AdminDAO;
 
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * The Admin class extends User and possesses all its generic
- * attributes.
- * 
+ * The Admin class extends User and possesses all its generic attributes.
+ *
  */
 public class Admin extends User {
 
     public Admin(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address) {
         super(id, password, firstName, lastName, dateOfBirth, personalEmail, uniEmail, phoneNumber, gender, address);
+    }
+
+    @Override
+    public void saveCurrrentUser() {
+        AdminDAO adminDAO = new AdminDAO();
+        adminDAO.update(this);
+        UserController.setCurrentUsers(adminDAO.getAllUsers());
     }
 }

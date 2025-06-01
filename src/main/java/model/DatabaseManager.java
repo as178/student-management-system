@@ -4,8 +4,8 @@
  */
 package model;
 
-import concrete_classes.other.PopUpUtil;
-import concrete_classes.other.ProgramShutdownUtil;
+import utility_classes.PopUpUtil;
+import utility_classes.ProgramShutdownUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

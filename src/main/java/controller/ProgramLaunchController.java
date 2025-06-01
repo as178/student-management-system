@@ -4,14 +4,13 @@
  */
 package controller;
 
-import concrete_classes.other.NavigationUtil;
+import utility_classes.NavigationUtil;
 import dao.AdminDAO;
 import dao.LecturerDAO;
 import dao.StudentDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import view.LoginView;
-import view.ProgramLaunchView;
 
 /**
  *
@@ -23,11 +22,7 @@ import view.ProgramLaunchView;
  */
 public class ProgramLaunchController implements ActionListener {
 
-    private ProgramLaunchView view;
-
-    public ProgramLaunchController(ProgramLaunchView view) {
-        this.view = view;
-    }
+    public ProgramLaunchController() {}
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -35,18 +30,21 @@ public class ProgramLaunchController implements ActionListener {
 
         switch (command) {
             case "1":
+                //set up login screen for student to login, load up respective currentUsers hashmap used for checking credentials
                 UserController.setCurrentUsers(new StudentDAO().getAllUsers());
                 NavigationUtil.newFrame(new LoginView(command));
                 break;
             case "2":
+                //set up login screen for lecturer to login, load up respective currentUsers hashmap used for checking credentials                
                 UserController.setCurrentUsers(new LecturerDAO().getAllUsers());
                 NavigationUtil.newFrame(new LoginView(command));
                 break;
             case "3":
+                //set up login screen for admin to login, load up respective currentUsers hashmap used for checking credentials                
                 UserController.setCurrentUsers(new AdminDAO().getAllUsers());
                 NavigationUtil.newFrame(new LoginView(command));
                 break;
-            case "x":
+            case "x": //shutdown
                 NavigationUtil.exitProgram();
                 break;
         }

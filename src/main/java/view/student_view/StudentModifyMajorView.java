@@ -25,11 +25,9 @@ import java.util.ArrayList;
 public class StudentModifyMajorView extends JFrame {
 
     private Student currentStudent;
-    private ArrayList<String> availableMajors; //all majors except the student's
-
-    //Majors loaded up in an arraylist for convenience
-    private MajorDAO majorDAO = new MajorDAO();
-    private ArrayList<String> allMajors = majorDAO.readAllMajors();
+    private ArrayList<String> availableMajors;
+    private MajorDAO majorDAO;
+    private ArrayList<String> allMajors;
     
     //used with the JRadioButtons to enable single major selection at a time
     private ButtonGroup majorsButtonGroup;
@@ -38,13 +36,20 @@ public class StudentModifyMajorView extends JFrame {
     private StudentModifyMajorController controller;
 
     public StudentModifyMajorView(Student currentStudent) {
-        this.currentStudent = currentStudent;
+        
+        //majors loaded up in an arraylist for convenience
+        this.majorDAO = new MajorDAO();
+        this.allMajors = majorDAO.readAllMajors();
+        
+        //all majors except the student's
         this.availableMajors = new ArrayList<String>();
+        
+        this.currentStudent = currentStudent;
 
         setTitle("Student Management System: Modify Major");
 
         getAvailableMajors();
-        controller = new StudentModifyMajorController(this, currentStudent, availableMajors);
+        this.controller = new StudentModifyMajorController(this, currentStudent);
         buildGUI();
     }
 
@@ -78,8 +83,8 @@ public class StudentModifyMajorView extends JFrame {
         mainPanel.add(headerLabel, BorderLayout.NORTH);
 
         //Init centre panel + button group
-        centrePanel = new JPanel(new GridLayout(0, 1, 10, 8));
-        majorsButtonGroup = new ButtonGroup();
+        this.centrePanel = new JPanel(new GridLayout(0, 1, 10, 8));
+        this.majorsButtonGroup = new ButtonGroup();
 
         //iterate through list of available majors and
         //make them each a JRadioButton that the user
@@ -87,12 +92,12 @@ public class StudentModifyMajorView extends JFrame {
         for (String major : availableMajors) {
             JRadioButton radioButton = new JRadioButton(major);
             radioButton.setFont(new Font("Monospaced", Font.PLAIN, 16));
-            majorsButtonGroup.add(radioButton);
-            centrePanel.add(radioButton);
+            this.majorsButtonGroup.add(radioButton);
+            this.centrePanel.add(radioButton);
         }
 
         //adding centre panel to main panel
-        mainPanel.add(centrePanel, BorderLayout.CENTER);
+        mainPanel.add(this.centrePanel, BorderLayout.CENTER);
 
         //Button config + styling 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
@@ -123,7 +128,7 @@ public class StudentModifyMajorView extends JFrame {
     public String getSelectedMajor() {
 
         //iterate through all components in centre panel
-        for (Component component : centrePanel.getComponents()) {
+        for (Component component : this.centrePanel.getComponents()) {
 
             //if component is an instance of JRadioButton
             if (component instanceof JRadioButton) {

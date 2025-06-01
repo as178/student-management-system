@@ -27,7 +27,7 @@ public class ProgramLaunchView extends JFrame {
         JPanel mainPanel = new JPanel(new GridLayout(6, 1, 20, 20));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 80, 40, 80));
 
-        //Labels
+        //Labels, alignments + styling
         JLabel textLabel = new JLabel("Welcome to the Student Management System!");
         JLabel textLabel2 = new JLabel("Please pick an option below:");
         textLabel.setFont(new Font("Monospaced", Font.BOLD, 19));
@@ -47,7 +47,7 @@ public class ProgramLaunchView extends JFrame {
 
         //Styling  + config for the buttons
         JButton[] buttons = {studentButton, lecturerButton, adminButton, exitButton};
-        ProgramLaunchController controller = new ProgramLaunchController(this);
+        ProgramLaunchController controller = new ProgramLaunchController();
 
         for (JButton button : buttons) {
             button.setFont(new Font("Monospaced", Font.BOLD, 16));

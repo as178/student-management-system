@@ -4,15 +4,14 @@
  */
 package controller.lecturer_controllers;
 
-import concrete_classes.other.NavigationUtil;
-import concrete_classes.other.PopUpUtil;
+import utility_classes.NavigationUtil;
+import utility_classes.PopUpUtil;
 import controller.UserController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import objects.Lecturer;
 import view.LoginView;
-import view.lecturer_view.LecturerDashboardView;
 import view.lecturer_view.LecturerManageCoursesView;
 import view.lecturer_view.LecturerViewDetailsView;
 
@@ -26,11 +25,9 @@ import view.lecturer_view.LecturerViewDetailsView;
  */
 public class LecturerDashboardController implements ActionListener {
 
-    private LecturerDashboardView view;
     private Lecturer currentLecturer;
 
-    public LecturerDashboardController(LecturerDashboardView view, Lecturer currentLecturer) {
-        this.view = view;
+    public LecturerDashboardController(Lecturer currentLecturer) {
         this.currentLecturer = currentLecturer;
     }
 
@@ -38,28 +35,26 @@ public class LecturerDashboardController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
 
-        if ("x".equalsIgnoreCase(command)) {
-            NavigationUtil.exitProgram();
-            return;
-        }
-
-        if ("b".equalsIgnoreCase(command)) {
-
-            int confirmation = PopUpUtil.displayConfirmInfo("Are you sure you want to logout?");
-
-            if (confirmation == JOptionPane.YES_OPTION) {
-                NavigationUtil.newFrame(new LoginView("2"));
-                UserController.logOutCurrentUser();
-                return;
-            }
-        }
-
         switch (command) {
-            case "1": //View My Details
+            case "1": //dashboard for viewing and modifying personal information
                 NavigationUtil.newFrame(new LecturerViewDetailsView(currentLecturer));
                 break;
-            case "2": //Manage My Courses
+            case "2": //dashboard for managing the courses the lecturer teaches
                 NavigationUtil.newFrame(new LecturerManageCoursesView(currentLecturer));
+                break;
+            case "b": //going back will log the lecturer out
+
+                //confirmation pop up 
+                int confirmation = PopUpUtil.displayConfirmInfo("Are you sure you want to logout?");
+
+                //if confirmed, go back to the login window for lecturers + logout current lecturer
+                if (confirmation == JOptionPane.YES_OPTION) {
+                    NavigationUtil.newFrame(new LoginView("2"));
+                    UserController.logOutCurrentUser();
+                }
+                break;
+            case "x": //shutdown
+                NavigationUtil.exitProgram();
                 break;
         }
     }

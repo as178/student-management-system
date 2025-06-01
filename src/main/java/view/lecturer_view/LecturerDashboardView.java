@@ -14,7 +14,7 @@ import objects.Lecturer;
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * View which is shown when a Lecturer logs into the program.
- * 
+ *
  * Controller: LecturerDashboardController
  *
  */
@@ -38,15 +38,12 @@ public class LecturerDashboardView extends JFrame {
         nameLabel.setFont(new Font("Monospaced", Font.BOLD, 19));
         promptLabel.setFont(new Font("Monospaced", Font.PLAIN, 18));
 
-        //Center the text labels
-        welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        promptLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        //Adding text labels to main panel
-        mainPanel.add(welcomeLabel);
-        mainPanel.add(nameLabel);
-        mainPanel.add(promptLabel);
+        //Centering the text labels + adding them to main panel
+        JLabel[] jlabels = {welcomeLabel, nameLabel, promptLabel};
+        for (JLabel label : jlabels) {
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            mainPanel.add(label);
+        }
 
         //Buttons, config + styling
         viewDetailsButton = new JButton("View My Details");
@@ -55,11 +52,10 @@ public class LecturerDashboardView extends JFrame {
         exitButton = new JButton("Exit");
 
         JButton[] buttons = {viewDetailsButton, manageCoursesButton, logoutButton, exitButton};
-        LecturerDashboardController controller = new LecturerDashboardController(this, currentLecturer);
-        Dimension buttonSize = new Dimension(240, 40);
+        LecturerDashboardController controller = new LecturerDashboardController(currentLecturer);
 
         for (JButton button : buttons) {
-            button.setPreferredSize(buttonSize);
+            button.setPreferredSize(new Dimension(240, 40));
             button.setFont(new Font("Monospaced", Font.BOLD, 15));
             button.addActionListener(controller);
             mainPanel.add(button);
@@ -71,6 +67,7 @@ public class LecturerDashboardView extends JFrame {
         logoutButton.setActionCommand("b");
         exitButton.setActionCommand("x");
 
+        //Adding main panel to this frame
         this.add(mainPanel);
     }
 }

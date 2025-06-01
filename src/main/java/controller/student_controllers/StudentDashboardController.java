@@ -4,8 +4,8 @@
  */
 package controller.student_controllers;
 
-import concrete_classes.other.NavigationUtil;
-import concrete_classes.other.PopUpUtil;
+import utility_classes.NavigationUtil;
+import utility_classes.PopUpUtil;
 import objects.Student;
 import controller.UserController;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import view.LoginView;
 import view.student_view.StudentAcademicDetailsView;
-import view.student_view.StudentDashboardView;
 import view.student_view.StudentViewDetailsView;
 
 /**
@@ -26,40 +25,37 @@ import view.student_view.StudentViewDetailsView;
  */
 public class StudentDashboardController implements ActionListener {
 
-    private StudentDashboardView view;
     private Student currentStudent;
 
-    public StudentDashboardController(StudentDashboardView view, Student currentStudent) {
-        this.view = view;
+    public StudentDashboardController(Student currentStudent) {
         this.currentStudent = currentStudent;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-
-        if ("x".equalsIgnoreCase(command)) {
-            NavigationUtil.exitProgram();
-            return;
-        }
-
-        if ("b".equalsIgnoreCase(command)) {
-
-            int confirmation = PopUpUtil.displayConfirmInfo("Are you sure you want to logout?");
-
-            if (confirmation == JOptionPane.YES_OPTION) {
-                NavigationUtil.newFrame(new LoginView("1"));
-                UserController.logOutCurrentUser();
-                return;
-            }
-        }
+        String command = e.getActionCommand(); //get respective command depending on button clicked
 
         switch (command) {
-            case "1": //View My Details
+            case "1": //dashboard for viewing and modifying personal information
                 NavigationUtil.newFrame(new StudentViewDetailsView(currentStudent));
                 break;
-            case "2": //View My Academic Details
+            case "2": //dashboard for viewing academic details
                 NavigationUtil.newFrame(new StudentAcademicDetailsView(currentStudent));
+                break;
+            case "b": //going back will log the student out
+                
+                //confirmation pop up 
+                int confirmation = PopUpUtil.displayConfirmInfo("Are you sure you want to logout?");
+
+                //if confirmed, go back to the login window for students + logout current student
+                if (confirmation == JOptionPane.YES_OPTION) {
+                    NavigationUtil.newFrame(new LoginView("1"));
+                    UserController.logOutCurrentUser();
+                    return;
+                }
+                break;
+            case "x": //shutdown
+                NavigationUtil.exitProgram();
                 break;
         }
     }

@@ -4,7 +4,7 @@
  */
 package controller.lecturer_controllers;
 
-import concrete_classes.other.NavigationUtil;
+import utility_classes.NavigationUtil;
 import dao.CourseDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +12,6 @@ import objects.Lecturer;
 import view.lecturer_view.LecturerCourseStudentsListView;
 import view.lecturer_view.LecturerDashboardView;
 import view.lecturer_view.LecturerEditCoursesView;
-import view.lecturer_view.LecturerManageCoursesView;
 
 /**
  *
@@ -24,34 +23,35 @@ import view.lecturer_view.LecturerManageCoursesView;
  */
 public class LecturerManageCoursesController implements ActionListener {
 
-    private LecturerManageCoursesView view1;
     private Lecturer currentLecturer;
     private CourseDAO courseDAO;
 
-    public LecturerManageCoursesController(LecturerManageCoursesView view, Lecturer currentLecturer) {
-        this.view1 = view;
+    public LecturerManageCoursesController(Lecturer currentLecturer) {
         this.currentLecturer = currentLecturer;
         this.courseDAO = new CourseDAO();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        /*
+        get respective command depending on button clicked
+        e.g. "e,COMP500" ==> edit COMP500
+        index 0 = e & index 1 = COMP500
+         */
         String[] command = e.getActionCommand().split(",");
 
         switch (command[0]) {
-            case "e":
-                NavigationUtil.newFrame(new LecturerEditCoursesView(currentLecturer, courseDAO.getById(command[1])));
+            case "e": //go to dashboard for editing course information for a chosen course
+                NavigationUtil.newFrame(new LecturerEditCoursesView(courseDAO.getById(command[1])));
                 break;
-
-            case "l":
+            case "l": //go to dashboard for seeing the list of students for a chosen course
                 NavigationUtil.newFrame(new LecturerCourseStudentsListView(courseDAO.getById(command[1])));
                 break;
-
-            case "b":
+            case "b": //go back to lecturer dashboard
                 NavigationUtil.newFrame(new LecturerDashboardView(currentLecturer));
                 break;
-
-            case "x":
+            case "x": //shutdown
                 NavigationUtil.exitProgram();
                 break;
         }

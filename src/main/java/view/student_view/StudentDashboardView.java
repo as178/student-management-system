@@ -38,15 +38,12 @@ public class StudentDashboardView extends JFrame {
         nameLabel.setFont(new Font("Monospaced", Font.BOLD, 19));
         promptLabel.setFont(new Font("Monospaced", Font.PLAIN, 18));
 
-        //Center the text labels
-        welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        promptLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        //Adding text labels to main panel
-        mainPanel.add(welcomeLabel);
-        mainPanel.add(nameLabel);
-        mainPanel.add(promptLabel);
+        //Centering the text labels + adding them to main panel
+        JLabel[] jlabels = {welcomeLabel, nameLabel, promptLabel};
+        for (JLabel label : jlabels){
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            mainPanel.add(label);
+        }
 
         //Buttons, config + styling
         viewDetailsButton = new JButton("View My Details");
@@ -55,11 +52,10 @@ public class StudentDashboardView extends JFrame {
         exitButton = new JButton("Exit");
 
         JButton[] buttons = {viewDetailsButton, viewAcademicButton, logoutButton, exitButton};
-        StudentDashboardController controller = new StudentDashboardController(this, currentStudent);
-        Dimension buttonSize = new Dimension(240, 40);
+        StudentDashboardController controller = new StudentDashboardController(currentStudent);
 
         for (JButton button : buttons) {
-            button.setPreferredSize(buttonSize);
+            button.setPreferredSize(new Dimension(240, 40));
             button.setFont(new Font("Monospaced", Font.BOLD, 15));
             button.addActionListener(controller);
             mainPanel.add(button);

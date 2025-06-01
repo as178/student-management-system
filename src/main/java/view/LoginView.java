@@ -48,12 +48,13 @@ public class LoginView extends JFrame {
         passwordLabel.setFont(new Font("Monospaced", Font.PLAIN, 17));
         password = new JPasswordField();
 
+        //Adding labels and fields to form panel
         formPanel.add(usernameLabel);
         formPanel.add(usernameId);
         formPanel.add(passwordLabel);
         formPanel.add(password);
 
-        //Buttons panel
+        //Buttons panel + buttons
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
         loginButton = new JButton("Login");

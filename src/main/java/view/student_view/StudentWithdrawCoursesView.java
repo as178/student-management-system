@@ -22,20 +22,19 @@ import javax.swing.*;
  *
  * This class displays the student's current enrollments and provides them with
  * further options (to enroll into more courses or withdraw from enrollments).
- * 
+ *
  * Controller: StudentModifyCoursesController
  *
  */
 public class StudentWithdrawCoursesView extends JFrame {
 
     private StudentModifyCoursesController controller;
-    private Student currentStudent;
-    private CourseDAO courseDAO = new CourseDAO();
+    private CourseDAO courseDAO;
     private HashMap<String, Course> allCourses;
 
     public StudentWithdrawCoursesView(Student currentStudent) {
-        this.currentStudent = currentStudent;
-        this.controller = new StudentModifyCoursesController(this, currentStudent);
+        this.controller = new StudentModifyCoursesController(currentStudent);
+        this.courseDAO = new CourseDAO();
         this.allCourses = courseDAO.getAllCourses();
 
         setTitle("Student Management System: Modify Courses");
@@ -76,35 +75,31 @@ public class StudentWithdrawCoursesView extends JFrame {
             //each with a withdraw button next to it
             for (String courseId : currentStudent.getEnrolledCourses().keySet()) {
 
-                Course currentCourse = allCourses.get(courseId); //get course
+                //get course object from allCourses 
+                Course currentCourse = allCourses.get(courseId);
 
-                if (currentCourse.getCourseId().equals(courseId)) { //if student is taking it
+                //align row to the left hand side of the frame 
+                JPanel row = new JPanel();
+                row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));
+                row.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-                    //align row to the left hand side of the frame 
-                    JPanel row = new JPanel();
-                    row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));
-                    row.setAlignmentX(Component.LEFT_ALIGNMENT);
+                //withdraw button config
+                JButton withdrawButton = new JButton("Withdraw");
+                withdrawButton.setFont(new Font("Monospaced", Font.BOLD, 14));
+                withdrawButton.setActionCommand("w," + courseId); //action command for controller, includes courseId
+                withdrawButton.addActionListener(controller);
 
-                    //withdraw button config
-                    JButton withdrawButton = new JButton("Withdraw");
-                    withdrawButton.setFont(new Font("Monospaced", Font.BOLD, 14));
-                    withdrawButton.setActionCommand("w," + currentCourse.getCourseId()); //action command for controller, includes courseId
-                    withdrawButton.addActionListener(controller);
+                //Course label to display course id + name
+                JLabel courseLabel = new JLabel("  ||  " + courseId + ", " + currentCourse.getCourseName());
+                courseLabel.setFont(new Font("Monospaced", Font.PLAIN, 16));
 
-                    //Course label to display course id + name
-                    JLabel courseLabel = new JLabel("  ||  " + currentCourse.getCourseId()
-                            + ", " + currentCourse.getCourseName());
-                    courseLabel.setFont(new Font("Monospaced", Font.PLAIN, 16));
+                //Add button and label to row ==> course panel + spacing
+                row.add(withdrawButton);
+                row.add(courseLabel);
+                row.setBorder(BorderFactory.createEmptyBorder(4, 0, 4, 0));
 
-                    //Add button and label to row ==> course panel + spacing
-                    row.add(withdrawButton);
-                    row.add(courseLabel);
-                    row.setBorder(BorderFactory.createEmptyBorder(4, 0, 4, 0));
-
-                    coursePanel.add(row);
-                    coursePanel.add(Box.createVerticalStrut(6)); 
-
-                }
+                coursePanel.add(row);
+                coursePanel.add(Box.createVerticalStrut(6));
             }
         }
 

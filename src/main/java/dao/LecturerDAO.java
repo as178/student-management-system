@@ -6,7 +6,7 @@ package dao;
 
 import abstract_classes.User;
 import objects.Lecturer;
-import concrete_classes.other.PopUpUtil;
+import utility_classes.PopUpUtil;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;

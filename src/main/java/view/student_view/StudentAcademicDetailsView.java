@@ -4,7 +4,7 @@
  */
 package view.student_view;
 
-import concrete_classes.other.GradesUtil;
+import utility_classes.GradesUtil;
 import objects.Student;
 import controller.student_controllers.StudentAcademicDetailsController;
 import dao.CourseDAO;
@@ -21,7 +21,6 @@ import java.util.HashMap;
  * also displayed.
  *
  * Controller: StudentAcademicDetailsController
- *
  *
  */
 public class StudentAcademicDetailsView extends JFrame {
@@ -54,6 +53,9 @@ public class StudentAcademicDetailsView extends JFrame {
         this.setContentPane(mainPanel);
     }
 
+    /*
+    Helper method for building the academic details panel.
+     */
     private JPanel buildAcademicPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -95,7 +97,7 @@ public class StudentAcademicDetailsView extends JFrame {
             firstLine.setFont(labelFont);
             panel.add(firstLine);
 
-            //current courses and student's grades for each
+            //current courses (ids only) and student's grades for each
             for (HashMap.Entry<String, Float> entry : currentStudent.getEnrolledCourses().entrySet()) {
                 String line = ">   " + entry.getKey() + "   ||  " + GradesUtil.convertFloatToGrade(entry.getValue());
                 JLabel courseLabel = new JLabel(line);
@@ -107,6 +109,9 @@ public class StudentAcademicDetailsView extends JFrame {
         return panel;
     }
 
+    /*
+    Helper method for building the buttons panel.
+     */
     private JPanel buildButtonPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -129,7 +134,7 @@ public class StudentAcademicDetailsView extends JFrame {
         row2.add(exitButton);
 
         //Buttons config + styling
-        StudentAcademicDetailsController controller = new StudentAcademicDetailsController(this, currentStudent);
+        StudentAcademicDetailsController controller = new StudentAcademicDetailsController(currentStudent);
         JButton[] buttons = {viewCourseDetailsButton, changeMajorButton, changeCoursesButton, backButton, exitButton};
         for (JButton button : buttons) {
             button.setFont(buttonFont);
@@ -140,6 +145,7 @@ public class StudentAcademicDetailsView extends JFrame {
         panel.add(row1);
         panel.add(row2);
 
+        //Action commands set for the controller
         viewCourseDetailsButton.setActionCommand("1");
         changeMajorButton.setActionCommand("2");
         changeCoursesButton.setActionCommand("3");

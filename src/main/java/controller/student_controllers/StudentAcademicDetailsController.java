@@ -4,11 +4,10 @@
  */
 package controller.student_controllers;
 
-import concrete_classes.other.NavigationUtil;
+import utility_classes.NavigationUtil;
 import objects.Student;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.student_view.StudentAcademicDetailsView;
 import view.student_view.StudentDashboardView;
 import view.student_view.StudentModifyMajorView;
 import view.student_view.StudentViewCoursesView;
@@ -24,36 +23,31 @@ import view.student_view.StudentWithdrawCoursesView;
  */
 public class StudentAcademicDetailsController implements ActionListener {
 
-    private StudentAcademicDetailsView view;
     private Student currentStudent;
 
-    public StudentAcademicDetailsController(StudentAcademicDetailsView view, Student currentStudent) {
-        this.view = view;
+    public StudentAcademicDetailsController(Student currentStudent) {
         this.currentStudent = currentStudent;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-
-        if ("x".equalsIgnoreCase(command)) {
-            NavigationUtil.exitProgram();
-            return;
-        }
-
-        if ("b".equalsIgnoreCase(command)) {
-            NavigationUtil.newFrame(new StudentDashboardView(currentStudent));
-        }
+        String command = e.getActionCommand(); //get respective command depending on button clicked
 
         switch (command) {
-            case "1": 
+            case "1": //go to course viewing dashboard
                 NavigationUtil.newFrame(new StudentViewCoursesView(currentStudent));
                 break;
-            case "2": 
+            case "2": //go to dashboard for changing majors
                 NavigationUtil.newFrame(new StudentModifyMajorView(currentStudent));
                 break;
-            case "3": 
+            case "3": //go to dashboard for withdrawing courses
                 NavigationUtil.newFrame(new StudentWithdrawCoursesView(currentStudent));
+                break;
+            case "b": //go back to the student dashboard
+                NavigationUtil.newFrame(new StudentDashboardView(currentStudent));
+                break;
+            case "x": //shutdown
+                NavigationUtil.exitProgram();
                 break;
         }
     }

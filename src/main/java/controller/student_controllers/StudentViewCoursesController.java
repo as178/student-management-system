@@ -4,7 +4,7 @@
  */
 package controller.student_controllers;
 
-import concrete_classes.other.NavigationUtil;
+import utility_classes.NavigationUtil;
 import objects.Student;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,40 +17,36 @@ import view.student_view.StudentViewPrevCoursesView;
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * This Controller is responsible for any Student, course viewing details
- * related implementations.
+ * related implementations; viewing of current and previous courses.
+ * 
+ * This controller is used by:
+ * - StudentViewCoursesView
+ * - StudentViewPrevCoursesView
  *
  */
 public class StudentViewCoursesController implements ActionListener {
 
-    private StudentViewCoursesView viewCurrent;
-    private StudentViewPrevCoursesView viewPrevious;
     private Student currentStudent;
 
-    public StudentViewCoursesController(StudentViewCoursesView view, Student currentStudent) {
-        this.viewCurrent = view;
-        this.currentStudent = currentStudent;
-    }
-
-    public StudentViewCoursesController(StudentViewPrevCoursesView view, Student currentStudent) {
-        this.viewPrevious = view;
+    public StudentViewCoursesController(Student currentStudent) {
         this.currentStudent = currentStudent;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
+        String command = e.getActionCommand(); //get respective command depending on button clicked
 
         switch (command) {
-            case "x":
+            case "x": //shutdown
                 NavigationUtil.exitProgram();
                 break;
-            case "b":
+            case "b": //go back to academic details dashboard
                 NavigationUtil.newFrame(new StudentAcademicDetailsView(currentStudent));
                 break;
-            case "c":
+            case "c": //display dashboard for viewing currently enrolled courses
                 NavigationUtil.newFrame(new StudentViewCoursesView(currentStudent));
                 break;
-            case "1":
+            case "1": //display dashboard for viewing previously enrolled courses
                 NavigationUtil.newFrame(new StudentViewPrevCoursesView(currentStudent));
                 break;
         }

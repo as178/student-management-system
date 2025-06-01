@@ -4,7 +4,7 @@
  */
 package dao;
 
-import concrete_classes.other.PopUpUtil;
+import utility_classes.PopUpUtil;
 import dao.dao_interfaces.MajorDAOInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

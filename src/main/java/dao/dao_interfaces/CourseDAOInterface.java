@@ -33,7 +33,7 @@ public interface CourseDAOInterface {
 
     public void updateEnrolledCourseTable(int studentId, String courseCode, Float newGrade);
 
-    public HashMap<Integer, String> readEnrolledStudentsGrades(String courseCode);
+    public HashMap<Integer, Float> readEnrolledStudentsGrades(String courseCode);
 
     public void updateCourse(Course course);
 

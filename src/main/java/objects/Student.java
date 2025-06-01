@@ -5,15 +5,17 @@
 package objects;
 
 import abstract_classes.User;
-import concrete_classes.other.GradesUtil;
+import controller.UserController;
+import dao.StudentDAO;
+import utility_classes.GradesUtil;
 import java.util.HashMap;
 
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * The Student class extends User and provides basic student
- * attributes and methods to retrieve them.
+ * The Student class extends User and provides basic student attributes and
+ * methods to retrieve them.
  *
  */
 public class Student extends User {
@@ -74,5 +76,12 @@ public class Student extends User {
 
     public void setMajor(String newMajor) {
         this.major = newMajor;
+    }
+
+    @Override
+    public void saveCurrrentUser() {
+        StudentDAO studentDAO = new StudentDAO();
+        studentDAO.update(this);
+        UserController.setCurrentUsers(studentDAO.getAllUsers());
     }
 }

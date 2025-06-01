@@ -25,16 +25,17 @@ import java.util.HashMap;
 public class StudentEnrollCoursesView extends JFrame {
 
     private StudentModifyCoursesController controller;
-    private Student currentStudent;
 
-    private CourseDAO courseDAO = new CourseDAO();
+    private CourseDAO courseDAO;
     private HashMap<String, Course> allCourses; //all courses
-    private HashMap<String, Course> allMajorCourses = new HashMap<>(); //student's major courses
-    private HashMap<String, Course> availableCourses = new HashMap<>(); //courses the student is eligible for
+    private HashMap<String, Course> allMajorCourses; //all courses from student's major
+    private HashMap<String, Course> availableCourses; //courses the student is eligible for
 
     public StudentEnrollCoursesView(Student currentStudent) {
-        this.currentStudent = currentStudent;
-        this.controller = new StudentModifyCoursesController(this, currentStudent);
+        this.courseDAO = new CourseDAO();
+        this.allMajorCourses = new HashMap<>();
+        this.availableCourses = new HashMap<>();
+        this.controller = new StudentModifyCoursesController(currentStudent);
         this.allCourses = courseDAO.getAllCourses();
 
         setTitle("Student Management System: Enroll into Courses");
@@ -62,10 +63,10 @@ public class StudentEnrollCoursesView extends JFrame {
         coursePanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
         //Load up all courses in student's major
-        this.allMajorCourses = controller.getMajorCourses(this.allMajorCourses, this.allCourses);
+        this.controller.getMajorCourses(this.allMajorCourses, this.allCourses);
         
         //Obtain which courses student is eligible to take
-        controller.getAvailableCourses(this.availableCourses, this.allCourses);
+        this.controller.getAvailableCourses(this.availableCourses, this.allCourses);
 
         //Iterate through all major courses
         for (Course course : allMajorCourses.values()) {

@@ -4,14 +4,13 @@
  */
 package controller.student_controllers;
 
-import concrete_classes.other.NavigationUtil;
-import concrete_classes.other.PopUpUtil;
+import utility_classes.NavigationUtil;
+import utility_classes.PopUpUtil;
 import objects.Student;
 import controller.UserController;
 import dao.CourseDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import view.student_view.StudentAcademicDetailsView;
 import view.student_view.StudentModifyMajorView;
@@ -27,59 +26,76 @@ public class StudentModifyMajorController implements ActionListener {
 
     private StudentModifyMajorView view;
     private Student currentStudent;
-    private ArrayList<String> listOfMajors;
 
-    public StudentModifyMajorController(StudentModifyMajorView view, Student currentStudent, ArrayList<String> listOfMajors) {
+    public StudentModifyMajorController(StudentModifyMajorView view, Student currentStudent) {
         this.view = view;
         this.currentStudent = currentStudent;
-        this.listOfMajors = listOfMajors;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
+        String command = e.getActionCommand(); //get respective command depending on button clicked
 
         switch (command) {
-            case "c":
-
-                String selectedMajor = view.getSelectedMajor();
-
-                if (selectedMajor != null) {
-                    int choice = PopUpUtil.displayConfirmWarning(
-                            "Changing your major will withdraw you from all your current courses.\n"
-                            + "Your grades will appear as 'Withdrawn' and won't count towards your GPA.\n\n"
-                            + "Are you sure you want to change your major to " + selectedMajor + "?"
-                    );
-
-                    if (choice == JOptionPane.YES_OPTION) {
-
-                        currentStudent.setMajor(selectedMajor);
-                        CourseDAO courseDAO = new CourseDAO();
-                        courseDAO.readStudentsCourses(currentStudent, currentStudent.getEnrolledCourses(), false);
-
-                        if (!currentStudent.getEnrolledCourses().isEmpty()) {
-                            courseDAO.withdrawAllCourses(currentStudent);
-                        }
-                        UserController.saveCurrrentUser();
-
-                        PopUpUtil.displayInfo("Your major was successfully updated to: " + selectedMajor + "!\n"
-                                + "To enroll into your new courses select Back > Change Courses.");
-                    }
-
-                    NavigationUtil.newFrame(new StudentModifyMajorView(currentStudent));
-
-                } else {
-                    PopUpUtil.displayError("Please select a valid major.");
-                }
-
+            case "c": //change student's major
+                this.changeStudentMajor(); 
                 break;
-
-            case "b":
+            case "b": //go back to the academic details section
                 NavigationUtil.newFrame(new StudentAcademicDetailsView(currentStudent));
                 break;
-            case "x":
+            case "x": //shutdown
                 NavigationUtil.exitProgram();
                 break;
+        }
+    }
+
+    /*
+    Helper method which takes care of the logic behind
+    students changing their majors.
+     */
+    private void changeStudentMajor() {
+
+        //get selected major from the view (radio buttons)
+        String selectedMajor = view.getSelectedMajor();
+
+        //when the student has selected a valid major
+        if (selectedMajor != null) {
+
+            //display confirmation pop up with information to student
+            int choice = PopUpUtil.displayConfirmWarning(
+                    "Changing your major will withdraw you from all your current courses.\n"
+                    + "Your grades will appear as 'Withdrawn' and won't count towards your GPA.\n\n"
+                    + "Are you sure you want to change your major to " + selectedMajor + "?"
+            );
+
+            //if the student wishes to proceed
+            if (choice == JOptionPane.YES_OPTION) {
+
+                //firstly change their major in memory (currentStudent object)
+                currentStudent.setMajor(selectedMajor);
+
+                //then load up the student's enrolled courses hashmap
+                CourseDAO courseDAO = new CourseDAO();
+                courseDAO.readStudentsCourses(currentStudent, currentStudent.getEnrolledCourses(), false);
+
+                //if their hashmap isn't empty (i.e. they're currently enrolled into courses)
+                if (!currentStudent.getEnrolledCourses().isEmpty()) {
+                    //withdraw them from all their current courses
+                    courseDAO.withdrawAllCourses(currentStudent);
+                }
+
+                //update the student table (saving student's new major) + success pop up message
+                currentStudent.saveCurrrentUser();
+                PopUpUtil.displayInfo("Your major was successfully updated to: " + selectedMajor + "!\n"
+                        + "To enroll into your new courses select Back > Change Courses.");
+            }
+
+            //refresh the major view to reflect the new available majors (excluding the one the student is now taking)
+            NavigationUtil.newFrame(new StudentModifyMajorView(currentStudent));
+
+        } else {
+            //else if the student hasn't selected anything and they click the confirm button, display an error message
+            PopUpUtil.displayError("Please select a valid major.");
         }
     }
 }

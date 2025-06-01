@@ -6,7 +6,7 @@ package view.student_view;
 
 import objects.Course;
 import objects.Lecturer;
-import concrete_classes.other.GradesUtil;
+import utility_classes.GradesUtil;
 import objects.Student;
 import controller.student_controllers.StudentViewCoursesController;
 import dao.CourseDAO;
@@ -86,7 +86,7 @@ public class StudentViewCoursesView extends JFrame {
                 Lecturer lecturer = (Lecturer) lecturerDAO.getById(Integer.parseInt(course.getCourseLecturer()));
 
                 //add all info to the centre panel
-                coursePanel.add(Box.createVerticalStrut(10));
+                coursePanel.add(Box.createVerticalStrut(10)); //spacing
                 coursePanel.add(makeLabel(course.getCourseId() + ", " + course.getCourseName(), true));
                 coursePanel.add(makeLabel("> Your Grade: " + GradesUtil.convertFloatToGrade(grade), false));
                 coursePanel.add(makeLabel("> Major: " + course.getCourseMajor(), false));
@@ -120,7 +120,7 @@ public class StudentViewCoursesView extends JFrame {
         backButton.setActionCommand("b");
         exitButton.setActionCommand("x");
 
-        StudentViewCoursesController controller = new StudentViewCoursesController(this, currentStudent);
+        StudentViewCoursesController controller = new StudentViewCoursesController(currentStudent);
         JButton[] buttons = {viewPreviousButton, backButton, exitButton};
         for (JButton button : buttons) {
             button.setFont(new Font("Monospaced", Font.BOLD, 14));

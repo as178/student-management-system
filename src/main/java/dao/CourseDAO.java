@@ -6,7 +6,7 @@ package dao;
 
 import objects.Course;
 import objects.Lecturer;
-import concrete_classes.other.PopUpUtil;
+import utility_classes.PopUpUtil;
 import objects.Student;
 import dao.dao_interfaces.CourseDAOInterface;
 import java.sql.Connection;
@@ -123,12 +123,12 @@ public class CourseDAO implements CourseDAOInterface {
 
     /*
     This method reads whatever is in the respective table (PreviousCourse or EnrolledCourse),
-    and populates a given student's hashmap accordingly (saves the courseCode, and the student's
+    and populates a given student's hashmap accordingly (saves the courseId, and the student's
     grade for that course).
     
     It does so by taking the currently logged in student, their courses hashmap (current enrollments or pevious),
     and a boolean for choosing which table to update from. It iterates through the rows which have the student's id,
-    and stores their course code and grade for the course into the provided hashmap.
+    and stores their course id and grade for the course into the provided hashmap.
     
     It will initially clear the hashmap in case there is no entries within the table.
      */
@@ -158,8 +158,8 @@ public class CourseDAO implements CourseDAOInterface {
     /*
     Method to add a course to EnrolledCourse/PreviousCourse for a particular
     student, depending on the needs/context of the program.; e.g. a student could 
-    be enrolling into a new course, EnrolleCourse table addition, or they withdrew
-    from a course which needs to be added to the PreviousCourse table.
+    be enrolling into a new course, EnrolledCourse table addition, or perhaps they withdrew
+    from a course which needs to then be added to the PreviousCourse table . . .
      */
     @Override
     public void addCourseToTable(int studentId, String courseId, Float grade, boolean previous) {
@@ -230,12 +230,12 @@ public class CourseDAO implements CourseDAOInterface {
     for a specific course. It returns a hashmap of students' ids and their grades.
     
     - if the grade is:
-    > "null" ==> the student hasn't be graded yet
-    > otherwise the grade is saved as a String
+    > "null" ==> the student hasn't been graded yet
+    > otherwise the grade is saved as a Float
      */
     @Override
-    public HashMap<Integer, String> readEnrolledStudentsGrades(String courseId) {
-        HashMap<Integer, String> studentGrades = new HashMap<>();
+    public HashMap<Integer, Float> readEnrolledStudentsGrades(String courseId) {
+        HashMap<Integer, Float> studentGrades = new HashMap<>();
         String sqlStatement = "SELECT student_id, grade FROM EnrolledCourse WHERE course_id = ?";
 
         try {
@@ -251,7 +251,7 @@ public class CourseDAO implements CourseDAOInterface {
                 if (grade == null) {
                     studentGrades.put(studentId, null);
                 } else {
-                    studentGrades.put(studentId, String.valueOf(grade));
+                    studentGrades.put(studentId, grade);
                 }
             }
         } catch (SQLException ex) {

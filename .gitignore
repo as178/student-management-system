@@ -1,1 +1,4 @@
 /target/
+/StudentManagementSystemDB/
+/derby.log
+/derby.properties

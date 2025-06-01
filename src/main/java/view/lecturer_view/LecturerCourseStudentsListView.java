@@ -17,27 +17,28 @@ import objects.Course;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * This class displays the courses the lecturer user is teaching; further
- * options are provided for editing the course information and listing students
- * within a chosen course (grades configuration).
- * 
+ * This class displays the students the lecturer user is teaching in a specific
+ * course. Options are provided for assigning a grade to a student or signing
+ * them off upon course completion.
+ *
  * Controller: LecturerCourseStudentsListController
  *
  */
 public class LecturerCourseStudentsListView extends JFrame {
 
     private Course currentCourse;
-    private HashMap<Integer, String> studentGrades;
+    private HashMap<Integer, Float> studentGrades; //hashmap of student ids + their grades for the chosen course
     private LecturerCourseStudentsListController controller;
 
     public LecturerCourseStudentsListView(Course currentCourse) {
         this.currentCourse = currentCourse;
 
+        //load up the hashmap with all students' grades for the chosen course
         CourseDAO courseDAO = new CourseDAO();
         this.studentGrades = courseDAO.readEnrolledStudentsGrades(currentCourse.getCourseId());
 
-        this.controller = new LecturerCourseStudentsListController(this, currentCourse, studentGrades);
-        setTitle("Enrolled Students for " + currentCourse.getCourseName());
+        this.controller = new LecturerCourseStudentsListController(currentCourse, studentGrades);
+        setTitle("Student Management System: Enrolled Students for " + currentCourse.getCourseName());
         buildGUI();
     }
 
@@ -61,24 +62,24 @@ public class LecturerCourseStudentsListView extends JFrame {
 
         //Getting all students in chosen course and inputting their information
         //to the student panel for styling and config ==> list panel
-        for (HashMap.Entry<Integer, String> entry : studentGrades.entrySet()) {
+        for (HashMap.Entry<Integer, Float> entry : studentGrades.entrySet()) {
 
             Integer studentId = entry.getKey();
-            String grade = entry.getValue();
+            Float grade = entry.getValue();
             String formattedGrade;
 
             //formatting for the grades to maintain them at 2 d.p.
-            if (grade == null || grade.isEmpty()) {
-                formattedGrade = "";
+            if (grade == null) {
+                formattedGrade = ""; //unassigned grade
             } else {
                 try {
-                    double floatGrade = Double.parseDouble(grade);
-                    formattedGrade = String.format("%.2f", floatGrade);
+                    formattedGrade = String.format("%.2f", grade);
                 } catch (NumberFormatException e) {
-                    formattedGrade = grade;
+                    formattedGrade = Float.toString(grade);
                 }
             }
 
+            //getting the student object
             Student student = (Student) studentDAO.getById(studentId);
 
             JPanel studentPanel = studentListRowPanel(student, formattedGrade);
@@ -96,16 +97,16 @@ public class LecturerCourseStudentsListView extends JFrame {
         JButton backButton = new JButton("Back");
         JButton exitButton = new JButton("Exit");
 
-        //Action commands for controller to handle
-        backButton.setActionCommand("b");
-        exitButton.setActionCommand("x");
-
         JButton[] buttons = {backButton, exitButton};
         for (JButton button : buttons) {
             button.setFont(new Font("Monospaced", Font.BOLD, 14));
             button.addActionListener(controller);
             buttonPanel.add(button);
         }
+
+        //Action commands for controller to handle
+        backButton.setActionCommand("b");
+        exitButton.setActionCommand("x");
 
         //Add button panel to main panel + inserting children components
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -136,7 +137,7 @@ public class LecturerCourseStudentsListView extends JFrame {
         gradeLabel.setFont(new Font("Monospaced", Font.BOLD, 14));
         gradeLabel.setMaximumSize(new Dimension(130, 30));
 
-        //Init grade field + styling
+        //Init grade field + styling, a non-editable field was chosen for aesthetic preferences
         gradeField = new JTextField(currentGrade, 6);
         gradeField.setHorizontalAlignment(JTextField.CENTER);
         gradeField.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -152,10 +153,6 @@ public class LecturerCourseStudentsListView extends JFrame {
         setGradeButton = new JButton("Set Grade");
         signOffButton = new JButton("Sign Off");
 
-        //Action commands with student id to be handled by controller
-        setGradeButton.setActionCommand("g," + student.getId());
-        signOffButton.setActionCommand("s," + student.getId());
-
         JButton[] buttons = {setGradeButton, signOffButton};
         for (JButton button : buttons) {
             button.setFont(new Font("Monospaced", Font.BOLD, 14));
@@ -164,6 +161,10 @@ public class LecturerCourseStudentsListView extends JFrame {
             panel.add(Box.createHorizontalStrut(10));
             panel.add(button);
         }
+
+        //Action commands with student id to be handled by controller
+        setGradeButton.setActionCommand("g," + student.getId());
+        signOffButton.setActionCommand("s," + student.getId());
 
         //return row
         return panel;

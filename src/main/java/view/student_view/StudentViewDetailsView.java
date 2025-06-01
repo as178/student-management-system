@@ -17,7 +17,7 @@ import objects.Student;
  *
  */
 public class StudentViewDetailsView extends UserViewAndModifyDetailsView {
-
+    
     public StudentViewDetailsView(Student currentStudent) {
         super(currentStudent);
     }

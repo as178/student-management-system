@@ -5,8 +5,8 @@
 package controller.admin_controllers;
 
 import abstract_classes.User;
-import concrete_classes.other.NavigationUtil;
-import concrete_classes.other.PopUpUtil;
+import utility_classes.NavigationUtil;
+import utility_classes.PopUpUtil;
 import dao.LecturerDAO;
 import dao.StudentDAO;
 import java.awt.event.ActionEvent;
@@ -57,14 +57,14 @@ public class AdminLoadUserControllers implements ActionListener {
             loadedUsers = students.getAllUsers();
             if (loadedUsers.containsKey(searchUserID)){
                 found = true;
-                NavigationUtil.newFrame(new AdminModifyPasswordView((User) loadedUsers.get(searchUserID), currentAdmin));
+                //NavigationUtil.newFrame(new AdminModifyPasswordView((User) loadedUsers.get(searchUserID), currentAdmin));
             }
 
             LecturerDAO lecturers = new LecturerDAO();
             loadedUsers = lecturers.getAllUsers();
             if (loadedUsers.containsKey(searchUserID)){
                 found = true;
-                NavigationUtil.newFrame(new AdminModifyPasswordView((User) loadedUsers.get(searchUserID), currentAdmin));
+                //NavigationUtil.newFrame(new AdminModifyPasswordView((User) loadedUsers.get(searchUserID), currentAdmin));
             }
             
             if (found == false){

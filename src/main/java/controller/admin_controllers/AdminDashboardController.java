@@ -4,7 +4,7 @@
  */
 package controller.admin_controllers;
 
-import concrete_classes.other.NavigationUtil;
+import utility_classes.NavigationUtil;
 import controller.UserController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

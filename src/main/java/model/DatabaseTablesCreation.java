@@ -4,7 +4,7 @@
  */
 package model;
 
-import concrete_classes.other.PopUpUtil;
+import utility_classes.PopUpUtil;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -245,7 +245,7 @@ public class DatabaseTablesCreation {
 
     /*
     Below are methods for default data insertion, which execute after each of the
-    respective tables is made.
+    respective tables are made.
      */
     private void insertIntoMajor() {
         try {

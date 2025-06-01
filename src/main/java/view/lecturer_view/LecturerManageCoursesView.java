@@ -8,7 +8,6 @@ import controller.lecturer_controllers.LecturerManageCoursesController;
 import objects.Course;
 import objects.Lecturer;
 import dao.CourseDAO;
-import java.util.HashMap;
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,21 +18,18 @@ import java.awt.*;
  * This class displays the courses the lecturer user is teaching; further
  * options are provided for editing the course information and listing students
  * within a chosen course (grades configuration).
- * 
+ *
  * Controller: LecturerManageCoursesController
  *
  */
 public class LecturerManageCoursesView extends JFrame {
 
-    private Lecturer currentLecturer;
     private LecturerManageCoursesController controller;
-    private CourseDAO courseDAO = new CourseDAO();
-    private HashMap<String, Course> allCourses;
+    private CourseDAO courseDAO;
 
     public LecturerManageCoursesView(Lecturer currentLecturer) {
-        this.currentLecturer = currentLecturer;
-        this.controller = new LecturerManageCoursesController(this, currentLecturer);
-        this.allCourses = courseDAO.getAllCourses();
+        this.courseDAO = new CourseDAO();
+        this.controller = new LecturerManageCoursesController(currentLecturer);
 
         setTitle("Student Management System: Manage Courses");
         setLayout(new BorderLayout());
@@ -60,9 +56,9 @@ public class LecturerManageCoursesView extends JFrame {
         coursePanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
         //Load up lecturer's courses hashmap
-        courseDAO.readLecturerCourses(currentLecturer);
+        this.courseDAO.readLecturerCourses(currentLecturer);
 
-        //If empty = appropriate message 
+        //If lecturer isn't teaching any courses show appropriate message 
         if (currentLecturer.getCoursesTaught().isEmpty()) {
             JLabel noCoursesLabel = new JLabel("> No assigned courses . . .");
             noCoursesLabel.setFont(new Font("Monospaced", Font.PLAIN, 16));
@@ -70,11 +66,11 @@ public class LecturerManageCoursesView extends JFrame {
 
         } else {
             //else iterate through lecturer's courses and display them
-            //each with edit info + list students buttons next to it
+            //each with edit info + list students buttons next to them
             int i = 0;
             for (Course course : currentLecturer.getCoursesTaught().values()) {
 
-                //align row to the left hand side of the frame 
+                //proper centred alignment
                 JPanel fullRowPanel = new JPanel();
                 fullRowPanel.setLayout(new BoxLayout(fullRowPanel, BoxLayout.Y_AXIS));
                 fullRowPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -84,20 +80,23 @@ public class LecturerManageCoursesView extends JFrame {
                 courseLabel.setFont(new Font("Monospaced", Font.PLAIN, 16));
                 courseLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-                //button row
+                //buttons row
                 JPanel buttonRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
                 buttonRow.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-                //buttons
+                //buttons, config + styling
                 JButton editCourseButton = new JButton("Edit Course");
-                editCourseButton.setFont(new Font("Monospaced", Font.BOLD, 14));
-                editCourseButton.setActionCommand("e," + course.getCourseId());
-                editCourseButton.addActionListener(controller);
-
                 JButton listStudentsButton = new JButton("List Students");
-                listStudentsButton.setFont(new Font("Monospaced", Font.BOLD, 14));
+
+                JButton[] buttons = {editCourseButton, listStudentsButton};
+                for (JButton button : buttons) {
+                    button.setFont(new Font("Monospaced", Font.BOLD, 14));
+                    button.addActionListener(controller);
+                }
+
+                //action commands for the controller (includes course ids)
+                editCourseButton.setActionCommand("e," + course.getCourseId());
                 listStudentsButton.setActionCommand("l," + course.getCourseId());
-                listStudentsButton.addActionListener(controller);
 
                 //adding buttons to the button row
                 buttonRow.add(editCourseButton);
@@ -113,9 +112,10 @@ public class LecturerManageCoursesView extends JFrame {
                 centreWrapper.setAlignmentX(Component.CENTER_ALIGNMENT);
                 centreWrapper.add(fullRowPanel);
 
+                //adding wrapper to course panel 
                 coursePanel.add(centreWrapper);
 
-                //if its not the last course, print a divider for aesthetics
+                //if its not the last course, print a divider with spacing for aesthetics
                 if (i++ < 1) {
                     coursePanel.add(Box.createVerticalStrut(10));
                     coursePanel.add(new JSeparator(SwingConstants.HORIZONTAL));
