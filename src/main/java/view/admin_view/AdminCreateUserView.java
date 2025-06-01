@@ -11,12 +11,14 @@ import concrete_classes.other.PopUpUtil;
 import concrete_classes.other.ValidationUtil;
 import dao.LecturerDAO;
 import dao.StudentDAO;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.Random;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -81,7 +83,7 @@ public class AdminCreateUserView extends UserViewAndModifyDetailsView {
 
         //Gender Stuff
         panel.add(Box.createVerticalStrut(20));
-        panel.add(createLabel("Gender:", labelFont));
+        JLabel genderLabel = createLabel("Gender:", labelFont);
         //radio buttons
         maleRadio = new JRadioButton("Male");
         femaleRadio = new JRadioButton("Female");
@@ -92,11 +94,10 @@ public class AdminCreateUserView extends UserViewAndModifyDetailsView {
         genderGroup.add(maleRadio);
         genderGroup.add(femaleRadio);
         //set Jpanet 
-        JPanel genderPanel = new JPanel();
-        genderPanel.setLayout(new BoxLayout(genderPanel, BoxLayout.X_AXIS));
-        genderPanel.add(maleRadio);
-        genderPanel.add(Box.createHorizontalStrut(15));
-        genderPanel.add(femaleRadio);
+        JPanel genderOptions = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        genderOptions.add(maleRadio);
+        genderOptions.add(femaleRadio);
+        panel.add(createFormRow(genderLabel, genderOptions));
 
         //choosing major / department
         panel.add(Box.createVerticalStrut(20));
@@ -131,9 +132,6 @@ public class AdminCreateUserView extends UserViewAndModifyDetailsView {
         emailField = new JTextField();
         emailField.setFont(labelFont2);
         panel.add(emailField);
-
-        //add gender panel with radio buttons 
-        panel.add(genderPanel);
 
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Phone Number:", labelFont));
@@ -282,5 +280,12 @@ public class AdminCreateUserView extends UserViewAndModifyDetailsView {
         if (confirmation == JOptionPane.YES_OPTION) {
             NavigationUtil.newFrame(new AdminDashboardView(currentAdmin));
         }
+    }
+
+    private JPanel createFormRow(JLabel label, JComponent input) {
+        JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        row.add(label);
+        row.add(input);
+        return row;
     }
 }
