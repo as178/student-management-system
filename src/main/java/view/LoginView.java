@@ -13,7 +13,7 @@ import java.awt.*;
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * View which is shown when a user chooses to login into the program.
- * 
+ *
  * Controller: LoginController
  *
  */
@@ -87,7 +87,7 @@ public class LoginView extends JFrame {
         wrapper.add(mainPanel);
 
         //Adding wrapper to this frame
-        this.add(wrapper);        
+        this.add(wrapper);
     }
 
     /*
@@ -100,4 +100,17 @@ public class LoginView extends JFrame {
     public String getPassword() {
         return new String(password.getPassword());
     }
+
+    /*
+    Methods used for testing
+    able to set the fields
+    */
+    public void setUsername(String username) {
+        usernameId.setText(username);
+    }
+
+    public void setPassword(String passwrd) {
+        password.setText(passwrd);
+    }
+
 }

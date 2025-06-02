@@ -16,6 +16,9 @@ import javax.swing.JOptionPane;
  */
 public final class PopUpUtil {
 
+    //test mode flag to supress popups 
+    public static boolean testMode = false;
+
     private PopUpUtil() {
     }
 
@@ -23,35 +26,62 @@ public final class PopUpUtil {
     Informative pop-ups, with small customisations for Information, Errors & Warnings.
      */
     public static void displayInfo(String message) {
-        JOptionPane.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
+        if (!testMode) {
+            JOptionPane.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            System.out.println("[INFO] " + message);
+        }
     }
 
     public static void displayError(String message) {
-        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+        if (!testMode) {
+            JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            System.out.println("[ERROR] " + message);
+        }
     }
 
     public static void displayWarning(String message) {
-        JOptionPane.showMessageDialog(null, message, "Warning", JOptionPane.WARNING_MESSAGE);
+        if (!testMode) {
+            JOptionPane.showMessageDialog(null, message, "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            System.out.println("[WARNING] " + message);
+        }
     }
 
     /*
     Confirmation pop-ups for user actions (Information) and alerts (Warnings).
      */
     public static int displayConfirmWarning(String message) {
-        return JOptionPane.showConfirmDialog(
-                null, message, "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (!testMode) {
+            return JOptionPane.showConfirmDialog(
+                    null, message, "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        } else {
+            System.out.println("[CONFIRM WARNING] " + message);
+            return JOptionPane.NO_OPTION; //simulate no option
+        }
     }
 
     public static int displayConfirmInfo(String message) {
-        return JOptionPane.showConfirmDialog(
-                null, message, "Information", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if (!testMode) {
+            return JOptionPane.showConfirmDialog(
+                    null, message, "Information", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            System.out.println("[CONFIRM INFO] " + message);
+            return JOptionPane.NO_OPTION; //simulate no option
+        }
     }
 
     /*
     Input pop-up for user input.
      */
     public static String displayInputInfo(String message) {
-        return JOptionPane.showInputDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
+        if (!testMode) {
+            return JOptionPane.showInputDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            System.out.println("[INPUT REQUEST] " + message);
+            return ""; // simulate empty input or adjust as needed
+        }
     }
 
     /*
@@ -61,27 +91,30 @@ public final class PopUpUtil {
     is returned depending on selected type.
      */
     public static String displayUserTypeSelection() {
-        String[] options = {"Student", "Lecturer"}; //two types
+        if (!testMode) {
+            String[] options = {"Student", "Lecturer"}; //two types
 
-        //options pop-up to let the admin choose
-        int selection = JOptionPane.showOptionDialog(null,
-                "Which type of user would you like to create?",
-                "Select User Type",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0] //default selection
-        );
+            //options pop-up to let the admin choose
+            int selection = JOptionPane.showOptionDialog(null,
+                    "Which type of user would you like to create?",
+                    "Select User Type",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0] //default selection
+            );
 
-        //return selected option or null if cancelled 
-        switch (selection) {
-            case 0:
-                return "Student";
-            case 1:
-                return "Lecturer";
-            default:
-                return null;
+            //return selected option or null if cancelled 
+            switch (selection) {
+                case 0:
+                    return "Student";
+                case 1:
+                    return "Lecturer";
+                default:
+                    return null;
+            }
         }
+        return "Student"; //Simulate default choice during testing
     }
 }
