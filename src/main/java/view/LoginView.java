@@ -112,5 +112,4 @@ public class LoginView extends JFrame {
     public void setPassword(String passwrd) {
         password.setText(passwrd);
     }
-
 }

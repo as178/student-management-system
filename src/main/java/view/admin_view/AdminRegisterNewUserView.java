@@ -37,7 +37,7 @@ public class AdminRegisterNewUserView extends AbstractFormView<User> { //dealing
                 "Student Management System: Register New User",
                 "Please enter the New User's information below:");
     }
-
+    
     //text fields
     private JTextField firstNameField, lastNameField, dobField, emailField, phoneField, addressField;
     private JPasswordField passwordField;

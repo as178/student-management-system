@@ -10,7 +10,6 @@ import dao.LecturerDAO;
 import dao.StudentDAO;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JFrame;
 import model.DatabaseManager;
 import objects.Admin;
@@ -36,15 +35,6 @@ public class LoginControllerTest {
 
     @BeforeClass
     public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-        UserController.logOutCurrentUser();
-    }
-
-    @Before
-    public void setUp() {
         //Initialize DB connection for DAO methods
         DatabaseManager.initialiseConnection();
 
@@ -54,20 +44,15 @@ public class LoginControllerTest {
 
         //Setup dummy frame to avoid null pointer during NavigationUtil.newFrame
         JFrame testFrame = new JFrame();
-        testFrame.setVisible(false); //disable frame visibility
-        utility_classes.NavigationUtil.currentFrame = testFrame;
+        utility_classes.NavigationUtil.initialFrame(testFrame);
+    }
 
-        //AdminDAO for Admin login
-        AdminDAO adminDAO = new AdminDAO();
-        UserController.setCurrentUsers(adminDAO.getAllUsers());
+    @AfterClass
+    public static void tearDownClass() {
+    }
 
-        //lecturerDAO for Lecturer login
-        LecturerDAO lecturerDAO = new LecturerDAO();
-        UserController.setCurrentUsers(lecturerDAO.getAllUsers());
-
-        //studentDAO for Student login
-        StudentDAO studentDAO = new StudentDAO();
-        UserController.setCurrentUsers(studentDAO.getAllUsers());
+    @Before
+    public void setUp() {
     }
 
     @After
@@ -87,7 +72,7 @@ public class LoginControllerTest {
 
         //Create LoginView and set credentials
         LoginView loginView = new LoginView(STUDENT); //STUDENT = student
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername("24229618"); //student ID
         loginView.setPassword("mySchoolPass"); //correct student password
 
@@ -111,7 +96,7 @@ public class LoginControllerTest {
 
         //Create LoginView and set credentials
         LoginView loginView = new LoginView(LECTURER); //STUDENT = lecturer
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername("14568912"); //lecturer ID
         loginView.setPassword("BrightTiger7"); //correct lecturer password
 
@@ -133,7 +118,7 @@ public class LoginControllerTest {
         UserController.setCurrentUsers(adminDAO.getAllUsers());
 
         LoginView loginView = new LoginView(ADMIN); //ADMIN = admin
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername("10567001"); //admin ID
         loginView.setPassword("adminpassword123"); //correct admin password
 
@@ -159,7 +144,7 @@ public class LoginControllerTest {
         UserController.setCurrentUsers(studentDAO.getAllUsers());
 
         LoginView loginView = new LoginView(STUDENT); //ADMIN = student
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername("99999999"); //wrong ID
         loginView.setPassword("mySchoolPass"); //correct student password
 
@@ -179,7 +164,7 @@ public class LoginControllerTest {
 
         //Create LoginView and set credentials
         LoginView loginView = new LoginView(LECTURER); //STUDENT = lecturer
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername("99999999"); //wrong ID
         loginView.setPassword("BrightTiger7"); //correct lecturer password
 
@@ -198,7 +183,7 @@ public class LoginControllerTest {
         UserController.setCurrentUsers(adminDAO.getAllUsers());
 
         LoginView loginView = new LoginView(ADMIN); //ADMIN = admin
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername("99999999"); //wrong ID
         loginView.setPassword("adminpassword123"); //correct admin password
 
@@ -221,7 +206,7 @@ public class LoginControllerTest {
         UserController.setCurrentUsers(studentDAO.getAllUsers());
 
         LoginView loginView = new LoginView(STUDENT); //ADMIN = student
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername("24229618"); //student ID
         loginView.setPassword("wrongpass"); // wrong password
 
@@ -241,7 +226,7 @@ public class LoginControllerTest {
 
         //Create LoginView and set credentials
         LoginView loginView = new LoginView(LECTURER); //STUDENT = lecturer
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername("14568912"); //lecturer ID
         loginView.setPassword("wrongpass"); // wrong password
 
@@ -260,7 +245,7 @@ public class LoginControllerTest {
         UserController.setCurrentUsers(adminDAO.getAllUsers());
 
         LoginView loginView = new LoginView(ADMIN); //ADMIN = admin
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername("10567001"); //admin ID
         loginView.setPassword("wrongpass"); // wrong password
 
@@ -282,7 +267,7 @@ public class LoginControllerTest {
         UserController.setCurrentUsers(studentDAO.getAllUsers());
 
         LoginView loginView = new LoginView(STUDENT); //ADMIN = student
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername(""); //Empty ID
         loginView.setPassword("mySchoolPass"); //correct student password
 
@@ -302,7 +287,7 @@ public class LoginControllerTest {
 
         //Create LoginView and set credentials
         LoginView loginView = new LoginView(LECTURER); //STUDENT = lecturer
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername(""); //Empty ID
         loginView.setPassword("BrightTiger7"); //correct lecturer password
 
@@ -321,7 +306,7 @@ public class LoginControllerTest {
         UserController.setCurrentUsers(adminDAO.getAllUsers());
 
         LoginView loginView = new LoginView(ADMIN); //ADMIN = admin
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername(""); //Empty ID
         loginView.setPassword("adminpassword123"); //correct admin password
 
@@ -343,7 +328,7 @@ public class LoginControllerTest {
         UserController.setCurrentUsers(studentDAO.getAllUsers());
 
         LoginView loginView = new LoginView(STUDENT); //ADMIN = student
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername(""); //Empty ID
         loginView.setPassword(""); //Empty password
 
@@ -363,7 +348,7 @@ public class LoginControllerTest {
 
         //Create LoginView and set credentials
         LoginView loginView = new LoginView(LECTURER); //STUDENT = lecturer
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername(""); //Empty ID
         loginView.setPassword(""); //Empty password
 
@@ -382,7 +367,7 @@ public class LoginControllerTest {
         UserController.setCurrentUsers(adminDAO.getAllUsers());
 
         LoginView loginView = new LoginView(ADMIN); //ADMIN = admin
-        loginView.setVisible(false); //prevent GUI from showing
+        utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername(""); //Empty ID
         loginView.setPassword(""); //Empty password
 

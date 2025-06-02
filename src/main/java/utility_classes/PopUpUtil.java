@@ -24,6 +24,7 @@ public final class PopUpUtil {
 
     /*
     Informative pop-ups, with small customisations for Information, Errors & Warnings.
+    If testMode is true then error message printed to consolse for the test results window 
      */
     public static void displayInfo(String message) {
         if (!testMode) {

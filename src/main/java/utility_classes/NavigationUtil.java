@@ -36,7 +36,9 @@ public final class NavigationUtil {
         currentFrame.setSize(700, 550); //constant frame size
         currentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit on close
         currentFrame.setLocationRelativeTo(null); //window centred 
-        currentFrame.setVisible(true); //make the frame visible
+
+        //if testmode is true then setVisible is false
+        currentFrame.setVisible(!testMode);
     }
 
     /*
@@ -46,18 +48,14 @@ public final class NavigationUtil {
     ensure only one dashboard is opened at a time.
      */
     public static void newFrame(JFrame newFrame) {
-        if (currentFrame != null) {
-            currentFrame.dispose(); // Prevent NullPointerException
-        }
-
+        currentFrame.dispose();
         currentFrame = newFrame;
         currentFrame.setSize(700, 550);
         currentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         currentFrame.setLocationRelativeTo(null);
-        
-        if (!testMode) {
-            currentFrame.setVisible(true);
-        }
+
+        //if testmode is true then setVisible is false
+        currentFrame.setVisible(!testMode);
     }
 
     /*
