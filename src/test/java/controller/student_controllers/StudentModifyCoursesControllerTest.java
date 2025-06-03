@@ -170,9 +170,9 @@ public class StudentModifyCoursesControllerTest {
      */
     @Test
     public void testWithdrawFromCourseMovesToPreviousEnrollment() {
-        //clean start state
-        courseDAO.removeCourseFromTable(student.getId(), "COMP500", false); // remove from enrolled
-        courseDAO.removeCourseFromTable(student.getId(), "COMP500", true);  // remove from previous
+        //setup clean state
+        courseDAO.removeCourseFromTable(student.getId(), "COMP500", false); //remove from enrolled
+        courseDAO.removeCourseFromTable(student.getId(), "COMP500", true);  //remove from previous
 
         //checks if student is enrolled in COMP500
         assertTrue("Student should be enrolled in COMP500", student.getEnrolledCourses().containsKey("COMP500"));
