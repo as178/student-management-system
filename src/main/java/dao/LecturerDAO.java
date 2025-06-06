@@ -166,7 +166,8 @@ public class LecturerDAO implements UserDAOInterface<Lecturer>, UserCreationDAOI
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
-            PopUpUtil.displayError("An error occurred while registering new Lecturer.");
+            PopUpUtil.displayError(ex.getMessage());
+            return;
         }
 
         PopUpUtil.displayInfo("The following Lecturer was registered successfully!\n"

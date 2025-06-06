@@ -244,7 +244,7 @@ public class AdminRegisterNewUserView extends AbstractFormView<User> { //dealing
     Helper method for generating a random, valid ID for
     the new user. Ranges depend on type.
      */
-    private int generateNewUserID() {
+    public int generateNewUserID() {
         Random rand = new Random();
 
         if (currentObject instanceof Student) {

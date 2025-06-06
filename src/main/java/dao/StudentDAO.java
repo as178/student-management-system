@@ -166,7 +166,8 @@ public class StudentDAO implements UserDAOInterface<Student>, UserCreationDAOInt
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
-            PopUpUtil.displayError("An error occurred while registering new Student.");
+            PopUpUtil.displayError(ex.getMessage());
+            return;
         }
 
         PopUpUtil.displayInfo("The following Student was registered successfully!\n"

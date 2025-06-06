@@ -17,9 +17,9 @@ import java.sql.Statement;
  *
  * This class provides the methods to create all the necessary tables for our
  * program as well as the insertion of initial data that comes with the program.
- * 
- * If any tables already exist/the database is established, they aren't recreated,
- * ensuring the current information for a user is saved and kept.
+ *
+ * If any tables already exist/the database is established, they aren't
+ * recreated, ensuring the current information for a user is saved and kept.
  *
  */
 public class DatabaseTablesCreation {
@@ -241,6 +241,32 @@ public class DatabaseTablesCreation {
         }
 
         return false;
+    }
+
+    /*
+    A method to drop all tables, used for refreshes during testing.
+     */
+    public void dropAllTables() {
+        dropTableIfExists("PreviousCourse");
+        dropTableIfExists("EnrolledCourse");
+        dropTableIfExists("Student");
+        dropTableIfExists("Course");
+        dropTableIfExists("Lecturer");
+        dropTableIfExists("Admin");
+        dropTableIfExists("Major");
+    }
+
+    private void dropTableIfExists(String tableName) {
+        if (isExistingTable(tableName)) {
+            try (Statement stmt = connection.createStatement()) {
+                stmt.executeUpdate("DROP TABLE " + tableName);
+                System.out.println("Dropped table: " + tableName);
+            } catch (SQLException e) {
+                System.err.println("Error dropping table " + tableName + ": " + e.getMessage());
+            }
+        } else {
+            System.out.println("Table " + tableName + " does not exist, skipping.");
+        }
     }
 
     /*
