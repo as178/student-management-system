@@ -21,7 +21,7 @@ public interface CourseDAOInterface {
     public Course getById(String id);
 
     public HashMap<String, Course> getAllCourses();
-    
+
     public void readLecturerCourses(Lecturer lecturerObj);
 
     public void readStudentsCourses(Student currentStudent,
@@ -38,4 +38,6 @@ public interface CourseDAOInterface {
     public void updateCourse(Course course);
 
     public void withdrawAllCourses(Student currentStudent);
+    
+    public void removeStudentCourses(Student currentStudent, boolean previous);
 }

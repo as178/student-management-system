@@ -54,10 +54,10 @@ public class LecturerCourseStudentsListController implements ActionListener {
 
         switch (command[0]) {
             case "g": //update chosen student's grade
-                this.updateStudentGrade((Student) studentDAO.getById(Integer.parseInt(command[1])));
+                this.updateStudentGrade(studentDAO.getById(Integer.parseInt(command[1])));
                 break;
             case "s": //sign off chosen student
-                this.signOffStudent((Student) studentDAO.getById(Integer.parseInt(command[1])));
+                this.signOffStudent(studentDAO.getById(Integer.parseInt(command[1])));
                 break;
             case "b": //go back to the dashboard for managing courses
                 NavigationUtil.newFrame(new LecturerManageCoursesView((Lecturer) UserController.getCurrentUser()));
@@ -98,28 +98,36 @@ public class LecturerCourseStudentsListController implements ActionListener {
     //helper method for signing off a student
     private void signOffStudent(Student studentToSignOff) {
 
-        //confirmation pop up for the lecturer
-        int confirm = PopUpUtil.displayConfirmInfo(
-                "Signing off " + studentToSignOff.getId() + ", " + studentToSignOff.getFirstName() + " " + studentToSignOff.getLastName() + "\n"
-                + "\nThis will remove the student from your course,\n"
-                + "and their grade will be transferred to their record.\n"
-                + "\nProceed with sign off?");
+        //get the student's grade for the course from the hashmap
+        Float studentGrade = studentGrades.get(studentToSignOff.getId());
 
-        //if lecturer wishes to proceed
-        if (confirm == JOptionPane.YES_OPTION) {
+        //if the student has a set grade
+        if (studentGrade != null) {
+            
+            //confirmation pop up for the lecturer
+            int confirm = PopUpUtil.displayConfirmInfo(
+                    "Signing off " + studentToSignOff.getId() + ", " + studentToSignOff.getFirstName() + " " + studentToSignOff.getLastName() + "\n"
+                    + "\nThis will remove the student from your course,\n"
+                    + "and their grade will be transferred to their record.\n"
+                    + "\nProceed with sign off?");
 
-            //get the student's grade for the course from the hashmap
-            Float studentGrade = studentGrades.get(studentToSignOff.getId());
+            //if lecturer wishes to proceed
+            if (confirm == JOptionPane.YES_OPTION) {
 
-            //add the student's grade for that specific course into the PreviousCourse table
-            courseDAO.addCourseToTable(studentToSignOff.getId(), currentCourse.getCourseId(), studentGrade, true);
+                //add the student's grade for that specific course into the PreviousCourse table
+                courseDAO.addCourseToTable(studentToSignOff.getId(), currentCourse.getCourseId(), studentGrade, true);
 
-            //then remove the same entry from the EnrolledCourse table, as the student is now signed off
-            courseDAO.removeCourseFromTable(studentToSignOff.getId(), currentCourse.getCourseId(), false);
+                //then remove the same entry from the EnrolledCourse table, as the student is now signed off
+                courseDAO.removeCourseFromTable(studentToSignOff.getId(), currentCourse.getCourseId(), false);
 
-            //success pop up + refreshing the student list
-            PopUpUtil.displayInfo("Thank you, the student was successfully signed off!");
-            NavigationUtil.newFrame(new LecturerCourseStudentsListView(currentCourse));
+                //success pop up + refreshing the student list
+                PopUpUtil.displayInfo("Thank you, the student was successfully signed off!");
+                NavigationUtil.newFrame(new LecturerCourseStudentsListView(currentCourse));
+            }
+           
+        //if the student's grade hasn't been set yet, the lecturer can't sign them off    
+        } else {
+            PopUpUtil.displayError("Please set the student's grade\nbefore signing them off.");
         }
     }
 }

@@ -32,17 +32,17 @@ public class ProgramLaunchController implements ActionListener {
             case "1":
                 //set up login screen for student to login, load up respective currentUsers hashmap used for checking credentials
                 UserController.setCurrentUsers(new StudentDAO().getAllUsers());
-                NavigationUtil.newFrame(new LoginView(command));
+                NavigationUtil.newFrame(new LoginView());
                 break;
             case "2":
                 //set up login screen for lecturer to login, load up respective currentUsers hashmap used for checking credentials                
                 UserController.setCurrentUsers(new LecturerDAO().getAllUsers());
-                NavigationUtil.newFrame(new LoginView(command));
+                NavigationUtil.newFrame(new LoginView());
                 break;
             case "3":
                 //set up login screen for admin to login, load up respective currentUsers hashmap used for checking credentials                
                 UserController.setCurrentUsers(new AdminDAO().getAllUsers());
-                NavigationUtil.newFrame(new LoginView(command));
+                NavigationUtil.newFrame(new LoginView());
                 break;
             case "x": //shutdown
                 NavigationUtil.exitProgram();

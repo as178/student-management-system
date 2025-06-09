@@ -21,7 +21,8 @@ import java.awt.*;
  *
  * View which is shown when a Lecturer wishes to update course information of
  * the courses they teach. This class extends the AbstractFormView, which
- * handles a lot of GUI logic behind the scenes, making the setup more efficient.
+ * handles a lot of GUI logic behind the scenes, making the setup more
+ * efficient.
  *
  */
 public class LecturerEditCoursesView extends AbstractFormView<Course> { //Course is the type of object we're dealing with
@@ -51,7 +52,7 @@ public class LecturerEditCoursesView extends AbstractFormView<Course> { //Course
 
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Lecturer ID:", labelFont));
-        panel.add(createLabel(currentObject.getCourseLecturer(), labelFont2));
+        panel.add(createLabel((currentObject.getCourseLecturer() == null) ? " / " : currentObject.getCourseLecturer(), labelFont2));
 
         panel.add(Box.createVerticalStrut(20));
         panel.add(createLabel("Major:", labelFont));
@@ -90,7 +91,7 @@ public class LecturerEditCoursesView extends AbstractFormView<Course> { //Course
     /*
     Overriden method for handling going back to
     the previous dashboard.
-    */
+     */
     @Override
     protected void handleBack() {
         int confirmation = PopUpUtil.displayConfirmInfo(

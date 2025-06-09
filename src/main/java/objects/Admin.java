@@ -7,12 +7,15 @@ package objects;
 import abstract_classes.User;
 import controller.UserController;
 import dao.AdminDAO;
+import utility_classes.NavigationUtil;
+import view.admin_view.AdminDashboardView;
 
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * The Admin class extends User and possesses all its generic attributes.
+ * The Admin class extends User and possesses all its generic attributes and
+ * methods.
  *
  */
 public class Admin extends User {
@@ -27,5 +30,16 @@ public class Admin extends User {
         AdminDAO adminDAO = new AdminDAO();
         adminDAO.update(this);
         UserController.setCurrentUsers(adminDAO.getAllUsers());
+    }
+
+    @Override
+    public void removeCurrentUser() {
+        AdminDAO adminDAO = new AdminDAO();
+        adminDAO.removeUser(this);
+    }
+
+    @Override
+    public void userMainDashboard() {
+        NavigationUtil.newFrame(new AdminDashboardView(this));
     }
 }

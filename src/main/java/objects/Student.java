@@ -4,11 +4,15 @@
  */
 package objects;
 
+import objects.objects_interfaces.NewUserInterface;
 import abstract_classes.User;
 import controller.UserController;
 import dao.StudentDAO;
 import utility_classes.GradesUtil;
 import java.util.HashMap;
+import java.util.Random;
+import utility_classes.NavigationUtil;
+import view.student_view.StudentDashboardView;
 
 /**
  *
@@ -18,7 +22,7 @@ import java.util.HashMap;
  * methods to retrieve them.
  *
  */
-public class Student extends User {
+public class Student extends User implements NewUserInterface {
 
     protected String major;
     protected HashMap<String, Float> enrolledCourses;
@@ -28,8 +32,8 @@ public class Student extends User {
     Default constructor to create a blank user;
     used when admin creates a new Student user.
      */
-    public Student(){}
-    
+    public Student() {}
+
     public Student(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address, String major) {
         super(id, password, firstName, lastName, dateOfBirth, personalEmail, uniEmail, phoneNumber, gender, address);
@@ -89,5 +93,37 @@ public class Student extends User {
         StudentDAO studentDAO = new StudentDAO();
         studentDAO.update(this);
         UserController.setCurrentUsers(studentDAO.getAllUsers());
+    }
+
+    @Override
+    public void removeCurrentUser() {
+        new StudentDAO().removeUser(this);
+    }
+
+    @Override
+    public void userMainDashboard() {
+        NavigationUtil.newFrame(new StudentDashboardView(this));
+    }
+
+    @Override
+    public void addNewUserToDatabase() {
+        //add this student to the Student table
+        new StudentDAO().createNewUser(this);
+    }
+
+    @Override
+    public int generateNewUserId() {
+        Random rand = new Random();
+
+        //Student ID range BETWEEN 20000000 AND 29999999 as specified in the Student table
+        int randomId = 20000000 + rand.nextInt(10000000);
+
+        StudentDAO studentDAO = new StudentDAO();
+
+        //while the id is taken, keep regenerating until a valid one is found
+        while (studentDAO.getById(randomId) != null) {
+            randomId = 20000000 + rand.nextInt(10000000);
+        }
+        return randomId; //return when valid id is found
     }
 }

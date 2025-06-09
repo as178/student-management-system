@@ -57,8 +57,8 @@ public class AdminDAO implements UserDAOInterface<Admin> {
 
         } catch (SQLException ex) {
             PopUpUtil.displayError(ex.getMessage());
-        } 
-        
+        }
+
         PopUpUtil.displayInfo("Details updated successfully!");
     }
 
@@ -131,5 +131,30 @@ public class AdminDAO implements UserDAOInterface<Admin> {
         }
 
         return admin;
+    }
+
+    /*
+    Method to remove an Admin from Admin table.
+     */
+    @Override
+    public void removeUser(Admin admin) {
+
+        String sqlStatement = "DELETE FROM Admin WHERE id = ?";
+
+        try {
+            PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
+            preparedStatement.setInt(1, admin.getId());
+
+            //if no rows are affected after statement is executed
+            if (preparedStatement.executeUpdate() == 0) {
+                PopUpUtil.displayError("No admin found under following ID: " + admin.getId());
+                return;
+            }
+        } catch (SQLException e) {
+            PopUpUtil.displayError("Failed to remove admin under following ID: " + admin.getId());
+            return;
+        }
+
+        PopUpUtil.displayInfo("Successfully removed admin with following ID: " + admin.getId());
     }
 }

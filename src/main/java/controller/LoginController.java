@@ -9,14 +9,8 @@ import utility_classes.NavigationUtil;
 import utility_classes.PopUpUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import objects.Admin;
-import objects.Lecturer;
-import objects.Student;
 import view.LoginView;
 import view.ProgramLaunchView;
-import view.admin_view.AdminDashboardView;
-import view.lecturer_view.LecturerDashboardView;
-import view.student_view.StudentDashboardView;
 
 /**
  *
@@ -66,18 +60,9 @@ public class LoginController implements ActionListener {
                 //if password is correct set the currentUser as this user
                 UserController.setCurrentUser(user);
 
-                //depending on the command, display the appropriate user dashboard
-                switch (command) {
-                    case "1": //student dashboard
-                        NavigationUtil.newFrame(new StudentDashboardView((Student) UserController.getCurrentUser()));
-                        break;
-                    case "2": //lecturer dashboard
-                        NavigationUtil.newFrame(new LecturerDashboardView((Lecturer) UserController.getCurrentUser()));
-                        break;
-                    case "3": //admin dashboard
-                        NavigationUtil.newFrame(new AdminDashboardView((Admin) UserController.getCurrentUser()));
-                        break;
-                }
+                //display the appropriate user dashboard based on their type
+                user.userMainDashboard();
+                
             } else { //if the user exists in the database but the password is wrong, alert the user
                 PopUpUtil.displayError("Incorrect credentials, please try again.");
             }

@@ -19,13 +19,12 @@ import javax.swing.JOptionPane;
  */
 public final class NavigationUtil {
 
-    //public so test cases can set frames
-    public static JFrame currentFrame;
-    //testmode to setvisibiliy when tests are run, stops gui from being visiable
+    private static JFrame currentFrame;
+    
+    //testmode to turn off GUI visibiliy when tests are being run
     public static boolean testMode = false;
 
-    private NavigationUtil() {
-    }
+    private NavigationUtil() {}
 
     /*
     Called at the beginning of the program to set up 
@@ -48,7 +47,11 @@ public final class NavigationUtil {
     ensure only one dashboard is opened at a time.
      */
     public static void newFrame(JFrame newFrame) {
-        currentFrame.dispose();
+        
+        if (currentFrame != null){
+            currentFrame.dispose();
+        }
+        
         currentFrame = newFrame;
         currentFrame.setSize(700, 550);
         currentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

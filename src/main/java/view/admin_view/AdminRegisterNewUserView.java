@@ -7,16 +7,12 @@ package view.admin_view;
 import abstract_classes.AbstractFormView;
 import abstract_classes.User;
 import controller.UserController;
-import dao.LecturerDAO;
 import dao.MajorDAO;
-import dao.StudentDAO;
 import java.awt.*;
-import java.util.Random;
 import javax.swing.*;
-import objects.Admin;
 import objects.Lecturer;
+import objects.objects_interfaces.NewUserInterface;
 import objects.Student;
-import utility_classes.NavigationUtil;
 import utility_classes.PopUpUtil;
 import utility_classes.ValidationUtil;
 
@@ -37,7 +33,7 @@ public class AdminRegisterNewUserView extends AbstractFormView<User> { //dealing
                 "Student Management System: Register New User",
                 "Please enter the New User's information below:");
     }
-    
+
     //text fields
     private JTextField firstNameField, lastNameField, dobField, emailField, phoneField, addressField;
     private JPasswordField passwordField;
@@ -153,8 +149,8 @@ public class AdminRegisterNewUserView extends AbstractFormView<User> { //dealing
      */
     @Override
     protected void handleSave() {
-        //randomly generate an id for the new user using helper method
-        int id = generateNewUserID();
+        //randomly generate an id for the new user using user specific method
+        int id = ((NewUserInterface) currentObject).generateNewUserId();
 
         //get the rest of the information from the text fields
         String firstName = firstNameField.getText().trim();
@@ -180,7 +176,7 @@ public class AdminRegisterNewUserView extends AbstractFormView<User> { //dealing
             return;
         }
 
-        if (!ValidationUtil.checkPassword(password)) {
+        if (!ValidationUtil.checkIntegerRange(password.length(), 8, 30)) {
             PopUpUtil.displayError("Passwords must be 8 to 30 characters,\nplease try again.");
             return;
         }
@@ -221,57 +217,22 @@ public class AdminRegisterNewUserView extends AbstractFormView<User> { //dealing
         //update currentObject in memory + in the relevant table within the database
         if (currentObject instanceof Student) {
 
-            currentObject = new Student( //instansiate new student in memory
+            currentObject = new Student( //instansiate new Student in memory
                     id, password, firstName, lastName, dob, email, uniEmail,
                     ValidationUtil.formatPhoneNumber(phone), gender, address, majorOrFaculty
             );
-            new StudentDAO().createNewUser((Student) currentObject); //insert them into the Student table 
-
         } else if (currentObject instanceof Lecturer) {
 
             currentObject = new Lecturer( //instansiate new Lecturer in memory
                     id, password, firstName, lastName, dob, email, uniEmail,
                     ValidationUtil.formatPhoneNumber(phone), gender, address, majorOrFaculty
             );
-            new LecturerDAO().createNewUser((Lecturer) currentObject); //insert them into the Lecturer table 
         }
+        
+        ((NewUserInterface) currentObject).addNewUserToDatabase();
 
         //go back to the main dashboard for the currently logged in admin
-        NavigationUtil.newFrame(new AdminDashboardView((Admin) UserController.getCurrentUser()));
-    }
-
-    /*
-    Helper method for generating a random, valid ID for
-    the new user. Ranges depend on type.
-     */
-    public int generateNewUserID() {
-        Random rand = new Random();
-
-        if (currentObject instanceof Student) {
-            //Student ID range BETWEEN 20000000 AND 29999999 as specified in the table
-            int randomId = 20000000 + rand.nextInt(10000000);
-
-            StudentDAO studentDAO = new StudentDAO();
-
-            //while the id is taken, keep regenerating until a valid one is found
-            while (studentDAO.getById(randomId) != null) {
-                randomId = 20000000 + rand.nextInt(10000000);
-            }
-            return randomId; //return when valid id is found
-
-        } else if (currentObject instanceof Lecturer) {
-            //Lecturer ID range BETWEEN 14000000 AND 16000000 as specified in the table
-            int randomId = 14000000 + rand.nextInt(2000000);
-
-            LecturerDAO lecturerDAO = new LecturerDAO();
-
-            //while the id is taken, keep regenerating until a valid one is found
-            while (lecturerDAO.getById(randomId) != null) {
-                randomId = 20000000 + rand.nextInt(10000000);
-            }
-            return randomId; //return when valid id is found
-        }
-        return 0;
+        UserController.getCurrentUser().userMainDashboard();
     }
 
     /*
@@ -284,7 +245,7 @@ public class AdminRegisterNewUserView extends AbstractFormView<User> { //dealing
                 "Are you sure you want to go back?\nYour changes won't be saved.");
 
         if (confirmation == JOptionPane.YES_OPTION) {
-            NavigationUtil.newFrame(new AdminDashboardView((Admin) UserController.getCurrentUser()));
+            UserController.getCurrentUser().userMainDashboard();
         }
     }
 }

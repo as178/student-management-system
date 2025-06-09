@@ -11,7 +11,7 @@ import java.util.HashMap;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * Interface used by each user DAO for their respective update methods.
+ * Interface used by each User DAO for their respective User related methods.
  *
  */
 public interface UserDAOInterface<T extends User> {
@@ -21,4 +21,6 @@ public interface UserDAOInterface<T extends User> {
     public T getById(int id);
 
     public HashMap<String, User> getAllUsers();
+
+    public void removeUser(T user);
 }

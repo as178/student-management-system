@@ -21,7 +21,7 @@ import java.util.HashMap;
  *
  * This view displays detailed information about the courses the student is
  * currently taking.
- * 
+ *
  * Controller: StudentViewCoursesController
  *
  */
@@ -83,7 +83,15 @@ public class StudentViewCoursesView extends JFrame {
 
                 //retrieve student's grade + the lecturer's first and last names based on their id
                 Float grade = currentStudent.getEnrolledCourses().get(courseId);
-                Lecturer lecturer = (Lecturer) lecturerDAO.getById(Integer.parseInt(course.getCourseLecturer()));
+
+                //retrieve the lecturer's full name or simply put a slash if null
+                Lecturer lecturer;
+                String lecturerName = "/";
+
+                if (course.getCourseLecturer() != null) {
+                    lecturer = lecturerDAO.getById(Integer.parseInt(course.getCourseLecturer()));
+                    lecturerName = "Dr. " + lecturer.getFirstName() + " " + lecturer.getLastName();
+                }
 
                 //add all info to the centre panel
                 coursePanel.add(Box.createVerticalStrut(10)); //spacing
@@ -95,7 +103,7 @@ public class StudentViewCoursesView extends JFrame {
 
                 coursePanel.add(makeLabel("> Prerequisite: " + prerequisite, false));
                 coursePanel.add(makeLabel("> Estimated Hours: " + course.getCourseEstimatedHours(), false));
-                coursePanel.add(makeLabel("> Lecturer: Dr. " + lecturer.getFirstName() + " " + lecturer.getLastName(), false));
+                coursePanel.add(makeLabel("> Lecturer: " + lecturerName, false));
                 coursePanel.add(makeLabel("> Description: " + course.getCourseDescription(), false));
 
                 //spacing and line separator
@@ -106,6 +114,7 @@ public class StudentViewCoursesView extends JFrame {
 
         //make the centre panel scrollable both horizontally and vertically
         JScrollPane scrollPane = new JScrollPane(coursePanel);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane, BorderLayout.CENTER); //adding to centre of frame
 
@@ -135,7 +144,7 @@ public class StudentViewCoursesView extends JFrame {
     /*
     Quick helper method for text labels for the courses display;
     dynamic changing of boldness.
-    */
+     */
     private JLabel makeLabel(String text, boolean bold) {
         JLabel label = new JLabel(text);
         label.setFont(new Font("Monospaced", bold ? Font.BOLD : Font.PLAIN, 16));

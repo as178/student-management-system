@@ -80,7 +80,7 @@ public class LecturerCourseStudentsListView extends JFrame {
             }
 
             //getting the student object
-            Student student = (Student) studentDAO.getById(studentId);
+            Student student = studentDAO.getById(studentId);
 
             JPanel studentPanel = studentListRowPanel(student, formattedGrade);
             listPanel.add(studentPanel);
@@ -89,6 +89,7 @@ public class LecturerCourseStudentsListView extends JFrame {
 
         //Make list panel scrollable + add to main panel
         JScrollPane scrollPane = new JScrollPane(listPanel);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 

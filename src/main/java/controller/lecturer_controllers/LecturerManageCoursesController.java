@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import objects.Lecturer;
 import view.lecturer_view.LecturerCourseStudentsListView;
-import view.lecturer_view.LecturerDashboardView;
 import view.lecturer_view.LecturerEditCoursesView;
 
 /**
@@ -49,7 +48,7 @@ public class LecturerManageCoursesController implements ActionListener {
                 NavigationUtil.newFrame(new LecturerCourseStudentsListView(courseDAO.getById(command[1])));
                 break;
             case "b": //go back to lecturer dashboard
-                NavigationUtil.newFrame(new LecturerDashboardView(currentLecturer));
+                currentLecturer.userMainDashboard();
                 break;
             case "x": //shutdown
                 NavigationUtil.exitProgram();

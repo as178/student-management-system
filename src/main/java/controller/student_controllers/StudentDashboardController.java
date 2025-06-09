@@ -39,9 +39,11 @@ public class StudentDashboardController implements ActionListener {
             case "1": //dashboard for viewing and modifying personal information
                 NavigationUtil.newFrame(new StudentViewDetailsView(currentStudent));
                 break;
+                
             case "2": //dashboard for viewing academic details
                 NavigationUtil.newFrame(new StudentAcademicDetailsView(currentStudent));
                 break;
+                
             case "b": //going back will log the student out
                 
                 //confirmation pop up 
@@ -49,11 +51,12 @@ public class StudentDashboardController implements ActionListener {
 
                 //if confirmed, go back to the login window for students + logout current student
                 if (confirmation == JOptionPane.YES_OPTION) {
-                    NavigationUtil.newFrame(new LoginView("1"));
+                    NavigationUtil.newFrame(new LoginView());
                     UserController.logOutCurrentUser();
                     return;
                 }
                 break;
+                
             case "x": //shutdown
                 NavigationUtil.exitProgram();
                 break;

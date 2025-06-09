@@ -23,7 +23,7 @@ public class LoginView extends JFrame {
     private JPasswordField password;
     private JButton loginButton, backButton, exitButton;
 
-    public LoginView(String roleCommand) {
+    public LoginView() {
         setTitle("Student Management System: Login");
 
         //Initial styling for main panel
@@ -72,7 +72,6 @@ public class LoginView extends JFrame {
         }
 
         //Set action commands for controller
-        loginButton.setActionCommand(roleCommand); //user's type, who they want to login as 
         backButton.setActionCommand("b");
         exitButton.setActionCommand("x");
 
@@ -102,8 +101,7 @@ public class LoginView extends JFrame {
     }
 
     /*
-    Methods used for testing
-    able to set the fields
+    Methods used for testing; able to set the fields.
     */
     public void setUsername(String username) {
         usernameId.setText(username);

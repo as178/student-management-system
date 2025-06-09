@@ -285,8 +285,9 @@ public class CourseDAO implements CourseDAOInterface {
 
         } catch (SQLException ex) {
             PopUpUtil.displayError("Error in updating " + course.getCourseId() + " in the Course table.");
-        } 
-        
+            return;
+        }
+
         PopUpUtil.displayInfo("Course updated successfully!");
     }
 
@@ -307,5 +308,28 @@ public class CourseDAO implements CourseDAOInterface {
             //remove that same course from EnrolledCourse table
             this.removeCourseFromTable(currentStudent.getId(), courseId, false);
         }
+    }
+
+    /*
+    Method (used during testing) for clearing out students' courses;
+    giving a clean state work with.
+     */
+    @Override
+    public void removeStudentCourses(Student currentStudent, boolean previous) {
+
+        String tableName = previous ? "PreviousCourse" : "EnrolledCourse";
+        String sqlStatement = "DELETE FROM " + tableName + " WHERE student_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = currentConnection.prepareStatement(sqlStatement);
+            preparedStatement.setInt(1, currentStudent.getId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            PopUpUtil.displayError("Error in erasing courses from the " + tableName + " table.");
+            return;
+        }
+
+        PopUpUtil.displayInfo("Courses cleared successfully!");
     }
 }

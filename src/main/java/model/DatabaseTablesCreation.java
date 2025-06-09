@@ -244,32 +244,6 @@ public class DatabaseTablesCreation {
     }
 
     /*
-    A method to drop all tables, used for refreshes during testing.
-     */
-    public void dropAllTables() {
-        dropTableIfExists("PreviousCourse");
-        dropTableIfExists("EnrolledCourse");
-        dropTableIfExists("Student");
-        dropTableIfExists("Course");
-        dropTableIfExists("Lecturer");
-        dropTableIfExists("Admin");
-        dropTableIfExists("Major");
-    }
-
-    private void dropTableIfExists(String tableName) {
-        if (isExistingTable(tableName)) {
-            try (Statement stmt = connection.createStatement()) {
-                stmt.executeUpdate("DROP TABLE " + tableName);
-                System.out.println("Dropped table: " + tableName);
-            } catch (SQLException e) {
-                System.err.println("Error dropping table " + tableName + ": " + e.getMessage());
-            }
-        } else {
-            System.out.println("Table " + tableName + " does not exist, skipping.");
-        }
-    }
-
-    /*
     Below are methods for default data insertion, which execute after each of the
     respective tables are made.
      */

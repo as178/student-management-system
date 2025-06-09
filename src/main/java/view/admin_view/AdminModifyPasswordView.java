@@ -86,7 +86,7 @@ public class AdminModifyPasswordView extends AbstractFormView<User> { //User is 
     protected void handleSave() {
         String newPassword = new String(passwordField.getPassword()).trim();
 
-        if (!ValidationUtil.checkPassword(newPassword)) {
+        if (!ValidationUtil.checkIntegerRange(newPassword.length(), 8, 30)) {
             PopUpUtil.displayError("Passwords must be 8 to 30 characters,\nplease try again.");
             return;
         }

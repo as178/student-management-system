@@ -7,7 +7,6 @@ package controller.student_controllers;
 import utility_classes.NavigationUtil;
 import utility_classes.PopUpUtil;
 import objects.Student;
-import controller.UserController;
 import dao.CourseDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

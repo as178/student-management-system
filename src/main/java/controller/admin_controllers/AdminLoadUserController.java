@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import objects.Admin;
-import view.admin_view.AdminDashboardView;
 import view.admin_view.AdminLoadUserView;
 import view.admin_view.AdminModifyPasswordView;
 
@@ -48,7 +47,7 @@ public class AdminLoadUserController implements ActionListener {
                 this.lookUpUser();
                 break;
             case "b": //go back to admin dashboard
-                NavigationUtil.newFrame(new AdminDashboardView(currentAdmin));
+                currentAdmin.userMainDashboard();
                 break;
             case "x": //shutdown
                 NavigationUtil.exitProgram();
@@ -81,7 +80,7 @@ public class AdminLoadUserController implements ActionListener {
             }
 
             //if both attempts are unsuccessful, the user admin is looking for doesn't exist ==> alert admin
-            PopUpUtil.displayError("User with ID: " + searchUserId + "\nNot Found!");
+            PopUpUtil.displayError("User with ID: " + searchUserId + "\nNot Found!\nValid users include Students and Lecturers.");
 
         } else { //else, the admin hasn't typed in anything and is alerted
             PopUpUtil.displayError("Please type in a valid ID.");

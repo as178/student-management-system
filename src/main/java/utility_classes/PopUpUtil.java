@@ -16,15 +16,14 @@ import javax.swing.JOptionPane;
  */
 public final class PopUpUtil {
 
-    //test mode flag to supress popups 
+    //testMode flag to supress pop-ups during testing
     public static boolean testMode = false;
 
-    private PopUpUtil() {
-    }
+    private PopUpUtil() {}
 
     /*
     Informative pop-ups, with small customisations for Information, Errors & Warnings.
-    If testMode is true then error message printed to consolse for the test results window 
+    If testMode is true then messages are printed to consolse for the test results window.
      */
     public static void displayInfo(String message) {
         if (!testMode) {
@@ -81,7 +80,7 @@ public final class PopUpUtil {
             return JOptionPane.showInputDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
         } else {
             System.out.println("[INPUT REQUEST] " + message);
-            return ""; // simulate empty input or adjust as needed
+            return ""; //simulate empty input
         }
     }
 
@@ -116,6 +115,6 @@ public final class PopUpUtil {
                     return null;
             }
         }
-        return "Student"; //Simulate default choice during testing
+        return "Student"; //simulate default choice during testing
     }
 }

@@ -10,8 +10,9 @@ package abstract_classes;
  *
  * The abstract class that is extended by every user within our program, as they
  * all share similar attributes, and methods required to retrieve/modify those
- * attributes. An abstract method for saving a currently logged in user is
- * included and must be implemented by every User.
+ * attributes. Abstract methods for saving and removing a currently logged in user
+ * are included, as well as a method for taking the user back to their main dashboard.
+ * All three methods must be implemented by every User.
  *
  */
 public abstract class User {
@@ -28,11 +29,10 @@ public abstract class User {
     protected String address;
 
     /*
-    default constructor to create a blank user
-    used when admin creates a new Student or lecturer user
+    Default constructor to create a blank user;
+    used when Admin creates a new Student or Lecturer user
      */
-    public User() {
-    }
+    public User() {}
 
     public User(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address) {
@@ -109,4 +109,18 @@ public abstract class User {
     saves their information to memory + database.
      */
     public abstract void saveCurrrentUser();
+
+    /*
+    Abstract method to be overriden by all users;
+    removes them from database (primarily used
+    for testing purposes).
+     */
+    public abstract void removeCurrentUser();
+
+    /*
+    Abstract method to be overriden by all users;
+    showcases the user's main dashboard depending
+    on the type of user they are.
+    */
+    public abstract void userMainDashboard();
 }

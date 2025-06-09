@@ -94,6 +94,7 @@ public class LecturerDAO implements UserDAOInterface<Lecturer>, UserCreationDAOI
 
         } catch (SQLException ex) {
             PopUpUtil.displayError("An error occurred while updating Lecturer.");
+            return;
         }
 
         PopUpUtil.displayInfo("Details updated successfully!");
@@ -166,11 +167,67 @@ public class LecturerDAO implements UserDAOInterface<Lecturer>, UserCreationDAOI
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
-            PopUpUtil.displayError(ex.getMessage());
+            PopUpUtil.displayError("Failed to register Lecturer.");
             return;
         }
 
         PopUpUtil.displayInfo("The following Lecturer was registered successfully!\n"
                 + newLecturer.getId() + ", " + newLecturer.getFirstName() + " " + newLecturer.getLastName());
+    }
+
+    /*
+    This method takes a Lecturer user and removes them from the database.
+    It checks whether the lecturer teaches any courses, and if so, nullifies
+    the courses' lecturer_id fields prior to removing the lecturer from the Lecturer table.
+     */
+    @Override
+    public void removeUser(Lecturer lecturer) {
+        String sqlStatement1 = "UPDATE Course SET lecturer_id = NULL WHERE lecturer_id = ?";
+        String sqlStatement2 = "DELETE FROM Lecturer WHERE id = ?";
+
+        try {
+            //setting autocommit to false in case rollback is needed
+            currentConnection.setAutoCommit(false);
+
+            //firstly, iterate through the Course table and see whether
+            //the lecturer is teaching any courses, and if so, replace their ID will NULL
+            PreparedStatement preparedStatement1 = currentConnection.prepareStatement(sqlStatement1);
+            preparedStatement1.setInt(1, lecturer.getId());
+            preparedStatement1.executeUpdate();
+
+            //once the lecturer is no longer teaching any courses
+            //we can safely delete them from the Lecturer table
+            PreparedStatement preparedStatement2 = currentConnection.prepareStatement(sqlStatement2);
+            preparedStatement2.setInt(1, lecturer.getId());
+
+            //if no rows are affected after statement is executed
+            if (preparedStatement2.executeUpdate() == 0) {
+                currentConnection.rollback(); //rollback if no lecturer was deleted
+                PopUpUtil.displayError("No lecturer found under following ID: " + lecturer.getId());
+                return;
+            }
+
+            //if everything was done successfully, commit
+            currentConnection.commit();
+
+        //if any errors occured throughout the process
+        } catch (SQLException e) {
+            try {
+                currentConnection.rollback(); //undo potentially partial modifications
+            
+            } catch (SQLException ex) {
+                PopUpUtil.displayError("Rollback failure.");
+            }
+           
+            PopUpUtil.displayError("Failed to remove lecturer under following ID: " + lecturer.getId());
+
+        //reset auto commit feature back regardless of outcome
+        } finally {
+            try {
+                currentConnection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                PopUpUtil.displayError("AutoCommit failure.");
+            }
+        }
     }
 }

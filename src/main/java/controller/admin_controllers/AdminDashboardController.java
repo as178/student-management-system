@@ -42,9 +42,11 @@ public class AdminDashboardController implements ActionListener {
             case "1": //dashboard for viewing and modifying personal information
                 NavigationUtil.newFrame(new AdminViewDetailsView(currentAdmin));
                 break;
+                
             case "2": //dashboard for loading up any student/lecturer user to change their password
                 NavigationUtil.newFrame(new AdminLoadUserView(currentAdmin));
                 break;
+                
             case "3":
                 //returns user type as String or remains null if admin cancels
                 String userType = PopUpUtil.displayUserTypeSelection();
@@ -56,6 +58,7 @@ public class AdminDashboardController implements ActionListener {
                             (userType.equals("Student")) ? new Student() : new Lecturer()));
                 }
                 break;
+                
             case "b": //going back will log the admin out
 
                 //confirmation pop up 
@@ -63,10 +66,11 @@ public class AdminDashboardController implements ActionListener {
 
                 //if confirmed, go back to the login window for admins + logout current admin
                 if (confirmation == JOptionPane.YES_OPTION) {
-                    NavigationUtil.newFrame(new LoginView("3"));
+                    NavigationUtil.newFrame(new LoginView());
                     UserController.logOutCurrentUser();
                 }
                 break;
+                
             case "x": //shutdown
                 NavigationUtil.exitProgram();
                 break;
