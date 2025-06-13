@@ -8,10 +8,12 @@ package abstract_classes;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * The abstract class that is extended by every user within
- * our program, as they all share similar attributes, and
- * methods required to retrieve/modify those attributes.
- * 
+ * The abstract class that is extended by every user within our program, as they
+ * all share similar attributes, and methods required to retrieve/modify those
+ * attributes. Abstract methods for saving and removing a currently logged in user
+ * are included, as well as a method for taking the user back to their main dashboard.
+ * All three methods must be implemented by every User.
+ *
  */
 public abstract class User {
 
@@ -25,6 +27,12 @@ public abstract class User {
     protected String phoneNumber;
     protected Character gender;
     protected String address;
+
+    /*
+    Default constructor to create a blank user;
+    used when Admin creates a new Student or Lecturer user
+     */
+    public User() {}
 
     public User(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address) {
@@ -40,31 +48,12 @@ public abstract class User {
         this.address = address;
     }
 
-    /*
-    An abstract method to be overriden by every user
-    for providing the path to their 'allUsers' file.
-    */
-    public abstract String getUsersPath();
-    
     public int getId() {
         return this.id;
     }
 
     public String getPassword() {
         return this.password;
-    }
-
-    /*
-    This method is used during personal details viewing
-    sections, where the password shouldn't be outright shown
-    to the user (e.g. ***********).
-    */
-    public String getSecretPassword() {
-        String hashedPassword = "";
-        for (int i = 0; i < this.password.length(); i++) {
-            hashedPassword += "*";
-        }
-        return hashedPassword;
     }
 
     public String getFirstName() {
@@ -114,4 +103,24 @@ public abstract class User {
     public void setAddress(String newAddress) {
         this.address = newAddress;
     }
+
+    /*
+    Abstract method to be overriden by all users;
+    saves their information to memory + database.
+     */
+    public abstract void saveCurrrentUser();
+
+    /*
+    Abstract method to be overriden by all users;
+    removes them from database (primarily used
+    for testing purposes).
+     */
+    public abstract void removeCurrentUser();
+
+    /*
+    Abstract method to be overriden by all users;
+    showcases the user's main dashboard depending
+    on the type of user they are.
+    */
+    public abstract void userMainDashboard();
 }
