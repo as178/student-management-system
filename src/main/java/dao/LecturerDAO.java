@@ -140,10 +140,12 @@ public class LecturerDAO implements UserDAOInterface<Lecturer>, UserCreationDAOI
 
     /*
     This method takes a Lecturer user and inserts
-    them into the Lecturer table.
+    them into the Lecturer table. Returns true or
+    false depending on whether it was successful
+    or not.
      */
     @Override
-    public void createNewUser(Lecturer newLecturer) {
+    public boolean createNewUser(Lecturer newLecturer) {
 
         String sqlStatement = "INSERT INTO Lecturer (id, password, first_name, last_name, date_of_birth, personal_email, university_email, "
                 + "phone_number, gender, address, faculty) "
@@ -167,12 +169,13 @@ public class LecturerDAO implements UserDAOInterface<Lecturer>, UserCreationDAOI
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
-            PopUpUtil.displayError("Failed to register Lecturer.");
-            return;
+            PopUpUtil.displayError("Failed to register Lecturer.\nPersonal emails and phone numbers\nmust be unique/unused.");
+            return false;
         }
 
         PopUpUtil.displayInfo("The following Lecturer was registered successfully!\n"
                 + newLecturer.getId() + ", " + newLecturer.getFirstName() + " " + newLecturer.getLastName());
+        return true;
     }
 
     /*

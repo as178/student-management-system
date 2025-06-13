@@ -15,8 +15,11 @@ package objects.objects_interfaces;
 public interface NewUserInterface {
 
     //add user to their respective database
-    public void addNewUserToDatabase();
+    public boolean addNewUserToDatabase();
 
     //generate a unique id for that user within their given range
     public int generateNewUserId();
+
+    //generate a unique uni email for that user 
+    public String generateNewUniEmail(String firstName, String lastName, int id);
 }

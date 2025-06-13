@@ -211,7 +211,8 @@ public class AdminRegisterNewUserView extends AbstractFormView<User> { //dealing
         String majorOrFaculty = (String) majorOrFacultyDropdown.getSelectedItem();
 
         //automatically create uni email in format firstname.lastname@aut.ac.nz after checks have passed
-        String uniEmail = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@aut.ac.nz";
+        //(the below method ensures the email will be unique)
+        String uniEmail = ((NewUserInterface) currentObject).generateNewUniEmail(firstName, lastName, id);
 
         //depending on type of user admin is wishing to create,
         //update currentObject in memory + in the relevant table within the database
@@ -228,11 +229,12 @@ public class AdminRegisterNewUserView extends AbstractFormView<User> { //dealing
                     ValidationUtil.formatPhoneNumber(phone), gender, address, majorOrFaculty
             );
         }
-        
-        ((NewUserInterface) currentObject).addNewUserToDatabase();
 
-        //go back to the main dashboard for the currently logged in admin
-        UserController.getCurrentUser().userMainDashboard();
+        //if successful registration
+        if (((NewUserInterface) currentObject).addNewUserToDatabase()) {
+            //go back to the main dashboard for the currently logged in admin
+            UserController.getCurrentUser().userMainDashboard();
+        }
     }
 
     /*

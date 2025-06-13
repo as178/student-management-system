@@ -19,8 +19,10 @@ import view.student_view.StudentDashboardView;
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * The Student class extends User and provides basic student attributes and
- * methods to retrieve them.
- *
+ * methods to retrieve them. It also implements the NewUserInterface methods
+ * for adding this Student to the Student table and generating a unique ID and
+ * uni email address for them.
+ * 
  */
 public class Student extends User implements NewUserInterface {
 
@@ -106,9 +108,9 @@ public class Student extends User implements NewUserInterface {
     }
 
     @Override
-    public void addNewUserToDatabase() {
+    public boolean addNewUserToDatabase() {
         //add this student to the Student table
-        new StudentDAO().createNewUser(this);
+        return new StudentDAO().createNewUser(this);
     }
 
     @Override
@@ -125,5 +127,26 @@ public class Student extends User implements NewUserInterface {
             randomId = 20000000 + rand.nextInt(10000000);
         }
         return randomId; //return when valid id is found
+    }
+
+    @Override
+    public String generateNewUniEmail(String firstName, String lastName, int id) {
+        //load up all students temporarily
+        HashMap<String, User> tempUsers = new StudentDAO().getAllUsers();
+
+        //automatically create uni email in format firstname.lastname@aut.ac.nz after checks have passed
+        //(prior to user being created in memory)
+        String uniEmail = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@aut.ac.nz";
+
+        //if the uni email is taken by someone with the same full name, add the new student's id to the email
+        //in order to make it unique
+        for (User student : tempUsers.values()) {
+            if (student.getUniEmail().equals(uniEmail)) {
+                uniEmail = firstName.toLowerCase() + "." + lastName.toLowerCase() + "_" + id + "@aut.ac.nz";
+                return uniEmail;
+            }
+        }
+        
+        return uniEmail;
     }
 }

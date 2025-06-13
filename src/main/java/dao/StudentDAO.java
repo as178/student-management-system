@@ -140,10 +140,12 @@ public class StudentDAO implements UserDAOInterface<Student>, UserCreationDAOInt
 
     /*
     This method takes a Student user and inserts
-    them into the Student table.
+    them into the Student table. Returns true or
+    false depending on whether it was successful
+    or not.
      */
     @Override
-    public void createNewUser(Student newStudent) {
+    public boolean createNewUser(Student newStudent) {
 
         String sqlStatement = "INSERT INTO Student (id, password, first_name, last_name, date_of_birth, personal_email, university_email, "
                 + "phone_number, gender, address, major) "
@@ -167,12 +169,13 @@ public class StudentDAO implements UserDAOInterface<Student>, UserCreationDAOInt
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
-            PopUpUtil.displayError("Failed to register Student.");
-            return;
+            PopUpUtil.displayError("Failed to register Student.\nPersonal emails and phone numbers\nmust be unique/unused.");
+            return false;
         }
 
         PopUpUtil.displayInfo("The following Student was registered successfully!\n"
                 + newStudent.getId() + ", " + newStudent.getFirstName() + " " + newStudent.getLastName());
+        return true;
     }
 
     /*

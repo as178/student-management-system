@@ -16,5 +16,5 @@ import abstract_classes.User;
  */
 public interface UserCreationDAOInterface<T extends User> {
 
-    public void createNewUser(T user);
+    public boolean createNewUser(T user);
 }
