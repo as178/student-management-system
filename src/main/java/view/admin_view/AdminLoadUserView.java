@@ -87,6 +87,6 @@ public class AdminLoadUserView extends JFrame {
     input from the text field.
      */
     public String getUserIdField() {
-        return userIdField.getText();
+        return userIdField.getText().trim();
     }
 }

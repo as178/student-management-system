@@ -4,17 +4,10 @@
  */
 package abstract_classes;
 
-import utility_classes.NavigationUtil;
 import utility_classes.PopUpUtil;
 import utility_classes.ValidationUtil;
 import java.awt.*;
 import javax.swing.*;
-import objects.Admin;
-import objects.Lecturer;
-import objects.Student;
-import view.admin_view.AdminDashboardView;
-import view.lecturer_view.LecturerDashboardView;
-import view.student_view.StudentDashboardView;
 
 /**
  *
@@ -106,7 +99,7 @@ public abstract class UserViewAndModifyDetailsView extends AbstractFormView<User
         String newPhone = phoneField.getText().trim();
         String newAddress = addressField.getText().trim();
 
-        if (!ValidationUtil.checkPassword(newPassword)) {
+        if (!ValidationUtil.checkIntegerRange(newPassword.length(), 8, 30)) {
             PopUpUtil.displayError("Passwords must be 8 to 30 characters,\nplease try again.");
             return;
         }
@@ -146,13 +139,7 @@ public abstract class UserViewAndModifyDetailsView extends AbstractFormView<User
                 "Are you sure you want to go back?\nYour changes won't be saved."); //confirmation to alert user
 
         if (confirmation == JOptionPane.YES_OPTION) {
-            if (currentObject instanceof Student) {
-                NavigationUtil.newFrame(new StudentDashboardView((Student) currentObject));
-            } else if (currentObject instanceof Lecturer) {
-                NavigationUtil.newFrame(new LecturerDashboardView((Lecturer) currentObject));
-            } else if (currentObject instanceof Admin) {
-                NavigationUtil.newFrame(new AdminDashboardView((Admin) currentObject));
-            }
+            currentObject.userMainDashboard();
         }
     }
 }

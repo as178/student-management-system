@@ -94,6 +94,7 @@ public class StudentDAO implements UserDAOInterface<Student>, UserCreationDAOInt
 
         } catch (SQLException ex) {
             PopUpUtil.displayError("An error occurred while updating Student.");
+            return;
         }
 
         PopUpUtil.displayInfo("Details updated successfully!");
@@ -139,10 +140,12 @@ public class StudentDAO implements UserDAOInterface<Student>, UserCreationDAOInt
 
     /*
     This method takes a Student user and inserts
-    them into the Student table.
+    them into the Student table. Returns true or
+    false depending on whether it was successful
+    or not.
      */
     @Override
-    public void createNewUser(Student newStudent) {
+    public boolean createNewUser(Student newStudent) {
 
         String sqlStatement = "INSERT INTO Student (id, password, first_name, last_name, date_of_birth, personal_email, university_email, "
                 + "phone_number, gender, address, major) "
@@ -166,10 +169,74 @@ public class StudentDAO implements UserDAOInterface<Student>, UserCreationDAOInt
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
-            PopUpUtil.displayError("An error occurred while registering new Student.");
+            PopUpUtil.displayError("Failed to register Student.\nPersonal emails and phone numbers\nmust be unique/unused.");
+            return false;
         }
 
         PopUpUtil.displayInfo("The following Student was registered successfully!\n"
                 + newStudent.getId() + ", " + newStudent.getFirstName() + " " + newStudent.getLastName());
+        return true;
+    }
+
+    /*
+    This method takes a Student user and removes them from the database.
+    It checks whether the student has any enrolled and previous courses,
+    and if so, deletes those entries first before removing the student
+    from the Student table.
+     */
+    @Override
+    public void removeUser(Student student) {
+        String sqlStatement1 = "DELETE FROM EnrolledCourse WHERE student_id = ?";
+        String sqlStatement2 = "DELETE FROM PreviousCourse WHERE student_id = ?";
+        String sqlStatement3 = "DELETE FROM Student WHERE id = ?";
+
+        try {
+
+            //setting autocommit to false in case rollback is needed
+            currentConnection.setAutoCommit(false);
+
+            //firstly we have to remove the student from their enrolled courses (EnrolledCourse table)
+            PreparedStatement preparedStatement1 = currentConnection.prepareStatement(sqlStatement1);
+            preparedStatement1.setInt(1, student.getId());
+            preparedStatement1.executeUpdate();
+
+            //then we have to remove their previously taken courses (PreviousCourse table)
+            PreparedStatement preparedStatement2 = currentConnection.prepareStatement(sqlStatement2);
+            preparedStatement2.setInt(1, student.getId());
+            preparedStatement2.executeUpdate();
+
+            //and finally we can remove the student from the database (Student table)
+            PreparedStatement preparedStatement3 = currentConnection.prepareStatement(sqlStatement3);
+            preparedStatement3.setInt(1, student.getId());
+
+            //if no rows are affected after statement is executed
+            if (preparedStatement3.executeUpdate() == 0) {
+                currentConnection.rollback(); //rollback if no student was deleted
+                PopUpUtil.displayError("No student found under following ID: " + student.getId());
+                return;
+            }
+
+            //if everything was done successfully, commit
+            currentConnection.commit();
+
+        //if any errors occured throughout the process
+        } catch (SQLException e) {
+            try {
+                currentConnection.rollback(); //undo potentially partial modifications
+
+            } catch (SQLException ex) {
+                PopUpUtil.displayError("Rollback failure.");
+            }
+
+            PopUpUtil.displayError("Failed to remove student under following ID: " + student.getId());
+
+        //reset auto commit feature back regardless of outcome
+        } finally {
+            try {
+                currentConnection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                PopUpUtil.displayError("AutoCommit failure.");
+            }
+        }
     }
 }

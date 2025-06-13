@@ -23,7 +23,7 @@ public class AdminDashboardView extends JFrame {
     private JButton viewDetailsButton, changeUserPasswordButton, registerNewUserButton,logoutButton, exitButton;
 
     public AdminDashboardView(Admin currentAdmin) {
-        setTitle("Student management System: Admin Dashboard");
+        setTitle("Student Management System: Admin Dashboard");
 
         //Main panel config
         JPanel mainPanel = new JPanel(new GridLayout(8, 1, 15, 15));

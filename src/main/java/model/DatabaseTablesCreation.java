@@ -17,9 +17,9 @@ import java.sql.Statement;
  *
  * This class provides the methods to create all the necessary tables for our
  * program as well as the insertion of initial data that comes with the program.
- * 
- * If any tables already exist/the database is established, they aren't recreated,
- * ensuring the current information for a user is saved and kept.
+ *
+ * If any tables already exist/the database is established, they aren't
+ * recreated, ensuring the current information for a user is saved and kept.
  *
  */
 public class DatabaseTablesCreation {

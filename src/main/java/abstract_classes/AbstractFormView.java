@@ -46,6 +46,7 @@ public abstract class AbstractFormView<T> extends JFrame {
         //Scrollable panel where all the information is presented to the user, added to main panel
         JPanel formPanel = buildFormPanel();
         JScrollPane scrollPane = new JScrollPane(formPanel);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 

@@ -104,6 +104,7 @@ public class StudentEnrollCoursesView extends JFrame {
 
         //Making course panel scrollable + add to frame
         JScrollPane scrollPane = new JScrollPane(coursePanel);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane, BorderLayout.CENTER);
 

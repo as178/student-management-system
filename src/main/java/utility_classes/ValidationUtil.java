@@ -21,17 +21,6 @@ public final class ValidationUtil {
 
     private ValidationUtil() {}
 
-    /*
-    User passwords must:
-    - not be empty
-    - be between 8 and 30 chars
-     */
-    public static boolean checkPassword(String password) {
-        return !password.isBlank()
-                && password.length() >= 8
-                && password.length() <= 30;
-    }
-
     //users within the program must be at least 16 years old
     public static boolean checkDateOfBirth(String userInputDOB) {
 
@@ -118,7 +107,7 @@ public final class ValidationUtil {
         }
         try {
             //otherwisse parse into a validFloat Integer
-            int validFloat = Integer.parseInt(inputFloat.trim());
+            float validFloat = Float.parseFloat(inputFloat.trim());
             //check if the float is within the given range
             return validFloat >= lowestFloat && validFloat <= highestFloat;
         } catch (NumberFormatException e) { //if it's not a valid float, return false

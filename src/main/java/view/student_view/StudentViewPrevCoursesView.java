@@ -81,9 +81,17 @@ public class StudentViewPrevCoursesView extends JFrame {
 
                 Course course = allCourses.get(courseId); //get current course from string courseId
 
-                //retrieve student's grade + the lecturer's first and last names based on their id
+                //retrieve student's grade
                 Float grade = currentStudent.getPreviousCourses().get(courseId);
-                Lecturer lecturer = (Lecturer) lecturerDAO.getById(Integer.parseInt(course.getCourseLecturer()));
+
+                //retrieve the lecturer's full name or simply put a slash if null
+                Lecturer lecturer;
+                String lecturerName = "/";
+
+                if (course.getCourseLecturer() != null) {
+                    lecturer = lecturerDAO.getById(Integer.parseInt(course.getCourseLecturer()));
+                    lecturerName = "Dr. " + lecturer.getFirstName() + " " + lecturer.getLastName();
+                }
 
                 //add all info to the centre panel
                 coursePanel.add(Box.createVerticalStrut(10)); //spacing
@@ -95,7 +103,7 @@ public class StudentViewPrevCoursesView extends JFrame {
 
                 coursePanel.add(makeLabel("> Prerequisite: " + prerequisite, false));
                 coursePanel.add(makeLabel("> Estimated Hours: " + course.getCourseEstimatedHours(), false));
-                coursePanel.add(makeLabel("> Lecturer: Dr. " + lecturer.getFirstName() + " " + lecturer.getLastName(), false));
+                coursePanel.add(makeLabel("> Lecturer: " + lecturerName, false));
                 coursePanel.add(makeLabel("> Description: " + course.getCourseDescription(), false));
 
                 //spacing and line separator
@@ -106,6 +114,7 @@ public class StudentViewPrevCoursesView extends JFrame {
 
         //make the centre panel scrollable both horizontally and vertically
         JScrollPane scrollPane = new JScrollPane(coursePanel);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         add(scrollPane, BorderLayout.CENTER);
 

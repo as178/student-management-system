@@ -10,11 +10,11 @@ import abstract_classes.User;
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
- * Interface used by user DAOs which enable creation of new
+ * Interface used by User DAOs which enable creation of new
  * users within the database.
  *
  */
 public interface UserCreationDAOInterface<T extends User> {
 
-    public void createNewUser(T user);
+    public boolean createNewUser(T user);
 }

@@ -4,21 +4,27 @@
  */
 package objects;
 
+import objects.objects_interfaces.NewUserInterface;
 import abstract_classes.User;
 import controller.UserController;
 import dao.StudentDAO;
 import utility_classes.GradesUtil;
 import java.util.HashMap;
+import java.util.Random;
+import utility_classes.NavigationUtil;
+import view.student_view.StudentDashboardView;
 
 /**
  *
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * The Student class extends User and provides basic student attributes and
- * methods to retrieve them.
- *
+ * methods to retrieve them. It also implements the NewUserInterface methods
+ * for adding this Student to the Student table and generating a unique ID and
+ * uni email address for them.
+ * 
  */
-public class Student extends User {
+public class Student extends User implements NewUserInterface {
 
     protected String major;
     protected HashMap<String, Float> enrolledCourses;
@@ -28,8 +34,8 @@ public class Student extends User {
     Default constructor to create a blank user;
     used when admin creates a new Student user.
      */
-    public Student(){}
-    
+    public Student() {}
+
     public Student(int id, String password, String firstName, String lastName, String dateOfBirth, String personalEmail,
             String uniEmail, String phoneNumber, Character gender, String address, String major) {
         super(id, password, firstName, lastName, dateOfBirth, personalEmail, uniEmail, phoneNumber, gender, address);
@@ -89,5 +95,58 @@ public class Student extends User {
         StudentDAO studentDAO = new StudentDAO();
         studentDAO.update(this);
         UserController.setCurrentUsers(studentDAO.getAllUsers());
+    }
+
+    @Override
+    public void removeCurrentUser() {
+        new StudentDAO().removeUser(this);
+    }
+
+    @Override
+    public void userMainDashboard() {
+        NavigationUtil.newFrame(new StudentDashboardView(this));
+    }
+
+    @Override
+    public boolean addNewUserToDatabase() {
+        //add this student to the Student table
+        return new StudentDAO().createNewUser(this);
+    }
+
+    @Override
+    public int generateNewUserId() {
+        Random rand = new Random();
+
+        //Student ID range BETWEEN 20000000 AND 29999999 as specified in the Student table
+        int randomId = 20000000 + rand.nextInt(10000000);
+
+        StudentDAO studentDAO = new StudentDAO();
+
+        //while the id is taken, keep regenerating until a valid one is found
+        while (studentDAO.getById(randomId) != null) {
+            randomId = 20000000 + rand.nextInt(10000000);
+        }
+        return randomId; //return when valid id is found
+    }
+
+    @Override
+    public String generateNewUniEmail(String firstName, String lastName, int id) {
+        //load up all students temporarily
+        HashMap<String, User> tempUsers = new StudentDAO().getAllUsers();
+
+        //automatically create uni email in format firstname.lastname@aut.ac.nz after checks have passed
+        //(prior to user being created in memory)
+        String uniEmail = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@aut.ac.nz";
+
+        //if the uni email is taken by someone with the same full name, add the new student's id to the email
+        //in order to make it unique
+        for (User student : tempUsers.values()) {
+            if (student.getUniEmail().equals(uniEmail)) {
+                uniEmail = firstName.toLowerCase() + "." + lastName.toLowerCase() + "_" + id + "@aut.ac.nz";
+                return uniEmail;
+            }
+        }
+        
+        return uniEmail;
     }
 }

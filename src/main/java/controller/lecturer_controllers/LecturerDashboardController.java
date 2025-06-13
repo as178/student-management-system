@@ -39,9 +39,11 @@ public class LecturerDashboardController implements ActionListener {
             case "1": //dashboard for viewing and modifying personal information
                 NavigationUtil.newFrame(new LecturerViewDetailsView(currentLecturer));
                 break;
+                
             case "2": //dashboard for managing the courses the lecturer teaches
                 NavigationUtil.newFrame(new LecturerManageCoursesView(currentLecturer));
                 break;
+                
             case "b": //going back will log the lecturer out
 
                 //confirmation pop up 
@@ -49,10 +51,11 @@ public class LecturerDashboardController implements ActionListener {
 
                 //if confirmed, go back to the login window for lecturers + logout current lecturer
                 if (confirmation == JOptionPane.YES_OPTION) {
-                    NavigationUtil.newFrame(new LoginView("2"));
+                    NavigationUtil.newFrame(new LoginView());
                     UserController.logOutCurrentUser();
                 }
                 break;
+                
             case "x": //shutdown
                 NavigationUtil.exitProgram();
                 break;

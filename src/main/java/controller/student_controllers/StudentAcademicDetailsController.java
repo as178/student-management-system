@@ -8,7 +8,6 @@ import utility_classes.NavigationUtil;
 import objects.Student;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.student_view.StudentDashboardView;
 import view.student_view.StudentModifyMajorView;
 import view.student_view.StudentViewCoursesView;
 import view.student_view.StudentWithdrawCoursesView;
@@ -44,7 +43,7 @@ public class StudentAcademicDetailsController implements ActionListener {
                 NavigationUtil.newFrame(new StudentWithdrawCoursesView(currentStudent));
                 break;
             case "b": //go back to the student dashboard
-                NavigationUtil.newFrame(new StudentDashboardView(currentStudent));
+                currentStudent.userMainDashboard();
                 break;
             case "x": //shutdown
                 NavigationUtil.exitProgram();

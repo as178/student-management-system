@@ -27,6 +27,7 @@ import view.student_view.StudentWithdrawCoursesView;
  * This controller is used by:
  * - StudentWithdrawCoursesView
  * - StudentEnrollCoursesView
+ * as they share common logic.
  *
  */
 public class StudentModifyCoursesController implements ActionListener {

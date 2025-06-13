@@ -22,7 +22,8 @@ import view.student_view.StudentViewPrevCoursesView;
  * This controller is used by:
  * - StudentViewCoursesView
  * - StudentViewPrevCoursesView
- *
+ * as they share common logic.
+ * 
  */
 public class StudentViewCoursesController implements ActionListener {
 
