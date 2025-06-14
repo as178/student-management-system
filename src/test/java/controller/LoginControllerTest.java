@@ -28,6 +28,8 @@ import utility_classes.PopUpUtil;
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * Test cases for the initial login logic of the program.
+ * (For convenience, we have decided to test on other default
+ * users within the program.)
  *
  */
 public class LoginControllerTest {
@@ -129,8 +131,8 @@ public class LoginControllerTest {
 
         LoginView loginView = new LoginView(); //ADMIN = admin
         utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
-        loginView.setUsername("10567001"); //admin ID
-        loginView.setPassword("adminpassword123"); //correct admin password
+        loginView.setUsername("10567003"); //admin ID
+        loginView.setPassword("charlieDev"); //correct admin password
 
         //Create controller and simulate admin login ADMIN option
         LoginController controller = new LoginController(loginView);
@@ -140,8 +142,8 @@ public class LoginControllerTest {
         User currentUser = UserController.getCurrentUser();
         assertNotNull("Admin login failed", currentUser);
         assertTrue(currentUser instanceof Admin);
-        assertEquals("10567001", currentUser.getId() + "");
-        assertEquals("adminpassword123", currentUser.getPassword() + "");
+        assertEquals("10567003", currentUser.getId() + "");
+        assertEquals("charlieDev", currentUser.getPassword() + "");
     }
 
     /**
@@ -196,7 +198,7 @@ public class LoginControllerTest {
         LoginView loginView = new LoginView(); //ADMIN = admin
         utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername("99999999"); //wrong ID
-        loginView.setPassword("adminpassword123"); //correct admin password
+        loginView.setPassword("charlieDev"); //correct admin password
 
         //Create controller and simulate admin login ADMIN option
         LoginController controller = new LoginController(loginView);
@@ -257,7 +259,7 @@ public class LoginControllerTest {
 
         LoginView loginView = new LoginView(); //ADMIN = admin
         utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
-        loginView.setUsername("10567001"); //admin ID
+        loginView.setUsername("10567003"); //admin ID
         loginView.setPassword("wrongpass"); // wrong password
 
         //Create controller and simulate admin login ADMIN option
@@ -319,7 +321,7 @@ public class LoginControllerTest {
         LoginView loginView = new LoginView(); //ADMIN = admin
         utility_classes.NavigationUtil.newFrame(loginView); //prevent GUI from showing
         loginView.setUsername(""); //Empty ID
-        loginView.setPassword("adminpassword123"); //correct admin password
+        loginView.setPassword("charlieDev"); //correct admin password
 
         //Create controller and simulate admin login ADMIN option
         LoginController controller = new LoginController(loginView);

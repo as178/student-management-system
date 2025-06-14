@@ -100,13 +100,13 @@ public final class ValidationUtil {
     }
 
     //version of above to be called when dealing with float values
-    public static boolean checkFloatRange(String inputFloat, int lowestFloat, int highestFloat) {
+    public static boolean checkFloatRange(String inputFloat, float lowestFloat, float highestFloat) {
         //if the inputFloat String is empty or null
         if (inputFloat == null || inputFloat.trim().isBlank()) {
             return false;
         }
         try {
-            //otherwisse parse into a validFloat Integer
+            //otherwise parse into a valid float 
             float validFloat = Float.parseFloat(inputFloat.trim());
             //check if the float is within the given range
             return validFloat >= lowestFloat && validFloat <= highestFloat;

@@ -96,7 +96,7 @@ public final class PopUpUtil {
 
             //options pop-up to let the admin choose
             int selection = JOptionPane.showOptionDialog(null,
-                    "Which type of user would you like to create?",
+                    "Which type of user would you like to register?",
                     "Select User Type",
                     JOptionPane.DEFAULT_OPTION,
                     JOptionPane.QUESTION_MESSAGE,

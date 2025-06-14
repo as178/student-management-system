@@ -78,7 +78,7 @@ public class LecturerCourseStudentsListController implements ActionListener {
         if (lecturerInput == null) { //if lecturer cancels
             return;
 
-        } else if (ValidationUtil.checkFloatRange(lecturerInput, 0, 100)) { //else check that the grade is within valid range
+        } else if (ValidationUtil.checkFloatRange(lecturerInput, 0f, 100f)) { //else check that the grade is within valid range
 
             //if so, update the studentGrades hashmap
             studentGrades.put(updatedStudent.getId(), Float.parseFloat(lecturerInput));

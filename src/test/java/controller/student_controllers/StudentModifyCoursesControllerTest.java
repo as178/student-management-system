@@ -24,7 +24,9 @@ import utility_classes.PopUpUtil;
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * Test cases for the main functionalities of Student.
- *
+ * (For convenience, we have decided to test on other default
+ * users within the program.)
+ * 
  */
 public class StudentModifyCoursesControllerTest {
 

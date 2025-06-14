@@ -17,12 +17,13 @@ import static utility_classes.ValidationUtil.*;
  * @author Angela Saric (24237573) & William Niven (24229618)
  *
  * Test cases for the ValidationUtil class used throughout the program.
+ * (For convenience, we have decided to test on other default
+ * users within the program.)
  *
  */
 public class ValidationUtilTest {
 
-    public ValidationUtilTest() {
-    }
+    public ValidationUtilTest() {}
 
     @BeforeClass
     public static void setUpClass() {
@@ -200,21 +201,21 @@ public class ValidationUtilTest {
      */
     @Test
     public void validcheckFloatRangeTest() {
-        assertTrue(checkFloatRange("5.5", 1, 10));
+        assertTrue(checkFloatRange("5.5", 1.5f, 10.1f));
     }
 
     @Test
     public void outOfUpperBoundscheckFloatRangeTest() {
-        assertFalse(checkFloatRange("10.5", 1, 10));
+        assertFalse(checkFloatRange("10.5", 1.5f, 10.1f));
     }
 
     @Test
     public void outOfLowerBoundscheckFloatRangeTest() {
-        assertFalse(checkFloatRange("0.4", 1, 10));
+        assertFalse(checkFloatRange("0.4", 1.5f, 10.1f));
     }
 
     @Test
     public void checkFloatRangeWithLetterTest() {
-        assertFalse(checkFloatRange("A", 1, 10));
+        assertFalse(checkFloatRange("A", 1.5f, 10.1f));
     }
 }
